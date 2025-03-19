@@ -1,0 +1,550 @@
+{
+    "objective_value": 2.0,
+    "retailer_assignments": [
+        {
+            "retailer": 1,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 2,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 3,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 4,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 5,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 6,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 7,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 8,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 9,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 10,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 11,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 12,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 13,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 14,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 15,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 16,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 17,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 18,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 19,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 20,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 21,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 22,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 23,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 24,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 25,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 26,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 27,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 28,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 29,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 30,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 31,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 32,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 33,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 34,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 35,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 36,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 37,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 38,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 39,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 40,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 41,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 42,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 43,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 44,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 45,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 46,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 47,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 48,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 49,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 50,
+            "assigned_to": "D2"
+        }
+    ],
+    "s_plus_values": [
+        0,
+        0,
+        0,
+        0,
+        1.0,
+        0
+    ],
+    "s_minus_values": [
+        0,
+        0,
+        1.0,
+        0,
+        0,
+        0
+    ],
+    "demands": [
+        [
+            46,
+            55,
+            69,
+            1,
+            87,
+            72,
+            50,
+            9,
+            58,
+            94,
+            55,
+            55,
+            57,
+            36,
+            50,
+            44,
+            38,
+            52,
+            3,
+            0,
+            55,
+            21,
+            21,
+            73,
+            38,
+            56,
+            66,
+            46,
+            30,
+            8,
+            49,
+            66,
+            58,
+            87,
+            32,
+            40,
+            42,
+            45,
+            33,
+            32,
+            28,
+            3,
+            79,
+            98,
+            95,
+            57,
+            50,
+            17,
+            81,
+            89
+        ],
+        [
+            73,
+            59,
+            48,
+            76,
+            23,
+            94,
+            22,
+            67,
+            62,
+            62,
+            75,
+            23,
+            56,
+            70,
+            71,
+            73,
+            82,
+            55,
+            53,
+            85,
+            94,
+            79,
+            36,
+            91,
+            59,
+            51,
+            8,
+            37,
+            72,
+            59,
+            54,
+            96,
+            30,
+            4,
+            54,
+            75,
+            8,
+            31,
+            40,
+            17,
+            78,
+            9,
+            53,
+            68,
+            62,
+            59,
+            3,
+            4,
+            39,
+            54
+        ],
+        [
+            70,
+            40,
+            96,
+            67,
+            53,
+            22,
+            17,
+            27,
+            97,
+            60,
+            43,
+            86,
+            15,
+            13,
+            0,
+            10,
+            7,
+            63,
+            79,
+            59,
+            52,
+            52,
+            64,
+            87,
+            97,
+            46,
+            42,
+            49,
+            31,
+            35,
+            30,
+            65,
+            3,
+            86,
+            74,
+            20,
+            80,
+            7,
+            51,
+            10,
+            41,
+            86,
+            15,
+            41,
+            3,
+            74,
+            98,
+            23,
+            7,
+            52
+        ],
+        [
+            28,
+            75,
+            64,
+            37,
+            32,
+            25,
+            37,
+            5,
+            73,
+            74,
+            24,
+            29,
+            93,
+            36,
+            61,
+            2,
+            19,
+            80,
+            99,
+            22,
+            28,
+            76,
+            16,
+            51,
+            76,
+            76,
+            27,
+            40,
+            38,
+            79,
+            90,
+            51,
+            62,
+            7,
+            27,
+            89,
+            77,
+            49,
+            4,
+            3,
+            12,
+            96,
+            26,
+            70,
+            81,
+            57,
+            35,
+            81,
+            50,
+            15
+        ],
+        [
+            79,
+            35,
+            34,
+            28,
+            76,
+            90,
+            53,
+            2,
+            23,
+            79,
+            21,
+            37,
+            90,
+            73,
+            89,
+            8,
+            62,
+            44,
+            29,
+            53,
+            20,
+            54,
+            66,
+            82,
+            65,
+            19,
+            55,
+            95,
+            20,
+            48,
+            23,
+            19,
+            40,
+            78,
+            77,
+            49,
+            37,
+            4,
+            19,
+            57,
+            15,
+            37,
+            30,
+            54,
+            54,
+            29,
+            80,
+            37,
+            29,
+            2
+        ],
+        [
+            28,
+            96,
+            95,
+            69,
+            5,
+            71,
+            8,
+            42,
+            95,
+            41,
+            57,
+            16,
+            19,
+            7,
+            48,
+            20,
+            39,
+            71,
+            75,
+            17,
+            67,
+            48,
+            39,
+            76,
+            59,
+            30,
+            65,
+            31,
+            69,
+            28,
+            91,
+            89,
+            67,
+            79,
+            28,
+            16,
+            9,
+            87,
+            86,
+            39,
+            79,
+            27,
+            57,
+            54,
+            99,
+            58,
+            90,
+            71,
+            2,
+            7
+        ]
+    ],
+    "target_demands": [
+        1213,
+        1326,
+        1172,
+        1202,
+        1149,
+        1283
+    ],
+    "gap": 0.99999999995,
+    "time": 3600.24333691597,
+    "status": "time limit exceeded",
+    "variables": 62,
+    "non-zero terms": 310,
+    "nodes": 477967274,
+    "iterations": 1147025106
+}

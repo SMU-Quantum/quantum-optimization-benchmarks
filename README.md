@@ -36,7 +36,7 @@ QUANTUM_OPTIMIZATION_BENCHMARKS/
 
 ### Clone the Repository
 ```
-git clone https://github.com/MonitSharma/quantum_optimization_benchmarks.git  
+git clone https://github.com/SMU-Quantum/quantum-optimization-benchmarks
 cd quantum-optimization-benchmarks  
 ```
 

@@ -1,0 +1,7 @@
+Gap: 0.9999999999956523
+Time: 3620.9777891635895
+Status: time limit exceeded
+Variables: 110
+Non-zero terms: 915
+Nodes: 157849669
+Iterations: 571310599

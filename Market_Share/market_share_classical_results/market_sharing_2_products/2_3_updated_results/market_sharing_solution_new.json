@@ -1,0 +1,83 @@
+{
+    "objective_value": 3.0,
+    "retailer_assignments": [
+        {
+            "retailer": 1,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 2,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 3,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 4,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 5,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 6,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 7,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 8,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 9,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 10,
+            "assigned_to": "D1"
+        }
+    ],
+    "s_plus_values": [
+        3.0,
+        0
+    ],
+    "s_minus_values": [
+        0,
+        0
+    ],
+    "demands": [
+        [
+            24,
+            3,
+            56,
+            72,
+            0,
+            21,
+            19,
+            74,
+            41,
+            10
+        ],
+        [
+            21,
+            38,
+            96,
+            20,
+            44,
+            93,
+            39,
+            14,
+            26,
+            81
+        ]
+    ],
+    "target_demands": [
+        160,
+        236
+    ]
+}

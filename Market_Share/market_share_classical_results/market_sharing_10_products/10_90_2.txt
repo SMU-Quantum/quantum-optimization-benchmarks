@@ -1,0 +1,111 @@
+Objective Value (Sum of Deviations): 23.0
+Retailer 1 assigned to D1
+Retailer 2 assigned to D1
+Retailer 3 assigned to D2
+Retailer 4 assigned to D2
+Retailer 5 assigned to D2
+Retailer 6 assigned to D1
+Retailer 7 assigned to D2
+Retailer 8 assigned to D2
+Retailer 9 assigned to D1
+Retailer 10 assigned to D2
+Retailer 11 assigned to D1
+Retailer 12 assigned to D2
+Retailer 13 assigned to D1
+Retailer 14 assigned to D1
+Retailer 15 assigned to D1
+Retailer 16 assigned to D2
+Retailer 17 assigned to D1
+Retailer 18 assigned to D1
+Retailer 19 assigned to D1
+Retailer 20 assigned to D1
+Retailer 21 assigned to D1
+Retailer 22 assigned to D1
+Retailer 23 assigned to D2
+Retailer 24 assigned to D2
+Retailer 25 assigned to D2
+Retailer 26 assigned to D2
+Retailer 27 assigned to D1
+Retailer 28 assigned to D2
+Retailer 29 assigned to D2
+Retailer 30 assigned to D2
+Retailer 31 assigned to D2
+Retailer 32 assigned to D2
+Retailer 33 assigned to D2
+Retailer 34 assigned to D1
+Retailer 35 assigned to D1
+Retailer 36 assigned to D2
+Retailer 37 assigned to D2
+Retailer 38 assigned to D2
+Retailer 39 assigned to D1
+Retailer 40 assigned to D1
+Retailer 41 assigned to D2
+Retailer 42 assigned to D2
+Retailer 43 assigned to D1
+Retailer 44 assigned to D2
+Retailer 45 assigned to D1
+Retailer 46 assigned to D1
+Retailer 47 assigned to D1
+Retailer 48 assigned to D1
+Retailer 49 assigned to D1
+Retailer 50 assigned to D2
+Retailer 51 assigned to D1
+Retailer 52 assigned to D1
+Retailer 53 assigned to D2
+Retailer 54 assigned to D2
+Retailer 55 assigned to D1
+Retailer 56 assigned to D1
+Retailer 57 assigned to D2
+Retailer 58 assigned to D1
+Retailer 59 assigned to D2
+Retailer 60 assigned to D2
+Retailer 61 assigned to D2
+Retailer 62 assigned to D1
+Retailer 63 assigned to D1
+Retailer 64 assigned to D2
+Retailer 65 assigned to D1
+Retailer 66 assigned to D2
+Retailer 67 assigned to D2
+Retailer 68 assigned to D2
+Retailer 69 assigned to D2
+Retailer 70 assigned to D2
+Retailer 71 assigned to D1
+Retailer 72 assigned to D2
+Retailer 73 assigned to D2
+Retailer 74 assigned to D1
+Retailer 75 assigned to D1
+Retailer 76 assigned to D2
+Retailer 77 assigned to D1
+Retailer 78 assigned to D1
+Retailer 79 assigned to D1
+Retailer 80 assigned to D1
+Retailer 81 assigned to D2
+Retailer 82 assigned to D2
+Retailer 83 assigned to D2
+Retailer 84 assigned to D2
+Retailer 85 assigned to D2
+Retailer 86 assigned to D1
+Retailer 87 assigned to D1
+Retailer 88 assigned to D1
+Retailer 89 assigned to D1
+Retailer 90 assigned to D1
+s_plus[1] = 0
+s_minus[1] = 1.0
+s_plus[2] = 3.0
+s_minus[2] = 0
+s_plus[3] = 10.0
+s_minus[3] = 0
+s_plus[4] = 0
+s_minus[4] = 0
+s_plus[5] = 0
+s_minus[5] = 0
+s_plus[6] = 0
+s_minus[6] = 4.0
+s_plus[7] = 0
+s_minus[7] = 0
+s_plus[8] = 2.0
+s_minus[8] = 0
+s_plus[9] = 1.0
+s_minus[9] = 0
+s_plus[10] = 0
+s_minus[10] = 2.0

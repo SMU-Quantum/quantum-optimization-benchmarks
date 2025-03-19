@@ -1,0 +1,168 @@
+{
+    "objective_value": 2.0,
+    "retailer_assignments": [
+        {
+            "retailer": 1,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 2,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 3,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 4,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 5,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 6,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 7,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 8,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 9,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 10,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 11,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 12,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 13,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 14,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 15,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 16,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 17,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 18,
+            "assigned_to": "D1"
+        },
+        {
+            "retailer": 19,
+            "assigned_to": "D2"
+        },
+        {
+            "retailer": 20,
+            "assigned_to": "D2"
+        }
+    ],
+    "s_plus_values": [
+        1.0,
+        1.0,
+        0
+    ],
+    "s_minus_values": [
+        0,
+        0,
+        0
+    ],
+    "demands": [
+        [
+            37,
+            12,
+            72,
+            9,
+            75,
+            5,
+            79,
+            64,
+            16,
+            1,
+            76,
+            71,
+            6,
+            25,
+            50,
+            20,
+            18,
+            84,
+            11,
+            28
+        ],
+        [
+            29,
+            14,
+            50,
+            68,
+            87,
+            87,
+            94,
+            96,
+            86,
+            13,
+            9,
+            7,
+            63,
+            61,
+            22,
+            57,
+            1,
+            0,
+            60,
+            81
+        ],
+        [
+            8,
+            88,
+            13,
+            47,
+            72,
+            30,
+            71,
+            3,
+            70,
+            21,
+            49,
+            57,
+            3,
+            68,
+            24,
+            43,
+            76,
+            26,
+            52,
+            80
+        ]
+    ],
+    "target_demands": [
+        379,
+        492,
+        450
+    ]
+}

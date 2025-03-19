@@ -1,0 +1,27 @@
+Objective Value (Sum of Deviations): 3.0
+Retailer 1 assigned to D2
+Retailer 2 assigned to D1
+Retailer 3 assigned to D2
+Retailer 4 assigned to D1
+Retailer 5 assigned to D1
+Retailer 6 assigned to D2
+Retailer 7 assigned to D1
+Retailer 8 assigned to D1
+Retailer 9 assigned to D1
+Retailer 10 assigned to D2
+Retailer 11 assigned to D1
+Retailer 12 assigned to D2
+Retailer 13 assigned to D2
+Retailer 14 assigned to D2
+Retailer 15 assigned to D1
+Retailer 16 assigned to D2
+Retailer 17 assigned to D2
+Retailer 18 assigned to D1
+Retailer 19 assigned to D1
+Retailer 20 assigned to D2
+s_plus[1] = 1.0
+s_minus[1] = 0
+s_plus[2] = 1.0
+s_minus[2] = 0
+s_plus[3] = 1.0
+s_minus[3] = 0
