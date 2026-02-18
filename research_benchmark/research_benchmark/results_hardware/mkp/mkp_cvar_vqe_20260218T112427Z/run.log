@@ -1,0 +1,188 @@
+Run start | problem=mkp method=cvar_vqe mode=multi seed=0
+Instance | path=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\Multi_Dimension_Knapsack\MKP_Instances\sac94\hp\hp1.dat
+Problem size | problem=mkp required_qubits=60
+AWS requested but Braket SDK not installed (HAS_BRAKET=False). initialization of AWS backends skipped.
+AWS backend unavailable/disabled | qpu_id=rigetti_ankaa3 error=AWS Braket unavailable or disabled
+AWS backend unavailable/disabled | qpu_id=iqm_emerald error=AWS Braket unavailable or disabled
+AWS backend unavailable/disabled | qpu_id=iqm_garnet error=AWS Braket unavailable or disabled
+AWS backend unavailable/disabled | qpu_id=amazon_sv1 error=AWS Braket unavailable or disabled
+AWS backend unavailable/disabled | qpu_id=amazon_tn1 error=AWS Braket unavailable or disabled
+Backend initialization complete | results={'rigetti_ankaa3': False, 'iqm_emerald': False, 'iqm_garnet': False, 'amazon_sv1': False, 'amazon_tn1': False, 'ibm_quantum': True, 'local_qiskit': True}
+QPU availability skipped reasons | {'rigetti_ankaa3': 'unavailable:AWS Braket unavailable or disabled', 'iqm_emerald': 'unavailable:AWS Braket unavailable or disabled', 'iqm_garnet': 'unavailable:AWS Braket unavailable or disabled', 'amazon_sv1': 'unavailable:AWS Braket unavailable or disabled', 'amazon_tn1': 'unavailable:AWS Braket unavailable or disabled', 'local_qiskit': 'insufficient_qubits:32<60'}
+Available QPUs | ['ibm_quantum']
+Execution targets | mode=multi qpus=['ibm_quantum']
+Optimization start | method=cvar_vqe objective=cvar shots=256 maxiter=12
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=573.0 shots=256
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.00000 (ms)
+Pass: ElidePermutations - 0.00000 (ms)
+Pass: RemoveDiagonalGatesBeforeMeasure - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: InverseCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.55218 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: Split2QUnitaries - 0.00000 (ms)
+Pass: SetLayout - 0.00000 (ms)
+Pass: VF2Layout - 39.12425 (ms)
+Pass: FullAncillaAllocation - 0.00000 (ms)
+Pass: EnlargeWithAncilla - 0.00000 (ms)
+Pass: ApplyLayout - 0.50879 (ms)
+Pass: CheckMap - 0.00000 (ms)
+Pass: FilterOpNodes - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 1.00493 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 1.52183 (ms)
+Pass: ConsolidateBlocks - 0.51546 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.51117 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: VF2PostLayout - 157.89771 (ms)
+Pass: ApplyLayout - 0.54312 (ms)
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: InstructionDurationCheck - 0.00000 (ms)
+IBM job submitted | backend=ibm_torino job_id=d6aq2up54hss73b6hajg
+IBM job d6aq2up54hss73b6hajg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq2up54hss73b6hajg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aq2up54hss73b6hajg unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=572.0 shots=256
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.00000 (ms)
+Pass: ElidePermutations - 0.00000 (ms)
+Pass: RemoveDiagonalGatesBeforeMeasure - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: InverseCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: Split2QUnitaries - 0.00000 (ms)
+Pass: SetLayout - 0.00000 (ms)
+Pass: VF2Layout - 42.70482 (ms)
+Pass: FullAncillaAllocation - 0.00000 (ms)
+Pass: EnlargeWithAncilla - 0.00000 (ms)
+Pass: ApplyLayout - 1.00422 (ms)
+Pass: CheckMap - 0.00000 (ms)
+Pass: FilterOpNodes - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 1.01256 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 1.00422 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.50354 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 1.00470 (ms)
+Pass: ConsolidateBlocks - 0.50378 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.51022 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: VF2PostLayout - 168.07199 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: InstructionDurationCheck - 0.00000 (ms)
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq3117ce2c73fej0b0
+IBM job d6aq3117ce2c73fej0b0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3117ce2c73fej0b0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6aq3117ce2c73fej0b0 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=570.0 shots=256
+IBM job submitted | backend=ibm_torino job_id=d6aq33cnsg9c739867g0
+IBM job d6aq33cnsg9c739867g0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq33cnsg9c739867g0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aq33cnsg9c739867g0 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=568.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq3597ce2c73fej0j0
+IBM job d6aq3597ce2c73fej0j0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3597ce2c73fej0j0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6aq3597ce2c73fej0j0 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=566.0 shots=256
+IBM job submitted | backend=ibm_torino job_id=d6aq37vg4t5c7383hfj0
+IBM job d6aq37vg4t5c7383hfj0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq37vg4t5c7383hfj0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aq37vg4t5c7383hfj0 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=564.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq3a7g4t5c7383hfm0
+IBM job d6aq3a7g4t5c7383hfm0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3a7g4t5c7383hfm0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=16.4
+IBM job completed | backend=ibm_marrakesh job_id=d6aq3a7g4t5c7383hfm0 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=562.0 shots=256
+IBM job submitted | backend=ibm_torino job_id=d6aq3f17ce2c73fej0tg
+IBM job d6aq3f17ce2c73fej0tg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3f17ce2c73fej0tg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aq3f17ce2c73fej0tg unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=560.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq3h97ce2c73fej100
+IBM job d6aq3h97ce2c73fej100 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3h97ce2c73fej100 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6aq3h97ce2c73fej100 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=558.0 shots=256
+IBM job submitted | backend=ibm_torino job_id=d6aq3jh54hss73b6hb7g
+IBM job d6aq3jh54hss73b6hb7g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3jh54hss73b6hb7g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aq3jh54hss73b6hb7g unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=556.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq3m4nsg9c7398685g
+IBM job d6aq3m4nsg9c7398685g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3m4nsg9c7398685g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6aq3m4nsg9c7398685g unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=554.0 shots=256
+IBM job submitted | backend=ibm_torino job_id=d6aq3ocnsg9c7398688g
+IBM job d6aq3ocnsg9c7398688g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3ocnsg9c7398688g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aq3ocnsg9c7398688g unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=553.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq3qknsg9c739868bg
+IBM job d6aq3qknsg9c739868bg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq3qknsg9c739868bg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6aq3qknsg9c739868bg unique_bitstrings=256
+Optimization finished | evaluations=12 status=2
+Local swap postprocess | improved=True candidates_checked=199
+Final solution | bitstring=010100100010100101000010001011100010011110101001011011000001 objective_label=mkp_total_profit objective_value=2739.0 feasible=True
+Artifacts | result=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T112427Z\result.json trace=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T112427Z\trace.jsonl qubo=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T112427Z\qubo.lp counts=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T112427Z\best_counts.json

@@ -108,6 +108,14 @@ def _configure_logging(
         ],
         force=True,
     )
+    # Suppress noisy Qiskit transpiler pass-by-pass output
+    for noisy_logger in (
+        "qiskit.transpiler.passes",
+        "qiskit.transpiler.runningpassmanager",
+        "qiskit.transpiler.passmanager",
+        "qiskit.compiler.transpiler",
+    ):
+        logging.getLogger(noisy_logger).setLevel(logging.WARNING)
     return log_path
 
 
@@ -506,9 +514,9 @@ def build_parser() -> argparse.ArgumentParser:
         help="Disable all QPUs except this one (strict single-backend filter).",
     )
 
-    parser.add_argument("--layers", type=int, default=1, help="Ansatz entangling depth.")
-    parser.add_argument("--entanglement", default="chain", choices=["chain", "full"])
-    parser.add_argument("--shots", type=int, default=256)
+    parser.add_argument("--layers", type=int, default=3, help="Ansatz entangling depth (reps).")
+    parser.add_argument("--entanglement", default="circular", choices=["chain", "circular", "full"])
+    parser.add_argument("--shots", type=int, default=1000)
     parser.add_argument("--maxiter", type=int, default=12)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--timeout-sec", type=float, default=None)
@@ -661,11 +669,8 @@ def run(args: argparse.Namespace) -> int:
         problem_type.value,
         num_qubits,
     )
-    LOGGER.debug(
-        "QUBO details | qubo_penalty=%s max_qubits_cap=%s",
-        args.qubo_penalty,
-        args.max_qubits,
-    )
+    if instance_path is not None:
+        LOGGER.info("Instance file: %s", instance_path.name if hasattr(instance_path, 'name') else instance_path)
 
     if int(args.max_qubits) > 0 and num_qubits > int(args.max_qubits):
         raise ValueError(
@@ -678,7 +683,6 @@ def run(args: argparse.Namespace) -> int:
         "iqm_emerald",
         "iqm_garnet",
         "amazon_sv1",
-        "amazon_tn1",
         "ibm_quantum",
         "local_qiskit",
     }
@@ -687,18 +691,22 @@ def run(args: argparse.Namespace) -> int:
     if args.only_qpu is not None and args.qpu_id is not None and args.qpu_id != args.only_qpu:
         raise ValueError("--qpu-id and --only-qpu conflict. They must match if both are set.")
 
-    only_is_aws = args.only_qpu in {"rigetti_ankaa3", "iqm_emerald", "iqm_garnet", "amazon_sv1", "amazon_tn1"}
+    only_is_aws = args.only_qpu in {"rigetti_ankaa3", "iqm_emerald", "iqm_garnet", "amazon_sv1"}
     if bool(args.no_aws) and only_is_aws:
         raise ValueError("--only-qpu requests an AWS backend but --no-aws is set.")
     if bool(args.no_ibm) and args.only_qpu == "ibm_quantum":
         raise ValueError("--only-qpu=ibm_quantum but --no-ibm is set.")
+
+    include_simulators = bool(args.include_simulators)
+    if args.only_qpu in {"local_qiskit", "amazon_sv1"}:
+        include_simulators = True
 
     LOGGER.debug(
         "Backend filters | only_qpu=%s no_aws=%s no_ibm=%s include_simulators=%s",
         args.only_qpu,
         bool(args.no_aws),
         bool(args.no_ibm),
-        bool(args.include_simulators),
+        include_simulators,
     )
 
     enabled_qpus = {args.only_qpu} if args.only_qpu is not None else None
@@ -719,18 +727,42 @@ def run(args: argparse.Namespace) -> int:
     manager.job_status_log_interval = float(args.queue_status_seconds)
     init_status = manager.initialize()
     LOGGER.debug("Hardware initialization status: %s", init_status)
+
+    # -- QPU Status Report --
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+    _sgt = _tz(_td(hours=8))
+    _now_sgt = _dt.now(_sgt)
+    print(f"\n  Time (SGT): {_now_sgt.strftime('%Y-%m-%d %H:%M %a')}")
+    ibm_service = manager.sessions.get("ibm_quantum")
+    if ibm_service is not None:
+        from qobench.hardware_manager import _get_ibm_usage_remaining_seconds
+        ibm_remaining = _get_ibm_usage_remaining_seconds(ibm_service)
+        if ibm_remaining is not None:
+            m, s = divmod(int(ibm_remaining), 60)
+            print(f"  IBM Runtime Budget: {m}m {s}s remaining")
+    print()
+    _hdr = f"  {'QPU':<20} {'Status':<12} {'Qubits':>6}  {'Detail'}"
+    print(_hdr)
+    print("  " + "-" * (len(_hdr) - 2))
+    for qid, qpu in manager.qpus.items():
+        if qpu.is_available:
+            status_str = "READY"
+        else:
+            status_str = "OFFLINE"
+        detail = qpu.last_error if qpu.last_error else (qpu.name if qpu.is_available else "")
+        # For available QPUs, show additional info
+        if qpu.is_available and qpu.provider == "ibm" and manager.ibm_backends_preferred:
+            pref = ", ".join(b["name"] for b in manager.ibm_backends_preferred)
+            detail = f"{len(manager.ibm_backends)} backends, preferred: {pref}"
+        print(f"  {qid:<20} {status_str:<12} {qpu.max_qubits:>6}  {detail}")
+    print()
+
     LOGGER.debug("Hardware status snapshot after init: %s", manager.status_snapshot())
 
-    include_simulators = bool(args.include_simulators)
-    if args.only_qpu in {"local_qiskit", "amazon_sv1", "amazon_tn1"}:
-        include_simulators = True
     available_qpus = manager.get_available_qpus_for_size(
         num_qubits=num_qubits,
         include_simulators=include_simulators,
     )
-    LOGGER.info("Available QPUs | %s", available_qpus)
-    snapshot = manager.status_snapshot()
-    LOGGER.debug("QPU status snapshot: %s", snapshot)
 
     if args.execution_mode == "single":
         selected_qpu = args.qpu_id or args.only_qpu or (available_qpus[0] if available_qpus else None)
@@ -779,6 +811,13 @@ def run(args: argparse.Namespace) -> int:
     )
     ansatz_metrics = _collect_ansatz_metrics(ansatz)
     objective = QuboObjective(qubo=qubo)
+    LOGGER.info(
+        "Ansatz | reps=%s entanglement=%s parameters=%s depth=%s 2q_gates=%s",
+        args.layers, args.entanglement,
+        ansatz_metrics.get("trainable_parameters"),
+        ansatz_metrics.get("depth"),
+        ansatz_metrics.get("two_qubit_gates"),
+    )
     LOGGER.info(
         "Optimization start | method=%s objective=%s shots=%s maxiter=%s",
         args.method,

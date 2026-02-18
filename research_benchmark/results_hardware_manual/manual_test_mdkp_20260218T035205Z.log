@@ -1,8 +1,0 @@
-2026-02-18 11:52:05,707 | INFO | qobench.manual_test_mdkp | Starting manual MDKP hardware test
-2026-02-18 11:52:05,708 | INFO | qobench.manual_test_mdkp | Test wrapper log file: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual/manual_test_mdkp_20260218T035205Z.log
-2026-02-18 11:52:05,708 | INFO | qobench.manual_test_mdkp | Test config | method=cvar_vqe execution_mode=single qpu_id=local_qiskit qpus=None shots=16 maxiter=1
-2026-02-18 11:52:05,708 | INFO | qobench.manual_test_mdkp | Using MDKP instance: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat
-2026-02-18 11:52:05,709 | INFO | qobench.manual_test_mdkp | Benchmark command: .venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mkp --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat --method cvar_vqe --execution-mode single --shots 16 --maxiter 1 --seed 0 --layers 1 --entanglement chain --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual --only-qpu local_qiskit --log-level INFO --qpu-id local_qiskit --include-simulators
-2026-02-18 11:52:05,709 | INFO | qobench.manual_test_mdkp | Launching benchmark process...
-2026-02-18 11:52:06,342 | INFO | qobench.manual_test_mdkp | Benchmark process finished | return_code=1
-2026-02-18 11:52:06,343 | INFO | qobench.manual_test_mdkp | Raw benchmark stdout saved to: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual/manual_test_mdkp_benchmark_stdout.log

@@ -67,6 +67,10 @@ class QPUConfig:
     weekdays_only: bool = False
 
 
+# IDs used for iterating over AWS Braket QPUs in initialize / refresh.
+_BRAKET_QPU_IDS = ("rigetti_ankaa3", "iqm_emerald", "iqm_garnet", "amazon_sv1")
+
+
 def _default_qpus() -> dict[str, QPUConfig]:
     return {
         "rigetti_ankaa3": QPUConfig(
@@ -103,14 +107,6 @@ def _default_qpus() -> dict[str, QPUConfig]:
             priority=8,
             availability_windows_sgt=None,
         ),
-        "amazon_tn1": QPUConfig(
-            name="Amazon TN1",
-            provider="braket_sim_tn1",
-            max_qubits=50,
-            region="us-west-1",
-            priority=8,
-            availability_windows_sgt=None,
-        ),
         "ibm_quantum": QPUConfig(
             name="IBM Quantum",
             provider="ibm",
@@ -120,9 +116,9 @@ def _default_qpus() -> dict[str, QPUConfig]:
             availability_windows_sgt=None,
         ),
         "local_qiskit": QPUConfig(
-            name="Local Qiskit Sampler",
+            name="Local Qiskit MPS Simulator",
             provider="local_qiskit",
-            max_qubits=32,
+            max_qubits=100,
             region="local",
             priority=20,
             availability_windows_sgt=None,
@@ -323,6 +319,11 @@ class QuantumHardwareManager:
         required = self.min_window_remaining_minutes
         if qpu.provider.startswith("braket_") and not self._is_simulator_provider(qpu.provider):
             required = max(required, self.min_aws_window_remaining_minutes)
+            # Adaptive guard: if this backend is slow, require extra runway.
+            if qpu.successful_jobs > 0:
+                avg_job_minutes = (qpu.total_time_sec / max(1, qpu.successful_jobs)) / 60.0
+                adaptive_required = min(180.0, (2.0 * avg_job_minutes) + 5.0)
+                required = max(required, adaptive_required)
         return remaining >= required
 
     @staticmethod
@@ -438,22 +439,26 @@ class QuantumHardwareManager:
             time.sleep(sleep_sec)
 
     def initialize(self) -> dict[str, bool]:
+        """Initialize all available QPUs. Returns dict of QPU name -> success."""
         results: dict[str, bool] = {}
-        LOGGER.debug(
+        LOGGER.info(
             "Initializing backends | use_aws=%s use_ibm=%s allow_simulators=%s",
             self.use_aws,
             self.use_ibm,
             self.allow_simulators,
         )
 
+        # ------- AWS Braket QPUs -------
+        if self.use_aws and not HAS_BRAKET:
+            LOGGER.warning(
+                "[AWS] Braket SDK not installed - all AWS backends will be unavailable. "
+                "Install with: pip install amazon-braket-sdk"
+            )
+
         if self.use_aws and HAS_BRAKET:
-            for qpu_id in (
-                "rigetti_ankaa3",
-                "iqm_emerald",
-                "iqm_garnet",
-                "amazon_sv1",
-                "amazon_tn1",
-            ):
+            for qpu_id in _BRAKET_QPU_IDS:
+                if qpu_id not in self.qpus:
+                    continue
                 if not self._is_enabled(qpu_id):
                     self._mark_disabled(qpu_id)
                     results[qpu_id] = False
@@ -463,21 +468,25 @@ class QuantumHardwareManager:
                 ):
                     self.qpus[qpu_id].is_available = False
                     self.qpus[qpu_id].last_error = "Simulators disabled by configuration"
-                    LOGGER.debug("Skipping simulator backend by configuration | qpu_id=%s", qpu_id)
+                    LOGGER.info("[%s] Skipped (simulators disabled)", qpu_id)
                     results[qpu_id] = False
                     continue
                 success = self._init_braket_device(qpu_id)
                 results[qpu_id] = success
         else:
-            for qpu_id in ("rigetti_ankaa3", "iqm_emerald", "iqm_garnet", "amazon_sv1", "amazon_tn1"):
+            for qpu_id in _BRAKET_QPU_IDS:
+                if qpu_id not in self.qpus:
+                    continue
                 if not self._is_enabled(qpu_id):
                     self._mark_disabled(qpu_id)
                 else:
+                    reason = "Braket SDK not installed" if not HAS_BRAKET else "AWS disabled"
                     self.qpus[qpu_id].is_available = False
-                    self.qpus[qpu_id].last_error = "AWS Braket unavailable or disabled"
-                    LOGGER.debug("AWS backend unavailable/disabled | qpu_id=%s", qpu_id)
+                    self.qpus[qpu_id].last_error = reason
+                    LOGGER.info("[%s] Unavailable - %s", qpu_id, reason)
                 results[qpu_id] = False
 
+        # ------- IBM Quantum -------
         if not self._is_enabled("ibm_quantum"):
             self._mark_disabled("ibm_quantum")
             results["ibm_quantum"] = False
@@ -485,36 +494,34 @@ class QuantumHardwareManager:
             success = self._init_ibm_device()
             results["ibm_quantum"] = success
         else:
+            reason = "IBM Runtime SDK not installed" if not HAS_IBM_RUNTIME else "IBM disabled"
             self.qpus["ibm_quantum"].is_available = False
-            self.qpus["ibm_quantum"].last_error = "IBM runtime unavailable or disabled"
-            LOGGER.debug("IBM backend unavailable/disabled")
+            self.qpus["ibm_quantum"].last_error = reason
+            LOGGER.info("[ibm_quantum] Unavailable - %s", reason)
             results["ibm_quantum"] = False
 
+        # ------- Local Qiskit Simulator -------
         if not self._is_enabled("local_qiskit"):
             self._mark_disabled("local_qiskit")
             results["local_qiskit"] = False
         elif self.allow_simulators and HAS_QISKIT:
             self.qpus["local_qiskit"].is_available = True
             self.qpus["local_qiskit"].last_error = ""
-            LOGGER.debug("Local qiskit backend enabled")
+            LOGGER.info("[local_qiskit] Ready (max %d qubits)", self.qpus["local_qiskit"].max_qubits)
             results["local_qiskit"] = True
         else:
             self.qpus["local_qiskit"].is_available = False
-            self.qpus["local_qiskit"].last_error = "Local qiskit simulator unavailable/disabled"
-            LOGGER.debug("Local qiskit backend unavailable/disabled")
+            self.qpus["local_qiskit"].last_error = "Local simulator unavailable or disabled"
+            LOGGER.info("[local_qiskit] Unavailable")
             results["local_qiskit"] = False
 
-        LOGGER.debug("Backend initialization complete | results=%s", results)
         return results
 
     def _init_braket_device(self, qpu_id: str) -> bool:
         qpu = self.qpus[qpu_id]
-        LOGGER.debug(
-            "Initializing AWS Braket backend | qpu_id=%s provider=%s region=%s profile=%s",
-            qpu_id,
-            qpu.provider,
-            qpu.region,
-            self.aws_profile,
+        LOGGER.info(
+            "[%s] Connecting to %s (region=%s, profile=%s)...",
+            qpu_id, qpu.name, qpu.region, self.aws_profile or "default",
         )
         try:
             if self.aws_profile:
@@ -537,22 +544,14 @@ class QuantumHardwareManager:
                     "arn:aws:braket:::device/quantum-simulator/amazon/sv1",
                     aws_session=aws_session,
                 )
-            elif qpu.provider == "braket_sim_tn1":
-                device = AwsDevice(
-                    "arn:aws:braket:::device/quantum-simulator/amazon/tn1",
-                    aws_session=aws_session,
-                )
             else:
                 raise ValueError(f"Unknown Braket provider: {qpu.provider}")
 
-            if str(device.status).upper() != "ONLINE":
+            status_str = str(device.status).upper()
+            if status_str != "ONLINE":
                 qpu.is_available = False
-                qpu.last_error = f"Device status is {device.status}"
-                LOGGER.warning(
-                    "AWS Braket backend offline | qpu_id=%s status=%s",
-                    qpu_id,
-                    device.status,
-                )
+                qpu.last_error = f"Device status: {status_str}"
+                LOGGER.warning("[%s] OFFLINE (status=%s)", qpu_id, status_str)
                 return False
 
             try:
@@ -567,31 +566,29 @@ class QuantumHardwareManager:
             qpu.is_available = True
             qpu.last_error = ""
             remaining_window = self._remaining_window_minutes_sgt(qpu)
-            LOGGER.debug(
-                "AWS Braket backend ready | qpu_id=%s status=ONLINE max_qubits=%s remaining_window_min_sgt=%s",
-                qpu_id,
-                qpu.max_qubits,
-                remaining_window,
+            window_str = f"{remaining_window:.0f}m remaining" if remaining_window is not None else "always-on"
+            LOGGER.info(
+                "[%s] Ready - %s (%d qubits, window: %s)",
+                qpu_id, qpu.name, qpu.max_qubits, window_str,
             )
             return True
         except Exception as exc:
             qpu.is_available = False
-            qpu.last_error = str(exc)
-            LOGGER.exception("AWS Braket backend init failed | qpu_id=%s error=%s", qpu_id, exc)
+            qpu.last_error = str(exc)[:120]
+            LOGGER.warning("[%s] Init failed - %s", qpu_id, qpu.last_error)
             return False
 
     def _init_ibm_device(self) -> bool:
         qpu = self.qpus["ibm_quantum"]
-        LOGGER.debug(
-            "Initializing IBM runtime service | token_provided=%s instance_provided=%s",
-            bool(self.ibm_token),
-            bool(self.ibm_instance),
+        LOGGER.info(
+            "[ibm_quantum] Connecting (token=%s, instance=%s)...",
+            "yes" if self.ibm_token else "saved",
+            "yes" if self.ibm_instance else "default",
         )
         try:
             service = None
 
             if self.ibm_token and self.ibm_instance:
-                LOGGER.debug("Trying IBM connection with explicit token + instance")
                 for channel in ("ibm_cloud", "ibm_quantum"):
                     try:
                         service = QiskitRuntimeService(
@@ -600,24 +597,22 @@ class QuantumHardwareManager:
                             instance=self.ibm_instance,
                         )
                         if service.active_account() is not None:
-                            LOGGER.debug("IBM connection established | channel=%s", channel)
+                            LOGGER.info("[ibm_quantum] Connected via %s channel", channel)
                             break
                     except Exception:
                         service = None
 
             if service is None:
-                LOGGER.debug("Trying IBM connection with saved system credentials")
                 try:
                     service = QiskitRuntimeService()
                     if service.active_account() is None:
                         service = None
                     else:
-                        LOGGER.debug("IBM connection established from saved credentials")
+                        LOGGER.info("[ibm_quantum] Connected via saved credentials")
                 except Exception:
                     service = None
 
             if service is None and self.ibm_token:
-                LOGGER.debug("Trying IBM connection with token only")
                 try:
                     service = QiskitRuntimeService(
                         channel="ibm_quantum",
@@ -626,33 +621,33 @@ class QuantumHardwareManager:
                     if service.active_account() is None:
                         service = None
                     else:
-                        LOGGER.debug("IBM connection established with token only")
+                        LOGGER.info("[ibm_quantum] Connected via token")
                 except Exception:
                     service = None
 
             if service is None:
                 qpu.is_available = False
-                qpu.last_error = "Could not initialize IBM runtime service"
-                LOGGER.warning("IBM initialization failed: could not initialize runtime service")
+                qpu.last_error = "Could not connect to IBM Quantum"
+                LOGGER.warning("[ibm_quantum] All connection methods failed")
                 return False
 
+            # Check runtime budget
             remaining = _get_ibm_usage_remaining_seconds(service)
-            LOGGER.debug(
-                "IBM runtime budget check | remaining_seconds=%s threshold_seconds=%.0f",
-                "unknown" if remaining is None else f"{remaining:.1f}",
-                float(self.ibm_min_runtime_seconds),
-            )
-            if (
-                remaining is not None
-                and remaining < float(self.ibm_min_runtime_seconds)
-            ):
-                qpu.is_available = False
-                qpu.last_error = (
-                    f"IBM runtime remaining {remaining:.0f}s < {self.ibm_min_runtime_seconds:.0f}s"
+            threshold = float(self.ibm_min_runtime_seconds)
+            if remaining is not None:
+                LOGGER.info(
+                    "[ibm_quantum] Runtime budget: %.0fs remaining (threshold: %.0fs)",
+                    remaining, threshold,
                 )
-                LOGGER.warning("IBM disabled due to low runtime budget | error=%s", qpu.last_error)
-                return False
+                if remaining < threshold:
+                    qpu.is_available = False
+                    qpu.last_error = f"Runtime budget low: {remaining:.0f}s < {threshold:.0f}s"
+                    LOGGER.warning("[ibm_quantum] %s", qpu.last_error)
+                    return False
+            else:
+                LOGGER.info("[ibm_quantum] Runtime budget: unavailable from API")
 
+            # Discover backends
             self.ibm_backends = []
             try:
                 backends = service.backends(operational=True, simulator=False)
@@ -674,12 +669,6 @@ class QuantumHardwareManager:
                             "num_qubits": int(backend.num_qubits),
                             "pending_jobs": pending_jobs,
                         }
-                    )
-                    LOGGER.debug(
-                        "IBM backend discovered | backend=%s qubits=%s pending_jobs=%s",
-                        backend.name,
-                        int(backend.num_qubits),
-                        "n/a" if pending_jobs is None else int(pending_jobs),
                     )
                 except Exception:
                     continue
@@ -703,31 +692,30 @@ class QuantumHardwareManager:
             if self.ibm_backends_preferred:
                 qpu.backend_name = self.ibm_backends_preferred[0]["name"]
                 qpu.max_qubits = int(self.ibm_backends_preferred[0]["num_qubits"])
-                preferred_names = [
-                    f"{item['name']}(qubits={item.get('num_qubits')},pending={item.get('pending_jobs')})"
-                    for item in self.ibm_backends_preferred
-                ]
-                LOGGER.debug(
-                    "IBM preferred backend candidates (least busy first) | backends=%s",
-                    preferred_names,
-                )
 
             self.sessions["ibm_quantum"] = service
             qpu.is_available = len(self.ibm_backends) > 0
-            qpu.last_error = "" if qpu.is_available else "No operational IBM hardware backend"
+            qpu.last_error = "" if qpu.is_available else "No operational IBM backend found"
             self._ibm_last_backend_refresh = time.time()
-            LOGGER.debug(
-                "IBM initialization complete | available=%s discovered_backends=%s selected_backend=%s selected_qubits=%s",
-                qpu.is_available,
-                len(self.ibm_backends),
-                qpu.backend_name,
-                qpu.max_qubits,
-            )
+
+            # Log discovered backends
+            if self.ibm_backends:
+                backend_strs = [
+                    f"{b['name']}({b['num_qubits']}q, pending={b.get('pending_jobs', 'n/a')})"
+                    for b in self.ibm_backends
+                ]
+                LOGGER.info("[ibm_quantum] %d backends found: %s", len(self.ibm_backends), ", ".join(backend_strs))
+                if self.ibm_backends_preferred:
+                    pref_strs = [b['name'] for b in self.ibm_backends_preferred]
+                    LOGGER.info("[ibm_quantum] Preferred (least busy): %s", ", ".join(pref_strs))
+            else:
+                LOGGER.warning("[ibm_quantum] No operational backends found")
+
             return qpu.is_available
         except Exception as exc:
             qpu.is_available = False
-            qpu.last_error = str(exc)
-            LOGGER.exception("IBM initialization failed | error=%s", exc)
+            qpu.last_error = str(exc)[:120]
+            LOGGER.warning("[ibm_quantum] Init failed - %s", qpu.last_error)
             return False
 
     def _refresh_ibm_pending(self, backend_infos: list[dict[str, Any]]) -> None:
@@ -802,29 +790,49 @@ class QuantumHardwareManager:
 
         remaining = _get_ibm_usage_remaining_seconds(service)
         if remaining is None:
-            LOGGER.debug("IBM usage refresh | remaining runtime unavailable from API")
+            LOGGER.debug("[ibm_quantum] Usage check: remaining runtime unavailable from API")
             return
 
         threshold = float(self.ibm_min_runtime_seconds)
-        LOGGER.debug(
-            "IBM usage refresh | remaining_seconds=%.1f threshold_seconds=%.0f",
-            remaining,
-            threshold,
+        LOGGER.info(
+            "[ibm_quantum] Usage check: %.0fs remaining (threshold: %.0fs)",
+            remaining, threshold,
         )
         if remaining < threshold:
             qpu.is_available = False
-            qpu.last_error = (
-                f"IBM runtime remaining {remaining:.0f}s < {threshold:.0f}s"
-            )
-            LOGGER.warning("IBM disabled by runtime threshold | error=%s", qpu.last_error)
+            qpu.last_error = f"Runtime budget low: {remaining:.0f}s < {threshold:.0f}s"
+            LOGGER.warning("[ibm_quantum] Disabled - %s", qpu.last_error)
+            # Attempt mid-run re-auth/reload to pick up refreshed account.
             if now - self._ibm_last_reconnect_attempt >= self._ibm_reconnect_interval:
                 self._ibm_last_reconnect_attempt = now
-                LOGGER.debug("Attempting IBM service reconnect after low runtime signal")
-                self._init_ibm_device()
+                LOGGER.info("[ibm_quantum] Attempting mid-run re-auth/reload...")
+                try:
+                    success = self._init_ibm_device()
+                    refreshed_service = self.sessions.get("ibm_quantum")
+                    refreshed_remaining = (
+                        _get_ibm_usage_remaining_seconds(refreshed_service)
+                        if refreshed_service else None
+                    )
+                    if success and refreshed_remaining is not None and refreshed_remaining >= threshold:
+                        qpu.is_available = True
+                        qpu.last_error = ""
+                        LOGGER.info(
+                            "[ibm_quantum] Re-auth succeeded - %.0fs available (>= %.0fs). Re-enabled.",
+                            refreshed_remaining, threshold,
+                        )
+                    else:
+                        remaining_str = f"{refreshed_remaining:.0f}s" if refreshed_remaining is not None else "unknown"
+                        LOGGER.info(
+                            "[ibm_quantum] Re-auth completed but still unavailable (remaining=%s)",
+                            remaining_str,
+                        )
+                except Exception as e:
+                    LOGGER.warning("[ibm_quantum] Mid-run re-auth failed: %s", e)
         else:
+            if not qpu.is_available:
+                LOGGER.info("[ibm_quantum] Runtime available again (%.0fs). Re-enabling.", remaining)
             qpu.is_available = True
             qpu.last_error = ""
-            LOGGER.debug("IBM remains schedulable after usage refresh")
 
     def _refresh_ibm_backends_if_needed(self, force: bool = False) -> None:
         if not self.use_ibm or not HAS_IBM_RUNTIME:
@@ -845,15 +853,17 @@ class QuantumHardwareManager:
         self,
         include_unavailable: bool = True,
         in_window_only: bool = False,
+        reason: str = "",
     ) -> None:
         if not HAS_BRAKET or not self.use_aws:
             return
         LOGGER.debug(
-            "Refreshing AWS Braket backends | include_unavailable=%s in_window_only=%s",
-            include_unavailable,
-            in_window_only,
+            "Refreshing AWS Braket backends | reason=%s",
+            reason or "periodic",
         )
-        for qpu_id in ("rigetti_ankaa3", "iqm_emerald", "iqm_garnet", "amazon_sv1", "amazon_tn1"):
+        for qpu_id in _BRAKET_QPU_IDS:
+            if qpu_id not in self.qpus:
+                continue
             if not self._is_enabled(qpu_id):
                 continue
             qpu = self.qpus[qpu_id]
@@ -882,41 +892,52 @@ class QuantumHardwareManager:
         include_simulators: bool,
     ) -> list[str]:
         self.refresh_credentials_if_needed()
-        candidates: list[tuple[int, str]] = []
+        self._refresh_ibm_usage_if_needed()
+        hardware_candidates: list[tuple[int, str]] = []
+        simulator_candidates: list[tuple[int, str]] = []
         skipped: dict[str, str] = {}
         for qpu_id, qpu in self.qpus.items():
+            is_sim = self._is_simulator_provider(qpu.provider)
             if not qpu.is_available:
-                skipped[qpu_id] = f"unavailable:{qpu.last_error}"
+                skipped[qpu_id] = f"unavailable - {qpu.last_error}"
                 continue
             if qpu.max_qubits < num_qubits:
-                skipped[qpu_id] = f"insufficient_qubits:{qpu.max_qubits}<{num_qubits}"
+                skipped[qpu_id] = f"too few qubits ({qpu.max_qubits} < {num_qubits})"
                 continue
-            if not include_simulators and self._is_simulator_provider(qpu.provider):
-                skipped[qpu_id] = "simulator_excluded"
-                continue
-            if not self.is_qpu_in_time_window(qpu):
-                skipped[qpu_id] = "outside_time_window"
-                continue
-            if not self._has_sufficient_window(qpu):
-                remaining = self._remaining_window_minutes_sgt(qpu)
-                skipped[qpu_id] = (
-                    f"window_too_short:{remaining:.1f}m"
-                    if remaining is not None
-                    else "window_too_short"
-                )
-                continue
-            candidates.append((qpu.priority, qpu_id))
+            if not is_sim:
+                # Hardware QPU checks
+                if not self.is_qpu_in_time_window(qpu):
+                    skipped[qpu_id] = "outside availability window"
+                    continue
+                if not self._has_sufficient_window(qpu):
+                    remaining = self._remaining_window_minutes_sgt(qpu)
+                    skipped[qpu_id] = (
+                        f"window closing soon ({remaining:.0f}m left)"
+                        if remaining is not None
+                        else "window closing soon"
+                    )
+                    continue
+                hardware_candidates.append((qpu.priority, qpu_id))
+            else:
+                # Simulator - track separately for fallback
+                simulator_candidates.append((qpu.priority, qpu_id))
 
-        candidates.sort(key=lambda item: (item[0], item[1]))
-        selected = [item[1] for item in candidates]
-        LOGGER.debug(
-            "QPU availability query | required_qubits=%s include_simulators=%s selected=%s",
-            num_qubits,
-            include_simulators,
-            selected,
-        )
+        hardware_candidates.sort(key=lambda item: (item[0], item[1]))
+        selected = [item[1] for item in hardware_candidates]
+
+        # Simulators are fallback-only: include only if no hardware QPU passed
+        if not selected and include_simulators and simulator_candidates:
+            simulator_candidates.sort(key=lambda item: (item[0], item[1]))
+            selected = [item[1] for item in simulator_candidates]
+            LOGGER.info("No hardware QPU available - falling back to simulators: %s", selected)
+        elif simulator_candidates:
+            sim_names = [item[1] for item in simulator_candidates]
+            skipped.update({sid: "simulator reserved as fallback" for sid in sim_names})
+
         if skipped:
-            LOGGER.debug("QPU availability skipped reasons | %s", skipped)
+            skip_lines = [f"  {qid}: {reason}" for qid, reason in skipped.items()]
+            LOGGER.info("QPUs skipped for %d-qubit problem:\n%s", num_qubits, "\n".join(skip_lines))
+        LOGGER.info("QPUs selected: %s", selected if selected else "(none)")
         return selected
 
     def status_snapshot(self) -> dict[str, dict[str, Any]]:
@@ -1415,15 +1436,14 @@ class QuantumHardwareManager:
             runtime_remaining_sec = (
                 _get_ibm_usage_remaining_seconds(service) if service is not None else None
             )
-        LOGGER.debug(
-            "Dispatching quantum job | qpu_id=%s provider=%s shots=%s qubits=%s timeout_sec=%s remaining_window_min_sgt=%s runtime_remaining_sec=%s",
-            qpu_id,
-            qpu.provider,
-            shots,
-            num_qubits,
-            timeout_sec,
-            remaining_window,
-            runtime_remaining_sec,
+        window_info = ""
+        if remaining_window is not None:
+            window_info = f" | window: {remaining_window:.0f}m left"
+        if runtime_remaining_sec is not None:
+            window_info += f" | IBM budget: {runtime_remaining_sec:.0f}s left"
+        LOGGER.info(
+            "Dispatching job -> %s | shots=%s qubits=%s%s",
+            qpu_id, shots, num_qubits, window_info,
         )
         start = time.time()
         try:
@@ -1485,13 +1505,8 @@ class QuantumHardwareManager:
             qpu.successful_jobs += 1
             qpu.total_time_sec += elapsed
         metadata["elapsed_sec"] = elapsed
-        LOGGER.debug(
-            "Quantum job completed | qpu_id=%s provider=%s elapsed_sec=%.3f total_jobs=%s success=%s failed=%s",
-            qpu_id,
-            qpu.provider,
-            elapsed,
-            qpu.total_jobs,
-            qpu.successful_jobs,
-            qpu.failed_jobs,
+        LOGGER.info(
+            "Job completed on %s in %.1fs (total: %d ok, %d failed)",
+            qpu_id, elapsed, qpu.successful_jobs, qpu.failed_jobs,
         )
         return counts, metadata

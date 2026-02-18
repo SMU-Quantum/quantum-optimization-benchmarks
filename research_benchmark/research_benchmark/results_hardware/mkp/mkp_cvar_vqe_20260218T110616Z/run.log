@@ -1,0 +1,131 @@
+Run start | problem=mkp method=cvar_vqe mode=multi seed=0
+Instance | path=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\Multi_Dimension_Knapsack\MKP_Instances\sac94\hp\hp1.dat
+Problem size | problem=mkp required_qubits=60
+Available QPUs | ['ibm_quantum']
+Execution targets | mode=multi qpus=['ibm_quantum']
+Optimization start | method=cvar_vqe objective=cvar shots=256 maxiter=12
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=598.0 shots=256
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.00000 (ms)
+Pass: ElidePermutations - 0.00000 (ms)
+Pass: RemoveDiagonalGatesBeforeMeasure - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: InverseCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: Split2QUnitaries - 0.00000 (ms)
+Pass: SetLayout - 0.00000 (ms)
+Pass: VF2Layout - 41.78119 (ms)
+Pass: FullAncillaAllocation - 0.00000 (ms)
+Pass: EnlargeWithAncilla - 0.00000 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: CheckMap - 0.00000 (ms)
+Pass: FilterOpNodes - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 2.00772 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 1.50657 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.53787 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.50712 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: VF2PostLayout - 164.14785 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: InstructionDurationCheck - 0.00000 (ms)
+IBM job submitted | backend=ibm_marrakesh job_id=d6apqeh7ce2c73feiltg
+IBM job d6apqeh7ce2c73feiltg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6apqeh7ce2c73feiltg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_marrakesh job_id=d6apqeh7ce2c73feiltg unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=596.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6apqi7g4t5c7383h57g
+IBM job d6apqi7g4t5c7383h57g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6apqi7g4t5c7383h57g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=32.5
+IBM job completed | backend=ibm_marrakesh job_id=d6apqi7g4t5c7383h57g unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=594.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6apqr97ce2c73feimdg
+IBM job d6apqr97ce2c73feimdg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6apqr97ce2c73feimdg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_marrakesh job_id=d6apqr97ce2c73feimdg unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=592.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6apqtknsg9c73985tkg
+IBM job d6apqtknsg9c73985tkg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6apqtknsg9c73985tkg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=37.8
+IBM job completed | backend=ibm_marrakesh job_id=d6apqtknsg9c73985tkg unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=590.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6apr84nsg9c73985u5g
+IBM job d6apr84nsg9c73985u5g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6apr84nsg9c73985u5g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6apr84nsg9c73985u5g unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=588.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6apra97ce2c73fein20
+IBM job d6apra97ce2c73fein20 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6apra97ce2c73fein20 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6apra97ce2c73fein20 unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=586.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aprcp7ce2c73fein60
+IBM job d6aprcp7ce2c73fein60 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aprcp7ce2c73fein60 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6aprcp7ce2c73fein60 unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=584.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aprf4nsg9c73985ufg
+IBM job d6aprf4nsg9c73985ufg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aprf4nsg9c73985ufg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6aprf4nsg9c73985ufg unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=582.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aprhh54hss73b6h210
+IBM job d6aprhh54hss73b6h210 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aprhh54hss73b6h210 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6aprhh54hss73b6h210 unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=1
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=1 runtime_remaining_sec=580.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aprk154hss73b6h250
+IBM job d6aprk154hss73b6h250 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aprk154hss73b6h250 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=6.4
+IBM job completed | backend=ibm_marrakesh job_id=d6aprk154hss73b6h250 unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=1
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=1 runtime_remaining_sec=578.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aprmh54hss73b6h27g
+IBM job d6aprmh54hss73b6h27g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6aprmh54hss73b6h27g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=16.6
+IBM job completed | backend=ibm_marrakesh job_id=d6aprmh54hss73b6h27g unique_bitstrings=256
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=576.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aprrp54hss73b6h2e0
+IBM job d6aprrp54hss73b6h2e0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aprrp54hss73b6h2e0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_marrakesh job_id=d6aprrp54hss73b6h2e0 unique_bitstrings=256
+Optimization finished | evaluations=12 status=2
+Local swap postprocess | improved=True candidates_checked=199
+Final solution | bitstring=100100111000100000000110011010100010101000100011101010011101 objective_label=mkp_total_profit objective_value=2393.0 feasible=True
+Artifacts | result=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T110616Z\result.json trace=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T110616Z\trace.jsonl qubo=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T110616Z\qubo.lp counts=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T110616Z\best_counts.json

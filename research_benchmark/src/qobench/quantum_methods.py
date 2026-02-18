@@ -144,7 +144,11 @@ def _entanglement_pairs(num_qubits: int, entanglement: str) -> list[tuple[int, i
         return []
     if entanglement == "full":
         return [(i, j) for i in range(num_qubits) for j in range(i + 1, num_qubits)]
-    # Default: chain
+    if entanglement == "circular":
+        pairs = [(i, i + 1) for i in range(num_qubits - 1)]
+        pairs.append((num_qubits - 1, 0))  # wrap-around
+        return pairs
+    # Default: chain (linear)
     return [(i, i + 1) for i in range(num_qubits - 1)]
 
 

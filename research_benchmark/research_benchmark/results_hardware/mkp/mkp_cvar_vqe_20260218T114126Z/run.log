@@ -1,0 +1,36 @@
+Run start | problem=mkp method=cvar_vqe mode=multi seed=0
+Instance | path=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\Multi_Dimension_Knapsack\MKP_Instances\sac94\hp\hp1.dat
+Problem size | problem=mkp required_qubits=60
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+SSO Token refresh succeeded
+[rigetti_ankaa3] Ready — Rigetti Ankaa-3 (82 qubits, window: 259m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready — IQM Emerald (54 qubits, window: 289m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready — IQM Garnet (20 qubits, window: 229m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready — Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 543s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=2092), ibm_marrakesh(156q, pending=0), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_marrakesh, ibm_torino
+[local_qiskit] Ready (max 32 qubits)
+[ibm_quantum] Usage check: 543s remaining (threshold: 50s)
+QPUs skipped for 60-qubit problem:
+  iqm_emerald: too few qubits (54 < 60)
+  iqm_garnet: too few qubits (20 < 60)
+  amazon_sv1: too few qubits (34 < 60)
+  local_qiskit: too few qubits (32 < 60)
+QPUs selected: ['rigetti_ankaa3', 'ibm_quantum']
+Execution targets | mode=multi qpus=['rigetti_ankaa3', 'ibm_quantum']
+Optimization start | method=cvar_vqe objective=cvar shots=256 maxiter=12
+Dispatching job → rigetti_ankaa3 | shots=256 qubits=60
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/a89b30a3-16ed-40c3-8080-14bd495de565
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/a89b30a3-16ed-40c3-8080-14bd495de565 status | state=QUEUED queue_position=1 elapsed_sec=0.6

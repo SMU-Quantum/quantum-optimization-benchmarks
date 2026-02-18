@@ -1,0 +1,2 @@
+Run start | problem=mkp method=cvar_vqe mode=multi seed=0
+Instance | path=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\Multi_Dimension_Knapsack\MKP_Instances\sac94\hp\hp1.dat

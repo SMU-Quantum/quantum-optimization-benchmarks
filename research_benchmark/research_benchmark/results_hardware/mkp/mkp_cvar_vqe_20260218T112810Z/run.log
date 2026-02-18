@@ -1,0 +1,197 @@
+Run start | problem=mkp method=cvar_vqe mode=multi seed=0
+Instance | path=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\Multi_Dimension_Knapsack\MKP_Instances\sac94\hp\hp1.dat
+Problem size | problem=mkp required_qubits=60
+Loading cached SSO token for Quantum
+Loading cached SSO token for Quantum
+Loading cached SSO token for Quantum
+Loading cached SSO token for Quantum
+Loading cached SSO token for Quantum
+AWS Braket backend init failed | qpu_id=amazon_tn1 error=Simulator 'arn:aws:braket:::device/quantum-simulator/amazon/tn1' not found in 'us-west-1'
+Traceback (most recent call last):
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_device.py", line 353, in _get_non_regional_device_session
+    self._populate_properties(session)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_device.py", line 374, in _populate_properties
+    metadata = session.get_device(self._arn)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_session.py", line 637, in get_device
+    return self.braket_client.get_device(deviceArn=arn)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\client.py", line 1078, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.ResourceNotFoundException: An error occurred (ResourceNotFoundException) when calling the GetDevice operation: Braket device 'arn:aws:braket:::device/quantum-simulator/amazon/tn1' not found in us-west-1. You can find a list of all supported device ARNs and the regions in which they are available in the documentation: https://docs.aws.amazon.com/braket/latest/developerguide/braket-devices.html
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 544, in _init_braket_device
+    device = AwsDevice(
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_device.py", line 117, in __init__
+    self._aws_session = self._get_session_and_initialize(aws_session or AwsSession())
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_device.py", line 329, in _get_session_and_initialize
+    else self._get_non_regional_device_session(session)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_device.py", line 358, in _get_non_regional_device_session
+    raise ValueError(f"Simulator '{self._arn}' not found in '{current_region}'") from e
+ValueError: Simulator 'arn:aws:braket:::device/quantum-simulator/amazon/tn1' not found in 'us-west-1'
+Backend initialization complete | results={'rigetti_ankaa3': True, 'iqm_emerald': True, 'iqm_garnet': True, 'amazon_sv1': True, 'amazon_tn1': False, 'ibm_quantum': True, 'local_qiskit': True}
+QPU availability skipped reasons | {'iqm_emerald': 'insufficient_qubits:54<60', 'iqm_garnet': 'insufficient_qubits:20<60', 'amazon_sv1': 'insufficient_qubits:34<60', 'amazon_tn1': "unavailable:Simulator 'arn:aws:braket:::device/quantum-simulator/amazon/tn1' not found in 'us-west-1'", 'local_qiskit': 'insufficient_qubits:32<60'}
+Available QPUs | ['rigetti_ankaa3', 'ibm_quantum']
+Execution targets | mode=multi qpus=['rigetti_ankaa3', 'ibm_quantum']
+Optimization start | method=cvar_vqe objective=cvar shots=256 maxiter=12
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/a9661aa7-5013-4807-9ca2-ad8a34a32c26
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/a9661aa7-5013-4807-9ca2-ad8a34a32c26 status | state=QUEUED queue_position=1 elapsed_sec=0.6
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/a9661aa7-5013-4807-9ca2-ad8a34a32c26 status | state=COMPLETED queue_position=None elapsed_sec=11.9
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/a9661aa7-5013-4807-9ca2-ad8a34a32c26 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=551.0 shots=256
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.52524 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.00000 (ms)
+Pass: ElidePermutations - 0.00000 (ms)
+Pass: RemoveDiagonalGatesBeforeMeasure - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: InverseCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.52094 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: Split2QUnitaries - 0.00000 (ms)
+Pass: SetLayout - 0.00000 (ms)
+Pass: VF2Layout - 38.40661 (ms)
+Pass: FullAncillaAllocation - 0.00000 (ms)
+Pass: EnlargeWithAncilla - 0.00000 (ms)
+Pass: ApplyLayout - 0.99993 (ms)
+Pass: CheckMap - 0.00000 (ms)
+Pass: FilterOpNodes - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.50187 (ms)
+Pass: Depth - 1.00231 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.50187 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.50163 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.52714 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 1.00303 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: VF2PostLayout - 149.54257 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: InstructionDurationCheck - 0.00000 (ms)
+IBM job submitted | backend=ibm_torino job_id=d6aq4ufg4t5c7383hhb0
+IBM job d6aq4ufg4t5c7383hhb0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq4ufg4t5c7383hhb0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=16.3
+IBM job completed | backend=ibm_torino job_id=d6aq4ufg4t5c7383hhb0 unique_bitstrings=256
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/20d6317c-0d49-41f8-a5c3-0c29e1e14cc7
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/20d6317c-0d49-41f8-a5c3-0c29e1e14cc7 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/20d6317c-0d49-41f8-a5c3-0c29e1e14cc7 status | state=COMPLETED queue_position=None elapsed_sec=12.1
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/20d6317c-0d49-41f8-a5c3-0c29e1e14cc7 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=550.0 shots=256
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.00000 (ms)
+Pass: ElidePermutations - 0.00000 (ms)
+Pass: RemoveDiagonalGatesBeforeMeasure - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: InverseCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.50831 (ms)
+Pass: Split2QUnitaries - 0.00000 (ms)
+Pass: SetLayout - 0.00000 (ms)
+Pass: VF2Layout - 41.97145 (ms)
+Pass: FullAncillaAllocation - 0.00000 (ms)
+Pass: EnlargeWithAncilla - 0.00000 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: CheckMap - 0.00000 (ms)
+Pass: FilterOpNodes - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 1.54257 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.51355 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.50879 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.50354 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: VF2PostLayout - 158.93888 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: InstructionDurationCheck - 0.00000 (ms)
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq56snsg9c739869pg
+IBM job d6aq56snsg9c739869pg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq56snsg9c739869pg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_marrakesh job_id=d6aq56snsg9c739869pg unique_bitstrings=256
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/70d5772a-3279-49c2-96df-ad8050adba87
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/70d5772a-3279-49c2-96df-ad8050adba87 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/70d5772a-3279-49c2-96df-ad8050adba87 status | state=COMPLETED queue_position=None elapsed_sec=12.1
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/70d5772a-3279-49c2-96df-ad8050adba87 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=548.0 shots=256
+IBM job submitted | backend=ibm_torino job_id=d6aq5cvg4t5c7383hhq0
+IBM job d6aq5cvg4t5c7383hhq0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq5cvg4t5c7383hhq0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=32.2
+IBM job completed | backend=ibm_torino job_id=d6aq5cvg4t5c7383hhq0 unique_bitstrings=256
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/374c4e2e-69eb-4e6a-86cb-ae489310bf17
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/374c4e2e-69eb-4e6a-86cb-ae489310bf17 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/374c4e2e-69eb-4e6a-86cb-ae489310bf17 status | state=COMPLETED queue_position=None elapsed_sec=11.9
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/374c4e2e-69eb-4e6a-86cb-ae489310bf17 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=546.0 shots=256
+IBM job submitted | backend=ibm_marrakesh job_id=d6aq5ph54hss73b6hddg
+IBM job d6aq5ph54hss73b6hddg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq5ph54hss73b6hddg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=69.8
+IBM job completed | backend=ibm_marrakesh job_id=d6aq5ph54hss73b6hddg unique_bitstrings=256
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/572243a6-09bd-40b3-a19d-5f3751d22212
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/572243a6-09bd-40b3-a19d-5f3751d22212 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/572243a6-09bd-40b3-a19d-5f3751d22212 status | state=COMPLETED queue_position=None elapsed_sec=11.9
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/572243a6-09bd-40b3-a19d-5f3751d22212 unique_bitstrings=256
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=544.0 shots=256
+IBM job submitted | backend=ibm_torino job_id=d6aq6fvg4t5c7383hiu0
+IBM job d6aq6fvg4t5c7383hiu0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aq6fvg4t5c7383hiu0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aq6fvg4t5c7383hiu0 unique_bitstrings=256
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/592e5aa4-875c-4dec-bb4f-5aefc95c0d33
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/592e5aa4-875c-4dec-bb4f-5aefc95c0d33 status | state=QUEUED queue_position=1 elapsed_sec=0.5

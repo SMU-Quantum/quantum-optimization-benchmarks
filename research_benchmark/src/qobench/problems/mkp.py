@@ -70,7 +70,8 @@ class MKPProblem(BenchmarkProblem):
     description = "Multi-Dimensional Knapsack Problem (OR-Library style .dat)."
 
     def default_instance(self, project_root: Path) -> Path | None:
-        return (
+        # Check current root first
+        candidate = (
             project_root
             / "Multi_Dimension_Knapsack"
             / "MKP_Instances"
@@ -78,11 +79,32 @@ class MKPProblem(BenchmarkProblem):
             / "hp"
             / "hp1.dat"
         )
+        if candidate.exists():
+            return candidate
+
+        # Check parent root (common structure)
+        candidate_parent = (
+            project_root.parent
+            / "Multi_Dimension_Knapsack"
+            / "MKP_Instances"
+            / "sac94"
+            / "hp"
+            / "hp1.dat"
+        )
+        if candidate_parent.exists():
+            return candidate_parent
+            
+        return candidate  # Return original path even if not found, to let load_instance fail with clear path
 
     def list_instances(self, project_root: Path, limit: int | None = None) -> list[Path]:
         folder = project_root / "Multi_Dimension_Knapsack" / "MKP_Instances"
         if not folder.exists():
+            # Try parent directory
+            folder = project_root.parent / "Multi_Dimension_Knapsack" / "MKP_Instances"
+            
+        if not folder.exists():
             return []
+            
         instances = sorted(folder.rglob("*.dat"))
         if limit is not None:
             instances = instances[:limit]
@@ -99,6 +121,18 @@ class MKPProblem(BenchmarkProblem):
         instance: MKPInstance,
         time_limit_sec: float | None = None,
     ) -> tuple["Model", dict[str, Any]]:
+        # Hack: Force docplex to ignore incompatible system CPLEX
+        import os
+        import sys
+        
+        # Remove cplex paths from sys.path
+        sys.path = [p for p in sys.path if "cplex" not in p.lower()]
+        
+        # Remove relevant env vars
+        for key in list(os.environ.keys()):
+            if "CPLEX" in key.upper():
+                del os.environ[key]
+
         try:
             from docplex.mp.model import Model
         except ModuleNotFoundError as exc:

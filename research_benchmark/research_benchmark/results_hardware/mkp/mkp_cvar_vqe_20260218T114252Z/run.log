@@ -1,0 +1,158 @@
+Run start | problem=mkp method=cvar_vqe mode=multi seed=0
+Instance | path=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\Multi_Dimension_Knapsack\MKP_Instances\sac94\hp\hp1.dat
+Problem size | problem=mkp required_qubits=60
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready — Rigetti Ankaa-3 (82 qubits, window: 258m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready — IQM Emerald (54 qubits, window: 287m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready — IQM Garnet (20 qubits, window: 227m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready — Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 543s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=2091), ibm_marrakesh(156q, pending=2), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_torino, ibm_marrakesh
+[local_qiskit] Ready (max 32 qubits)
+[ibm_quantum] Usage check: 543s remaining (threshold: 50s)
+QPUs skipped for 60-qubit problem:
+  iqm_emerald: too few qubits (54 < 60)
+  iqm_garnet: too few qubits (20 < 60)
+  amazon_sv1: too few qubits (34 < 60)
+  local_qiskit: too few qubits (32 < 60)
+QPUs selected: ['rigetti_ankaa3', 'ibm_quantum']
+Execution targets | mode=multi qpus=['rigetti_ankaa3', 'ibm_quantum']
+Optimization start | method=cvar_vqe objective=cvar shots=256 maxiter=12
+Dispatching job → rigetti_ankaa3 | shots=256 qubits=60
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/5dc55494-d00f-4800-8ef0-113e2b0bf19d
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/5dc55494-d00f-4800-8ef0-113e2b0bf19d status | state=QUEUED queue_position=1 elapsed_sec=0.6
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/5dc55494-d00f-4800-8ef0-113e2b0bf19d status | state=COMPLETED queue_position=None elapsed_sec=6.3
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/5dc55494-d00f-4800-8ef0-113e2b0bf19d unique_bitstrings=256
+Job completed on rigetti_ankaa3 in 11.6s (total: 1 ok, 0 failed)
+Dispatching job → ibm_quantum | shots=256 qubits=60
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=543.0 shots=256
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.00000 (ms)
+Pass: ElidePermutations - 0.00000 (ms)
+Pass: RemoveDiagonalGatesBeforeMeasure - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: InverseCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: Split2QUnitaries - 0.00000 (ms)
+Pass: SetLayout - 0.00000 (ms)
+Pass: VF2Layout - 39.60800 (ms)
+Pass: FullAncillaAllocation - 0.00000 (ms)
+Pass: EnlargeWithAncilla - 0.00000 (ms)
+Pass: ApplyLayout - 0.51570 (ms)
+Pass: CheckMap - 0.00000 (ms)
+Pass: FilterOpNodes - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.51117 (ms)
+Pass: BasisTranslator - 1.02782 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 1.97864 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: VF2PostLayout - 157.52649 (ms)
+Pass: ApplyLayout - 0.51045 (ms)
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: InstructionDurationCheck - 0.00000 (ms)
+IBM job submitted | backend=ibm_torino job_id=d6aqbph7ce2c73fej9r0
+IBM job d6aqbph7ce2c73fej9r0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aqbph7ce2c73fej9r0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6aqbph7ce2c73fej9r0 unique_bitstrings=256
+Job completed on ibm_quantum in 8.7s (total: 1 ok, 0 failed)
+Dispatching job → rigetti_ankaa3 | shots=256 qubits=60
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=256 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/82eb67db-43a7-4851-ae0f-a9a593bb3832
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/82eb67db-43a7-4851-ae0f-a9a593bb3832 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/82eb67db-43a7-4851-ae0f-a9a593bb3832 status | state=COMPLETED queue_position=None elapsed_sec=6.3
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/82eb67db-43a7-4851-ae0f-a9a593bb3832 unique_bitstrings=256
+Job completed on rigetti_ankaa3 in 8.0s (total: 2 ok, 0 failed)
+Dispatching job → ibm_quantum | shots=256 qubits=60
+[ibm_quantum] Usage check: 542s remaining (threshold: 50s)
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=542.0 shots=256
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 0.00000 (ms)
+Pass: ElidePermutations - 0.00000 (ms)
+Pass: RemoveDiagonalGatesBeforeMeasure - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: InverseCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: Split2QUnitaries - 0.00000 (ms)
+Pass: SetLayout - 0.00000 (ms)
+Pass: VF2Layout - 44.16394 (ms)
+Pass: FullAncillaAllocation - 0.00000 (ms)
+Pass: EnlargeWithAncilla - 0.00000 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: CheckMap - 0.00000 (ms)
+Pass: FilterOpNodes - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: HighLevelSynthesis - 0.00000 (ms)
+Pass: BasisTranslator - 1.04594 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 1.00446 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.50354 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.53096 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: ConsolidateBlocks - 0.00000 (ms)
+Pass: UnitarySynthesis - 0.00000 (ms)
+Pass: RemoveIdentityEquivalent - 0.00000 (ms)
+Pass: Optimize1qGatesDecomposition - 0.00000 (ms)
+Pass: CommutativeCancellation - 0.00000 (ms)
+Pass: ContractIdleWiresInControlFlow - 0.00000 (ms)
+Pass: GatesInBasis - 0.00000 (ms)
+Pass: Depth - 0.00000 (ms)
+Pass: Size - 0.00000 (ms)
+Pass: MinimumPoint - 0.00000 (ms)
+Pass: VF2PostLayout - 179.37517 (ms)
+Pass: ApplyLayout - 0.00000 (ms)
+Pass: ContainsInstruction - 0.00000 (ms)
+Pass: InstructionDurationCheck - 0.00000 (ms)
+IBM job submitted | backend=ibm_marrakesh job_id=d6aqbtvg4t5c7383hoqg
+IBM job d6aqbtvg4t5c7383hoqg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aqbtvg4t5c7383hoqg (ibm_marrakesh) status | state=RUNNING queue_position=n/a elapsed_sec=123.8
