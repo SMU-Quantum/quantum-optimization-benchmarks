@@ -27,6 +27,7 @@ QUANTUM_OPTIMIZATION_BENCHMARKS/
   - qap.ipynb: Code for solving the QAP
   - README.md: Documentation for the QAP problem
 - requirements.txt: Python dependencies
+- research_benchmark/: research-oriented Python pipeline + hardware runner
 ```
 
 ---
@@ -92,6 +93,18 @@ pip install -r requirements.txt
 1. Navigate to the problem-specific directory.
 2. Open the Jupyter notebook (.ipynb) to explore the code.
 3. Use the provided instances in the respective directories for testing.
+
+## Research-Friendly Python + Hardware Workflow
+
+For the refactored research pipeline (problem loaders, QUBO flow, and hardware execution on IBM/AWS/local backends), use:
+
+- `research_benchmark/README.md`
+
+Main hardware entrypoint:
+
+```bash
+.venv/bin/python research_benchmark/run_hardware_benchmark.py --help
+```
 
 Cite the paper, if you use this work
 

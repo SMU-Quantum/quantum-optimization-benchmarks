@@ -1,0 +1,423 @@
+2026-02-18 13:39:37,100 | INFO | Starting hardware run | problem=mkp method=cvar_vqe mode=single seed=0 run_dir=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T053937Z
+2026-02-18 13:39:37,101 | INFO | Initial configuration | qpu_id=ibm_quantum qpus=None only_qpu=ibm_quantum shots=1000 maxiter=20 layers=1 entanglement=chain
+2026-02-18 13:39:37,101 | INFO | Resolved paths | project_root=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks requested_instance=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat resolved_instance=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat output_root=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual log_file=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T053937Z/run.log
+2026-02-18 13:39:37,101 | INFO | Using instance path: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat
+2026-02-18 13:39:37,101 | INFO | Problem instance loaded | problem=mkp
+2026-02-18 13:39:37,131 | INFO | Problem model built | model_time_limit=60.00s
+2026-02-18 13:39:37,168 | INFO | QUBO generated | num_variables=60 qubo_penalty=None max_qubits_cap=0
+2026-02-18 13:39:37,168 | INFO | Problem details | problem=mkp instance=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat required_qubits=60
+2026-02-18 13:39:37,168 | INFO | Backend filters | only_qpu=ibm_quantum no_aws=False no_ibm=False include_simulators=False
+2026-02-18 13:39:37,168 | INFO | QuantumHardwareManager initialized | use_aws=True use_ibm=True allow_simulators=True aws_profile=None enabled_qpus=['ibm_quantum'] qiskit_optimization_level=3
+2026-02-18 13:39:37,168 | INFO | Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+2026-02-18 13:39:37,168 | INFO | QPU disabled by filter | qpu_id=rigetti_ankaa3
+2026-02-18 13:39:37,168 | INFO | QPU disabled by filter | qpu_id=iqm_emerald
+2026-02-18 13:39:37,168 | INFO | QPU disabled by filter | qpu_id=iqm_garnet
+2026-02-18 13:39:37,168 | INFO | QPU disabled by filter | qpu_id=amazon_sv1
+2026-02-18 13:39:37,168 | INFO | QPU disabled by filter | qpu_id=amazon_tn1
+2026-02-18 13:39:37,168 | INFO | Initializing IBM runtime service | token_provided=False instance_provided=False
+2026-02-18 13:39:37,168 | INFO | Trying IBM connection with saved system credentials
+2026-02-18 13:39:40,581 | INFO | IBM connection established from saved credentials
+2026-02-18 13:39:42,125 | INFO | IBM runtime budget check | remaining_seconds=557.0 threshold_seconds=50
+2026-02-18 13:39:47,857 | INFO | IBM backend discovered | backend=ibm_fez qubits=156 pending_jobs=2271
+2026-02-18 13:39:49,427 | INFO | IBM backend discovered | backend=ibm_marrakesh qubits=156 pending_jobs=11
+2026-02-18 13:39:50,624 | INFO | IBM backend discovered | backend=ibm_torino qubits=133 pending_jobs=130
+2026-02-18 13:39:50,625 | INFO | IBM preferred backend candidates (least busy first) | backends=['ibm_marrakesh(qubits=156,pending=11)', 'ibm_torino(qubits=133,pending=130)']
+2026-02-18 13:39:50,625 | INFO | IBM initialization complete | available=True discovered_backends=3 selected_backend=ibm_marrakesh selected_qubits=156
+2026-02-18 13:39:50,625 | INFO | QPU disabled by filter | qpu_id=local_qiskit
+2026-02-18 13:39:50,625 | INFO | Backend initialization complete | results={'rigetti_ankaa3': False, 'iqm_emerald': False, 'iqm_garnet': False, 'amazon_sv1': False, 'amazon_tn1': False, 'ibm_quantum': True, 'local_qiskit': False}
+2026-02-18 13:39:50,625 | INFO | Hardware initialization status: {'rigetti_ankaa3': False, 'iqm_emerald': False, 'iqm_garnet': False, 'amazon_sv1': False, 'amazon_tn1': False, 'ibm_quantum': True, 'local_qiskit': False}
+2026-02-18 13:39:50,993 | INFO | IBM usage refresh | remaining_seconds=557.0 threshold_seconds=50
+2026-02-18 13:39:50,994 | INFO | QPU availability query | required_qubits=60 include_simulators=False selected=['ibm_quantum']
+2026-02-18 13:39:50,994 | INFO | QPU availability skipped reasons | {'rigetti_ankaa3': 'unavailable:Disabled by --only-qpu filter', 'iqm_emerald': 'unavailable:Disabled by --only-qpu filter', 'iqm_garnet': 'unavailable:Disabled by --only-qpu filter', 'amazon_sv1': 'unavailable:Disabled by --only-qpu filter', 'amazon_tn1': 'unavailable:Disabled by --only-qpu filter', 'local_qiskit': 'unavailable:Disabled by --only-qpu filter'}
+2026-02-18 13:39:50,994 | INFO | Available QPUs for run | num_qubits=60 include_simulators=False qpus=['ibm_quantum']
+2026-02-18 13:39:50,994 | INFO | QPU candidate | qpu_id=ibm_quantum backend=ibm_marrakesh max_qubits=156 remaining_window_min_sgt=None
+2026-02-18 13:39:50,994 | INFO | Scheduler selection complete | mode=single selected_qpus=['ibm_quantum']
+2026-02-18 13:39:50,994 | INFO | Execution targets finalized | selected_qpus=['ibm_quantum']
+2026-02-18 13:39:51,001 | INFO | Starting optimization | method=cvar_vqe objective=cvar timeout=None shots=1000 maxiter=20
+2026-02-18 13:39:51,002 | INFO | Starting variational optimization | method=cvar_vqe objective_mode=cvar qpu_mode=single qpus=['ibm_quantum'] shots=1000 maxiter=20 seed=0
+2026-02-18 13:39:51,003 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 13:39:51,402 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=557.0
+2026-02-18 13:39:52,658 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=12
+2026-02-18 13:39:53,013 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=12 runtime_remaining_sec=557.0 shots=1000
+2026-02-18 13:39:53,013 | INFO | Transpiling circuit for backend | backend=ibm_marrakesh ansatz=n60_l1_echain optimization_level=3
+2026-02-18 13:39:53,082 | INFO | Pass: ContainsInstruction - 0.00906 (ms)
+2026-02-18 13:39:53,082 | INFO | Pass: UnitarySynthesis - 0.00381 (ms)
+2026-02-18 13:39:53,082 | INFO | Pass: HighLevelSynthesis - 0.01001 (ms)
+2026-02-18 13:39:53,082 | INFO | Pass: BasisTranslator - 0.07010 (ms)
+2026-02-18 13:39:53,082 | INFO | Pass: ElidePermutations - 0.00501 (ms)
+2026-02-18 13:39:53,082 | INFO | Pass: RemoveDiagonalGatesBeforeMeasure - 0.01097 (ms)
+2026-02-18 13:39:53,082 | INFO | Pass: RemoveIdentityEquivalent - 0.00501 (ms)
+2026-02-18 13:39:53,082 | INFO | Pass: InverseCancellation - 0.02813 (ms)
+2026-02-18 13:39:53,083 | INFO | Pass: ContractIdleWiresInControlFlow - 0.00215 (ms)
+2026-02-18 13:39:53,083 | INFO | Pass: CommutativeCancellation - 0.11086 (ms)
+2026-02-18 13:39:53,083 | INFO | Pass: ConsolidateBlocks - 0.20504 (ms)
+2026-02-18 13:39:53,083 | INFO | Pass: Split2QUnitaries - 0.00215 (ms)
+2026-02-18 13:39:53,083 | INFO | Pass: SetLayout - 0.00215 (ms)
+2026-02-18 13:39:53,120 | INFO | Pass: VF2Layout - 37.19902 (ms)
+2026-02-18 13:39:53,120 | INFO | Pass: FullAncillaAllocation - 0.10610 (ms)
+2026-02-18 13:39:53,120 | INFO | Pass: EnlargeWithAncilla - 0.04482 (ms)
+2026-02-18 13:39:53,121 | INFO | Pass: ApplyLayout - 0.21815 (ms)
+2026-02-18 13:39:53,121 | INFO | Pass: CheckMap - 0.04911 (ms)
+2026-02-18 13:39:53,121 | INFO | Pass: FilterOpNodes - 0.03815 (ms)
+2026-02-18 13:39:53,121 | INFO | Pass: UnitarySynthesis - 0.00215 (ms)
+2026-02-18 13:39:53,121 | INFO | Pass: HighLevelSynthesis - 0.01597 (ms)
+2026-02-18 13:39:53,121 | INFO | Pass: BasisTranslator - 0.61297 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: Depth - 0.08225 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: Size - 0.00095 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: MinimumPoint - 0.00596 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: ConsolidateBlocks - 0.20933 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: UnitarySynthesis - 0.00215 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: RemoveIdentityEquivalent - 0.01502 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: Optimize1qGatesDecomposition - 0.16809 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: CommutativeCancellation - 0.13804 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: ContractIdleWiresInControlFlow - 0.00095 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: GatesInBasis - 0.02623 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: Depth - 0.04721 (ms)
+2026-02-18 13:39:53,122 | INFO | Pass: Size - 0.00095 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: MinimumPoint - 0.14520 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: ConsolidateBlocks - 0.16499 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: UnitarySynthesis - 0.00095 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: RemoveIdentityEquivalent - 0.00477 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: Optimize1qGatesDecomposition - 0.14520 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: CommutativeCancellation - 0.12922 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: ContractIdleWiresInControlFlow - 0.00095 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: GatesInBasis - 0.02384 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: Depth - 0.04792 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: Size - 0.00072 (ms)
+2026-02-18 13:39:53,123 | INFO | Pass: MinimumPoint - 0.00215 (ms)
+2026-02-18 13:39:53,258 | INFO | Pass: VF2PostLayout - 134.44662 (ms)
+2026-02-18 13:39:53,258 | INFO | Pass: ApplyLayout - 0.24796 (ms)
+2026-02-18 13:39:53,258 | INFO | Pass: ContainsInstruction - 0.00310 (ms)
+2026-02-18 13:39:53,258 | INFO | Pass: InstructionDurationCheck - 0.00286 (ms)
+2026-02-18 13:39:54,680 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6al1aknsg9c73980mk0
+2026-02-18 13:39:55,089 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 13:40:27,172 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=32.5
+2026-02-18 13:40:59,603 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=64.9
+2026-02-18 13:41:32,270 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=97.6
+2026-02-18 13:42:04,629 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=129.9
+2026-02-18 13:42:37,090 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=162.4
+2026-02-18 13:43:09,652 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=195.0
+2026-02-18 13:43:42,008 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=227.3
+2026-02-18 13:44:14,684 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=260.0
+2026-02-18 13:44:47,139 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=292.5
+2026-02-18 13:45:19,703 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=325.0
+2026-02-18 13:45:52,240 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=357.6
+2026-02-18 13:46:25,139 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=390.5
+2026-02-18 13:46:57,701 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=423.0
+2026-02-18 13:47:30,057 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=455.4
+2026-02-18 13:48:02,333 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=487.7
+2026-02-18 13:48:35,086 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=520.4
+2026-02-18 13:49:07,353 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=552.7
+2026-02-18 13:49:39,904 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=585.2
+2026-02-18 13:50:12,461 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=617.8
+2026-02-18 13:50:45,032 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=650.4
+2026-02-18 13:51:17,698 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=683.0
+2026-02-18 13:51:50,467 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=715.8
+2026-02-18 13:52:22,928 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=748.2
+2026-02-18 13:52:55,594 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=780.9
+2026-02-18 13:53:28,260 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=813.6
+2026-02-18 13:54:00,721 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=846.0
+2026-02-18 13:54:33,183 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=878.5
+2026-02-18 13:55:05,848 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=911.2
+2026-02-18 13:55:38,404 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=943.7
+2026-02-18 13:56:11,043 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=976.4
+2026-02-18 13:56:43,928 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1009.2
+2026-02-18 13:57:16,475 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1041.8
+2026-02-18 13:57:48,833 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1074.2
+2026-02-18 13:58:21,702 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1107.0
+2026-02-18 13:58:54,164 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1139.5
+2026-02-18 13:59:26,683 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1172.0
+2026-02-18 13:59:59,599 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1204.9
+2026-02-18 14:00:32,060 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1237.4
+2026-02-18 14:01:05,137 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1270.5
+2026-02-18 14:01:37,289 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1302.6
+2026-02-18 14:02:10,264 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1335.6
+2026-02-18 14:02:42,723 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1368.0
+2026-02-18 14:03:15,442 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1400.8
+2026-02-18 14:03:47,907 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1433.2
+2026-02-18 14:04:20,275 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1465.6
+2026-02-18 14:04:52,556 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1497.9
+2026-02-18 14:05:24,986 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1530.3
+2026-02-18 14:05:57,599 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1562.9
+2026-02-18 14:06:29,921 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1595.2
+2026-02-18 14:07:02,080 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1627.4
+2026-02-18 14:07:34,603 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1659.9
+2026-02-18 14:08:06,911 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1692.2
+2026-02-18 14:08:39,008 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1724.3
+2026-02-18 14:09:11,035 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1756.4
+2026-02-18 14:09:43,780 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1789.1
+2026-02-18 14:10:16,051 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1821.4
+2026-02-18 14:10:48,138 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1853.5
+2026-02-18 14:11:20,674 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1886.0
+2026-02-18 14:11:52,860 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1918.2
+2026-02-18 14:12:25,179 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1950.5
+2026-02-18 14:12:57,698 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=1983.0
+2026-02-18 14:13:29,874 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2015.2
+2026-02-18 14:14:02,413 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2047.7
+2026-02-18 14:14:34,691 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2080.0
+2026-02-18 14:15:07,229 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2112.5
+2026-02-18 14:15:39,780 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2145.1
+2026-02-18 14:16:11,697 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2177.0
+2026-02-18 14:16:44,177 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2209.5
+2026-02-18 14:17:16,245 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2241.6
+2026-02-18 14:17:48,504 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2273.8
+2026-02-18 14:18:20,855 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2306.2
+2026-02-18 14:18:53,179 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2338.5
+2026-02-18 14:19:25,779 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2371.1
+2026-02-18 14:19:58,087 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2403.4
+2026-02-18 14:20:30,600 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2435.9
+2026-02-18 14:21:02,699 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=2468.0
+2026-02-18 14:21:29,310 | INFO | IBM job d6al1aknsg9c73980mk0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=2494.6
+2026-02-18 14:21:29,720 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6al1aknsg9c73980mk0 unique_bitstrings=1000
+2026-02-18 14:21:29,721 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=2498.318 total_jobs=1 success=1 failed=0
+2026-02-18 14:21:30,271 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=23714132.85500000 best_energy=2467708.00000000 best_bitstring=001001101110011101100100011100000010101110100111100111011100
+2026-02-18 14:21:30,271 | INFO | Variational evaluation | eval=1 qpu_id=ibm_quantum objective=23714132.85500000 best_sample_energy=2467708.00000000
+2026-02-18 14:21:30,271 | INFO | New variational incumbent | eval=1 qpu_id=ibm_quantum objective=23714132.85500000 bitstring=001001101110011101100100011100000010101110100111100111011100
+2026-02-18 14:21:30,271 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:21:30,643 | INFO | IBM usage refresh | remaining_seconds=555.0 threshold_seconds=50
+2026-02-18 14:21:30,644 | INFO | Refreshing IBM backend inventory | force=False refresh_interval_sec=300.0
+2026-02-18 14:21:30,644 | INFO | Initializing IBM runtime service | token_provided=False instance_provided=False
+2026-02-18 14:21:30,644 | INFO | Trying IBM connection with saved system credentials
+2026-02-18 14:21:32,613 | INFO | IBM connection established from saved credentials
+2026-02-18 14:21:34,287 | INFO | IBM runtime budget check | remaining_seconds=555.0 threshold_seconds=50
+2026-02-18 14:21:39,757 | INFO | IBM backend discovered | backend=ibm_fez qubits=156 pending_jobs=2250
+2026-02-18 14:21:41,003 | INFO | IBM backend discovered | backend=ibm_marrakesh qubits=156 pending_jobs=1
+2026-02-18 14:21:42,351 | INFO | IBM backend discovered | backend=ibm_torino qubits=133 pending_jobs=134
+2026-02-18 14:21:42,356 | INFO | IBM preferred backend candidates (least busy first) | backends=['ibm_marrakesh(qubits=156,pending=1)', 'ibm_torino(qubits=133,pending=134)']
+2026-02-18 14:21:42,358 | INFO | IBM initialization complete | available=True discovered_backends=3 selected_backend=ibm_marrakesh selected_qubits=156
+2026-02-18 14:21:42,674 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=555.0
+2026-02-18 14:21:43,914 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=1
+2026-02-18 14:21:44,243 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=1 runtime_remaining_sec=555.0 shots=1000
+2026-02-18 14:21:45,919 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alku97ce2c73fee370
+2026-02-18 14:21:46,232 | INFO | IBM job d6alku97ce2c73fee370 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:22:18,087 | INFO | IBM job d6alku97ce2c73fee370 (ibm_marrakesh) status | state=RUNNING queue_position=n/a elapsed_sec=32.2
+2026-02-18 14:22:50,535 | INFO | IBM job d6alku97ce2c73fee370 (ibm_marrakesh) status | state=RUNNING queue_position=n/a elapsed_sec=64.6
+2026-02-18 14:23:23,044 | INFO | IBM job d6alku97ce2c73fee370 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=97.1
+2026-02-18 14:23:23,458 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alku97ce2c73fee370 unique_bitstrings=1000
+2026-02-18 14:23:23,459 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=100.784 total_jobs=2 success=2 failed=0
+2026-02-18 14:23:23,997 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25739241.84000000 best_energy=3200514.00000000 best_bitstring=000100100110100001110100010000001010001100100000001010100101
+2026-02-18 14:23:23,997 | INFO | Variational evaluation | eval=2 qpu_id=ibm_quantum objective=25739241.84000000 best_sample_energy=3200514.00000000
+2026-02-18 14:23:23,998 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:23:24,364 | INFO | IBM usage refresh | remaining_seconds=553.0 threshold_seconds=50
+2026-02-18 14:23:24,784 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=553.0
+2026-02-18 14:23:25,863 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:23:26,220 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=553.0 shots=1000
+2026-02-18 14:23:27,564 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6allnvg4t5c7383cja0
+2026-02-18 14:23:27,958 | INFO | IBM job d6allnvg4t5c7383cja0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:23:33,283 | INFO | IBM job d6allnvg4t5c7383cja0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:23:33,698 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6allnvg4t5c7383cja0 unique_bitstrings=1000
+2026-02-18 14:23:33,699 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=8.914 total_jobs=3 success=3 failed=0
+2026-02-18 14:23:34,239 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=28017609.27500000 best_energy=1422549.00000000 best_bitstring=000111101010101000000010000010001010111100100111101000011010
+2026-02-18 14:23:34,239 | INFO | Variational evaluation | eval=3 qpu_id=ibm_quantum objective=28017609.27500000 best_sample_energy=1422549.00000000
+2026-02-18 14:23:34,239 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:23:34,566 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=551.0
+2026-02-18 14:23:35,638 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:23:35,961 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=551.0 shots=1000
+2026-02-18 14:23:37,687 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6allqfg4t5c7383cjdg
+2026-02-18 14:23:37,997 | INFO | IBM job d6allqfg4t5c7383cjdg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:23:48,646 | INFO | IBM job d6allqfg4t5c7383cjdg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+2026-02-18 14:23:49,060 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6allqfg4t5c7383cjdg unique_bitstrings=1000
+2026-02-18 14:23:49,061 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=14.494 total_jobs=4 success=4 failed=0
+2026-02-18 14:23:49,589 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=30113606.30000000 best_energy=1017389.00000000 best_bitstring=001101011110101111000000011001111010000111000001110000011100
+2026-02-18 14:23:49,589 | INFO | Variational evaluation | eval=4 qpu_id=ibm_quantum objective=30113606.30000000 best_sample_energy=1017389.00000000
+2026-02-18 14:23:49,589 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:23:50,116 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=549.0
+2026-02-18 14:23:50,999 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:23:51,526 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=549.0 shots=1000
+2026-02-18 14:23:53,251 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6allu4nsg9c73981bp0
+2026-02-18 14:23:53,661 | INFO | IBM job d6allu4nsg9c73981bp0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:24:04,309 | INFO | IBM job d6allu4nsg9c73981bp0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.1
+2026-02-18 14:24:04,667 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6allu4nsg9c73981bp0 unique_bitstrings=1000
+2026-02-18 14:24:04,667 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=14.551 total_jobs=5 success=5 failed=0
+2026-02-18 14:24:05,192 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=24488006.54500000 best_energy=869061.00000000 best_bitstring=000101101101011000111101001010100010111101101001001010011001
+2026-02-18 14:24:05,193 | INFO | Variational evaluation | eval=5 qpu_id=ibm_quantum objective=24488006.54500000 best_sample_energy=869061.00000000
+2026-02-18 14:24:05,193 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:24:05,505 | INFO | IBM usage refresh | remaining_seconds=547.0 threshold_seconds=50
+2026-02-18 14:24:05,847 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=547.0
+2026-02-18 14:24:07,180 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:24:07,498 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=547.0 shots=1000
+2026-02-18 14:24:08,919 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alm24nsg9c73981bt0
+2026-02-18 14:24:09,331 | INFO | IBM job d6alm24nsg9c73981bt0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:24:20,081 | INFO | IBM job d6alm24nsg9c73981bt0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.2
+2026-02-18 14:24:20,498 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alm24nsg9c73981bt0 unique_bitstrings=1000
+2026-02-18 14:24:20,498 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=14.651 total_jobs=6 success=6 failed=0
+2026-02-18 14:24:21,024 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25924789.37000000 best_energy=3359064.00000000 best_bitstring=000110111101101000001100000110010010101000101000001011011001
+2026-02-18 14:24:21,024 | INFO | Variational evaluation | eval=6 qpu_id=ibm_quantum objective=25924789.37000000 best_sample_energy=3359064.00000000
+2026-02-18 14:24:21,025 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:24:21,412 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=545.0
+2026-02-18 14:24:22,641 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:24:22,967 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=545.0 shots=1000
+2026-02-18 14:24:24,689 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alm67g4t5c7383cjrg
+2026-02-18 14:24:25,098 | INFO | IBM job d6alm67g4t5c7383cjrg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:24:30,424 | INFO | IBM job d6alm67g4t5c7383cjrg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:24:30,769 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alm67g4t5c7383cjrg unique_bitstrings=1000
+2026-02-18 14:24:30,770 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=9.357 total_jobs=7 success=7 failed=0
+2026-02-18 14:24:31,312 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=26425940.68000000 best_energy=782375.00000000 best_bitstring=000010000101101000110000101100011001000110101111111010000110
+2026-02-18 14:24:31,312 | INFO | Variational evaluation | eval=7 qpu_id=ibm_quantum objective=26425940.68000000 best_sample_energy=782375.00000000
+2026-02-18 14:24:31,312 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:24:31,652 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=543.0
+2026-02-18 14:24:32,676 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:24:33,006 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=543.0 shots=1000
+2026-02-18 14:24:34,593 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alm8h54hss73b6cg5g
+2026-02-18 14:24:34,928 | INFO | IBM job d6alm8h54hss73b6cg5g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:24:40,254 | INFO | IBM job d6alm8h54hss73b6cg5g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:24:40,670 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alm8h54hss73b6cg5g unique_bitstrings=1000
+2026-02-18 14:24:40,670 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=9.018 total_jobs=8 success=8 failed=0
+2026-02-18 14:24:41,195 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25823938.55000000 best_energy=1135692.00000000 best_bitstring=000100110000100100111011101101011010101000101001101001011110
+2026-02-18 14:24:41,195 | INFO | Variational evaluation | eval=8 qpu_id=ibm_quantum objective=25823938.55000000 best_sample_energy=1135692.00000000
+2026-02-18 14:24:41,195 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:24:41,585 | INFO | IBM usage refresh | remaining_seconds=541.0 threshold_seconds=50
+2026-02-18 14:24:41,586 | INFO | Refreshing cached credentials/backends | elapsed_sec=2704.4 interval_sec=2700.0
+2026-02-18 14:24:41,916 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=541.0
+2026-02-18 14:24:43,355 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:24:43,735 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=541.0 shots=1000
+2026-02-18 14:24:45,287 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6almb7g4t5c7383ck1g
+2026-02-18 14:24:45,681 | INFO | IBM job d6almb7g4t5c7383ck1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:24:56,433 | INFO | IBM job d6almb7g4t5c7383ck1g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.1
+2026-02-18 14:24:56,751 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6almb7g4t5c7383ck1g unique_bitstrings=1000
+2026-02-18 14:24:56,751 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=14.835 total_jobs=9 success=9 failed=0
+2026-02-18 14:24:57,288 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=27255897.35000000 best_energy=1996215.00000000 best_bitstring=000111111010101011000000010010101010111000101000001000011001
+2026-02-18 14:24:57,288 | INFO | Variational evaluation | eval=9 qpu_id=ibm_quantum objective=27255897.35000000 best_sample_energy=1996215.00000000
+2026-02-18 14:24:57,288 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:24:57,643 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=537.0
+2026-02-18 14:24:58,685 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:24:59,077 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=537.0 shots=1000
+2026-02-18 14:25:00,631 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6almf17ce2c73fee4rg
+2026-02-18 14:25:01,041 | INFO | IBM job d6almf17ce2c73fee4rg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:25:06,366 | INFO | IBM job d6almf17ce2c73fee4rg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:25:06,781 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6almf17ce2c73fee4rg unique_bitstrings=1000
+2026-02-18 14:25:06,781 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=9.138 total_jobs=10 success=10 failed=0
+2026-02-18 14:25:07,309 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25575955.87500000 best_energy=1955844.00000000 best_bitstring=000111100101010000110100100100100010000011011111101010000011
+2026-02-18 14:25:07,309 | INFO | Variational evaluation | eval=10 qpu_id=ibm_quantum objective=25575955.87500000 best_sample_energy=1955844.00000000
+2026-02-18 14:25:07,309 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:25:07,697 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=535.0
+2026-02-18 14:25:08,530 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:25:08,926 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=535.0 shots=1000
+2026-02-18 14:25:10,335 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6almhknsg9c73981cf0
+2026-02-18 14:25:10,668 | INFO | IBM job d6almhknsg9c73981cf0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:25:15,992 | INFO | IBM job d6almhknsg9c73981cf0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:25:16,408 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6almhknsg9c73981cf0 unique_bitstrings=1000
+2026-02-18 14:25:16,408 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=8.711 total_jobs=11 success=11 failed=0
+2026-02-18 14:25:16,933 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25671627.72000000 best_energy=2216534.00000000 best_bitstring=101010111001011111001011011010111010111001010111101000000100
+2026-02-18 14:25:16,933 | INFO | Variational evaluation | eval=11 qpu_id=ibm_quantum objective=25671627.72000000 best_sample_energy=2216534.00000000
+2026-02-18 14:25:16,933 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:25:17,253 | INFO | IBM usage refresh | remaining_seconds=533.0 threshold_seconds=50
+2026-02-18 14:25:17,630 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=533.0
+2026-02-18 14:25:18,610 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:25:18,961 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=533.0 shots=1000
+2026-02-18 14:25:20,497 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6almk154hss73b6cgig
+2026-02-18 14:25:20,804 | INFO | IBM job d6almk154hss73b6cgig (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:25:31,455 | INFO | IBM job d6almk154hss73b6cgig (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+2026-02-18 14:25:31,870 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6almk154hss73b6cgig unique_bitstrings=1000
+2026-02-18 14:25:31,871 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=14.240 total_jobs=12 success=12 failed=0
+2026-02-18 14:25:32,401 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=26775764.35500000 best_energy=2380946.00000000 best_bitstring=000100101111001111000001011010100101001001011111001010000001
+2026-02-18 14:25:32,401 | INFO | Variational evaluation | eval=12 qpu_id=ibm_quantum objective=26775764.35500000 best_sample_energy=2380946.00000000
+2026-02-18 14:25:32,401 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:25:32,718 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=531.0
+2026-02-18 14:25:33,793 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:25:34,301 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=531.0 shots=1000
+2026-02-18 14:25:35,755 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6almnvg4t5c7383ckf0
+2026-02-18 14:25:36,057 | INFO | IBM job d6almnvg4t5c7383ckf0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:26:08,308 | INFO | IBM job d6almnvg4t5c7383ckf0 (ibm_marrakesh) status | state=RUNNING queue_position=n/a elapsed_sec=32.6
+2026-02-18 14:26:40,472 | INFO | IBM job d6almnvg4t5c7383ckf0 (ibm_marrakesh) status | state=RUNNING queue_position=n/a elapsed_sec=64.7
+2026-02-18 14:26:46,002 | INFO | IBM job d6almnvg4t5c7383ckf0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=70.2
+2026-02-18 14:26:46,519 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6almnvg4t5c7383ckf0 unique_bitstrings=1000
+2026-02-18 14:26:46,519 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=73.800 total_jobs=13 success=13 failed=0
+2026-02-18 14:26:47,061 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=23590777.43500000 best_energy=1570887.00000000 best_bitstring=011100011000010000010101100011000100111000100011101000000010
+2026-02-18 14:26:47,061 | INFO | Variational evaluation | eval=13 qpu_id=ibm_quantum objective=23590777.43500000 best_sample_energy=1570887.00000000
+2026-02-18 14:26:47,061 | INFO | New variational incumbent | eval=13 qpu_id=ibm_quantum objective=23590777.43500000 bitstring=011100011000010000010101100011000100111000100011101000000010
+2026-02-18 14:26:47,061 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:26:47,436 | INFO | IBM usage refresh | remaining_seconds=525.0 threshold_seconds=50
+2026-02-18 14:26:47,436 | INFO | Refreshing IBM backend inventory | force=False refresh_interval_sec=300.0
+2026-02-18 14:26:47,436 | INFO | Initializing IBM runtime service | token_provided=False instance_provided=False
+2026-02-18 14:26:47,436 | INFO | Trying IBM connection with saved system credentials
+2026-02-18 14:26:49,150 | INFO | IBM connection established from saved credentials
+2026-02-18 14:26:50,816 | INFO | IBM runtime budget check | remaining_seconds=525.0 threshold_seconds=50
+2026-02-18 14:26:56,962 | INFO | IBM backend discovered | backend=ibm_fez qubits=156 pending_jobs=2247
+2026-02-18 14:26:58,399 | INFO | IBM backend discovered | backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:26:59,914 | INFO | IBM backend discovered | backend=ibm_torino qubits=133 pending_jobs=135
+2026-02-18 14:26:59,918 | INFO | IBM preferred backend candidates (least busy first) | backends=['ibm_marrakesh(qubits=156,pending=0)', 'ibm_torino(qubits=133,pending=135)']
+2026-02-18 14:26:59,919 | INFO | IBM initialization complete | available=True discovered_backends=3 selected_backend=ibm_marrakesh selected_qubits=156
+2026-02-18 14:27:00,305 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=525.0
+2026-02-18 14:27:01,363 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:27:01,773 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=525.0 shots=1000
+2026-02-18 14:27:03,527 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alndvg4t5c7383cl6g
+2026-02-18 14:27:03,923 | INFO | IBM job d6alndvg4t5c7383cl6g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:27:09,257 | INFO | IBM job d6alndvg4t5c7383cl6g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:27:09,587 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alndvg4t5c7383cl6g unique_bitstrings=1000
+2026-02-18 14:27:09,587 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=9.282 total_jobs=14 success=14 failed=0
+2026-02-18 14:27:10,125 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25491576.82000000 best_energy=1426936.00000000 best_bitstring=111001000110000000110100101001000000010000100010001010011100
+2026-02-18 14:27:10,125 | INFO | Variational evaluation | eval=14 qpu_id=ibm_quantum objective=25491576.82000000 best_sample_energy=1426936.00000000
+2026-02-18 14:27:10,125 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:27:10,578 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=523.0
+2026-02-18 14:27:11,492 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:27:12,217 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=523.0 shots=1000
+2026-02-18 14:27:13,742 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alngcnsg9c73981df0
+2026-02-18 14:27:14,046 | INFO | IBM job d6alngcnsg9c73981df0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:27:24,711 | INFO | IBM job d6alngcnsg9c73981df0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+2026-02-18 14:27:25,054 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alngcnsg9c73981df0 unique_bitstrings=1000
+2026-02-18 14:27:25,054 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=14.476 total_jobs=15 success=15 failed=0
+2026-02-18 14:27:25,598 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=24009796.09500000 best_energy=1381842.00000000 best_bitstring=001000100110100000111011110100011001000100100011101010011110
+2026-02-18 14:27:25,598 | INFO | Variational evaluation | eval=15 qpu_id=ibm_quantum objective=24009796.09500000 best_sample_energy=1381842.00000000
+2026-02-18 14:27:25,599 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:27:25,978 | INFO | IBM usage refresh | remaining_seconds=521.0 threshold_seconds=50
+2026-02-18 14:27:26,315 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=521.0
+2026-02-18 14:27:27,318 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:27:27,654 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=521.0 shots=1000
+2026-02-18 14:27:29,012 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alnk154hss73b6chog
+2026-02-18 14:27:29,421 | INFO | IBM job d6alnk154hss73b6chog (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:27:34,753 | INFO | IBM job d6alnk154hss73b6chog (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:27:35,078 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alnk154hss73b6chog unique_bitstrings=1000
+2026-02-18 14:27:35,079 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=8.763 total_jobs=16 success=16 failed=0
+2026-02-18 14:27:35,639 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=29203125.95500000 best_energy=3179766.00000000 best_bitstring=010111011000010011001000011010100010111000101000001010000101
+2026-02-18 14:27:35,639 | INFO | Variational evaluation | eval=16 qpu_id=ibm_quantum objective=29203125.95500000 best_sample_energy=3179766.00000000
+2026-02-18 14:27:35,639 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:27:36,081 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=519.0
+2026-02-18 14:27:37,206 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:27:37,553 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=519.0 shots=1000
+2026-02-18 14:27:38,957 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alnmng4t5c7383clgg
+2026-02-18 14:27:39,357 | INFO | IBM job d6alnmng4t5c7383clgg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+2026-02-18 14:27:44,691 | INFO | IBM job d6alnmng4t5c7383clgg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:27:45,089 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alnmng4t5c7383clgg unique_bitstrings=1000
+2026-02-18 14:27:45,089 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=9.008 total_jobs=17 success=17 failed=0
+2026-02-18 14:27:45,626 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=26740288.59000000 best_energy=2288825.00000000 best_bitstring=001010100110100011001010010100100101000110100111101010000011
+2026-02-18 14:27:45,626 | INFO | Variational evaluation | eval=17 qpu_id=ibm_quantum objective=26740288.59000000 best_sample_energy=2288825.00000000
+2026-02-18 14:27:45,626 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:27:45,962 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=517.0
+2026-02-18 14:27:46,861 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:27:47,227 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=517.0 shots=1000
+2026-02-18 14:27:48,578 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alnp17ce2c73fee6c0
+2026-02-18 14:27:48,893 | INFO | IBM job d6alnp17ce2c73fee6c0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:27:54,310 | INFO | IBM job d6alnp17ce2c73fee6c0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+2026-02-18 14:27:54,722 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alnp17ce2c73fee6c0 unique_bitstrings=1000
+2026-02-18 14:27:54,723 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=8.760 total_jobs=18 success=18 failed=0
+2026-02-18 14:27:55,257 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25475178.39500000 best_energy=1488928.00000000 best_bitstring=000100111011101111000010010010100110111101000011110000001001
+2026-02-18 14:27:55,257 | INFO | Variational evaluation | eval=18 qpu_id=ibm_quantum objective=25475178.39500000 best_sample_energy=1488928.00000000
+2026-02-18 14:27:55,257 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:27:55,590 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=515.0
+2026-02-18 14:27:56,872 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:27:57,221 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=515.0 shots=1000
+2026-02-18 14:27:58,713 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alnrh7ce2c73fee6f0
+2026-02-18 14:27:59,058 | INFO | IBM job d6alnrh7ce2c73fee6f0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:28:04,521 | INFO | IBM job d6alnrh7ce2c73fee6f0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.8
+2026-02-18 14:28:04,853 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alnrh7ce2c73fee6f0 unique_bitstrings=1000
+2026-02-18 14:28:04,853 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=9.263 total_jobs=19 success=19 failed=0
+2026-02-18 14:28:05,409 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=24266465.76000000 best_energy=2063209.00000000 best_bitstring=000111111010011111000000100100000101001101010111101010001001
+2026-02-18 14:28:05,409 | INFO | Variational evaluation | eval=19 qpu_id=ibm_quantum objective=24266465.76000000 best_sample_energy=2063209.00000000
+2026-02-18 14:28:05,409 | INFO | Submitting evaluation | qpu_id=ibm_quantum objective_mode=cvar shots=1000 timeout_sec=None
+2026-02-18 14:28:06,003 | INFO | IBM usage refresh | remaining_seconds=513.0 threshold_seconds=50
+2026-02-18 14:28:06,354 | INFO | Dispatching quantum job | qpu_id=ibm_quantum provider=ibm shots=1000 qubits=60 timeout_sec=None remaining_window_min_sgt=None runtime_remaining_sec=513.0
+2026-02-18 14:28:07,665 | INFO | Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+2026-02-18 14:28:07,993 | INFO | Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=513.0 shots=1000
+2026-02-18 14:28:09,334 | INFO | IBM job submitted | backend=ibm_marrakesh job_id=d6alnufg4t5c7383clo0
+2026-02-18 14:28:09,666 | INFO | IBM job d6alnufg4t5c7383clo0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+2026-02-18 14:28:15,091 | INFO | IBM job d6alnufg4t5c7383clo0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.8
+2026-02-18 14:28:15,455 | INFO | IBM job completed | backend=ibm_marrakesh job_id=d6alnufg4t5c7383clo0 unique_bitstrings=1000
+2026-02-18 14:28:15,455 | INFO | Quantum job completed | qpu_id=ibm_quantum provider=ibm elapsed_sec=9.100 total_jobs=20 success=20 failed=0
+2026-02-18 14:28:15,982 | INFO | Evaluation complete | qpu_id=ibm_quantum objective_value=25012256.53000000 best_energy=228873.00000000 best_bitstring=000101111010100000001011000110100001000110100111001011000011
+2026-02-18 14:28:15,983 | INFO | Variational evaluation | eval=20 qpu_id=ibm_quantum objective=25012256.53000000 best_sample_energy=228873.00000000
+2026-02-18 14:28:15,983 | INFO | Variational optimization complete | status=2 message=Maximum number of function evaluations has been exceeded. evaluations=20 best_objective=23590777.43500000
+2026-02-18 14:28:15,983 | INFO | Optimization finished | status=2 message=Maximum number of function evaluations has been exceeded. evaluations=20 qpu_usage={'ibm_quantum': 20}
+2026-02-18 14:28:15,983 | INFO | Best result | objective=23590777.43500000 energy=1570887.00000000 bitstring=011100011000010000010101100011000100111000100011101000000010
+2026-02-18 14:28:15,983 | INFO | Reconstructed problem objective | label=mkp_total_profit value=2181.0 feasible=True
+2026-02-18 14:28:16,005 | INFO | Artifacts written | result=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T053937Z/result.json trace=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T053937Z/trace.jsonl qubo=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T053937Z/qubo.lp counts=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T053937Z/best_counts.json

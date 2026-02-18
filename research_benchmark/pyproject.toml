@@ -1,0 +1,19 @@
+[build-system]
+requires = ["setuptools>=67", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "qobench-research"
+version = "0.1.0"
+description = "Research-grade benchmark pipeline for combinatorial optimization datasets."
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+  "numpy>=2.0",
+  "docplex>=2.29",
+  "networkx>=3.0",
+  "qiskit-optimization>=0.6.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]

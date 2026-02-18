@@ -1,0 +1,23 @@
+2026-02-18 12:37:42,320 | INFO | Starting hardware run | problem=mkp method=cvar_vqe mode=single seed=0 run_dir=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T043742Z
+2026-02-18 12:37:42,321 | INFO | Initial configuration | qpu_id=local_qiskit qpus=None only_qpu=local_qiskit shots=16 maxiter=1 layers=1 entanglement=chain
+2026-02-18 12:37:42,321 | INFO | Resolved paths | project_root=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks requested_instance=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat resolved_instance=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat output_root=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual log_file=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T043742Z/run.log
+2026-02-18 12:37:42,321 | INFO | Using instance path: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat
+2026-02-18 12:37:42,322 | INFO | Problem instance loaded | problem=mkp
+2026-02-18 12:37:42,353 | INFO | Problem model built | model_time_limit=60.00s
+2026-02-18 12:37:42,392 | INFO | QUBO generated | num_variables=60 qubo_penalty=None max_qubits_cap=0
+2026-02-18 12:37:42,392 | INFO | Problem details | problem=mkp instance=/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat required_qubits=60
+2026-02-18 12:37:42,392 | INFO | Backend filters | only_qpu=local_qiskit no_aws=False no_ibm=False include_simulators=True
+2026-02-18 12:37:42,393 | INFO | QuantumHardwareManager initialized | use_aws=True use_ibm=True allow_simulators=True aws_profile=None enabled_qpus=['local_qiskit']
+2026-02-18 12:37:42,393 | INFO | Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+2026-02-18 12:37:42,393 | INFO | QPU disabled by filter | qpu_id=rigetti_ankaa3
+2026-02-18 12:37:42,394 | INFO | QPU disabled by filter | qpu_id=iqm_emerald
+2026-02-18 12:37:42,394 | INFO | QPU disabled by filter | qpu_id=iqm_garnet
+2026-02-18 12:37:42,394 | INFO | QPU disabled by filter | qpu_id=amazon_sv1
+2026-02-18 12:37:42,395 | INFO | QPU disabled by filter | qpu_id=amazon_tn1
+2026-02-18 12:37:42,395 | INFO | QPU disabled by filter | qpu_id=ibm_quantum
+2026-02-18 12:37:42,395 | INFO | Local qiskit backend enabled
+2026-02-18 12:37:42,395 | INFO | Backend initialization complete | results={'rigetti_ankaa3': False, 'iqm_emerald': False, 'iqm_garnet': False, 'amazon_sv1': False, 'amazon_tn1': False, 'ibm_quantum': False, 'local_qiskit': True}
+2026-02-18 12:37:42,396 | INFO | Hardware initialization status: {'rigetti_ankaa3': False, 'iqm_emerald': False, 'iqm_garnet': False, 'amazon_sv1': False, 'amazon_tn1': False, 'ibm_quantum': False, 'local_qiskit': True}
+2026-02-18 12:37:42,396 | INFO | QPU availability query | required_qubits=60 include_simulators=True selected=[]
+2026-02-18 12:37:42,396 | INFO | QPU availability skipped reasons | {'rigetti_ankaa3': 'unavailable:Disabled by --only-qpu filter', 'iqm_emerald': 'unavailable:Disabled by --only-qpu filter', 'iqm_garnet': 'unavailable:Disabled by --only-qpu filter', 'amazon_sv1': 'unavailable:Disabled by --only-qpu filter', 'amazon_tn1': 'unavailable:Disabled by --only-qpu filter', 'ibm_quantum': 'unavailable:Disabled by --only-qpu filter', 'local_qiskit': 'insufficient_qubits:32<60'}
+2026-02-18 12:37:42,396 | INFO | Available QPUs for run | num_qubits=60 include_simulators=True qpus=[]

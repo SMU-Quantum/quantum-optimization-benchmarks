@@ -1,0 +1,8 @@
+Starting manual MDKP hardware test
+Test wrapper log file: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/manual_test_mdkp_20260218T071215Z.log
+Test config | method=cvar_vqe execution_mode=single qpu_id=ibm_quantum qpus=None shots=1000 maxiter=20
+Using MDKP instance: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat
+Launching benchmark process...
+Benchmark process finished | return_code=0
+Raw benchmark stdout saved to: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/manual_test_mdkp_benchmark_stdout.log
+Printed compact instance summary from: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/research_benchmark/results_hardware_manual/mkp/mkp_cvar_vqe_20260218T071215Z/result.json

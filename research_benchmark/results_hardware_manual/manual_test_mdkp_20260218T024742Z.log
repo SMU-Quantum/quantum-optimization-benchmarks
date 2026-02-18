@@ -1,0 +1,9 @@
+2026-02-18 10:47:42,202 | INFO | qobench.manual_test_mdkp | Starting manual MDKP hardware test
+2026-02-18 10:47:42,202 | INFO | qobench.manual_test_mdkp | Test wrapper log file: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual/manual_test_mdkp_20260218T024742Z.log
+2026-02-18 10:47:42,203 | INFO | qobench.manual_test_mdkp | Test config | method=cvar_vqe execution_mode=single qpu_id=local_qiskit qpus=None shots=16 maxiter=1
+2026-02-18 10:47:42,203 | INFO | qobench.manual_test_mdkp | Using MDKP instance: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat
+2026-02-18 10:47:42,203 | INFO | qobench.manual_test_mdkp | Benchmark command: /opt/homebrew/opt/python@3.13/bin/python3.13 /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mkp --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat --method cvar_vqe --execution-mode single --shots 16 --maxiter 1 --seed 0 --layers 1 --entanglement chain --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_manual --only-qpu local_qiskit --log-level INFO --qpu-id local_qiskit --include-simulators
+2026-02-18 10:47:42,204 | INFO | qobench.manual_test_mdkp | Launching benchmark process...
+2026-02-18 10:47:42,250 | INFO | qobench.manual_test_mdkp | [benchmark] Dependency error: No module named 'numpy'
+2026-02-18 10:47:42,251 | INFO | qobench.manual_test_mdkp | [benchmark] Run this command in your benchmark virtual environment, e.g. `.venv/bin/python`.
+2026-02-18 10:47:42,257 | INFO | qobench.manual_test_mdkp | Benchmark process finished | return_code=1
