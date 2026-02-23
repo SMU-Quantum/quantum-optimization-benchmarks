@@ -1044,11 +1044,11 @@ class QuantumHardwareManager:
         )
         return selected
 
-    def _refresh_ibm_usage_if_needed(self) -> None:
+    def _refresh_ibm_usage_if_needed(self, *, force: bool = False) -> None:
         if not self._is_enabled("ibm_quantum"):
             return
         now = time.time()
-        if now - self._ibm_usage_last_check < self._ibm_usage_check_interval:
+        if not force and (now - self._ibm_usage_last_check < self._ibm_usage_check_interval):
             return
         self._ibm_usage_last_check = now
 
@@ -1072,7 +1072,12 @@ class QuantumHardwareManager:
             qpu.last_error = f"Runtime budget low: {remaining:.0f}s < {threshold:.0f}s"
             LOGGER.warning("[ibm_quantum] Disabled - %s", qpu.last_error)
             # Attempt mid-run re-auth/reload to pick up refreshed account.
-            if now - self._ibm_last_reconnect_attempt >= self._ibm_reconnect_interval:
+            # Force mode bypasses reconnect cooldown so budget-low handling can
+            # immediately consume a newly-added credential from JSON.
+            reconnect_ready = (now - self._ibm_last_reconnect_attempt >= self._ibm_reconnect_interval)
+            if force:
+                reconnect_ready = True
+            if reconnect_ready:
                 self._ibm_last_reconnect_attempt = now
                 LOGGER.info("[ibm_quantum] Attempting mid-run re-auth/reload...")
                 max_attempts = 1
@@ -1155,15 +1160,22 @@ class QuantumHardwareManager:
             service = self.sessions.get("ibm_quantum")
             if service is not None:
                 remaining = _get_ibm_usage_remaining_seconds(service)
-                if remaining is not None and remaining > float(self.ibm_min_runtime_seconds):
+                threshold = float(self.ibm_min_runtime_seconds)
+                if remaining is not None and remaining > threshold:
                     return  # budget is healthy, no need to rediscover
                 if remaining is not None:
                     LOGGER.info(
                         "IBM runtime budget low (%.0fs remaining < %.0fs threshold) "
                         "— refreshing backend inventory",
                         remaining,
-                        float(self.ibm_min_runtime_seconds),
+                        threshold,
                     )
+                    # Force an immediate usage refresh so credential rotation
+                    # is attempted even if the periodic usage-check interval
+                    # has not elapsed yet.
+                    self._refresh_ibm_usage_if_needed(force=True)
+                    if self.qpus["ibm_quantum"].is_available:
+                        return
 
             # Also respect the minimum interval to avoid spamming on budget=0
             now = time.time()
