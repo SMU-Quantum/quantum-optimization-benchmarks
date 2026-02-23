@@ -1,0 +1,277 @@
+{
+  "run_timestamp_utc": "20260218T123830Z",
+  "run_directory": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_cvar_vqe_20260218T123830Z\\1tc_8_txt",
+  "log_file": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_cvar_vqe_20260218T123830Z\\run.log",
+  "problem": "mis",
+  "instance_path": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\Maximum_Independent_Set\\mis_benchmark_instances\\1tc.8.txt",
+  "instance_name": "1tc.8.txt",
+  "method": "cvar_vqe",
+  "execution_mode": "multi",
+  "num_qubits": 8,
+  "selected_qpus": [
+    "rigetti_ankaa3",
+    "iqm_emerald",
+    "iqm_garnet",
+    "ibm_quantum"
+  ],
+  "timing": {
+    "solve_runtime_sec": 155.53924519999418,
+    "total_instance_sec": 155.5744281000225
+  },
+  "ansatz_metrics": {
+    "num_qubits": 8,
+    "trainable_parameters": 32,
+    "depth": 29,
+    "one_qubit_gates": 32,
+    "two_qubit_gates": 24,
+    "measurement_ops": 8
+  },
+  "qpu_status_snapshot": {
+    "rigetti_ankaa3": {
+      "name": "Rigetti Ankaa-3",
+      "provider": "braket_rigetti",
+      "is_available": true,
+      "max_qubits": 82,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 18,
+      "successful_jobs": 18,
+      "failed_jobs": 0,
+      "total_time_sec": 252.61678528785706,
+      "remaining_window_minutes_sgt": 176.0
+    },
+    "iqm_emerald": {
+      "name": "IQM Emerald",
+      "provider": "braket_iqm_emerald",
+      "is_available": true,
+      "max_qubits": 54,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 10,
+      "successful_jobs": 10,
+      "failed_jobs": 0,
+      "total_time_sec": 463.7834281921387,
+      "remaining_window_minutes_sgt": 206.0
+    },
+    "iqm_garnet": {
+      "name": "IQM Garnet",
+      "provider": "braket_iqm_garnet",
+      "is_available": true,
+      "max_qubits": 20,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 6,
+      "successful_jobs": 6,
+      "failed_jobs": 0,
+      "total_time_sec": 77.05884027481079,
+      "remaining_window_minutes_sgt": 146.0
+    },
+    "amazon_sv1": {
+      "name": "Amazon SV1",
+      "provider": "braket_sim_sv1",
+      "is_available": true,
+      "max_qubits": 34,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "ibm_quantum": {
+      "name": "IBM Quantum",
+      "provider": "ibm",
+      "is_available": true,
+      "max_qubits": 156,
+      "backend_name": "ibm_marrakesh",
+      "last_error": "",
+      "total_jobs": 30,
+      "successful_jobs": 28,
+      "failed_jobs": 2,
+      "total_time_sec": 682.3692634105682,
+      "remaining_window_minutes_sgt": null
+    },
+    "local_qiskit": {
+      "name": "Local Qiskit MPS Simulator",
+      "provider": "local_qiskit",
+      "is_available": true,
+      "max_qubits": 100,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    }
+  },
+  "optimizer": {
+    "status": "2",
+    "message": "Maximum number of function evaluations has been exceeded.",
+    "total_evaluations": 12,
+    "qpu_usage": {
+      "rigetti_ankaa3": 3,
+      "iqm_emerald": 3,
+      "iqm_garnet": 3,
+      "ibm_quantum": 3
+    }
+  },
+  "best_result": {
+    "optimization_objective_mode": "cvar",
+    "optimization_objective_value": -2.21,
+    "objective_value": 4.0,
+    "best_sample_energy": -4.0,
+    "raw_best_bitstring": "10001011",
+    "best_bitstring": "10001011",
+    "best_theta": [
+      4.002148315014479,
+      1.6951199159934145,
+      0.25744424357926954,
+      0.5038461967152733,
+      5.109927617709579,
+      5.735012432197602,
+      4.211604993109835,
+      4.583562073612696,
+      3.415696558991173,
+      5.8752333142921085,
+      5.126159064066656,
+      0.017206504032783308,
+      5.3872299529679575,
+      0.21102439329246717,
+      4.584560380312186,
+      1.1036768144935105,
+      5.423513122375916,
+      3.402101183476623,
+      1.8831453470115125,
+      2.6558221377616955,
+      0.17793774164533058,
+      0.7808948568301981,
+      4.213657469038928,
+      4.066411630084061,
+      3.8665786907160857,
+      2.4107171716328644,
+      6.265654816724269,
+      6.1627701893613205,
+      4.3073873243438365,
+      4.086956167564611,
+      4.325638382299154,
+      2.4436653767928673
+    ],
+    "raw_decoded_solution": {
+      "active_variable_count": 4,
+      "active_variables": [
+        "x_0",
+        "x_4",
+        "x_6",
+        "x_7"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        4,
+        6,
+        7
+      ],
+      "selected_indices_one_based": [
+        1,
+        5,
+        7,
+        8
+      ]
+    },
+    "raw_reconstructed_problem_objective": {
+      "objective_label": "maximum_independent_set_cardinality",
+      "objective_sense": "maximize",
+      "objective_value": 4.0,
+      "feasible": true,
+      "constraint_violations": {
+        "edge_conflicts": 0
+      }
+    },
+    "postprocess": {
+      "name": "one_round_local_swap",
+      "improved": false,
+      "candidates_checked": 24
+    },
+    "decoded_solution": {
+      "active_variable_count": 4,
+      "active_variables": [
+        "x_0",
+        "x_4",
+        "x_6",
+        "x_7"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        4,
+        6,
+        7
+      ],
+      "selected_indices_one_based": [
+        1,
+        5,
+        7,
+        8
+      ]
+    },
+    "reconstructed_problem_objective": {
+      "objective_label": "maximum_independent_set_cardinality",
+      "objective_sense": "maximize",
+      "objective_value": 4.0,
+      "feasible": true,
+      "constraint_violations": {
+        "edge_conflicts": 0
+      }
+    },
+    "active_assignment": {
+      "x_0": 1,
+      "x_1": 0,
+      "x_2": 0,
+      "x_3": 0,
+      "x_4": 1,
+      "x_5": 0,
+      "x_6": 1,
+      "x_7": 1
+    }
+  },
+  "config": {
+    "problem": "mis",
+    "instance": null,
+    "project_root": ".",
+    "method": "cvar_vqe",
+    "execution_mode": "multi",
+    "qpu_id": null,
+    "qpus": null,
+    "only_qpu": null,
+    "layers": 3,
+    "entanglement": "circular",
+    "shots": 1000,
+    "maxiter": 12,
+    "seed": 0,
+    "timeout_sec": null,
+    "max_qubits": 0,
+    "qubo_penalty": null,
+    "cvar_alpha": 0.2,
+    "pce_population": 8,
+    "pce_elite_frac": 0.25,
+    "pce_parallel_workers": 2,
+    "pce_batch_size": 1,
+    "aws_profile": "quantum",
+    "ibm_token": null,
+    "ibm_instance": null,
+    "qiskit_optimization_level": 3,
+    "no_aws": false,
+    "no_ibm": false,
+    "include_simulators": false,
+    "min_window_minutes": 10.0,
+    "min_aws_window_minutes": 30.0,
+    "ibm_min_runtime_seconds": 50.0,
+    "ibm_backend_refresh_seconds": 300.0,
+    "queue_status_seconds": 120.0,
+    "model_time_limit": 60.0,
+    "num_products": 2,
+    "output_root": "research_benchmark/results_hardware",
+    "log_level": "INFO",
+    "log_file": null
+  }
+}

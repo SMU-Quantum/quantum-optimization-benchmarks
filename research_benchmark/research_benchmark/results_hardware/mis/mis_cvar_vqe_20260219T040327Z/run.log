@@ -1,0 +1,1248 @@
+Run start | problem=mis method=cvar_vqe mode=multi seed=0
+Instances discovered | problem=mis count=7
+  - 1dc.128.txt
+  - 1dc.64.txt
+  - 1et.64.txt
+  - 1tc.16.txt
+  - 1tc.32.txt
+  - 1tc.64.txt
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 177m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready - IQM Emerald (54 qubits, window: 0m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 687m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 598s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=920), ibm_marrakesh(156q, pending=3), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_torino, ibm_marrakesh
+[local_qiskit] Ready (max 100 qubits)
+[ibm_quantum] Usage check: 596s remaining (threshold: 50s)
+QPUs skipped for 0-qubit problem:
+  iqm_emerald: outside availability window
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+Execution plan | mode=multi qpus=['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum'] instances=7
+
+[1/7] Starting instance: 1dc.128.txt
+
+======================================================================
+  Instance: 1dc.128.txt
+======================================================================
+  Problem: mis | Instance: 1dc.128.txt | Qubits: 128
+QPUs skipped for 128-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 128)
+  iqm_emerald: too few qubits (54 < 128)
+  iqm_garnet: too few qubits (20 < 128)
+  amazon_sv1: too few qubits (34 < 128)
+  local_qiskit: too few qubits (100 < 128)
+QPUs selected: ['ibm_quantum']
+  Ansatz | reps=5 entanglement=circular parameters=768 depth=647 2q_gates=640
+  Optimization | method=cvar_vqe objective=cvar shots=1000 maxiter=100 qpus=['ibm_quantum']
+  Protocol | shots=1000 maxiter=100 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 596s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=596.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8nf7g4t5c73842lhg
+IBM job d6b8nf7g4t5c73842lhg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8nf7g4t5c73842lhg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8nf7g4t5c73842lhg unique_bitstrings=1000
+Job completed on ibm_quantum in 24.6s (total: 1 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 594s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=594.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8nhsnsg9c7398nbcg
+IBM job d6b8nhsnsg9c7398nbcg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8nhsnsg9c7398nbcg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8nhsnsg9c7398nbcg unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 2 ok, 0 failed)
+[ibm_quantum] Usage check: 590s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 590s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=590.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8nk97ce2c73ff4760
+IBM job d6b8nk97ce2c73ff4760 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8nk97ce2c73ff4760 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8nk97ce2c73ff4760 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 3 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 588s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=588.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8nn17ce2c73ff479g
+IBM job d6b8nn17ce2c73ff479g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8nn17ce2c73ff479g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b8nn17ce2c73ff479g unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 4 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 586s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=586.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8npp54hss73b72gig
+IBM job d6b8npp54hss73b72gig (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8npp54hss73b72gig (ibm_torino) status | state=RUNNING queue_position=n/a elapsed_sec=182.8
+IBM job d6b8npp54hss73b72gig (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=209.6
+IBM job completed | backend=ibm_torino job_id=d6b8npp54hss73b72gig unique_bitstrings=1000
+Job completed on ibm_quantum in 213.0s (total: 5 ok, 0 failed)
+[ibm_quantum] Usage check: 582s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 582s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=582.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8pfng4t5c73842nr0
+IBM job d6b8pfng4t5c73842nr0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8pfng4t5c73842nr0 (ibm_torino) status | state=RUNNING queue_position=n/a elapsed_sec=182.4
+IBM job d6b8pfng4t5c73842nr0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=215.0
+IBM job completed | backend=ibm_torino job_id=d6b8pfng4t5c73842nr0 unique_bitstrings=1000
+Job completed on ibm_quantum in 218.5s (total: 6 ok, 0 failed)
+[ibm_quantum] Usage check: 578s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 578s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=578.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8r6h7ce2c73ff4b9g
+IBM job d6b8r6h7ce2c73ff4b9g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8r6h7ce2c73ff4b9g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_torino job_id=d6b8r6h7ce2c73ff4b9g unique_bitstrings=1000
+Job completed on ibm_quantum in 14.3s (total: 7 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 576s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=576.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8rah54hss73b72kd0
+IBM job d6b8rah54hss73b72kd0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8rah54hss73b72kd0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8rah54hss73b72kd0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 8 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 574s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=574.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8rdfg4t5c73842pv0
+IBM job d6b8rdfg4t5c73842pv0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8rdfg4t5c73842pv0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8rdfg4t5c73842pv0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 9 ok, 0 failed)
+[ibm_quantum] Usage check: 570s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 570s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=570.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8rg7g4t5c73842q3g
+IBM job d6b8rg7g4t5c73842q3g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8rg7g4t5c73842q3g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8rg7g4t5c73842q3g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 10 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 568s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=568.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8risnsg9c7398nfu0
+IBM job d6b8risnsg9c7398nfu0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8risnsg9c7398nfu0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8risnsg9c7398nfu0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 11 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 566s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=566.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8rlh7ce2c73ff4br0
+IBM job d6b8rlh7ce2c73ff4br0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8rlh7ce2c73ff4br0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8rlh7ce2c73ff4br0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.6s (total: 12 ok, 0 failed)
+[ibm_quantum] Usage check: 564s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 564s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=562.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8rofg4t5c73842qd0
+IBM job d6b8rofg4t5c73842qd0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8rofg4t5c73842qd0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8rofg4t5c73842qd0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 13 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 560s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=560.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8rr4nsg9c7398ng7g
+IBM job d6b8rr4nsg9c7398ng7g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8rr4nsg9c7398ng7g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8rr4nsg9c7398ng7g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 14 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 558s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=558.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8rth7ce2c73ff4c4g
+IBM job d6b8rth7ce2c73ff4c4g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8rth7ce2c73ff4c4g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8rth7ce2c73ff4c4g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 15 ok, 0 failed)
+[ibm_quantum] Usage check: 556s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 556s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=556.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8s0954hss73b72l60
+IBM job d6b8s0954hss73b72l60 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8s0954hss73b72l60 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8s0954hss73b72l60 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 16 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 552s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=552.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8s34nsg9c7398nggg
+IBM job d6b8s34nsg9c7398nggg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8s34nsg9c7398nggg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_torino job_id=d6b8s34nsg9c7398nggg unique_bitstrings=1000
+Job completed on ibm_quantum in 14.7s (total: 17 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 550s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=550.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8s74nsg9c7398ngm0
+IBM job d6b8s74nsg9c7398ngm0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8s74nsg9c7398ngm0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8s74nsg9c7398ngm0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 18 ok, 0 failed)
+[ibm_quantum] Usage check: 548s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 548s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=548.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8sa7g4t5c73842r70
+IBM job d6b8sa7g4t5c73842r70 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8sa7g4t5c73842r70 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8sa7g4t5c73842r70 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 19 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 544s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=544.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8sch7ce2c73ff4clg
+IBM job d6b8sch7ce2c73ff4clg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8sch7ce2c73ff4clg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8sch7ce2c73ff4clg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 20 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 542s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=542.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8sfh54hss73b72lmg
+IBM job d6b8sfh54hss73b72lmg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8sfh54hss73b72lmg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8sfh54hss73b72lmg unique_bitstrings=1000
+Job completed on ibm_quantum in 9.5s (total: 21 ok, 0 failed)
+[ibm_quantum] Usage check: 540s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 540s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=540.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8si97ce2c73ff4csg
+IBM job d6b8si97ce2c73ff4csg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8si97ce2c73ff4csg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8si97ce2c73ff4csg unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 22 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 536s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=536.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8skp54hss73b72lsg
+IBM job d6b8skp54hss73b72lsg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8skp54hss73b72lsg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b8skp54hss73b72lsg unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 23 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 534s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=534.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8snng4t5c73842rm0
+IBM job d6b8snng4t5c73842rm0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8snng4t5c73842rm0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8snng4t5c73842rm0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 24 ok, 0 failed)
+[ibm_quantum] Usage check: 532s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 532s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=532.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8sq97ce2c73ff4d7g
+IBM job d6b8sq97ce2c73ff4d7g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8sq97ce2c73ff4d7g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8sq97ce2c73ff4d7g unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 25 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 530s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=530.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8ssp7ce2c73ff4dc0
+IBM job d6b8ssp7ce2c73ff4dc0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8ssp7ce2c73ff4dc0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8ssp7ce2c73ff4dc0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 26 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 526s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=526.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8svh7ce2c73ff4df0
+IBM job d6b8svh7ce2c73ff4df0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.5
+IBM job d6b8svh7ce2c73ff4df0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.9
+IBM job completed | backend=ibm_torino job_id=d6b8svh7ce2c73ff4df0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 27 ok, 0 failed)
+[ibm_quantum] Usage check: 524s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 524s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=524.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8t2cnsg9c7398nhl0
+IBM job d6b8t2cnsg9c7398nhl0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8t2cnsg9c7398nhl0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8t2cnsg9c7398nhl0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 28 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 522s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=522.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8t57g4t5c73842s60
+IBM job d6b8t57g4t5c73842s60 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8t57g4t5c73842s60 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8t57g4t5c73842s60 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 29 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 520s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=518.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8t7knsg9c7398nhr0
+IBM job d6b8t7knsg9c7398nhr0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8t7knsg9c7398nhr0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8t7knsg9c7398nhr0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 30 ok, 0 failed)
+[ibm_quantum] Usage check: 516s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 516s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=516.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tafg4t5c73842sc0
+IBM job d6b8tafg4t5c73842sc0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tafg4t5c73842sc0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8tafg4t5c73842sc0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 31 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 514s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=514.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8td4nsg9c7398ni0g
+IBM job d6b8td4nsg9c7398ni0g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8td4nsg9c7398ni0g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8td4nsg9c7398ni0g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 32 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 512s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=512.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tfsnsg9c7398ni40
+IBM job d6b8tfsnsg9c7398ni40 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tfsnsg9c7398ni40 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b8tfsnsg9c7398ni40 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.3s (total: 33 ok, 0 failed)
+[ibm_quantum] Usage check: 508s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 508s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=508.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tiknsg9c7398ni7g
+IBM job d6b8tiknsg9c7398ni7g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tiknsg9c7398ni7g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8tiknsg9c7398ni7g unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 34 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 506s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=506.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tl154hss73b72n00
+IBM job d6b8tl154hss73b72n00 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tl154hss73b72n00 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8tl154hss73b72n00 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 35 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 504s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=504.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tnsnsg9c7398nig0
+IBM job d6b8tnsnsg9c7398nig0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tnsnsg9c7398nig0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8tnsnsg9c7398nig0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 36 ok, 0 failed)
+[ibm_quantum] Usage check: 502s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 502s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=500.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tqh7ce2c73ff4ee0
+IBM job d6b8tqh7ce2c73ff4ee0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tqh7ce2c73ff4ee0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8tqh7ce2c73ff4ee0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 37 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 498s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=498.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tt17ce2c73ff4eig
+IBM job d6b8tt17ce2c73ff4eig (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tt17ce2c73ff4eig (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8tt17ce2c73ff4eig unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 38 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 496s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=496.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8tvsnsg9c7398nirg
+IBM job d6b8tvsnsg9c7398nirg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8tvsnsg9c7398nirg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8tvsnsg9c7398nirg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 39 ok, 0 failed)
+[ibm_quantum] Usage check: 494s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 494s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=494.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8u2h7ce2c73ff4epg
+IBM job d6b8u2h7ce2c73ff4epg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8u2h7ce2c73ff4epg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_torino job_id=d6b8u2h7ce2c73ff4epg unique_bitstrings=1000
+Job completed on ibm_quantum in 14.2s (total: 40 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 490s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=490.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8u6knsg9c7398nj5g
+IBM job d6b8u6knsg9c7398nj5g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8u6knsg9c7398nj5g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b8u6knsg9c7398nj5g unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 41 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 488s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=488.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8u9954hss73b72nqg
+IBM job d6b8u9954hss73b72nqg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.5
+IBM job d6b8u9954hss73b72nqg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b8u9954hss73b72nqg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 42 ok, 0 failed)
+[ibm_quantum] Usage check: 486s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 486s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=486.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8uc4nsg9c7398njbg
+IBM job d6b8uc4nsg9c7398njbg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8uc4nsg9c7398njbg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8uc4nsg9c7398njbg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 43 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 482s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=482.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8ueknsg9c7398njg0
+IBM job d6b8ueknsg9c7398njg0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8ueknsg9c7398njg0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8ueknsg9c7398njg0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 44 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 480s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=480.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8uh97ce2c73ff4fgg
+IBM job d6b8uh97ce2c73ff4fgg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8uh97ce2c73ff4fgg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.2
+IBM job completed | backend=ibm_torino job_id=d6b8uh97ce2c73ff4fgg unique_bitstrings=1000
+Job completed on ibm_quantum in 14.4s (total: 45 ok, 0 failed)
+[ibm_quantum] Usage check: 478s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 478s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=478.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8ul97ce2c73ff4fm0
+IBM job d6b8ul97ce2c73ff4fm0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8ul97ce2c73ff4fm0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8ul97ce2c73ff4fm0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 46 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 474s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=474.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8uo7g4t5c73842u00
+IBM job d6b8uo7g4t5c73842u00 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8uo7g4t5c73842u00 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8uo7g4t5c73842u00 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 47 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 472s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=472.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8uqvg4t5c73842u30
+IBM job d6b8uqvg4t5c73842u30 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8uqvg4t5c73842u30 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8uqvg4t5c73842u30 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 48 ok, 0 failed)
+[ibm_quantum] Usage check: 470s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 470s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=470.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8utknsg9c7398nk10
+IBM job d6b8utknsg9c7398nk10 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8utknsg9c7398nk10 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8utknsg9c7398nk10 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 49 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 468s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=468.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8v0cnsg9c7398nk50
+IBM job d6b8v0cnsg9c7398nk50 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8v0cnsg9c7398nk50 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_torino job_id=d6b8v0cnsg9c7398nk50 unique_bitstrings=1000
+Job completed on ibm_quantum in 14.2s (total: 50 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 462s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=462.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8v497ce2c73ff4g9g
+IBM job d6b8v497ce2c73ff4g9g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8v497ce2c73ff4g9g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_torino job_id=d6b8v497ce2c73ff4g9g unique_bitstrings=1000
+Job completed on ibm_quantum in 14.4s (total: 51 ok, 0 failed)
+[ibm_quantum] Usage check: 459s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 459s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=459.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8v8954hss73b72p50
+IBM job d6b8v8954hss73b72p50 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8v8954hss73b72p50 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8v8954hss73b72p50 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 52 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 455s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=455.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8vb154hss73b72pag
+IBM job d6b8vb154hss73b72pag (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8vb154hss73b72pag (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8vb154hss73b72pag unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 53 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 453s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=453.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8vdh54hss73b72ph0
+IBM job d6b8vdh54hss73b72ph0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8vdh54hss73b72ph0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b8vdh54hss73b72ph0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 54 ok, 0 failed)
+[ibm_quantum] Usage check: 451s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 451s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=451.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8vgknsg9c7398nktg
+IBM job d6b8vgknsg9c7398nktg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8vgknsg9c7398nktg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b8vgknsg9c7398nktg unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 55 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 449s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=449.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b8vj954hss73b72pr0
+IBM job d6b8vj954hss73b72pr0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b8vj954hss73b72pr0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=53.9
+IBM job completed | backend=ibm_torino job_id=d6b8vj954hss73b72pr0 unique_bitstrings=1000
+Job completed on ibm_quantum in 57.6s (total: 56 ok, 0 failed)
+[ibm_quantum] Usage check: 443s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 443s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=443.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b902fg4t5c73842vtg
+IBM job d6b902fg4t5c73842vtg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b902fg4t5c73842vtg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b902fg4t5c73842vtg unique_bitstrings=1000
+Job completed on ibm_quantum in 9.2s (total: 57 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 441s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=441.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b90517ce2c73ff4hr0
+IBM job d6b90517ce2c73ff4hr0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b90517ce2c73ff4hr0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b90517ce2c73ff4hr0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 58 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 439s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=439.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b907vg4t5c73843060
+IBM job d6b907vg4t5c73843060 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b907vg4t5c73843060 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=43.1
+IBM job completed | backend=ibm_torino job_id=d6b907vg4t5c73843060 unique_bitstrings=1000
+Job completed on ibm_quantum in 46.4s (total: 59 ok, 0 failed)
+[ibm_quantum] Usage check: 435s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 435s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=435.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b90k7g4t5c738430k0
+IBM job d6b90k7g4t5c738430k0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b90k7g4t5c738430k0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b90k7g4t5c738430k0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 60 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 433s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=433.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b90mknsg9c7398nmn0
+IBM job d6b90mknsg9c7398nmn0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b90mknsg9c7398nmn0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=32.6
+IBM job completed | backend=ibm_torino job_id=d6b90mknsg9c7398nmn0 unique_bitstrings=1000
+Job completed on ibm_quantum in 35.7s (total: 61 ok, 0 failed)
+[ibm_quantum] Usage check: 429s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 429s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=429.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b9104nsg9c7398nmvg
+IBM job d6b9104nsg9c7398nmvg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b9104nsg9c7398nmvg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b9104nsg9c7398nmvg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 62 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 427s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=427.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b912snsg9c7398nn3g
+IBM job d6b912snsg9c7398nn3g (ibm_torino) status | state=RUNNING queue_position=n/a elapsed_sec=0.3
+IBM job d6b912snsg9c7398nn3g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b912snsg9c7398nn3g unique_bitstrings=1000
+Job completed on ibm_quantum in 9.2s (total: 63 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 425s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=425.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b915knsg9c7398nn80
+IBM job d6b915knsg9c7398nn80 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b915knsg9c7398nn80 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b915knsg9c7398nn80 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 64 ok, 0 failed)
+[ibm_quantum] Usage check: 423s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 423s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=423.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b918cnsg9c7398nnb0
+IBM job d6b918cnsg9c7398nnb0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b918cnsg9c7398nnb0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b918cnsg9c7398nnb0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 65 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 419s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=419.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b91ap7ce2c73ff4jcg
+IBM job d6b91ap7ce2c73ff4jcg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b91ap7ce2c73ff4jcg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b91ap7ce2c73ff4jcg unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 66 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 417s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=417.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b91dh7ce2c73ff4jgg
+IBM job d6b91dh7ce2c73ff4jgg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b91dh7ce2c73ff4jgg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b91dh7ce2c73ff4jgg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 67 ok, 0 failed)
+[ibm_quantum] Usage check: 415s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 415s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=415.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b91gfg4t5c738431p0
+IBM job d6b91gfg4t5c738431p0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b91gfg4t5c738431p0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b91gfg4t5c738431p0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 68 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 411s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=411.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b91j7g4t5c738431u0
+IBM job d6b91j7g4t5c738431u0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b91j7g4t5c738431u0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b91j7g4t5c738431u0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 69 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 409s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=409.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b91lp7ce2c73ff4jqg
+IBM job d6b91lp7ce2c73ff4jqg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b91lp7ce2c73ff4jqg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=21.6
+IBM job completed | backend=ibm_torino job_id=d6b91lp7ce2c73ff4jqg unique_bitstrings=1000
+Job completed on ibm_quantum in 24.9s (total: 70 ok, 0 failed)
+[ibm_quantum] Usage check: 404s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 404s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=404.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b91sknsg9c7398no40
+IBM job d6b91sknsg9c7398no40 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b91sknsg9c7398no40 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b91sknsg9c7398no40 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 71 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 402s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=402.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b91v4nsg9c7398no7g
+IBM job d6b91v4nsg9c7398no7g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b91v4nsg9c7398no7g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b91v4nsg9c7398no7g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 72 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 400s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=400.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b921vg4t5c738432k0
+IBM job d6b921vg4t5c738432k0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b921vg4t5c738432k0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b921vg4t5c738432k0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.2s (total: 73 ok, 0 failed)
+[ibm_quantum] Usage check: 398s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 398s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=398.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b924knsg9c7398nofg
+IBM job d6b924knsg9c7398nofg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b924knsg9c7398nofg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b924knsg9c7398nofg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 74 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 394s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=394.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92717ce2c73ff4kjg
+IBM job d6b92717ce2c73ff4kjg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92717ce2c73ff4kjg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b92717ce2c73ff4kjg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 75 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 392s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=392.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b929vg4t5c738432v0
+IBM job d6b929vg4t5c738432v0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b929vg4t5c738432v0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b929vg4t5c738432v0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 76 ok, 0 failed)
+[ibm_quantum] Usage check: 390s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 390s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=390.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92ch54hss73b72tk0
+IBM job d6b92ch54hss73b72tk0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92ch54hss73b72tk0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=16.4
+IBM job completed | backend=ibm_torino job_id=d6b92ch54hss73b72tk0 unique_bitstrings=1000
+Job completed on ibm_quantum in 20.2s (total: 77 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 386s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=386.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92i7g4t5c7384339g
+IBM job d6b92i7g4t5c7384339g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92i7g4t5c7384339g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b92i7g4t5c7384339g unique_bitstrings=1000
+Job completed on ibm_quantum in 9.2s (total: 78 ok, 0 failed)
+[ibm_quantum] Usage check: 384s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 384s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=384.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92kp7ce2c73ff4l70
+IBM job d6b92kp7ce2c73ff4l70 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92kp7ce2c73ff4l70 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b92kp7ce2c73ff4l70 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 79 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 382s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=382.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92nng4t5c738433h0
+IBM job d6b92nng4t5c738433h0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92nng4t5c738433h0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b92nng4t5c738433h0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 80 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 380s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=380.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92q7g4t5c738433m0
+IBM job d6b92q7g4t5c738433m0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92q7g4t5c738433m0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.9
+IBM job completed | backend=ibm_torino job_id=d6b92q7g4t5c738433m0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.2s (total: 81 ok, 0 failed)
+[ibm_quantum] Usage check: 376s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 376s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=376.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92ssnsg9c7398npeg
+IBM job d6b92ssnsg9c7398npeg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92ssnsg9c7398npeg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b92ssnsg9c7398npeg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 82 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 374s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=374.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b92vng4t5c738433sg
+IBM job d6b92vng4t5c738433sg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b92vng4t5c738433sg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b92vng4t5c738433sg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 83 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 372s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=372.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b9324nsg9c7398npm0
+IBM job d6b9324nsg9c7398npm0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b9324nsg9c7398npm0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b9324nsg9c7398npm0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 84 ok, 0 failed)
+[ibm_quantum] Usage check: 368s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 368s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=368.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b934p54hss73b72ui0
+IBM job d6b934p54hss73b72ui0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b934p54hss73b72ui0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b934p54hss73b72ui0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 85 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 366s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=366.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b937fg4t5c73843470
+IBM job d6b937fg4t5c73843470 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b937fg4t5c73843470 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b937fg4t5c73843470 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 86 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 364s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=364.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b939p7ce2c73ff4mb0
+IBM job d6b939p7ce2c73ff4mb0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b939p7ce2c73ff4mb0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b939p7ce2c73ff4mb0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 87 ok, 0 failed)
+[ibm_quantum] Usage check: 362s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 362s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=362.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b93cng4t5c738434dg
+IBM job d6b93cng4t5c738434dg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b93cng4t5c738434dg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b93cng4t5c738434dg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 88 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 358s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=358.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b93f17ce2c73ff4mj0
+IBM job d6b93f17ce2c73ff4mj0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b93f17ce2c73ff4mj0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b93f17ce2c73ff4mj0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 89 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 356s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=356.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b93hp54hss73b72v60
+IBM job d6b93hp54hss73b72v60 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b93hp54hss73b72v60 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b93hp54hss73b72v60 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 90 ok, 0 failed)
+[ibm_quantum] Usage check: 354s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 354s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=354.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b93kcnsg9c7398nqf0
+IBM job d6b93kcnsg9c7398nqf0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b93kcnsg9c7398nqf0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b93kcnsg9c7398nqf0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 91 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 352s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=350.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b93n154hss73b72veg
+IBM job d6b93n154hss73b72veg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b93n154hss73b72veg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_torino job_id=d6b93n154hss73b72veg unique_bitstrings=1000
+Job completed on ibm_quantum in 14.2s (total: 92 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 348s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=348.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b93r4nsg9c7398nqo0
+IBM job d6b93r4nsg9c7398nqo0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b93r4nsg9c7398nqo0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b93r4nsg9c7398nqo0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 93 ok, 0 failed)
+[ibm_quantum] Usage check: 346s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 346s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=346.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b93tvg4t5c738435c0
+IBM job d6b93tvg4t5c738435c0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b93tvg4t5c738435c0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b93tvg4t5c738435c0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.1s (total: 94 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 344s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=344.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b940ng4t5c738435g0
+IBM job d6b940ng4t5c738435g0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b940ng4t5c738435g0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b940ng4t5c738435g0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 95 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 340s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=340.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b94397ce2c73ff4ni0
+IBM job d6b94397ce2c73ff4ni0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b94397ce2c73ff4ni0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b94397ce2c73ff4ni0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 96 ok, 0 failed)
+[ibm_quantum] Usage check: 338s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 338s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=338.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b946154hss73b7303g
+IBM job d6b946154hss73b7303g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b946154hss73b7303g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b946154hss73b7303g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 97 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 336s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=336.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b948h7ce2c73ff4nqg
+IBM job d6b948h7ce2c73ff4nqg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b948h7ce2c73ff4nqg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b948h7ce2c73ff4nqg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 98 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 332s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=332.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b94b954hss73b730b0
+IBM job d6b94b954hss73b730b0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b94b954hss73b730b0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b94b954hss73b730b0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 99 ok, 0 failed)
+[ibm_quantum] Usage check: 330s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=128 | IBM budget: 330s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=128 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=330.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b94e17ce2c73ff4o2g
+IBM job d6b94e17ce2c73ff4o2g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b94e17ce2c73ff4o2g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b94e17ce2c73ff4o2g unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 100 ok, 0 failed)
+  Optimization finished | evaluations=100 status=2 time=1686.1s
+  Result | objective=43.0 feasible=False postprocess_improved=True
+
+[2/7] Starting instance: 1dc.64.txt
+
+======================================================================
+  Instance: 1dc.64.txt
+======================================================================
+  Problem: mis | Instance: 1dc.64.txt | Qubits: 64
+QPUs skipped for 64-qubit problem:
+  iqm_emerald: too few qubits (54 < 64)
+  iqm_garnet: too few qubits (20 < 64)
+  amazon_sv1: too few qubits (34 < 64)
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'ibm_quantum']
+  Ansatz | reps=5 entanglement=circular parameters=384 depth=327 2q_gates=320
+  Optimization | method=cvar_vqe objective=cvar shots=1000 maxiter=100 qpus=['rigetti_ankaa3', 'ibm_quantum']
+  Protocol | shots=1000 maxiter=100 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 148m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/ffd989a7-f8d9-44c1-a16b-ba978296232b
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/ffd989a7-f8d9-44c1-a16b-ba978296232b status | state=QUEUED queue_position=1 elapsed_sec=0.6
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/ffd989a7-f8d9-44c1-a16b-ba978296232b status | state=COMPLETED queue_position=None elapsed_sec=23.0
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/ffd989a7-f8d9-44c1-a16b-ba978296232b unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 28.9s (total: 1 ok, 0 failed)
+[ibm_quantum] Usage check: 326s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 326s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=326.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b94op7ce2c73ff4og0
+IBM job d6b94op7ce2c73ff4og0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b94op7ce2c73ff4og0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b94op7ce2c73ff4og0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.0s (total: 101 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 148m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/7d66906b-cda7-4e3f-a919-956c3ebf9535
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/7d66906b-cda7-4e3f-a919-956c3ebf9535 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/7d66906b-cda7-4e3f-a919-956c3ebf9535 status | state=COMPLETED queue_position=None elapsed_sec=22.9
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/7d66906b-cda7-4e3f-a919-956c3ebf9535 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.1s (total: 2 ok, 0 failed)
+[ibm_quantum] Usage check: 322s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 322s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=322.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b951p54hss73b731cg
+IBM job d6b951p54hss73b731cg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b951p54hss73b731cg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b951p54hss73b731cg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 102 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 147m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/ff81a038-0037-4155-8d30-357da6848573
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/ff81a038-0037-4155-8d30-357da6848573 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/ff81a038-0037-4155-8d30-357da6848573 status | state=COMPLETED queue_position=None elapsed_sec=23.0
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/ff81a038-0037-4155-8d30-357da6848573 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 26.6s (total: 3 ok, 0 failed)
+[ibm_quantum] Usage check: 318s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 318s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=318.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b95bfg4t5c738437dg
+IBM job d6b95bfg4t5c738437dg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b95bfg4t5c738437dg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b95bfg4t5c738437dg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 103 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 147m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0ac6f173-24fa-4b5a-9fe6-dc549f0499b1
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0ac6f173-24fa-4b5a-9fe6-dc549f0499b1 status | state=QUEUED queue_position=1 elapsed_sec=0.6
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0ac6f173-24fa-4b5a-9fe6-dc549f0499b1 status | state=COMPLETED queue_position=None elapsed_sec=23.0
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0ac6f173-24fa-4b5a-9fe6-dc549f0499b1 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 26.2s (total: 4 ok, 0 failed)
+[ibm_quantum] Usage check: 314s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 314s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=314.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b95kvg4t5c738437s0
+IBM job d6b95kvg4t5c738437s0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b95kvg4t5c738437s0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b95kvg4t5c738437s0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 104 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 146m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/732d257b-0dc7-43ea-8cf8-6c45ea0d3520
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/732d257b-0dc7-43ea-8cf8-6c45ea0d3520 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/732d257b-0dc7-43ea-8cf8-6c45ea0d3520 status | state=COMPLETED queue_position=None elapsed_sec=22.8
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/732d257b-0dc7-43ea-8cf8-6c45ea0d3520 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 24.9s (total: 5 ok, 0 failed)
+[ibm_quantum] Usage check: 310s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 310s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=310.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b95u154hss73b732q0
+IBM job d6b95u154hss73b732q0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b95u154hss73b732q0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6b95u154hss73b732q0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 105 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 145m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/fa164b2f-7411-4d37-9e67-e69399eeb2e3
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/fa164b2f-7411-4d37-9e67-e69399eeb2e3 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/fa164b2f-7411-4d37-9e67-e69399eeb2e3 status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/fa164b2f-7411-4d37-9e67-e69399eeb2e3 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.3s (total: 6 ok, 0 failed)
+[ibm_quantum] Usage check: 306s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 306s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=306.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b9674nsg9c7398nugg
+IBM job d6b9674nsg9c7398nugg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b9674nsg9c7398nugg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b9674nsg9c7398nugg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 106 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 145m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/28abd870-8e78-4675-9fb6-796cfcdd58a6
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/28abd870-8e78-4675-9fb6-796cfcdd58a6 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/28abd870-8e78-4675-9fb6-796cfcdd58a6 status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/28abd870-8e78-4675-9fb6-796cfcdd58a6 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.2s (total: 7 ok, 0 failed)
+[ibm_quantum] Usage check: 302s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 302s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=302.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b96g17ce2c73ff4r80
+IBM job d6b96g17ce2c73ff4r80 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b96g17ce2c73ff4r80 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b96g17ce2c73ff4r80 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 107 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 144m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/bfb0d223-1361-461a-b65f-2d30b4ff29d2
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/bfb0d223-1361-461a-b65f-2d30b4ff29d2 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/bfb0d223-1361-461a-b65f-2d30b4ff29d2 status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/bfb0d223-1361-461a-b65f-2d30b4ff29d2 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.9s (total: 8 ok, 0 failed)
+[ibm_quantum] Usage check: 298s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 298s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=298.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b96p954hss73b734b0
+IBM job d6b96p954hss73b734b0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b96p954hss73b734b0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b96p954hss73b734b0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 108 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 143m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0dbde11a-f3c0-41a2-a731-69fee9b2f403
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0dbde11a-f3c0-41a2-a731-69fee9b2f403 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0dbde11a-f3c0-41a2-a731-69fee9b2f403 status | state=COMPLETED queue_position=None elapsed_sec=22.8
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0dbde11a-f3c0-41a2-a731-69fee9b2f403 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.0s (total: 9 ok, 0 failed)
+[ibm_quantum] Usage check: 294s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 294s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=294.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b972knsg9c7398nvv0
+IBM job d6b972knsg9c7398nvv0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b972knsg9c7398nvv0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b972knsg9c7398nvv0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 109 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 143m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/579349fe-e633-4fdf-b7a9-f2c9c3fb5945
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/579349fe-e633-4fdf-b7a9-f2c9c3fb5945 status | state=QUEUED queue_position=2 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/579349fe-e633-4fdf-b7a9-f2c9c3fb5945 status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/579349fe-e633-4fdf-b7a9-f2c9c3fb5945 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 26.0s (total: 10 ok, 0 failed)
+[ibm_quantum] Usage check: 290s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 290s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=290.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b97bp54hss73b735a0
+IBM job d6b97bp54hss73b735a0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b97bp54hss73b735a0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b97bp54hss73b735a0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 110 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 142m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/7d763d29-6435-497f-8ea2-7fefb7cc1983
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/7d763d29-6435-497f-8ea2-7fefb7cc1983 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/7d763d29-6435-497f-8ea2-7fefb7cc1983 status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/7d763d29-6435-497f-8ea2-7fefb7cc1983 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 24.8s (total: 11 ok, 0 failed)
+[ibm_quantum] Usage check: 286s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 286s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=286.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b97ksnsg9c7398o0rg
+IBM job d6b97ksnsg9c7398o0rg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6b97ksnsg9c7398o0rg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b97ksnsg9c7398o0rg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 111 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 142m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/3dbe1cf9-3e91-42bf-bfe7-09eaba70dcdd
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/3dbe1cf9-3e91-42bf-bfe7-09eaba70dcdd status | state=QUEUED queue_position=2 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/3dbe1cf9-3e91-42bf-bfe7-09eaba70dcdd status | state=COMPLETED queue_position=None elapsed_sec=22.9
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/3dbe1cf9-3e91-42bf-bfe7-09eaba70dcdd unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.1s (total: 12 ok, 0 failed)
+[ibm_quantum] Usage check: 283s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 283s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=283.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b97tng4t5c73843bj0
+IBM job d6b97tng4t5c73843bj0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b97tng4t5c73843bj0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b97tng4t5c73843bj0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.2s (total: 112 ok, 0 failed)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 141m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/71031213-55cf-4bbf-9c5b-7e3e193e0ebf
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/71031213-55cf-4bbf-9c5b-7e3e193e0ebf status | state=QUEUED queue_position=2 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/71031213-55cf-4bbf-9c5b-7e3e193e0ebf status | state=COMPLETED queue_position=None elapsed_sec=22.8
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/71031213-55cf-4bbf-9c5b-7e3e193e0ebf unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 24.9s (total: 13 ok, 0 failed)
+[ibm_quantum] Usage check: 281s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 281s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=281.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b986ng4t5c73843btg
+IBM job d6b986ng4t5c73843btg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b986ng4t5c73843btg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=32.3
+IBM job completed | backend=ibm_torino job_id=d6b986ng4t5c73843btg unique_bitstrings=1000
+Job completed on ibm_quantum in 35.3s (total: 113 ok, 0 failed)
+[ibm_quantum] Usage check: 277s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 140m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/f34d43b6-515d-41ec-9f7f-5053ca86fa46
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/f34d43b6-515d-41ec-9f7f-5053ca86fa46 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/f34d43b6-515d-41ec-9f7f-5053ca86fa46 status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/f34d43b6-515d-41ec-9f7f-5053ca86fa46 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 27.4s (total: 14 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 277s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=277.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b98mvg4t5c73843ckg
+IBM job d6b98mvg4t5c73843ckg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b98mvg4t5c73843ckg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b98mvg4t5c73843ckg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 114 ok, 0 failed)
+[ibm_quantum] Usage check: 273s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 139m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/455ab1e5-ee6d-43f0-b41d-1716a54cfa5e
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/455ab1e5-ee6d-43f0-b41d-1716a54cfa5e status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/455ab1e5-ee6d-43f0-b41d-1716a54cfa5e status | state=COMPLETED queue_position=None elapsed_sec=22.9
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/455ab1e5-ee6d-43f0-b41d-1716a54cfa5e unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.5s (total: 15 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 273s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=273.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b990154hss73b737k0
+IBM job d6b990154hss73b737k0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b990154hss73b737k0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b990154hss73b737k0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 115 ok, 0 failed)
+[ibm_quantum] Usage check: 269s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 139m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0aab7156-d3ca-4782-877d-38d04783d172
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0aab7156-d3ca-4782-877d-38d04783d172 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0aab7156-d3ca-4782-877d-38d04783d172 status | state=COMPLETED queue_position=None elapsed_sec=22.8
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0aab7156-d3ca-4782-877d-38d04783d172 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.9s (total: 16 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 269s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=269.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b999fg4t5c73843dg0
+IBM job d6b999fg4t5c73843dg0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6b999fg4t5c73843dg0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b999fg4t5c73843dg0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 116 ok, 0 failed)
+[ibm_quantum] Usage check: 265s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 138m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/f2f3004c-0442-48b4-9d9c-915be4bbdf3d
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/f2f3004c-0442-48b4-9d9c-915be4bbdf3d status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/f2f3004c-0442-48b4-9d9c-915be4bbdf3d status | state=COMPLETED queue_position=None elapsed_sec=22.8
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/f2f3004c-0442-48b4-9d9c-915be4bbdf3d unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.5s (total: 17 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 265s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=265.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b99i97ce2c73ff4vhg
+IBM job d6b99i97ce2c73ff4vhg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b99i97ce2c73ff4vhg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b99i97ce2c73ff4vhg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 117 ok, 0 failed)
+[ibm_quantum] Usage check: 263s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 138m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/c9518f14-d97b-4962-9d7e-a36bfbdbe06e
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/c9518f14-d97b-4962-9d7e-a36bfbdbe06e status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/c9518f14-d97b-4962-9d7e-a36bfbdbe06e status | state=COMPLETED queue_position=None elapsed_sec=22.8
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/c9518f14-d97b-4962-9d7e-a36bfbdbe06e unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 26.3s (total: 18 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 261s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=261.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b99rh54hss73b7390g
+IBM job d6b99rh54hss73b7390g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b99rh54hss73b7390g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b99rh54hss73b7390g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 118 ok, 0 failed)
+[ibm_quantum] Usage check: 259s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 137m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/e524d024-e871-40f7-a59e-cac080c11d5f
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/e524d024-e871-40f7-a59e-cac080c11d5f status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/e524d024-e871-40f7-a59e-cac080c11d5f status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/e524d024-e871-40f7-a59e-cac080c11d5f unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.3s (total: 19 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 259s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=259.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b9a4vg4t5c73843eng
+IBM job d6b9a4vg4t5c73843eng (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b9a4vg4t5c73843eng (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6b9a4vg4t5c73843eng unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 119 ok, 0 failed)
+[ibm_quantum] Usage check: 255s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 136m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/4f90304a-7f7e-4836-b830-a50de2000637
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/4f90304a-7f7e-4836-b830-a50de2000637 status | state=QUEUED queue_position=3 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/4f90304a-7f7e-4836-b830-a50de2000637 status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/4f90304a-7f7e-4836-b830-a50de2000637 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 25.4s (total: 20 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 255s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=255.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b9ae17ce2c73ff50pg
+IBM job d6b9ae17ce2c73ff50pg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b9ae17ce2c73ff50pg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b9ae17ce2c73ff50pg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 120 ok, 0 failed)
+[ibm_quantum] Usage check: 251s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 136m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/1d179e94-5a0b-40b1-ad82-1df5ebe7bddd
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/1d179e94-5a0b-40b1-ad82-1df5ebe7bddd status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/1d179e94-5a0b-40b1-ad82-1df5ebe7bddd status | state=COMPLETED queue_position=None elapsed_sec=22.7
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/1d179e94-5a0b-40b1-ad82-1df5ebe7bddd unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 26.3s (total: 21 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=64 | IBM budget: 251s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=64 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=251.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6b9ancnsg9c7398o53g
+IBM job d6b9ancnsg9c7398o53g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6b9ancnsg9c7398o53g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6b9ancnsg9c7398o53g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.3s (total: 121 ok, 0 failed)
+[ibm_quantum] Usage check: 249s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=64 | window: 135m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=64
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/d42e3f5e-04cc-4a36-870e-edeb2bf8b93d
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/d42e3f5e-04cc-4a36-870e-edeb2bf8b93d status | state=QUEUED queue_position=1 elapsed_sec=0.5

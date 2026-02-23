@@ -1,0 +1,88 @@
+{
+  "problem": "qap",
+  "method": "vqe",
+  "total_instances": 11,
+  "ok_count": 2,
+  "total_runtime_sec": 13936.892495600041,
+  "results": [
+    {
+      "instance": "chr12a.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 777612.0,
+      "feasible": false,
+      "time_sec": 2981.1610966000007,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_vqe_20260222T090857Z\\chr12a_dat"
+    },
+    {
+      "instance": "chr12b.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 732674.0,
+      "feasible": false,
+      "time_sec": 8653.924101399956,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_vqe_20260222T090857Z\\chr12b_dat"
+    },
+    {
+      "instance": "chr12c.dat",
+      "qubits": 144,
+      "status": "FAILED",
+      "reason": "All QPUs failed at eval=113. Last error: QPU 'ibm_quantum' unavailable: Runtime budget low: 49s < 50s",
+      "time_sec": 2231.508200600045
+    },
+    {
+      "instance": "had12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "nug12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "rou12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "scr12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai10a.dat",
+      "qubits": 100,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai10b.dat",
+      "qubits": 100,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai12a.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai12b.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    }
+  ]
+}

@@ -114,6 +114,12 @@ def _configure_logging(
         "qiskit.transpiler.runningpassmanager",
         "qiskit.transpiler.passmanager",
         "qiskit.compiler.transpiler",
+        "qiskit.passmanager",
+        "qiskit.passmanager.base_tasks",
+        "qiskit.passmanager.flow_controllers",
+        "qiskit.passmanager.passmanager",
+        "qiskit_ibm_runtime.base_primitive",
+        "management.get",
     ):
         logging.getLogger(noisy_logger).setLevel(logging.WARNING)
     return log_path
@@ -517,7 +523,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--layers", type=int, default=3, help="Ansatz entangling depth (reps).")
     parser.add_argument("--entanglement", default="circular", choices=["chain", "circular", "full"])
     parser.add_argument("--shots", type=int, default=1000)
-    parser.add_argument("--maxiter", type=int, default=12)
+    parser.add_argument("--maxiter", type=int, default=200)
     parser.add_argument("--seed", type=int, default=0)
     parser.add_argument("--timeout-sec", type=float, default=None)
     parser.add_argument(
@@ -528,7 +534,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--qubo-penalty", type=float, default=None)
 
-    parser.add_argument("--cvar-alpha", type=float, default=0.2, help="Alpha for CVaR objective.")
+    parser.add_argument("--cvar-alpha", type=float, default=0.25, help="Alpha for CVaR objective.")
     parser.add_argument("--pce-population", type=int, default=8)
     parser.add_argument("--pce-elite-frac", type=float, default=0.25)
     parser.add_argument("--pce-parallel-workers", type=int, default=2)
@@ -561,7 +567,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--min-aws-window-minutes",
         type=float,
-        default=30.0,
+        default=20.0,
         help="Minimum remaining window required for AWS hardware QPUs.",
     )
     parser.add_argument(
@@ -579,7 +585,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--queue-status-seconds",
         type=float,
-        default=120.0,
+        default=180.0,
         help="How often to print queue/status updates while waiting for a submitted job.",
     )
 
@@ -590,6 +596,16 @@ def build_parser() -> argparse.ArgumentParser:
         "--output-root",
         default="research_benchmark/results_hardware",
         help="Output root directory. Results are grouped by problem name.",
+    )
+    parser.add_argument(
+        "--checkpoint-dir",
+        default="checkpoints",
+        help="Directory for per-problem checkpoint JSONs that track completed instances.",
+    )
+    parser.add_argument(
+        "--force-rerun",
+        action="store_true",
+        help="Ignore checkpoints and re-run all instances.",
     )
     parser.add_argument(
         "--log-level",
@@ -606,54 +622,75 @@ def build_parser() -> argparse.ArgumentParser:
     return parser
 
 
-def run(args: argparse.Namespace) -> int:
-    run_start = time.perf_counter()
-    project_root = Path(args.project_root).resolve()
-    problem_type = ProblemType(args.problem)
-    now_utc = datetime.now(timezone.utc)
-    run_stamp = now_utc.strftime("%Y%m%dT%H%M%SZ")
-    output_root = Path(args.output_root).resolve()
-    run_dir = output_root / problem_type.value / f"{problem_type.value}_{args.method}_{run_stamp}"
-    run_dir.mkdir(parents=True, exist_ok=True)
-    log_path = _configure_logging(
-        log_level_name=str(args.log_level),
-        project_root=project_root,
-        run_dir=run_dir,
-        explicit_log_file=args.log_file,
+def _load_checkpoint(checkpoint_path: Path) -> dict[str, Any]:
+    """Load checkpoint JSON for a problem type.
+
+    Returns a dict mapping instance_name -> result summary for completed instances.
+    """
+    if checkpoint_path.is_file():
+        try:
+            data = json.loads(checkpoint_path.read_text(encoding="utf-8"))
+            if isinstance(data, dict):
+                return data
+        except Exception as exc:
+            LOGGER.warning("Failed to load checkpoint %s: %s", checkpoint_path, exc)
+    return {}
+
+
+def _save_checkpoint(
+    checkpoint_path: Path,
+    checkpoint: dict[str, Any],
+) -> None:
+    """Save checkpoint JSON atomically."""
+    checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+    tmp_path = checkpoint_path.with_suffix(".tmp")
+    tmp_path.write_text(
+        json.dumps(to_jsonable(checkpoint), indent=2),
+        encoding="utf-8",
     )
+    tmp_path.replace(checkpoint_path)
+
+
+def _solve_single_instance(
+    *,
+    args: argparse.Namespace,
+    problem: Any,
+    problem_type: ProblemType,
+    instance_path: Path,
+    manager: Any,
+    scheduler_qpus: list[str],
+    run_dir: Path,
+    run_stamp: str,
+    log_path: Path,
+    include_simulators: bool,
+) -> dict[str, Any]:
+    """Solve a single instance and return the result summary."""
+    instance_name = instance_path.name if instance_path else "unknown"
+    instance_start = time.perf_counter()
+
     LOGGER.info(
-        "Run start | problem=%s method=%s mode=%s seed=%s",
-        problem_type.value,
-        args.method,
-        args.execution_mode,
-        args.seed,
+        "\n" + "=" * 70 + "\n  Instance: %s\n" + "=" * 70,
+        instance_name,
     )
 
-    instance_path = _resolve_instance_path(project_root, args.instance)
-    LOGGER.debug(
-        "Resolved paths | project_root=%s requested_instance=%s resolved_instance=%s output_root=%s log_file=%s",
-        project_root,
-        args.instance,
-        instance_path,
-        output_root,
-        log_path,
-    )
+    # --- Detect generated instances (Market Share parameterised grid) ---
+    from .problems.market_share import MarketShareProblem
+    _actual_instance_path: Path | None = instance_path
+    _load_seed = int(args.seed)
+    _load_num_products = int(args.num_products)
 
-    problem = get_problem(problem_type)
-    if instance_path is None:
-        default_instance = problem.default_instance(project_root)
-        if default_instance is not None:
-            instance_path = default_instance.resolve()
-    LOGGER.info("Instance | path=%s", instance_path)
+    if isinstance(problem, MarketShareProblem) and instance_path.suffix == ".gen":
+        parsed = MarketShareProblem.parse_generated_instance_name(instance_path.name)
+        if parsed is not None:
+            _load_seed, _load_num_products = parsed
+        _actual_instance_path = None  # signal generation, not file loading
 
     instance = problem.load_instance(
-        instance_path,
-        seed=int(args.seed),
-        num_products=int(args.num_products),
+        _actual_instance_path,
+        seed=_load_seed,
+        num_products=_load_num_products,
     )
-    LOGGER.debug("Problem instance loaded | problem=%s", problem_type.value)
     model, _ = problem.build_model(instance=instance, time_limit_sec=float(args.model_time_limit))
-    LOGGER.debug("Problem model built | model_time_limit=%.2fs", float(args.model_time_limit))
 
     from_docplex_mp, QuadraticProgramToQubo = _import_qubo_tools()
     qp = from_docplex_mp(model)
@@ -665,145 +702,50 @@ def run(args: argparse.Namespace) -> int:
     qubo = converter.convert(qp)
     num_qubits = int(qubo.get_num_vars())
     LOGGER.info(
-        "Problem size | problem=%s required_qubits=%s",
-        problem_type.value,
-        num_qubits,
+        "  Problem: %s | Instance: %s | Qubits: %d",
+        problem_type.value, instance_name, num_qubits,
     )
-    if instance_path is not None:
-        LOGGER.info("Instance file: %s", instance_path.name if hasattr(instance_path, 'name') else instance_path)
 
     if int(args.max_qubits) > 0 and num_qubits > int(args.max_qubits):
-        raise ValueError(
-            f"QUBO has {num_qubits} variables, larger than --max-qubits={args.max_qubits}. "
-            "Use a smaller instance or raise --max-qubits."
+        LOGGER.warning(
+            "  SKIPPED: %s requires %d qubits, exceeds --max-qubits=%s",
+            instance_name, num_qubits, args.max_qubits,
         )
+        return {
+            "instance": instance_name, "qubits": num_qubits,
+            "status": "SKIPPED", "reason": f"Too many qubits ({num_qubits})",
+        }
 
-    known_qpu_ids = {
-        "rigetti_ankaa3",
-        "iqm_emerald",
-        "iqm_garnet",
-        "amazon_sv1",
-        "ibm_quantum",
-        "local_qiskit",
-    }
-    if args.only_qpu is not None and args.only_qpu not in known_qpu_ids:
-        raise ValueError(f"Unknown --only-qpu '{args.only_qpu}'.")
-    if args.only_qpu is not None and args.qpu_id is not None and args.qpu_id != args.only_qpu:
-        raise ValueError("--qpu-id and --only-qpu conflict. They must match if both are set.")
-
-    only_is_aws = args.only_qpu in {"rigetti_ankaa3", "iqm_emerald", "iqm_garnet", "amazon_sv1"}
-    if bool(args.no_aws) and only_is_aws:
-        raise ValueError("--only-qpu requests an AWS backend but --no-aws is set.")
-    if bool(args.no_ibm) and args.only_qpu == "ibm_quantum":
-        raise ValueError("--only-qpu=ibm_quantum but --no-ibm is set.")
-
-    include_simulators = bool(args.include_simulators)
-    if args.only_qpu in {"local_qiskit", "amazon_sv1"}:
-        include_simulators = True
-
-    LOGGER.debug(
-        "Backend filters | only_qpu=%s no_aws=%s no_ibm=%s include_simulators=%s",
-        args.only_qpu,
-        bool(args.no_aws),
-        bool(args.no_ibm),
-        include_simulators,
-    )
-
-    enabled_qpus = {args.only_qpu} if args.only_qpu is not None else None
-    manager = QuantumHardwareManager(
-        aws_profile=args.aws_profile,
-        ibm_token=args.ibm_token,
-        ibm_instance=args.ibm_instance,
-        use_aws=not bool(args.no_aws),
-        use_ibm=not bool(args.no_ibm),
-        allow_simulators=True,
-        enabled_qpu_ids=enabled_qpus,
-        qiskit_optimization_level=int(args.qiskit_optimization_level),
-    )
-    manager.min_window_remaining_minutes = float(args.min_window_minutes)
-    manager.min_aws_window_remaining_minutes = float(args.min_aws_window_minutes)
-    manager.ibm_min_runtime_seconds = float(args.ibm_min_runtime_seconds)
-    manager.ibm_backend_refresh_interval = float(args.ibm_backend_refresh_seconds)
-    manager.job_status_log_interval = float(args.queue_status_seconds)
-    init_status = manager.initialize()
-    LOGGER.debug("Hardware initialization status: %s", init_status)
-
-    # -- QPU Status Report --
-    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
-    _sgt = _tz(_td(hours=8))
-    _now_sgt = _dt.now(_sgt)
-    print(f"\n  Time (SGT): {_now_sgt.strftime('%Y-%m-%d %H:%M %a')}")
-    ibm_service = manager.sessions.get("ibm_quantum")
-    if ibm_service is not None:
-        from qobench.hardware_manager import _get_ibm_usage_remaining_seconds
-        ibm_remaining = _get_ibm_usage_remaining_seconds(ibm_service)
-        if ibm_remaining is not None:
-            m, s = divmod(int(ibm_remaining), 60)
-            print(f"  IBM Runtime Budget: {m}m {s}s remaining")
-    print()
-    _hdr = f"  {'QPU':<20} {'Status':<12} {'Qubits':>6}  {'Detail'}"
-    print(_hdr)
-    print("  " + "-" * (len(_hdr) - 2))
-    for qid, qpu in manager.qpus.items():
-        if qpu.is_available:
-            status_str = "READY"
-        else:
-            status_str = "OFFLINE"
-        detail = qpu.last_error if qpu.last_error else (qpu.name if qpu.is_available else "")
-        # For available QPUs, show additional info
-        if qpu.is_available and qpu.provider == "ibm" and manager.ibm_backends_preferred:
-            pref = ", ".join(b["name"] for b in manager.ibm_backends_preferred)
-            detail = f"{len(manager.ibm_backends)} backends, preferred: {pref}"
-        print(f"  {qid:<20} {status_str:<12} {qpu.max_qubits:>6}  {detail}")
-    print()
-
-    LOGGER.debug("Hardware status snapshot after init: %s", manager.status_snapshot())
-
+    # Re-check QPU availability for this problem size
     available_qpus = manager.get_available_qpus_for_size(
         num_qubits=num_qubits,
         include_simulators=include_simulators,
     )
+    # Use pre-selected QPUs but filter for this size
+    usable_qpus = [q for q in scheduler_qpus if q in available_qpus]
+    if not usable_qpus:
+        # Try with simulators as fallback
+        available_with_sims = manager.get_available_qpus_for_size(
+            num_qubits=num_qubits, include_simulators=True,
+        )
+        usable_qpus = [q for q in available_with_sims if q in scheduler_qpus] or list(available_with_sims)
 
-    if args.execution_mode == "single":
-        selected_qpu = args.qpu_id or args.only_qpu or (available_qpus[0] if available_qpus else None)
-        if selected_qpu is None:
-            raise RuntimeError(
-                "No QPU available for this problem size. Try --include-simulators or different credentials."
-            )
-        if selected_qpu not in manager.qpus:
-            raise ValueError(f"Unknown --qpu-id '{selected_qpu}'.")
-        qpu_cfg = manager.qpus[selected_qpu]
-        if not qpu_cfg.is_available:
-            raise RuntimeError(f"QPU '{selected_qpu}' is unavailable: {qpu_cfg.last_error}")
-        if qpu_cfg.max_qubits < num_qubits:
-            raise RuntimeError(
-                f"QPU '{selected_qpu}' supports {qpu_cfg.max_qubits} qubits, needs {num_qubits}."
-            )
-        scheduler_qpus = [selected_qpu]
-    else:
-        restricted_qpus = _parse_qpu_list(args.qpus)
-        if args.only_qpu is not None:
-            if restricted_qpus and restricted_qpus != [args.only_qpu]:
-                raise ValueError("--qpus conflicts with --only-qpu. Keep only the same backend.")
-            restricted_qpus = [args.only_qpu]
+    if not usable_qpus:
+        LOGGER.warning(
+            "  SKIPPED: No QPU available for %d-qubit instance %s",
+            num_qubits, instance_name,
+        )
+        return {
+            "instance": instance_name, "qubits": num_qubits,
+            "status": "SKIPPED", "reason": "No QPU available",
+        }
 
-        if restricted_qpus:
-            scheduler_qpus = [qpu_id for qpu_id in available_qpus if qpu_id in restricted_qpus]
-        else:
-            scheduler_qpus = list(available_qpus)
-        if not scheduler_qpus:
-            raise RuntimeError(
-                "No QPUs available for multi mode with current filters. "
-                "Try --include-simulators or relax --qpus."
-            )
-
-    LOGGER.info(
-        "Execution targets | mode=%s qpus=%s",
-        args.execution_mode,
-        scheduler_qpus,
+    scheduler = QpuScheduler(
+        mode=args.execution_mode,
+        qpu_ids=usable_qpus,
+        manager=manager,
+        num_qubits=num_qubits,
     )
-
-    scheduler = QpuScheduler(mode=args.execution_mode, qpu_ids=scheduler_qpus)
     ansatz = build_ansatz_bundle(
         num_qubits=num_qubits,
         layers=int(args.layers),
@@ -812,56 +754,71 @@ def run(args: argparse.Namespace) -> int:
     ansatz_metrics = _collect_ansatz_metrics(ansatz)
     objective = QuboObjective(qubo=qubo)
     LOGGER.info(
-        "Ansatz | reps=%s entanglement=%s parameters=%s depth=%s 2q_gates=%s",
+        "  Ansatz | reps=%s entanglement=%s parameters=%s depth=%s 2q_gates=%s",
         args.layers, args.entanglement,
         ansatz_metrics.get("trainable_parameters"),
         ansatz_metrics.get("depth"),
         ansatz_metrics.get("two_qubit_gates"),
     )
     LOGGER.info(
-        "Optimization start | method=%s objective=%s shots=%s maxiter=%s",
+        "  Optimization | method=%s objective=%s shots=%s maxiter=%s qpus=%s",
         args.method,
-        "expectation" if args.method == "vqe" else ("cvar" if args.method == "cvar_vqe" else "expectation"),
-        args.shots,
-        args.maxiter,
+        "cvar" if args.method == "cvar_vqe" else "expectation",
+        args.shots, args.maxiter, usable_qpus,
+    )
+    LOGGER.info(
+        "  Protocol | shots=%s maxiter=%s timeout=%s repair=one_round_local_swap stopping=fixed_iterations",
+        args.shots, args.maxiter,
+        f"{args.timeout_sec}s" if args.timeout_sec is not None else "none",
     )
 
+    # Create instance-specific output dir
+    inst_dir = run_dir / instance_name.replace(".", "_")
+    inst_dir.mkdir(parents=True, exist_ok=True)
+
     solve_start = time.perf_counter()
-    if args.method in ("vqe", "cvar_vqe"):
-        if int(args.pce_batch_size) > 1:
-            LOGGER.debug("Ignoring --pce-batch-size for method=%s (only used by pce)", args.method)
-        optimization = run_variational_method(
-            method=args.method,
-            manager=manager,
-            scheduler=scheduler,
-            ansatz=ansatz,
-            objective=objective,
-            shots=int(args.shots),
-            maxiter=int(args.maxiter),
-            seed=int(args.seed),
-            cvar_alpha=float(args.cvar_alpha),
-            timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
-        )
-    else:
-        optimization = run_pce_method(
-            manager=manager,
-            scheduler=scheduler,
-            ansatz=ansatz,
-            objective=objective,
-            shots=int(args.shots),
-            maxiter=int(args.maxiter),
-            seed=int(args.seed),
-            population_size=int(args.pce_population),
-            elite_frac=float(args.pce_elite_frac),
-            timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
-            parallel_workers=int(args.pce_parallel_workers),
-            batch_size=int(args.pce_batch_size),
-        )
+    try:
+        if args.method in ("vqe", "cvar_vqe"):
+            optimization = run_variational_method(
+                method=args.method,
+                manager=manager,
+                scheduler=scheduler,
+                ansatz=ansatz,
+                objective=objective,
+                shots=int(args.shots),
+                maxiter=int(args.maxiter),
+                seed=int(args.seed),
+                cvar_alpha=float(args.cvar_alpha),
+                timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
+            )
+        else:
+            optimization = run_pce_method(
+                manager=manager,
+                scheduler=scheduler,
+                ansatz=ansatz,
+                objective=objective,
+                shots=int(args.shots),
+                maxiter=int(args.maxiter),
+                seed=int(args.seed),
+                population_size=int(args.pce_population),
+                elite_frac=float(args.pce_elite_frac),
+                timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
+                parallel_workers=int(args.pce_parallel_workers),
+                batch_size=int(args.pce_batch_size),
+            )
+    except Exception as exc:
+        solve_runtime_sec = float(time.perf_counter() - solve_start)
+        LOGGER.warning("  FAILED: %s after %.1fs - %s", instance_name, solve_runtime_sec, exc)
+        return {
+            "instance": instance_name, "qubits": num_qubits,
+            "status": "FAILED", "reason": str(exc)[:200],
+            "time_sec": solve_runtime_sec,
+        }
+
     solve_runtime_sec = float(time.perf_counter() - solve_start)
     LOGGER.info(
-        "Optimization finished | evaluations=%s status=%s",
-        optimization.total_evaluations,
-        optimization.optimizer_status,
+        "  Optimization finished | evaluations=%s status=%s time=%.1fs",
+        optimization.total_evaluations, optimization.optimizer_status, solve_runtime_sec,
     )
 
     variable_names_in_order = [
@@ -891,53 +848,154 @@ def run(args: argparse.Namespace) -> int:
     final_bitstring = str(local_swap["bitstring"])
     postprocess_improved = bool(local_swap["improved"])
 
+    obj_value = reconstructed.get("objective_value")
+    feasible = reconstructed.get("feasible")
+
     LOGGER.info(
-        "Local swap postprocess | improved=%s candidates_checked=%s",
-        postprocess_improved,
-        local_swap["candidates_checked"],
-    )
-    LOGGER.info(
-        "Final solution | bitstring=%s objective_label=%s objective_value=%s feasible=%s",
-        final_bitstring,
-        reconstructed.get("objective_label"),
-        reconstructed.get("objective_value"),
-        reconstructed.get("feasible"),
+        "  Result | objective=%s feasible=%s postprocess_improved=%s",
+        obj_value, feasible, postprocess_improved,
     )
 
-    (run_dir / "qubo.lp").write_text(qubo.export_as_lp_string(), encoding="utf-8")
-    (run_dir / "trace.jsonl").write_text(serialize_trace(optimization.trace), encoding="utf-8")
-    (run_dir / "best_counts.json").write_text(
+    # --- Collect all job metadata from trace ---
+    all_job_metadata: list[dict[str, Any]] = []
+    all_job_ids: list[str] = []
+    for trace_entry in optimization.trace:
+        meta = trace_entry.get("metadata")
+        if meta:
+            all_job_metadata.append(meta)
+            jid = meta.get("job_id") or meta.get("task_id")
+            if jid:
+                all_job_ids.append(str(jid))
+
+    # --- Calibration snapshot ---
+    try:
+        calibration = manager.get_calibration_snapshot()
+    except Exception:
+        calibration = {}
+
+    # --- Benchmark protocol definition ---
+    benchmark_protocol = {
+        "budget": {
+            "shots_per_circuit": int(args.shots),
+            "max_optimizer_iterations": int(args.maxiter),
+            "total_circuit_evaluations": optimization.total_evaluations,
+            "wall_clock_cap_sec": float(args.timeout_sec) if args.timeout_sec is not None else None,
+            "queue_time_policy": "included_in_wall_clock",
+        },
+        "objective_measured": {
+            "optimizer_objective": optimization.objective_mode,
+            "cvar_alpha": float(args.cvar_alpha) if args.method == "cvar_vqe" else None,
+            "reported_best_sample_energy": optimization.best_energy,
+            "reported_expected_value": optimization.best_value,
+            "post_processed_objective": obj_value,
+            "note": (
+                "optimizer_objective is used to guide parameter updates; "
+                "best_sample_energy is the lowest QUBO energy from any single bitstring; "
+                "post_processed_objective is after local-swap repair"
+            ),
+        },
+        "feasibility_policy": {
+            "repair_allowed": True,
+            "repair_method": "one_round_local_swap",
+            "repair_description": (
+                "After optimization, the best raw bitstring is taken. "
+                "A single round of local bit-flip swap is applied: "
+                "each variable is flipped and the resulting QUBO energy is checked. "
+                "If any flip improves the objective, the best flip is kept."
+            ),
+            "repair_applied": postprocess_improved,
+            "candidates_checked": local_swap["candidates_checked"],
+            "raw_objective_before_repair": raw_reconstructed.get("objective_value"),
+            "raw_feasible_before_repair": raw_reconstructed.get("feasible"),
+        },
+        "stopping_rule": {
+            "type": "fixed_iterations",
+            "max_iterations": int(args.maxiter),
+            "actual_iterations": optimization.total_evaluations,
+            "optimizer_status": optimization.optimizer_status,
+            "optimizer_message": optimization.optimizer_message,
+        },
+    }
+
+    # --- Save artifacts ---
+    (inst_dir / "qubo.lp").write_text(qubo.export_as_lp_string(), encoding="utf-8")
+    (inst_dir / "trace.jsonl").write_text(serialize_trace(optimization.trace), encoding="utf-8")
+    (inst_dir / "best_counts.json").write_text(
         json.dumps(to_jsonable(optimization.best_counts), indent=2),
         encoding="utf-8",
     )
 
+    # --- Build comprehensive result payload ---
     result_payload = {
+        "schema_version": "2.0",
         "run_timestamp_utc": run_stamp,
-        "run_directory": str(run_dir),
+        "run_directory": str(inst_dir),
         "log_file": str(log_path),
         "problem": problem_type.value,
         "instance_path": str(instance_path) if instance_path is not None else None,
-        "method": args.method,
-        "execution_mode": args.execution_mode,
-        "num_qubits": num_qubits,
-        "selected_qpus": scheduler_qpus,
+        "instance_name": instance_name,
+
+        # --- Benchmark Protocol ---
+        "benchmark_protocol": benchmark_protocol,
+
+        # --- Device & Execution Info ---
+        "execution": {
+            "method": args.method,
+            "execution_mode": args.execution_mode,
+            "selected_qpus": usable_qpus,
+            "job_ids": all_job_ids,
+            "total_jobs_dispatched": len(all_job_metadata),
+            "seed": int(args.seed),
+        },
+
+        # --- Circuit Metrics (pre-transpilation) ---
+        "circuit_metrics": {
+            "num_qubits": num_qubits,
+            "ansatz_reps": int(args.layers),
+            "ansatz_entanglement": str(args.entanglement),
+            "trainable_parameters": ansatz_metrics.get("trainable_parameters"),
+            "depth_pretranspile": ansatz_metrics.get("depth"),
+            "one_qubit_gates_pretranspile": ansatz_metrics.get("one_qubit_gates"),
+            "two_qubit_gates_pretranspile": ansatz_metrics.get("two_qubit_gates"),
+            "measurement_count": ansatz_metrics.get("measurement_ops"),
+        },
+
+        # --- Transpiler Settings ---
+        "transpiler_settings": {
+            "qiskit_optimization_level": int(args.qiskit_optimization_level),
+            "routing_method": "preset_passmanager_default",
+            "note": "transpiled circuit metrics available per-job in job_metadata",
+        },
+
+        # --- Device Calibration Snapshot ---
+        "device_calibration": calibration,
+
+        # --- Timing ---
         "timing": {
             "solve_runtime_sec": solve_runtime_sec,
-            "total_runtime_sec": float(time.perf_counter() - run_start),
+            "total_instance_sec": float(time.perf_counter() - instance_start),
         },
-        "ansatz_metrics": ansatz_metrics,
-        "init_status": init_status,
+
+        # --- QPU Status ---
         "qpu_status_snapshot": manager.status_snapshot(),
+
+        # --- Optimizer Result ---
         "optimizer": {
             "status": optimization.optimizer_status,
             "message": optimization.optimizer_message,
             "total_evaluations": optimization.total_evaluations,
             "qpu_usage": optimization.qpu_usage,
         },
+
+        # --- Per-job Metadata ---
+        "job_metadata": all_job_metadata,
+
+        # --- Best Result ---
         "best_result": {
             "optimization_objective_mode": optimization.objective_mode,
             "optimization_objective_value": optimization.best_value,
-            "objective_value": reconstructed.get("objective_value"),
+            "objective_value": obj_value,
+            "feasible": feasible,
             "best_sample_energy": optimization.best_energy,
             "raw_best_bitstring": optimization.best_bitstring,
             "best_bitstring": final_bitstring,
@@ -953,51 +1011,286 @@ def run(args: argparse.Namespace) -> int:
             "reconstructed_problem_objective": reconstructed,
             "active_assignment": assignment,
         },
+
+        # --- Raw Bitstring Counts ---
+        "raw_bitstring_counts": optimization.best_counts,
+
+        # --- Full Config ---
         "config": vars(args),
     }
 
-    (run_dir / "result.json").write_text(
+    (inst_dir / "result.json").write_text(
         json.dumps(to_jsonable(result_payload), indent=2),
         encoding="utf-8",
     )
-    LOGGER.info(
-        "Artifacts | result=%s trace=%s qubo=%s counts=%s",
-        run_dir / "result.json",
-        run_dir / "trace.jsonl",
-        run_dir / "qubo.lp",
-        run_dir / "best_counts.json",
-    )
-    total_runtime_sec = float(time.perf_counter() - run_start)
 
-    print(f"Run directory: {run_dir}")
-    print(f"Log file: {log_path}")
-    print(f"Problem: {problem_type.value}")
-    print(f"Method: {args.method}")
-    print(f"QUBO variables: {num_qubits}")
-    print(f"QPU mode: {args.execution_mode}")
-    print(f"QPUs used: {scheduler_qpus}")
-    print(f"Total solve time (s): {solve_runtime_sec:.3f}")
-    print(f"Total runtime (s): {total_runtime_sec:.3f}")
-    print(f"Circuit qubits: {ansatz_metrics['num_qubits']}")
-    print(f"Trainable parameters: {ansatz_metrics['trainable_parameters']}")
-    print(f"Circuit depth: {ansatz_metrics['depth']}")
-    print(f"One-qubit gates: {ansatz_metrics['one_qubit_gates']}")
-    print(f"Two-qubit gates: {ansatz_metrics['two_qubit_gates']}")
-    reconstructed_value = reconstructed.get("objective_value")
-    try:
-        reconstructed_value_str = f"{float(reconstructed_value):.6f}"
-    except Exception:
-        reconstructed_value_str = str(reconstructed_value)
-    print(
-        f"Reconstructed objective ({reconstructed.get('objective_label')}): {reconstructed_value_str}"
+    return {
+        "instance": instance_name,
+        "qubits": num_qubits,
+        "status": "OK",
+        "objective": obj_value,
+        "feasible": feasible,
+        "time_sec": solve_runtime_sec,
+        "qpus": usable_qpus,
+        "result_dir": str(inst_dir),
+    }
+
+
+def run(args: argparse.Namespace) -> int:
+    run_start = time.perf_counter()
+    project_root = Path(args.project_root).resolve()
+    problem_type = ProblemType(args.problem)
+    now_utc = datetime.now(timezone.utc)
+    run_stamp = now_utc.strftime("%Y%m%dT%H%M%SZ")
+    output_root = Path(args.output_root).resolve()
+    run_dir = output_root / problem_type.value / f"{problem_type.value}_{args.method}_{run_stamp}"
+    run_dir.mkdir(parents=True, exist_ok=True)
+    log_path = _configure_logging(
+        log_level_name=str(args.log_level),
+        project_root=project_root,
+        run_dir=run_dir,
+        explicit_log_file=args.log_file,
     )
-    print(f"Reconstructed feasible: {reconstructed.get('feasible')}")
-    print(f"Final bitstring: {final_bitstring}")
-    print(
-        "Local swap postprocess: "
-        f"improved={postprocess_improved} candidates_checked={local_swap['candidates_checked']}"
+    LOGGER.info(
+        "Run start | problem=%s method=%s mode=%s seed=%s",
+        problem_type.value,
+        args.method,
+        args.execution_mode,
+        args.seed,
     )
-    print(f"Artifacts: {run_dir / 'result.json'}")
+
+    problem = get_problem(problem_type)
+
+    # --- Discover instances ---
+    if args.instance is not None:
+        # Single instance specified via CLI
+        instance_path = _resolve_instance_path(project_root, args.instance)
+        if instance_path is None:
+            raise FileNotFoundError(f"Instance not found: {args.instance}")
+        instance_paths = [instance_path]
+    else:
+        # Discover ALL instances from the problem's default folder
+        instance_paths = problem.list_instances(project_root)
+        if not instance_paths:
+            # Fallback to default single instance
+            default = problem.default_instance(project_root)
+            if default is not None:
+                instance_paths = [default.resolve()]
+            else:
+                raise FileNotFoundError(
+                    f"No instances found for {problem_type.value}. "
+                    "Specify --instance or check project_root."
+                )
+
+    LOGGER.info(
+        "Instances discovered | problem=%s count=%d",
+        problem_type.value, len(instance_paths),
+    )
+    for ip in instance_paths:
+        LOGGER.info("  - %s", ip.name)
+
+    # --- Initialize hardware (once for all instances) ---
+    known_qpu_ids = {
+        "rigetti_ankaa3",
+        "iqm_emerald",
+        "iqm_garnet",
+        "amazon_sv1",
+        "ibm_quantum",
+        "local_qiskit",
+    }
+    if args.only_qpu is not None and args.only_qpu not in known_qpu_ids:
+        raise ValueError(f"Unknown --only-qpu '{args.only_qpu}'.")
+    if args.only_qpu is not None and args.qpu_id is not None and args.qpu_id != args.only_qpu:
+        raise ValueError("--qpu-id and --only-qpu conflict. They must match if both are set.")
+
+    only_is_aws = args.only_qpu in {"rigetti_ankaa3", "iqm_emerald", "iqm_garnet", "amazon_sv1"}
+    if bool(args.no_aws) and only_is_aws:
+        raise ValueError("--only-qpu requests an AWS backend but --no-aws is set.")
+    if bool(args.no_ibm) and args.only_qpu == "ibm_quantum":
+        raise ValueError("--only-qpu=ibm_quantum but --no-ibm is set.")
+
+    include_simulators = bool(args.include_simulators)
+    if args.only_qpu in {"local_qiskit", "amazon_sv1"}:
+        include_simulators = True
+
+    enabled_qpus = {args.only_qpu} if args.only_qpu is not None else None
+    manager = QuantumHardwareManager(
+        aws_profile=args.aws_profile,
+        ibm_token=args.ibm_token,
+        ibm_instance=args.ibm_instance,
+        use_aws=not bool(args.no_aws),
+        use_ibm=not bool(args.no_ibm),
+        allow_simulators=True,
+        enabled_qpu_ids=enabled_qpus,
+        qiskit_optimization_level=int(args.qiskit_optimization_level),
+    )
+    manager.min_window_remaining_minutes = float(args.min_window_minutes)
+    manager.min_aws_window_remaining_minutes = float(args.min_aws_window_minutes)
+    manager.ibm_min_runtime_seconds = float(args.ibm_min_runtime_seconds)
+    manager.ibm_backend_refresh_interval = float(args.ibm_backend_refresh_seconds)
+    manager.job_status_log_interval = float(args.queue_status_seconds)
+    init_status = manager.initialize()
+
+    # -- QPU Status Report --
+    from datetime import datetime as _dt, timezone as _tz, timedelta as _td
+    _sgt = _tz(_td(hours=8))
+    _now_sgt = _dt.now(_sgt)
+    print(f"\n  Time (SGT): {_now_sgt.strftime('%Y-%m-%d %H:%M %a')}")
+    ibm_service = manager.sessions.get("ibm_quantum")
+    if ibm_service is not None:
+        from qobench.hardware_manager import _get_ibm_usage_remaining_seconds
+        ibm_remaining = _get_ibm_usage_remaining_seconds(ibm_service)
+        if ibm_remaining is not None:
+            m, s = divmod(int(ibm_remaining), 60)
+            print(f"  IBM Runtime Budget: {m}m {s}s remaining")
+    print()
+    _hdr = f"  {'QPU':<20} {'Status':<12} {'Qubits':>6}  {'Detail'}"
+    print(_hdr)
+    print("  " + "-" * (len(_hdr) - 2))
+    for qid, qpu in manager.qpus.items():
+        if qpu.is_available:
+            status_str = "READY"
+        else:
+            status_str = "OFFLINE"
+        detail = qpu.last_error if qpu.last_error else (qpu.name if qpu.is_available else "")
+        if qpu.is_available and qpu.provider == "ibm" and manager.ibm_backends_preferred:
+            pref = ", ".join(b["name"] for b in manager.ibm_backends_preferred)
+            detail = f"{len(manager.ibm_backends)} backends, preferred: {pref}"
+        print(f"  {qid:<20} {status_str:<12} {qpu.max_qubits:>6}  {detail}")
+    print()
+
+    # Determine scheduler QPUs (use largest instance to seed the initial list)
+    if args.execution_mode == "single":
+        selected_qpu = args.qpu_id or args.only_qpu
+        if selected_qpu is None:
+            # Pick first available hardware QPU
+            avail = manager.get_available_qpus_for_size(num_qubits=0, include_simulators=include_simulators)
+            selected_qpu = avail[0] if avail else None
+        if selected_qpu is None:
+            raise RuntimeError("No QPU available. Try --include-simulators or different credentials.")
+        scheduler_qpus = [selected_qpu]
+    else:
+        restricted_qpus = _parse_qpu_list(args.qpus)
+        if args.only_qpu is not None:
+            restricted_qpus = [args.only_qpu]
+        avail = manager.get_available_qpus_for_size(num_qubits=0, include_simulators=include_simulators)
+        if restricted_qpus:
+            scheduler_qpus = [q for q in avail if q in restricted_qpus]
+        else:
+            scheduler_qpus = list(avail)
+        if not scheduler_qpus:
+            raise RuntimeError("No QPUs available. Try --include-simulators or relax --qpus.")
+
+    LOGGER.info(
+        "Execution plan | mode=%s qpus=%s instances=%d",
+        args.execution_mode, scheduler_qpus, len(instance_paths),
+    )
+
+    # --- Checkpoint setup ---
+    checkpoint_dir = Path(args.checkpoint_dir).resolve()
+    checkpoint_path = checkpoint_dir / f"{problem_type.value}.json"
+    checkpoint: dict[str, Any] = {}
+    if not bool(getattr(args, "force_rerun", False)):
+        checkpoint = _load_checkpoint(checkpoint_path)
+        if checkpoint:
+            LOGGER.info(
+                "Checkpoint loaded | %d completed instances for %s",
+                len(checkpoint), problem_type.value,
+            )
+
+    # --- Solve each instance ---
+    results: list[dict[str, Any]] = []
+    for idx, inst_path in enumerate(instance_paths, 1):
+        inst_name = inst_path.name
+
+        # Check if instance is already completed in checkpoint
+        if inst_name in checkpoint and not bool(getattr(args, "force_rerun", False)):
+            prev = checkpoint[inst_name]
+            LOGGER.info(
+                "\n[%d/%d] SKIPPING (already completed): %s  [obj=%s, feasible=%s]",
+                idx, len(instance_paths), inst_name,
+                prev.get("objective", "?"), prev.get("feasible", "?"),
+            )
+            results.append(prev)
+            continue
+
+        LOGGER.info(
+            "\n[%d/%d] Starting instance: %s",
+            idx, len(instance_paths), inst_name,
+        )
+        result = _solve_single_instance(
+            args=args,
+            problem=problem,
+            problem_type=problem_type,
+            instance_path=inst_path,
+            manager=manager,
+            scheduler_qpus=scheduler_qpus,
+            run_dir=run_dir,
+            run_stamp=run_stamp,
+            log_path=log_path,
+            include_simulators=include_simulators,
+        )
+        results.append(result)
+
+        # Save to checkpoint if instance completed successfully
+        if result.get("status") == "OK":
+            checkpoint[inst_name] = result
+            _save_checkpoint(checkpoint_path, checkpoint)
+            LOGGER.info(
+                "  Checkpoint saved | %s -> %s",
+                inst_name, checkpoint_path,
+            )
+
+    # --- Summary ---
+    total_runtime_sec = float(time.perf_counter() - run_start)
+    LOGGER.info("\n" + "=" * 70)
+    LOGGER.info("  BENCHMARK SUMMARY | %s %s", problem_type.value.upper(), args.method)
+    LOGGER.info("=" * 70)
+    hdr = f"  {'Instance':<18} {'Qubits':>6} {'Status':<8} {'Objective':>12} {'Feasible':>8} {'Time(s)':>8}"
+    LOGGER.info(hdr)
+    LOGGER.info("  " + "-" * (len(hdr) - 2))
+    ok_count = 0
+    for r in results:
+        status = r.get("status", "?")
+        obj = r.get("objective", "")
+        feas = r.get("feasible", "")
+        t = r.get("time_sec", 0)
+        if status == "OK":
+            ok_count += 1
+            try:
+                obj_str = f"{float(obj):.1f}"
+            except Exception:
+                obj_str = str(obj)
+            LOGGER.info(
+                "  %-18s %6d %-8s %12s %8s %8.1f",
+                r["instance"], r["qubits"], status, obj_str, feas, t,
+            )
+        else:
+            LOGGER.info(
+                "  %-18s %6d %-8s %12s %8s %8.1f",
+                r["instance"], r.get("qubits", 0), status,
+                r.get("reason", "")[:12], "", t if t else 0,
+            )
+    LOGGER.info("  " + "-" * (len(hdr) - 2))
+    LOGGER.info(
+        "  Total: %d instances | %d OK | %.1fs total runtime",
+        len(results), ok_count, total_runtime_sec,
+    )
+    LOGGER.info("  Results: %s", run_dir)
+
+    # Save combined summary
+    summary = {
+        "problem": problem_type.value,
+        "method": args.method,
+        "total_instances": len(results),
+        "ok_count": ok_count,
+        "total_runtime_sec": total_runtime_sec,
+        "results": results,
+    }
+    (run_dir / "summary.json").write_text(
+        json.dumps(to_jsonable(summary), indent=2), encoding="utf-8",
+    )
+
     return 0
 
 

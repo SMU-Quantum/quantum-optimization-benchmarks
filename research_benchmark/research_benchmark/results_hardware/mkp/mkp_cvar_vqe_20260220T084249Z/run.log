@@ -1,0 +1,85 @@
+Run start | problem=mkp method=cvar_vqe mode=multi seed=0
+Instances discovered | problem=mkp count=12
+  - hp1.dat
+  - hp2.dat
+  - pb1.dat
+  - pb2.dat
+  - pb4.dat
+  - pb5.dat
+  - pet2.dat
+  - pet3.dat
+  - pet4.dat
+  - pet5.dat
+  - pet6.dat
+  - pet7.dat
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 0m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready - IQM Emerald (54 qubits, window: 468m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 408m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 600s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=1826), ibm_marrakesh(156q, pending=0), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_marrakesh, ibm_torino
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 600s remaining (threshold: 50s)
+QPUs skipped for 0-qubit problem:
+  rigetti_ankaa3: outside availability window
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['iqm_emerald', 'iqm_garnet', 'ibm_quantum']
+Execution plan | mode=multi qpus=['iqm_emerald', 'iqm_garnet', 'ibm_quantum'] instances=12
+Checkpoint loaded | 4 completed instances for mkp
+
+[1/12] SKIPPING (already completed): hp1.dat  [obj=2261.0, feasible=True]
+
+[2/12] SKIPPING (already completed): hp2.dat  [obj=2680.0, feasible=True]
+
+[3/12] SKIPPING (already completed): pb1.dat  [obj=2630.0, feasible=True]
+
+[4/12] SKIPPING (already completed): pb2.dat  [obj=2806.0, feasible=True]
+
+[5/12] Starting instance: pb4.dat
+
+======================================================================
+  Instance: pb4.dat
+======================================================================
+  Problem: mkp | Instance: pb4.dat | Qubits: 45
+QPUs skipped for 45-qubit problem:
+  rigetti_ankaa3: outside availability window
+  iqm_garnet: too few qubits (20 < 45)
+  amazon_sv1: too few qubits (34 < 45)
+  local_qiskit: too few qubits (28 < 45)
+QPUs selected: ['iqm_emerald', 'ibm_quantum']
+  Ansatz | reps=3 entanglement=circular parameters=180 depth=140 2q_gates=135
+  Optimization | method=cvar_vqe objective=cvar shots=1000 maxiter=200 qpus=['iqm_emerald', 'ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> iqm_emerald | shots=1000 qubits=45 | window: 467m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=45
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/fa638433-4b3b-46b7-9a7a-82b69942ff4d
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/fa638433-4b3b-46b7-9a7a-82b69942ff4d status | state=QUEUED queue_position=1 elapsed_sec=0.7
+Task is in terminal state FAILED and no result is available.
+Task failure reason is: Issue encountered on device - try submitting the task again..
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/fa638433-4b3b-46b7-9a7a-82b69942ff4d status | state=FAILED queue_position=None elapsed_sec=6.7
+Quantum job failed | qpu_id=iqm_emerald provider=braket_iqm_emerald elapsed_sec=9.946 error=AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/fa638433-4b3b-46b7-9a7a-82b69942ff4d ended in terminal state 'FAILED'
+Traceback (most recent call last):
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 1813, in run_counts
+    counts, metadata = self._run_braket_counts(
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 1242, in _run_braket_counts
+    self._wait_for_terminal_status(
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 447, in _wait_for_terminal_status
+    raise RuntimeError(f"{label} ended in terminal state '{state}'")
+RuntimeError: AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/fa638433-4b3b-46b7-9a7a-82b69942ff4d ended in terminal state 'FAILED'
+QPU 'iqm_emerald' failed at eval=1 (attempt 1/2): AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/fa638433-4b3b-46b7-9a7a-82b69942ff4d ended in terminal state 'FAILED'  Trying next QPU...
+Dispatching job -> ibm_quantum | shots=1000 qubits=45 | IBM budget: 600s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=45 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=600.0 shots=1000

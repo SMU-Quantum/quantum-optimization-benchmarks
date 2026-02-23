@@ -1,0 +1,629 @@
+Run start | problem=mis method=cvar_vqe mode=multi seed=0
+Instances discovered | problem=mis count=7
+  - 1dc.128.txt
+  - 1dc.64.txt
+  - 1et.64.txt
+  - 1tc.16.txt
+  - 1tc.32.txt
+  - 1tc.64.txt
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 0m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready - IQM Emerald (54 qubits, window: 541m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 481m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 600s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=1795), ibm_marrakesh(156q, pending=0), ibm_torino(133q, pending=3)
+[ibm_quantum] Preferred (least busy): ibm_marrakesh, ibm_torino
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 600s remaining (threshold: 50s)
+QPUs skipped for 0-qubit problem:
+  rigetti_ankaa3: outside availability window
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['iqm_emerald', 'iqm_garnet', 'ibm_quantum']
+Execution plan | mode=multi qpus=['iqm_emerald', 'iqm_garnet', 'ibm_quantum'] instances=7
+Checkpoint loaded | 4 completed instances for mis
+
+[1/7] SKIPPING (already completed): 1dc.128.txt  [obj=41.0, feasible=False]
+
+[2/7] SKIPPING (already completed): 1dc.64.txt  [obj=18.0, feasible=False]
+
+[3/7] SKIPPING (already completed): 1et.64.txt  [obj=19.0, feasible=False]
+
+[4/7] Starting instance: 1tc.16.txt
+
+======================================================================
+  Instance: 1tc.16.txt
+======================================================================
+  Problem: mis | Instance: 1tc.16.txt | Qubits: 16
+QPUs skipped for 16-qubit problem:
+  rigetti_ankaa3: outside availability window
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['iqm_emerald', 'iqm_garnet', 'ibm_quantum']
+  Ansatz | reps=3 entanglement=circular parameters=64 depth=53 2q_gates=48
+  Optimization | method=cvar_vqe objective=cvar shots=1000 maxiter=200 qpus=['iqm_emerald', 'iqm_garnet', 'ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 541m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/aaece00e-6adf-40ec-8d22-f3599c95f9ab
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/aaece00e-6adf-40ec-8d22-f3599c95f9ab status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/aaece00e-6adf-40ec-8d22-f3599c95f9ab status | state=COMPLETED queue_position=None elapsed_sec=12.5
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/aaece00e-6adf-40ec-8d22-f3599c95f9ab unique_bitstrings=963
+Job completed on iqm_emerald in 18.8s (total: 1 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 481m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/e096cbc4-4c5b-4107-a891-638ac04530b9
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/e096cbc4-4c5b-4107-a891-638ac04530b9 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/e096cbc4-4c5b-4107-a891-638ac04530b9 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/e096cbc4-4c5b-4107-a891-638ac04530b9 unique_bitstrings=949
+Job completed on iqm_garnet in 17.9s (total: 1 ok, 0 failed)
+[ibm_quantum] Usage check: 598s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 598s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=1
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=1 runtime_remaining_sec=598.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0qup7ce2c73ffvkd0
+IBM job d6c0qup7ce2c73ffvkd0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0qup7ce2c73ffvkd0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=54.1
+IBM job completed | backend=ibm_marrakesh job_id=d6c0qup7ce2c73ffvkd0 unique_bitstrings=942
+Job completed on ibm_quantum in 57.3s (total: 1 ok, 0 failed)
+QPU 'rigetti_ankaa3' window closed — marking OFFLINE: Availability window closed (0m remaining)
+[ibm_quantum] Usage check: 594s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 540m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/92f54329-a41b-4fee-8239-1e86deca70d1
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/92f54329-a41b-4fee-8239-1e86deca70d1 status | state=QUEUED queue_position=2 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/92f54329-a41b-4fee-8239-1e86deca70d1 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/92f54329-a41b-4fee-8239-1e86deca70d1 unique_bitstrings=958
+Job completed on iqm_emerald in 15.1s (total: 2 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 479m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/2562d406-3ec8-4047-bec8-50ea9975eac9
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/2562d406-3ec8-4047-bec8-50ea9975eac9 status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/2562d406-3ec8-4047-bec8-50ea9975eac9 status | state=COMPLETED queue_position=None elapsed_sec=6.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/2562d406-3ec8-4047-bec8-50ea9975eac9 unique_bitstrings=947
+Job completed on iqm_garnet in 9.1s (total: 2 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 594s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=1
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=1 runtime_remaining_sec=594.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c0rjsnsg9c7399ivs0
+IBM job d6c0rjsnsg9c7399ivs0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0rjsnsg9c7399ivs0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.1
+IBM job completed | backend=ibm_torino job_id=d6c0rjsnsg9c7399ivs0 unique_bitstrings=979
+Job completed on ibm_quantum in 14.1s (total: 2 ok, 0 failed)
+[ibm_quantum] Usage check: 590s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 539m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/50fd2317-d909-4595-a704-a3972d986b6e
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/50fd2317-d909-4595-a704-a3972d986b6e status | state=QUEUED queue_position=2 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/50fd2317-d909-4595-a704-a3972d986b6e status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/50fd2317-d909-4595-a704-a3972d986b6e unique_bitstrings=958
+Job completed on iqm_emerald in 14.6s (total: 3 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 479m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/772e5371-c534-419f-9f2a-ab7bcfd16318
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/772e5371-c534-419f-9f2a-ab7bcfd16318 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/772e5371-c534-419f-9f2a-ab7bcfd16318 status | state=COMPLETED queue_position=None elapsed_sec=13.0
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/772e5371-c534-419f-9f2a-ab7bcfd16318 unique_bitstrings=945
+Job completed on iqm_garnet in 15.1s (total: 3 ok, 0 failed)
+[ibm_quantum] Usage check: 588s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 588s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=588.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0rv954hss73b7uab0
+IBM job d6c0rv954hss73b7uab0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0rv954hss73b7uab0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_marrakesh job_id=d6c0rv954hss73b7uab0 unique_bitstrings=968
+Job completed on ibm_quantum in 13.8s (total: 3 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 538m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/e3438ac0-eb93-4263-af28-b9c8aaaaae1d
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/e3438ac0-eb93-4263-af28-b9c8aaaaae1d status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/e3438ac0-eb93-4263-af28-b9c8aaaaae1d status | state=COMPLETED queue_position=None elapsed_sec=12.5
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/e3438ac0-eb93-4263-af28-b9c8aaaaae1d unique_bitstrings=954
+Job completed on iqm_emerald in 15.5s (total: 4 ok, 0 failed)
+[ibm_quantum] Usage check: 584s remaining (threshold: 50s)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 478m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/8d6c66f1-d886-422f-bf50-cb8a0b803ea1
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/8d6c66f1-d886-422f-bf50-cb8a0b803ea1 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/8d6c66f1-d886-422f-bf50-cb8a0b803ea1 status | state=COMPLETED queue_position=None elapsed_sec=6.8
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/8d6c66f1-d886-422f-bf50-cb8a0b803ea1 unique_bitstrings=959
+Job completed on iqm_garnet in 9.4s (total: 4 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 584s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=584.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0s9vg4t5c7384u6t0
+IBM job d6c0s9vg4t5c7384u6t0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0s9vg4t5c7384u6t0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6c0s9vg4t5c7384u6t0 unique_bitstrings=982
+Job completed on ibm_quantum in 8.7s (total: 4 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 537m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/4adecd25-ad8e-4d9b-b496-0a47f5d7246b
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/4adecd25-ad8e-4d9b-b496-0a47f5d7246b status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/4adecd25-ad8e-4d9b-b496-0a47f5d7246b status | state=COMPLETED queue_position=None elapsed_sec=12.9
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/4adecd25-ad8e-4d9b-b496-0a47f5d7246b unique_bitstrings=967
+Job completed on iqm_emerald in 15.0s (total: 5 ok, 0 failed)
+[ibm_quantum] Usage check: 582s remaining (threshold: 50s)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 477m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/ddbb977b-e907-4a3d-83f6-dd9aa40f8fd6
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/ddbb977b-e907-4a3d-83f6-dd9aa40f8fd6 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/ddbb977b-e907-4a3d-83f6-dd9aa40f8fd6 status | state=COMPLETED queue_position=None elapsed_sec=6.8
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/ddbb977b-e907-4a3d-83f6-dd9aa40f8fd6 unique_bitstrings=942
+Job completed on iqm_garnet in 9.2s (total: 5 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 582s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=582.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c0sing4t5c7384u78g
+IBM job d6c0sing4t5c7384u78g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6c0sing4t5c7384u78g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=11.1
+IBM job completed | backend=ibm_torino job_id=d6c0sing4t5c7384u78g unique_bitstrings=984
+Job completed on ibm_quantum in 14.1s (total: 5 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 537m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/7733f6d5-9103-4f2f-9a07-549ad69df30a
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/7733f6d5-9103-4f2f-9a07-549ad69df30a status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/7733f6d5-9103-4f2f-9a07-549ad69df30a status | state=COMPLETED queue_position=None elapsed_sec=12.5
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/7733f6d5-9103-4f2f-9a07-549ad69df30a unique_bitstrings=949
+Job completed on iqm_emerald in 14.9s (total: 6 ok, 0 failed)
+[ibm_quantum] Usage check: 580s remaining (threshold: 50s)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 477m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/2f60ed8a-ed1e-4a46-b8f3-9b6cf5d1cb84
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/2f60ed8a-ed1e-4a46-b8f3-9b6cf5d1cb84 status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/2f60ed8a-ed1e-4a46-b8f3-9b6cf5d1cb84 status | state=COMPLETED queue_position=None elapsed_sec=13.0
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/2f60ed8a-ed1e-4a46-b8f3-9b6cf5d1cb84 unique_bitstrings=968
+Job completed on iqm_garnet in 15.1s (total: 6 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 580s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=580.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0su97ce2c73ffvmtg
+IBM job d6c0su97ce2c73ffvmtg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0su97ce2c73ffvmtg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=27.0
+IBM job completed | backend=ibm_marrakesh job_id=d6c0su97ce2c73ffvmtg unique_bitstrings=968
+Job completed on ibm_quantum in 29.6s (total: 6 ok, 0 failed)
+[ibm_quantum] Usage check: 572s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 536m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bd09117e-7ca4-480f-b455-d3e3b2720bdf
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bd09117e-7ca4-480f-b455-d3e3b2720bdf status | state=QUEUED queue_position=2 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bd09117e-7ca4-480f-b455-d3e3b2720bdf status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bd09117e-7ca4-480f-b455-d3e3b2720bdf unique_bitstrings=960
+Job completed on iqm_emerald in 14.7s (total: 7 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 475m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/129c9cde-b769-4f25-8416-bb217f4b6777
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/129c9cde-b769-4f25-8416-bb217f4b6777 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/129c9cde-b769-4f25-8416-bb217f4b6777 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/129c9cde-b769-4f25-8416-bb217f4b6777 unique_bitstrings=945
+Job completed on iqm_garnet in 14.9s (total: 7 ok, 0 failed)
+[ibm_quantum] Usage check: 570s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 570s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=570.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c0tdsnsg9c7399j23g
+IBM job d6c0tdsnsg9c7399j23g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0tdsnsg9c7399j23g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6c0tdsnsg9c7399j23g unique_bitstrings=978
+Job completed on ibm_quantum in 9.0s (total: 7 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 535m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/15342c1d-d24f-4bea-906c-3a04414bfee2
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/15342c1d-d24f-4bea-906c-3a04414bfee2 status | state=QUEUED queue_position=2 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/15342c1d-d24f-4bea-906c-3a04414bfee2 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/15342c1d-d24f-4bea-906c-3a04414bfee2 unique_bitstrings=954
+Job completed on iqm_emerald in 15.5s (total: 8 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 475m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/123abed9-1b19-43f2-bf25-3b632f15c2cc
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/123abed9-1b19-43f2-bf25-3b632f15c2cc status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/123abed9-1b19-43f2-bf25-3b632f15c2cc status | state=COMPLETED queue_position=None elapsed_sec=12.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/123abed9-1b19-43f2-bf25-3b632f15c2cc unique_bitstrings=964
+Job completed on iqm_garnet in 15.2s (total: 8 ok, 0 failed)
+[ibm_quantum] Usage check: 568s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 568s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=565.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0to954hss73b7ucfg
+IBM job d6c0to954hss73b7ucfg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0to954hss73b7ucfg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6c0to954hss73b7ucfg unique_bitstrings=969
+Job completed on ibm_quantum in 8.9s (total: 8 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 534m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/dc471348-7a62-4eef-9a10-de650fb2b3e0
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/dc471348-7a62-4eef-9a10-de650fb2b3e0 status | state=QUEUED queue_position=2 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/dc471348-7a62-4eef-9a10-de650fb2b3e0 status | state=COMPLETED queue_position=None elapsed_sec=12.4
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/dc471348-7a62-4eef-9a10-de650fb2b3e0 unique_bitstrings=957
+Job completed on iqm_emerald in 14.7s (total: 9 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 474m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/04b9eeee-adb1-47bd-8ae7-758b505dd6b4
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/04b9eeee-adb1-47bd-8ae7-758b505dd6b4 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/04b9eeee-adb1-47bd-8ae7-758b505dd6b4 status | state=COMPLETED queue_position=None elapsed_sec=6.7
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/04b9eeee-adb1-47bd-8ae7-758b505dd6b4 unique_bitstrings=946
+Job completed on iqm_garnet in 9.4s (total: 9 ok, 0 failed)
+[ibm_quantum] Usage check: 563s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 563s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=563.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0u14nsg9c7399j2rg
+IBM job d6c0u14nsg9c7399j2rg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0u14nsg9c7399j2rg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6c0u14nsg9c7399j2rg unique_bitstrings=976
+Job completed on ibm_quantum in 8.3s (total: 9 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 534m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/609ce12f-1aa7-4f4b-9bb8-0540bf0074db
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/609ce12f-1aa7-4f4b-9bb8-0540bf0074db status | state=QUEUED queue_position=2 elapsed_sec=0.6
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/609ce12f-1aa7-4f4b-9bb8-0540bf0074db status | state=COMPLETED queue_position=None elapsed_sec=12.4
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/609ce12f-1aa7-4f4b-9bb8-0540bf0074db unique_bitstrings=963
+Job completed on iqm_emerald in 14.5s (total: 10 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 474m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bf3e83c0-9aac-4c5e-8fc0-8f86fa5a7241
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bf3e83c0-9aac-4c5e-8fc0-8f86fa5a7241 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bf3e83c0-9aac-4c5e-8fc0-8f86fa5a7241 status | state=COMPLETED queue_position=None elapsed_sec=6.8
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bf3e83c0-9aac-4c5e-8fc0-8f86fa5a7241 unique_bitstrings=944
+Job completed on iqm_garnet in 9.3s (total: 10 ok, 0 failed)
+[ibm_quantum] Usage check: 559s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 559s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=559.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c0u9snsg9c7399j370
+IBM job d6c0u9snsg9c7399j370 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0u9snsg9c7399j370 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6c0u9snsg9c7399j370 unique_bitstrings=987
+Job completed on ibm_quantum in 8.6s (total: 10 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 533m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/1c6e7b22-ef1a-4503-9009-8af75cbff092
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/1c6e7b22-ef1a-4503-9009-8af75cbff092 status | state=QUEUED queue_position=2 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/1c6e7b22-ef1a-4503-9009-8af75cbff092 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/1c6e7b22-ef1a-4503-9009-8af75cbff092 unique_bitstrings=956
+Job completed on iqm_emerald in 14.7s (total: 11 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 473m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/4f886567-030d-4502-9346-9b6f5ac935f7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/4f886567-030d-4502-9346-9b6f5ac935f7 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/4f886567-030d-4502-9346-9b6f5ac935f7 status | state=COMPLETED queue_position=None elapsed_sec=6.8
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/4f886567-030d-4502-9346-9b6f5ac935f7 unique_bitstrings=943
+Job completed on iqm_garnet in 9.2s (total: 11 ok, 0 failed)
+[ibm_quantum] Usage check: 555s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 555s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=555.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0ui954hss73b7udgg
+IBM job d6c0ui954hss73b7udgg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0ui954hss73b7udgg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6c0ui954hss73b7udgg unique_bitstrings=968
+Job completed on ibm_quantum in 8.6s (total: 11 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 533m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/cc78c0f9-4455-4180-9205-cf18820a53e1
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/cc78c0f9-4455-4180-9205-cf18820a53e1 status | state=QUEUED queue_position=2 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/cc78c0f9-4455-4180-9205-cf18820a53e1 status | state=COMPLETED queue_position=None elapsed_sec=12.5
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/cc78c0f9-4455-4180-9205-cf18820a53e1 unique_bitstrings=963
+Job completed on iqm_emerald in 14.7s (total: 12 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 472m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/ef3714e4-5fa3-4294-bba8-5fa6bf0c218c
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/ef3714e4-5fa3-4294-bba8-5fa6bf0c218c status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/ef3714e4-5fa3-4294-bba8-5fa6bf0c218c status | state=COMPLETED queue_position=None elapsed_sec=13.0
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/ef3714e4-5fa3-4294-bba8-5fa6bf0c218c unique_bitstrings=959
+Job completed on iqm_garnet in 15.5s (total: 12 ok, 0 failed)
+[ibm_quantum] Usage check: 551s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 551s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=549.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0ush7ce2c73ffvpag
+IBM job d6c0ush7ce2c73ffvpag (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0ush7ce2c73ffvpag (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6c0ush7ce2c73ffvpag unique_bitstrings=962
+Job completed on ibm_quantum in 8.4s (total: 12 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 532m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/76e85427-87b0-4915-8fa4-d0a5a9be8a6a
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/76e85427-87b0-4915-8fa4-d0a5a9be8a6a status | state=QUEUED queue_position=2 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/76e85427-87b0-4915-8fa4-d0a5a9be8a6a status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/76e85427-87b0-4915-8fa4-d0a5a9be8a6a unique_bitstrings=953
+Job completed on iqm_emerald in 14.9s (total: 13 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 472m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/c3e73577-18bf-49d3-b692-5321c5e649b5
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/c3e73577-18bf-49d3-b692-5321c5e649b5 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/c3e73577-18bf-49d3-b692-5321c5e649b5 status | state=COMPLETED queue_position=None elapsed_sec=6.8
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/c3e73577-18bf-49d3-b692-5321c5e649b5 unique_bitstrings=952
+Job completed on iqm_garnet in 9.4s (total: 13 ok, 0 failed)
+[ibm_quantum] Usage check: 547s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 547s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=547.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c0v5fg4t5c7384uabg
+IBM job d6c0v5fg4t5c7384uabg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0v5fg4t5c7384uabg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6c0v5fg4t5c7384uabg unique_bitstrings=980
+Job completed on ibm_quantum in 8.8s (total: 13 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 531m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/45ac7fd7-81dc-4c23-be66-dbc475c2ccea
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/45ac7fd7-81dc-4c23-be66-dbc475c2ccea status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/45ac7fd7-81dc-4c23-be66-dbc475c2ccea status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/45ac7fd7-81dc-4c23-be66-dbc475c2ccea unique_bitstrings=959
+Job completed on iqm_emerald in 15.1s (total: 14 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 471m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/59cb82a8-494b-4ff0-91db-40f999fe3fd8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/59cb82a8-494b-4ff0-91db-40f999fe3fd8 status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/59cb82a8-494b-4ff0-91db-40f999fe3fd8 status | state=COMPLETED queue_position=None elapsed_sec=6.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/59cb82a8-494b-4ff0-91db-40f999fe3fd8 unique_bitstrings=955
+Job completed on iqm_garnet in 9.5s (total: 14 ok, 0 failed)
+[ibm_quantum] Usage check: 543s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 543s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=543.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c0ve97ce2c73ffvpvg
+IBM job d6c0ve97ce2c73ffvpvg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c0ve97ce2c73ffvpvg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=112.9
+IBM job completed | backend=ibm_marrakesh job_id=d6c0ve97ce2c73ffvpvg unique_bitstrings=971
+Job completed on ibm_quantum in 115.9s (total: 14 ok, 0 failed)
+[ibm_quantum] Usage check: 539s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 529m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/ea7464fc-2157-427e-917f-59a73fa852dd
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/ea7464fc-2157-427e-917f-59a73fa852dd status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/ea7464fc-2157-427e-917f-59a73fa852dd status | state=COMPLETED queue_position=None elapsed_sec=12.5
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/ea7464fc-2157-427e-917f-59a73fa852dd unique_bitstrings=959
+Job completed on iqm_emerald in 15.1s (total: 15 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 469m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/1d6a640f-f306-4225-a4ff-d81fbf8ef778
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/1d6a640f-f306-4225-a4ff-d81fbf8ef778 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/1d6a640f-f306-4225-a4ff-d81fbf8ef778 status | state=COMPLETED queue_position=None elapsed_sec=6.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/1d6a640f-f306-4225-a4ff-d81fbf8ef778 unique_bitstrings=952
+Job completed on iqm_garnet in 9.1s (total: 15 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 539s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=539.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c10hp54hss73b7uftg
+IBM job d6c10hp54hss73b7uftg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c10hp54hss73b7uftg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6c10hp54hss73b7uftg unique_bitstrings=980
+Job completed on ibm_quantum in 8.7s (total: 15 ok, 0 failed)
+[ibm_quantum] Usage check: 537s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 528m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/07bf3c6c-440e-408d-960b-ff93b69a8ccc
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/07bf3c6c-440e-408d-960b-ff93b69a8ccc status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/07bf3c6c-440e-408d-960b-ff93b69a8ccc status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/07bf3c6c-440e-408d-960b-ff93b69a8ccc unique_bitstrings=964
+Job completed on iqm_emerald in 14.8s (total: 16 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 468m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/20ebf8e3-f457-4170-9cdc-e8f36f67994f
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/20ebf8e3-f457-4170-9cdc-e8f36f67994f status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/20ebf8e3-f457-4170-9cdc-e8f36f67994f status | state=COMPLETED queue_position=None elapsed_sec=6.8
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/20ebf8e3-f457-4170-9cdc-e8f36f67994f unique_bitstrings=959
+Job completed on iqm_garnet in 9.0s (total: 16 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 537s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=537.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c10q954hss73b7ug60
+IBM job d6c10q954hss73b7ug60 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c10q954hss73b7ug60 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=107.4
+IBM job completed | backend=ibm_marrakesh job_id=d6c10q954hss73b7ug60 unique_bitstrings=970
+Job completed on ibm_quantum in 110.5s (total: 16 ok, 0 failed)
+[ibm_quantum] Usage check: 528s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 526m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/906cf566-2386-46a7-a492-cbbdc4f1524b
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/906cf566-2386-46a7-a492-cbbdc4f1524b status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/906cf566-2386-46a7-a492-cbbdc4f1524b status | state=COMPLETED queue_position=None elapsed_sec=13.0
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/906cf566-2386-46a7-a492-cbbdc4f1524b unique_bitstrings=942
+Job completed on iqm_emerald in 15.0s (total: 17 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 466m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/afa64ec3-7fcb-4497-9ee8-92996780494c
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/afa64ec3-7fcb-4497-9ee8-92996780494c status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/afa64ec3-7fcb-4497-9ee8-92996780494c status | state=COMPLETED queue_position=None elapsed_sec=6.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/afa64ec3-7fcb-4497-9ee8-92996780494c unique_bitstrings=954
+Job completed on iqm_garnet in 9.1s (total: 17 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 526s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=526.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c11sng4t5c7384ud30
+IBM job d6c11sng4t5c7384ud30 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c11sng4t5c7384ud30 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6c11sng4t5c7384ud30 unique_bitstrings=982
+Job completed on ibm_quantum in 8.7s (total: 17 ok, 0 failed)
+[ibm_quantum] Usage check: 524s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 526m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bfe520c5-e653-4335-86d3-8d57b3d17a36
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bfe520c5-e653-4335-86d3-8d57b3d17a36 status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bfe520c5-e653-4335-86d3-8d57b3d17a36 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bfe520c5-e653-4335-86d3-8d57b3d17a36 unique_bitstrings=962
+Job completed on iqm_emerald in 15.1s (total: 18 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 465m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/cc8abc2e-0184-4b58-ae87-3990736cf077
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/cc8abc2e-0184-4b58-ae87-3990736cf077 status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/cc8abc2e-0184-4b58-ae87-3990736cf077 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/cc8abc2e-0184-4b58-ae87-3990736cf077 unique_bitstrings=960
+Job completed on iqm_garnet in 15.1s (total: 18 ok, 0 failed)
+[ibm_quantum] Usage check: 524s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 524s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=524.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c127h7ce2c73ffvsr0
+IBM job d6c127h7ce2c73ffvsr0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c127h7ce2c73ffvsr0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=134.9
+IBM job completed | backend=ibm_marrakesh job_id=d6c127h7ce2c73ffvsr0 unique_bitstrings=967
+Job completed on ibm_quantum in 137.8s (total: 18 ok, 0 failed)
+[ibm_quantum] Usage check: 519s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 523m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bf50f4d2-6863-448f-a7f2-7f2a84fa65a7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bf50f4d2-6863-448f-a7f2-7f2a84fa65a7 status | state=QUEUED queue_position=2 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/bf50f4d2-6863-448f-a7f2-7f2a84fa65a7 status | state=COMPLETED queue_position=None elapsed_sec=12.4
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/bf50f4d2-6863-448f-a7f2-7f2a84fa65a7 unique_bitstrings=958
+Job completed on iqm_emerald in 14.5s (total: 19 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 462m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/f4e9f15a-eb67-4668-b761-4c5c2965805d
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/f4e9f15a-eb67-4668-b761-4c5c2965805d status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/f4e9f15a-eb67-4668-b761-4c5c2965805d status | state=COMPLETED queue_position=None elapsed_sec=12.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/f4e9f15a-eb67-4668-b761-4c5c2965805d unique_bitstrings=951
+Job completed on iqm_garnet in 15.4s (total: 19 ok, 0 failed)
+[ibm_quantum] Usage check: 517s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 517s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=517.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c13i17ce2c73ffvubg
+IBM job d6c13i17ce2c73ffvubg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c13i17ce2c73ffvubg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6c13i17ce2c73ffvubg unique_bitstrings=987
+Job completed on ibm_quantum in 8.6s (total: 19 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 522m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/826d038e-edd6-459d-abd5-81163f5c0fa9
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/826d038e-edd6-459d-abd5-81163f5c0fa9 status | state=QUEUED queue_position=2 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/826d038e-edd6-459d-abd5-81163f5c0fa9 status | state=COMPLETED queue_position=None elapsed_sec=12.4
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/826d038e-edd6-459d-abd5-81163f5c0fa9 unique_bitstrings=947
+Job completed on iqm_emerald in 14.5s (total: 20 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 462m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/87794df0-9bdb-4a64-a1a5-e4055e0038c7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/87794df0-9bdb-4a64-a1a5-e4055e0038c7 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/87794df0-9bdb-4a64-a1a5-e4055e0038c7 status | state=COMPLETED queue_position=None elapsed_sec=6.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/87794df0-9bdb-4a64-a1a5-e4055e0038c7 unique_bitstrings=973
+Job completed on iqm_garnet in 9.3s (total: 20 ok, 0 failed)
+[ibm_quantum] Usage check: 515s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 515s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=515.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c13qvg4t5c7384uf90
+IBM job d6c13qvg4t5c7384uf90 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c13qvg4t5c7384uf90 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=161.2
+IBM job completed | backend=ibm_marrakesh job_id=d6c13qvg4t5c7384uf90 unique_bitstrings=981
+Job completed on ibm_quantum in 164.4s (total: 20 ok, 0 failed)
+[ibm_quantum] Usage check: 510s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 519m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/3fe23c5b-4e62-4289-8e3a-290837a10d20
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/3fe23c5b-4e62-4289-8e3a-290837a10d20 status | state=QUEUED queue_position=2 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/3fe23c5b-4e62-4289-8e3a-290837a10d20 status | state=COMPLETED queue_position=None elapsed_sec=12.5
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/3fe23c5b-4e62-4289-8e3a-290837a10d20 unique_bitstrings=949
+Job completed on iqm_emerald in 15.5s (total: 21 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 459m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/6a22f459-3bd5-4657-bbe7-c8733bdef3ec
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/6a22f459-3bd5-4657-bbe7-c8733bdef3ec status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/6a22f459-3bd5-4657-bbe7-c8733bdef3ec status | state=COMPLETED queue_position=None elapsed_sec=12.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/6a22f459-3bd5-4657-bbe7-c8733bdef3ec unique_bitstrings=963
+Job completed on iqm_garnet in 15.1s (total: 21 ok, 0 failed)
+[ibm_quantum] Usage check: 510s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 510s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=510.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c15c154hss73b7uldg
+IBM job d6c15c154hss73b7uldg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c15c154hss73b7uldg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6c15c154hss73b7uldg unique_bitstrings=976
+Job completed on ibm_quantum in 8.5s (total: 21 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 518m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/7ae72dde-cf47-4808-8c16-e8a03cc3778c
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/7ae72dde-cf47-4808-8c16-e8a03cc3778c status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/7ae72dde-cf47-4808-8c16-e8a03cc3778c status | state=COMPLETED queue_position=None elapsed_sec=12.5
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/7ae72dde-cf47-4808-8c16-e8a03cc3778c unique_bitstrings=964
+Job completed on iqm_emerald in 15.0s (total: 22 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 458m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/fa7a2977-6488-48a5-b541-aa55dca4a233
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/fa7a2977-6488-48a5-b541-aa55dca4a233 status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/fa7a2977-6488-48a5-b541-aa55dca4a233 status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/fa7a2977-6488-48a5-b541-aa55dca4a233 unique_bitstrings=962
+Job completed on iqm_garnet in 14.8s (total: 22 ok, 0 failed)
+[ibm_quantum] Usage check: 506s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 506s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=16 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=506.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6c15m4nsg9c7399jbfg
+IBM job d6c15m4nsg9c7399jbfg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c15m4nsg9c7399jbfg (ibm_marrakesh) status | state=RUNNING queue_position=n/a elapsed_sec=182.9
+IBM job d6c15m4nsg9c7399jbfg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=249.6
+IBM job completed | backend=ibm_marrakesh job_id=d6c15m4nsg9c7399jbfg unique_bitstrings=970
+Job completed on ibm_quantum in 252.6s (total: 22 ok, 0 failed)
+[ibm_quantum] Usage check: 497s remaining (threshold: 50s)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 513m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/2165b925-f211-4bc4-8add-9140737a2d4a
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/2165b925-f211-4bc4-8add-9140737a2d4a status | state=QUEUED queue_position=1 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/2165b925-f211-4bc4-8add-9140737a2d4a status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/2165b925-f211-4bc4-8add-9140737a2d4a unique_bitstrings=966
+Job completed on iqm_emerald in 15.6s (total: 23 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 453m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=0.7
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=184.9
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=370.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=551.2
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=735.1
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=919.4
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=1102.6
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=1286.3
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=1469.2
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=1652.2
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=1835.5
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=QUEUED queue_position=1 elapsed_sec=2019.5
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add status | state=COMPLETED queue_position=None elapsed_sec=2168.3
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/655bd220-b9d8-4439-85e5-1f107bc21add unique_bitstrings=960
+Job completed on iqm_garnet in 2170.8s (total: 23 ok, 0 failed)
+[ibm_quantum] Usage check: 60s remaining (threshold: 50s)
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 0m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready - IQM Emerald (54 qubits, window: 477m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 417m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+Dispatching job -> ibm_quantum | shots=1000 qubits=16 | IBM budget: 56s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=16 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=56.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6c1orvg4t5c7384vd4g
+IBM job d6c1orvg4t5c7384vd4g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6c1orvg4t5c7384vd4g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6c1orvg4t5c7384vd4g unique_bitstrings=981
+Job completed on ibm_quantum in 8.8s (total: 23 ok, 0 failed)
+Dispatching job -> iqm_emerald | shots=1000 qubits=16 | window: 477m left
+Submitting AWS Braket task | qpu_id=iqm_emerald provider=braket_iqm_emerald shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/6fea7087-f5ec-4dc7-ba53-d25c91d05f8d
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/6fea7087-f5ec-4dc7-ba53-d25c91d05f8d status | state=QUEUED queue_position=2 elapsed_sec=0.8
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/6fea7087-f5ec-4dc7-ba53-d25c91d05f8d status | state=COMPLETED queue_position=None elapsed_sec=12.6
+AWS Braket task completed | qpu_id=iqm_emerald task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/6fea7087-f5ec-4dc7-ba53-d25c91d05f8d unique_bitstrings=959
+Job completed on iqm_emerald in 17.5s (total: 24 ok, 0 failed)
+[ibm_quantum] Usage check: 52s remaining (threshold: 50s)
+Dispatching job -> iqm_garnet | shots=1000 qubits=16 | window: 416m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=16
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/88cbd5ed-737e-4310-a861-a76f59cd89b3
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/88cbd5ed-737e-4310-a861-a76f59cd89b3 status | state=QUEUED queue_position=7 elapsed_sec=0.7

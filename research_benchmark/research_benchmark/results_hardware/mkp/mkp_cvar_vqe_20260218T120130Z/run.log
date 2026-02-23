@@ -189,3 +189,42 @@ Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakes
 Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=530.0 shots=1000
 IBM job submitted | backend=ibm_marrakesh job_id=d6aqle7g4t5c7383i300
 IBM job d6aqle7g4t5c7383i300 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aqle7g4t5c7383i300 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=16.4
+IBM job completed | backend=ibm_marrakesh job_id=d6aqle7g4t5c7383i300 unique_bitstrings=1000
+Job completed on ibm_quantum in 19.8s (total: 4 ok, 0 failed)
+[ibm_quantum] Usage check: 528s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=60 | window: 236m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0b8561c1-c226-44ff-8937-5448f84a1620
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0b8561c1-c226-44ff-8937-5448f84a1620 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/0b8561c1-c226-44ff-8937-5448f84a1620 status | state=COMPLETED queue_position=None elapsed_sec=17.5
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/0b8561c1-c226-44ff-8937-5448f84a1620 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 20.5s (total: 5 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=60 | IBM budget: 528s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=528.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6aqlop7ce2c73fejkig
+IBM job d6aqlop7ce2c73fejkig (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aqlop7ce2c73fejkig (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_torino job_id=d6aqlop7ce2c73fejkig unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 5 ok, 0 failed)
+[ibm_quantum] Usage check: 526s remaining (threshold: 50s)
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=60 | window: 236m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=60
+AWS Braket task submitted | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/aa4d4e8c-a6a5-46c5-9a80-0cf35f2ec401
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/aa4d4e8c-a6a5-46c5-9a80-0cf35f2ec401 status | state=QUEUED queue_position=1 elapsed_sec=0.5
+AWS task arn:aws:braket:us-west-1:145023100654:quantum-task/aa4d4e8c-a6a5-46c5-9a80-0cf35f2ec401 status | state=COMPLETED queue_position=None elapsed_sec=17.5
+AWS Braket task completed | qpu_id=rigetti_ankaa3 task_id=arn:aws:braket:us-west-1:145023100654:quantum-task/aa4d4e8c-a6a5-46c5-9a80-0cf35f2ec401 unique_bitstrings=1000
+Job completed on rigetti_ankaa3 in 20.4s (total: 6 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=60 | IBM budget: 526s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=60 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=526.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6aqm0ng4t5c7383i3l0
+IBM job d6aqm0ng4t5c7383i3l0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6aqm0ng4t5c7383i3l0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6aqm0ng4t5c7383i3l0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 6 ok, 0 failed)
+Optimization finished | evaluations=12 status=2
+Local swap postprocess | improved=True candidates_checked=199
+Final solution | bitstring=101000100100101100110100000010111100101000101001111010000110 objective_label=mkp_total_profit objective_value=2499.0 feasible=True
+Artifacts | result=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T120130Z\result.json trace=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T120130Z\trace.jsonl qubo=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T120130Z\qubo.lp counts=C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_cvar_vqe_20260218T120130Z\best_counts.json

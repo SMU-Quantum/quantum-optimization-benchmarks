@@ -51,10 +51,18 @@ class QAPProblem(BenchmarkProblem):
     description = "Quadratic Assignment Problem (QAPLIB style .dat)."
 
     def default_instance(self, project_root: Path) -> Path | None:
-        return project_root / "Quadratic_Assignment_Problem" / "qapdata" / "chr12a.dat"
+        candidate = project_root / "Quadratic_Assignment_Problem" / "qapdata" / "chr12a.dat"
+        if candidate.exists():
+            return candidate
+        candidate_parent = project_root.parent / "Quadratic_Assignment_Problem" / "qapdata" / "chr12a.dat"
+        if candidate_parent.exists():
+            return candidate_parent
+        return candidate
 
     def list_instances(self, project_root: Path, limit: int | None = None) -> list[Path]:
         folder = project_root / "Quadratic_Assignment_Problem" / "qapdata"
+        if not folder.exists():
+            folder = project_root.parent / "Quadratic_Assignment_Problem" / "qapdata"
         if not folder.exists():
             return []
         instances = sorted(folder.glob("*.dat"))

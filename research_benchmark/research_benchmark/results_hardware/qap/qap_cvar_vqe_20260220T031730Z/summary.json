@@ -1,0 +1,95 @@
+{
+  "problem": "qap",
+  "method": "cvar_vqe",
+  "total_instances": 11,
+  "ok_count": 3,
+  "total_runtime_sec": 19074.686185500002,
+  "results": [
+    {
+      "instance": "chr12a.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 610162.0,
+      "feasible": false,
+      "time_sec": 2445.2499379999936,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_cvar_vqe_20260220T031730Z\\chr12a_dat"
+    },
+    {
+      "instance": "chr12b.dat",
+      "qubits": 144,
+      "status": "FAILED",
+      "reason": "IBM job d6bu4h4nsg9c7399fl70 (ibm_marrakesh) ended in terminal state 'CANCELLED'",
+      "time_sec": 2078.8654154000105
+    },
+    {
+      "instance": "chr12c.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 649470.0,
+      "feasible": false,
+      "time_sec": 7169.249021900003,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_cvar_vqe_20260220T031730Z\\chr12c_dat"
+    },
+    {
+      "instance": "had12.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 27058.0,
+      "feasible": false,
+      "time_sec": 5549.5768045999575,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_cvar_vqe_20260220T031730Z\\had12_dat"
+    },
+    {
+      "instance": "nug12.dat",
+      "qubits": 144,
+      "status": "FAILED",
+      "reason": "QPU 'ibm_quantum' unavailable: Runtime budget low: 41s < 50s",
+      "time_sec": 1737.3811787000159
+    },
+    {
+      "instance": "rou12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "scr12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai10a.dat",
+      "qubits": 100,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai10b.dat",
+      "qubits": 100,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai12a.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai12b.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    }
+  ]
+}

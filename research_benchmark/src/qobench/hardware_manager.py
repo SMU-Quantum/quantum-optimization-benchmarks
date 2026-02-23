@@ -49,6 +49,18 @@ IBM_MIN_RUNTIME_SECONDS = 50.0
 LOGGER = logging.getLogger("qobench.hardware_manager")
 
 
+class QPUWindowExpiredError(RuntimeError):
+    """Raised when a QPU's availability window has closed.
+
+    Callers should catch this to attempt failover to another QPU.
+    """
+    def __init__(self, qpu_id: str, message: str | None = None) -> None:
+        self.qpu_id = qpu_id
+        super().__init__(
+            message or f"QPU '{qpu_id}' availability window has closed."
+        )
+
+
 @dataclass(slots=True)
 class QPUConfig:
     name: str
@@ -116,9 +128,9 @@ def _default_qpus() -> dict[str, QPUConfig]:
             availability_windows_sgt=None,
         ),
         "local_qiskit": QPUConfig(
-            name="Local Qiskit MPS Simulator",
+            name="Local Qiskit Statevector Simulator",
             provider="local_qiskit",
-            max_qubits=100,
+            max_qubits=28,
             region="local",
             priority=20,
             availability_windows_sgt=None,
@@ -691,7 +703,12 @@ class QuantumHardwareManager:
 
             if self.ibm_backends_preferred:
                 qpu.backend_name = self.ibm_backends_preferred[0]["name"]
-                qpu.max_qubits = int(self.ibm_backends_preferred[0]["num_qubits"])
+            # max_qubits should reflect the LARGEST backend, not just the
+            # preferred one, so that the size filter in
+            # get_available_qpus_for_size doesn't reject problems that
+            # larger backends can handle.
+            if self.ibm_backends:
+                qpu.max_qubits = max(int(b["num_qubits"]) for b in self.ibm_backends)
 
             self.sessions["ibm_quantum"] = service
             qpu.is_available = len(self.ibm_backends) > 0
@@ -835,17 +852,41 @@ class QuantumHardwareManager:
             qpu.last_error = ""
 
     def _refresh_ibm_backends_if_needed(self, force: bool = False) -> None:
+        """Refresh IBM backend inventory only when runtime budget is exhausted.
+
+        Instead of periodic rediscovery, we only refresh when the remaining
+        IBM runtime budget drops below ``ibm_min_runtime_seconds``.  This
+        avoids unnecessary API calls while the current backend still has
+        plenty of budget.
+        """
         if not self.use_ibm or not HAS_IBM_RUNTIME:
             return
         if not self._is_enabled("ibm_quantum"):
             return
-        now = time.time()
-        if not force and (now - self._ibm_last_backend_refresh) < float(self.ibm_backend_refresh_interval):
-            return
+
+        if not force:
+            # Check if budget is still healthy — skip refresh if so
+            service = self.sessions.get("ibm_quantum")
+            if service is not None:
+                remaining = _get_ibm_usage_remaining_seconds(service)
+                if remaining is not None and remaining > float(self.ibm_min_runtime_seconds):
+                    return  # budget is healthy, no need to rediscover
+                if remaining is not None:
+                    LOGGER.info(
+                        "IBM runtime budget low (%.0fs remaining < %.0fs threshold) "
+                        "— refreshing backend inventory",
+                        remaining,
+                        float(self.ibm_min_runtime_seconds),
+                    )
+
+            # Also respect the minimum interval to avoid spamming on budget=0
+            now = time.time()
+            if (now - self._ibm_last_backend_refresh) < 60.0:
+                return
+
         LOGGER.debug(
-            "Refreshing IBM backend inventory | force=%s refresh_interval_sec=%.1f",
+            "Refreshing IBM backend inventory | force=%s",
             force,
-            float(self.ibm_backend_refresh_interval),
         )
         self._init_ibm_device()
 
@@ -885,6 +926,51 @@ class QuantumHardwareManager:
             )
             self._refresh_braket_backends(include_unavailable=True, in_window_only=False)
             self.last_credential_refresh = now
+
+    def refresh_qpu_windows(self, num_qubits: int = 0) -> list[str]:
+        """Re-check availability windows for all QPUs.
+
+        Marks QPUs available when a new window opens and unavailable when
+        a window closes.  Returns list of QPU IDs that are currently in
+        an open window and have enough qubits for *num_qubits*.
+        """
+        now_changed: list[str] = []
+        for qpu_id, qpu in self.qpus.items():
+            if self._is_simulator_provider(qpu.provider):
+                continue
+            in_window = self.is_qpu_in_time_window(qpu)
+            has_runway = self._has_sufficient_window(qpu)
+            was_available = qpu.is_available
+            window_error = qpu.last_error if "window" in (qpu.last_error or "").lower() else ""
+
+            if in_window and has_runway and not was_available and window_error:
+                # QPU was marked offline due to window expiry, but a new window
+                # is now open → mark it available again.
+                qpu.is_available = True
+                qpu.last_error = ""
+                LOGGER.info(
+                    "QPU '%s' window re-opened — marking AVAILABLE", qpu_id,
+                )
+                now_changed.append(qpu_id)
+            elif (not in_window or not has_runway) and was_available:
+                # Window just closed → mark offline
+                remaining = self._remaining_window_minutes_sgt(qpu)
+                qpu.is_available = False
+                qpu.last_error = (
+                    f"Availability window closed ({remaining:.0f}m remaining)"
+                    if remaining is not None
+                    else "Outside availability window"
+                )
+                LOGGER.info(
+                    "QPU '%s' window closed — marking OFFLINE: %s",
+                    qpu_id, qpu.last_error,
+                )
+
+        available = [
+            qpu_id for qpu_id, qpu in self.qpus.items()
+            if qpu.is_available and qpu.max_qubits >= num_qubits
+        ]
+        return available
 
     def get_available_qpus_for_size(
         self,
@@ -958,6 +1044,165 @@ class QuantumHardwareManager:
             }
         return snapshot
 
+    def get_calibration_snapshot(self) -> dict[str, Any]:
+        """Collect device calibration data for reproducibility.
+
+        Returns a dict keyed by qpu_id with T1/T2, gate errors, readout errors,
+        coupling map, and device metadata where available.
+        """
+        calibration: dict[str, Any] = {}
+
+        # IBM backends
+        if HAS_IBM_RUNTIME and self.ibm_backends:
+            for binfo in self.ibm_backends:
+                backend = binfo.get("backend")
+                name = binfo.get("name", "unknown")
+                entry: dict[str, Any] = {
+                    "provider": "ibm",
+                    "backend_name": name,
+                    "num_qubits": binfo.get("num_qubits"),
+                    "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+                }
+                try:
+                    target = getattr(backend, "target", None)
+                    if target is not None:
+                        # Extract coupling map
+                        try:
+                            from qiskit.transpiler import CouplingMap
+                            cm = CouplingMap(target.build_coupling_map().get_edges()) if hasattr(target, "build_coupling_map") else None
+                            if cm is not None:
+                                entry["coupling_map_edges"] = len(cm.get_edges())
+                        except Exception:
+                            pass
+
+                        # Extract gate errors from target
+                        try:
+                            ops = target.operation_names
+                            gate_errors: dict[str, list[float]] = {}
+                            for op_name in ops:
+                                if op_name in ("measure", "delay", "reset"):
+                                    continue
+                                errs = []
+                                for qargs in target.qargs_for_operation_name(op_name):
+                                    props = target[op_name].get(qargs)
+                                    if props is not None and props.error is not None:
+                                        errs.append(float(props.error))
+                                if errs:
+                                    gate_errors[op_name] = {
+                                        "mean": round(sum(errs) / len(errs), 6),
+                                        "max": round(max(errs), 6),
+                                        "min": round(min(errs), 6),
+                                        "count": len(errs),
+                                    }
+                            if gate_errors:
+                                entry["gate_errors"] = gate_errors
+                        except Exception:
+                            pass
+
+                        # Qubit properties (T1/T2, readout)
+                        try:
+                            t1_values, t2_values, readout_errors = [], [], []
+                            for qi in range(target.num_qubits):
+                                qprops = target.qubit_properties
+                                if qprops and qi < len(qprops) and qprops[qi] is not None:
+                                    qp = qprops[qi]
+                                    if hasattr(qp, "t1") and qp.t1 is not None:
+                                        t1_values.append(float(qp.t1))
+                                    if hasattr(qp, "t2") and qp.t2 is not None:
+                                        t2_values.append(float(qp.t2))
+                                # Readout error from measure operation
+                                meas_props = target["measure"].get((qi,))
+                                if meas_props is not None and meas_props.error is not None:
+                                    readout_errors.append(float(meas_props.error))
+                            if t1_values:
+                                entry["t1_us"] = {
+                                    "mean": round(sum(t1_values) / len(t1_values) * 1e6, 2),
+                                    "min": round(min(t1_values) * 1e6, 2),
+                                }
+                            if t2_values:
+                                entry["t2_us"] = {
+                                    "mean": round(sum(t2_values) / len(t2_values) * 1e6, 2),
+                                    "min": round(min(t2_values) * 1e6, 2),
+                                }
+                            if readout_errors:
+                                entry["readout_error"] = {
+                                    "mean": round(sum(readout_errors) / len(readout_errors), 6),
+                                    "max": round(max(readout_errors), 6),
+                                }
+                        except Exception:
+                            pass
+                except Exception as exc:
+                    entry["calibration_error"] = str(exc)[:200]
+
+                calibration[f"ibm_{name}"] = entry
+
+        # AWS Braket devices
+        if HAS_BRAKET:
+            for qpu_id in _BRAKET_QPU_IDS:
+                if qpu_id not in self.devices:
+                    continue
+                device = self.devices[qpu_id]
+                qpu = self.qpus.get(qpu_id)
+                entry = {
+                    "provider": qpu.provider if qpu else "braket",
+                    "device_name": qpu.name if qpu else qpu_id,
+                    "num_qubits": qpu.max_qubits if qpu else None,
+                    "timestamp_utc": datetime.now(timezone.utc).isoformat(),
+                }
+                try:
+                    props = device.properties
+                    if hasattr(props, "provider") and hasattr(props.provider, "specs"):
+                        specs = props.provider.specs
+                        # Rigetti / IQM provide fidelity specs
+                        if isinstance(specs, dict):
+                            for spec_key in ("1Q", "2Q"):
+                                if spec_key in specs:
+                                    fidelities = []
+                                    errors = []
+                                    for gate_name, gate_data in specs[spec_key].items():
+                                        if isinstance(gate_data, dict):
+                                            for metric, value in gate_data.items():
+                                                if "fidelity" in metric.lower() and isinstance(value, (int, float)):
+                                                    fidelities.append(float(value))
+                                                if "error" in metric.lower() and isinstance(value, (int, float)):
+                                                    errors.append(float(value))
+                                    if fidelities:
+                                        entry[f"{spec_key}_fidelity"] = {
+                                            "mean": round(sum(fidelities) / len(fidelities), 6),
+                                            "min": round(min(fidelities), 6),
+                                            "count": len(fidelities),
+                                        }
+                        # T1/T2
+                        if isinstance(specs, dict) and "1Q" in specs:
+                            t1s, t2s = [], []
+                            for qid, qdata in specs["1Q"].items():
+                                if isinstance(qdata, dict):
+                                    if "T1" in qdata and isinstance(qdata["T1"], (int, float)):
+                                        t1s.append(float(qdata["T1"]))
+                                    if "T2" in qdata and isinstance(qdata["T2"], (int, float)):
+                                        t2s.append(float(qdata["T2"]))
+                            if t1s:
+                                entry["t1_us"] = {
+                                    "mean": round(sum(t1s) / len(t1s) * 1e6, 2),
+                                    "min": round(min(t1s) * 1e6, 2),
+                                }
+                            if t2s:
+                                entry["t2_us"] = {
+                                    "mean": round(sum(t2s) / len(t2s) * 1e6, 2),
+                                    "min": round(min(t2s) * 1e6, 2),
+                                }
+                    # Connectivity
+                    if hasattr(props, "paradigm") and hasattr(props.paradigm, "connectivity"):
+                        conn = props.paradigm.connectivity
+                        if hasattr(conn, "connectivityGraph"):
+                            entry["connectivity_type"] = getattr(conn, "fullyConnected", False)
+                except Exception as exc:
+                    entry["calibration_error"] = str(exc)[:200]
+
+                calibration[qpu_id] = entry
+
+        return calibration
+
     def _run_braket_counts(
         self,
         qpu_id: str,
@@ -980,6 +1225,16 @@ class QuantumHardwareManager:
             shots,
             num_qubits,
         )
+        # Capture circuit metrics
+        braket_circuit_depth = None
+        braket_gate_count = None
+        try:
+            braket_circuit_depth = int(bound_circuit.depth)
+            braket_gate_count = len(bound_circuit.instructions)
+        except Exception:
+            pass
+
+        submit_time_utc = datetime.now(timezone.utc).isoformat()
         task = device.run(bound_circuit, shots=int(shots))
         task_id = task.id
         LOGGER.info("AWS Braket task submitted | qpu_id=%s task_id=%s", qpu_id, task_id)
@@ -992,6 +1247,7 @@ class QuantumHardwareManager:
             success_states={"COMPLETED"},
         )
         result = task.result()
+        complete_time_utc = datetime.now(timezone.utc).isoformat()
 
         counts = normalize_counts(
             raw_counts=dict(result.measurement_counts),
@@ -1004,7 +1260,17 @@ class QuantumHardwareManager:
             task_id,
             len(counts),
         )
-        return counts, {"task_id": task_id, "provider": "braket", "qpu_id": qpu_id}
+        return counts, {
+            "task_id": task_id,
+            "provider": "braket",
+            "qpu_id": qpu_id,
+            "device_name": self.qpus[qpu_id].name,
+            "shots": shots,
+            "submit_time_utc": submit_time_utc,
+            "complete_time_utc": complete_time_utc,
+            "braket_circuit_depth": braket_circuit_depth,
+            "braket_gate_count": braket_gate_count,
+        }
 
     def _extract_sampler_v2_counts_from_pub_result(
         self,
@@ -1112,9 +1378,57 @@ class QuantumHardwareManager:
             ansatz_id=ansatz_id,
             qiskit_template=qiskit_template,
         )
-        bind_map = {qiskit_parameters[i]: float(theta[i]) for i in range(len(qiskit_parameters))}
+
+        # Capture transpiled circuit metrics for reproducibility
+        transpiled_metrics: dict[str, Any] = {
+            "optimization_level": self.qiskit_optimization_level,
+        }
+        try:
+            transpiled_metrics["transpiled_depth"] = int(compiled_template.depth())
+            one_q, two_q, meas = 0, 0, 0
+            for inst, qargs, _ in compiled_template.data:
+                if inst.name == "measure":
+                    meas += 1
+                elif len(qargs) == 1:
+                    one_q += 1
+                elif len(qargs) == 2:
+                    two_q += 1
+            transpiled_metrics["transpiled_1q_gates"] = one_q
+            transpiled_metrics["transpiled_2q_gates"] = two_q
+            transpiled_metrics["transpiled_measurements"] = meas
+        except Exception:
+            pass
+        try:
+            layout = compiled_template.layout
+            if layout is not None and hasattr(layout, "final_layout"):
+                final = layout.final_layout
+                if final is not None:
+                    qubit_map = {}
+                    for vq, pq in final.get_virtual_bits().items():
+                        try:
+                            qubit_map[str(vq)] = int(pq)
+                        except Exception:
+                            pass
+                    if qubit_map:
+                        transpiled_metrics["qubit_mapping_sample_size"] = len(qubit_map)
+        except Exception:
+            pass
+
+        # Build a name→value lookup from the *original* (pre-transpilation)
+        # parameter list, then bind using the *transpiled* circuit's own
+        # Parameter objects.  Transpilation (especially at opt-level 3) can
+        # replace Parameter instances, so binding by original references fails.
+        name_to_value = {
+            qiskit_parameters[i].name: float(theta[i])
+            for i in range(len(qiskit_parameters))
+        }
+        bind_map = {}
+        for p in compiled_template.parameters:
+            if p.name in name_to_value:
+                bind_map[p] = name_to_value[p.name]
         bound_circuit = compiled_template.assign_parameters(bind_map)
 
+        submit_time_utc = datetime.now(timezone.utc).isoformat()
         sampler = SamplerV2(backend)
         job = sampler.run([bound_circuit], shots=int(shots))
         job_id = getattr(job, "job_id", None)
@@ -1131,6 +1445,7 @@ class QuantumHardwareManager:
             min_log_interval_sec=120.0,
         )
         result = job.result()
+        complete_time_utc = datetime.now(timezone.utc).isoformat()
         counts = self._extract_sampler_v2_counts(result=result, num_qubits=num_qubits)
         LOGGER.info(
             "IBM job completed | backend=%s job_id=%s unique_bitstrings=%s",
@@ -1143,6 +1458,12 @@ class QuantumHardwareManager:
             "backend_name": backend_name,
             "job_id": job_id,
             "qpu_id": "ibm_quantum",
+            "backend_qubits": backend_info.get("num_qubits"),
+            "pending_jobs_at_submit": backend_info.get("pending_jobs"),
+            "submit_time_utc": submit_time_utc,
+            "complete_time_utc": complete_time_utc,
+            "shots": shots,
+            **transpiled_metrics,
         }
 
     def _run_ibm_counts_batch(
@@ -1186,11 +1507,20 @@ class QuantumHardwareManager:
             ansatz_id=ansatz_id,
             qiskit_template=qiskit_template,
         )
+        # Build a name→value lookup from the *original* (pre-transpilation)
+        # parameter list, then bind using the *transpiled* circuit's own
+        # Parameter objects.  Transpilation (especially at opt-level 3) can
+        # replace Parameter instances, so binding by original references fails.
         bound_circuits = []
         for theta in thetas:
-            bind_map = {
-                qiskit_parameters[i]: float(theta[i]) for i in range(len(qiskit_parameters))
+            name_to_value = {
+                qiskit_parameters[i].name: float(theta[i])
+                for i in range(len(qiskit_parameters))
             }
+            bind_map = {}
+            for p in compiled_template.parameters:
+                if p.name in name_to_value:
+                    bind_map[p] = name_to_value[p.name]
             bound_circuits.append(compiled_template.assign_parameters(bind_map))
 
         sampler = SamplerV2(backend)
@@ -1264,7 +1594,15 @@ class QuantumHardwareManager:
             num_qubits,
             LOCAL_SAMPLER_KIND,
         )
-        bind_map = {qiskit_parameters[i]: float(theta[i]) for i in range(len(qiskit_parameters))}
+        # Use name-based binding to avoid stale Parameter object references.
+        name_to_value = {
+            qiskit_parameters[i].name: float(theta[i])
+            for i in range(len(qiskit_parameters))
+        }
+        bind_map = {}
+        for p in qiskit_template.parameters:
+            if p.name in name_to_value:
+                bind_map[p] = name_to_value[p.name]
         bound_circuit = qiskit_template.assign_parameters(bind_map)
         sampler = LocalSampler()
         if LOCAL_SAMPLER_KIND == "v1":
@@ -1436,6 +1774,27 @@ class QuantumHardwareManager:
             runtime_remaining_sec = (
                 _get_ibm_usage_remaining_seconds(service) if service is not None else None
             )
+
+        # Guard: reject dispatch if the availability window has closed
+        if remaining_window is not None and remaining_window <= 0 and not self._is_simulator_provider(qpu.provider):
+            qpu.is_available = False
+            qpu.last_error = "Availability window has closed"
+            raise QPUWindowExpiredError(
+                qpu_id,
+                f"QPU '{qpu_id}' availability window has closed (0m remaining). "
+                "Job not dispatched.",
+            )
+        # Also check sufficient runway
+        if not self._is_simulator_provider(qpu.provider) and not self._has_sufficient_window(qpu):
+            qpu.is_available = False
+            remaining_str = f"{remaining_window:.0f}m" if remaining_window is not None else "unknown"
+            qpu.last_error = f"Availability window closing soon ({remaining_str} remaining)"
+            raise QPUWindowExpiredError(
+                qpu_id,
+                f"QPU '{qpu_id}' window closing soon ({remaining_str} remaining). "
+                "Job not dispatched.",
+            )
+
         window_info = ""
         if remaining_window is not None:
             window_info = f" | window: {remaining_window:.0f}m left"

@@ -70,13 +70,12 @@ class MKPProblem(BenchmarkProblem):
     description = "Multi-Dimensional Knapsack Problem (OR-Library style .dat)."
 
     def default_instance(self, project_root: Path) -> Path | None:
-        # Check current root first
+        # Check current root first - use hpp folder
         candidate = (
             project_root
             / "Multi_Dimension_Knapsack"
             / "MKP_Instances"
-            / "sac94"
-            / "hp"
+            / "hpp"
             / "hp1.dat"
         )
         if candidate.exists():
@@ -87,8 +86,7 @@ class MKPProblem(BenchmarkProblem):
             project_root.parent
             / "Multi_Dimension_Knapsack"
             / "MKP_Instances"
-            / "sac94"
-            / "hp"
+            / "hpp"
             / "hp1.dat"
         )
         if candidate_parent.exists():
@@ -97,15 +95,15 @@ class MKPProblem(BenchmarkProblem):
         return candidate  # Return original path even if not found, to let load_instance fail with clear path
 
     def list_instances(self, project_root: Path, limit: int | None = None) -> list[Path]:
-        folder = project_root / "Multi_Dimension_Knapsack" / "MKP_Instances"
+        folder = project_root / "Multi_Dimension_Knapsack" / "MKP_Instances" / "hpp"
         if not folder.exists():
             # Try parent directory
-            folder = project_root.parent / "Multi_Dimension_Knapsack" / "MKP_Instances"
+            folder = project_root.parent / "Multi_Dimension_Knapsack" / "MKP_Instances" / "hpp"
             
         if not folder.exists():
             return []
             
-        instances = sorted(folder.rglob("*.dat"))
+        instances = sorted(folder.glob("*.dat"))
         if limit is not None:
             instances = instances[:limit]
         return instances

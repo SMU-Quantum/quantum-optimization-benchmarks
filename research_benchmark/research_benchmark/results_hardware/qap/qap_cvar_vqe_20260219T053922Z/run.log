@@ -1,0 +1,427 @@
+Run start | problem=qap method=cvar_vqe mode=multi seed=0
+Instances discovered | problem=qap count=11
+  - chr12a.dat
+  - chr12b.dat
+  - chr12c.dat
+  - had12.dat
+  - nug12.dat
+  - rou12.dat
+  - scr12.dat
+  - tai10a.dat
+  - tai10b.dat
+  - tai12a.dat
+  - tai12b.dat
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 81m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready - IQM Emerald (54 qubits, window: 0m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 591m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 598s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=911), ibm_marrakesh(156q, pending=5), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_torino, ibm_marrakesh
+[local_qiskit] Ready (max 100 qubits)
+[ibm_quantum] Usage check: 598s remaining (threshold: 50s)
+QPUs skipped for 0-qubit problem:
+  iqm_emerald: outside availability window
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+Execution plan | mode=multi qpus=['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum'] instances=11
+
+[1/11] Starting instance: chr12a.dat
+
+======================================================================
+  Instance: chr12a.dat
+======================================================================
+  Problem: qap | Instance: chr12a.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: ['ibm_quantum']
+  Ansatz | reps=3 entanglement=circular parameters=576 depth=437 2q_gates=432
+  Optimization | method=cvar_vqe objective=cvar shots=1000 maxiter=200 qpus=['ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 598s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=5
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=5 runtime_remaining_sec=598.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6ba4eng4t5c73844h1g
+IBM job d6ba4eng4t5c73844h1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6ba4eng4t5c73844h1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=182.4
+IBM job d6ba4eng4t5c73844h1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=364.9
+IBM job d6ba4eng4t5c73844h1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=547.8
+IBM job d6ba4eng4t5c73844h1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=730.4
+IBM job d6ba4eng4t5c73844h1g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=837.8
+IBM job completed | backend=ibm_marrakesh job_id=d6ba4eng4t5c73844h1g unique_bitstrings=1000
+Job completed on ibm_quantum in 859.1s (total: 1 ok, 0 failed)
+[ibm_quantum] Usage check: 596s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 596s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=596.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bab1fg4t5c73844peg
+IBM job d6bab1fg4t5c73844peg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bab1fg4t5c73844peg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bab1fg4t5c73844peg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 2 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 594s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=594.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bab417ce2c73ff6atg
+IBM job d6bab417ce2c73ff6atg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bab417ce2c73ff6atg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bab417ce2c73ff6atg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 3 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 592s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=592.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bab6vg4t5c73844pl0
+IBM job d6bab6vg4t5c73844pl0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bab6vg4t5c73844pl0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.1
+IBM job completed | backend=ibm_marrakesh job_id=d6bab6vg4t5c73844pl0 unique_bitstrings=1000
+Job completed on ibm_quantum in 14.0s (total: 4 ok, 0 failed)
+[ibm_quantum] Usage check: 590s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 590s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=590.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babavg4t5c73844pr0
+IBM job d6babavg4t5c73844pr0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6babavg4t5c73844pr0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=10.9
+IBM job completed | backend=ibm_marrakesh job_id=d6babavg4t5c73844pr0 unique_bitstrings=1000
+Job completed on ibm_quantum in 13.7s (total: 5 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 588s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=588.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babevg4t5c73844pv0
+IBM job d6babevg4t5c73844pv0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6babevg4t5c73844pv0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6babevg4t5c73844pv0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.3s (total: 6 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 586s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=586.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babhfg4t5c73844q30
+IBM job d6babhfg4t5c73844q30 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6babhfg4t5c73844q30 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6babhfg4t5c73844q30 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 7 ok, 0 failed)
+[ibm_quantum] Usage check: 584s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 584s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=584.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babk4nsg9c7398pec0
+IBM job d6babk4nsg9c7398pec0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6babk4nsg9c7398pec0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6babk4nsg9c7398pec0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 8 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 582s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=582.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babmp54hss73b74kug
+IBM job d6babmp54hss73b74kug (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6babmp54hss73b74kug (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6babmp54hss73b74kug unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 9 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 580s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=580.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babp954hss73b74l2g
+IBM job d6babp954hss73b74l2g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6babp954hss73b74l2g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6babp954hss73b74l2g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.2s (total: 10 ok, 0 failed)
+[ibm_quantum] Usage check: 578s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 578s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=578.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babs4nsg9c7398peng
+IBM job d6babs4nsg9c7398peng (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6babs4nsg9c7398peng (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6babs4nsg9c7398peng unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 11 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 576s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=576.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6babup7ce2c73ff6bq0
+IBM job d6babup7ce2c73ff6bq0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6babup7ce2c73ff6bq0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6babup7ce2c73ff6bq0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 12 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 574s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=574.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bac1ng4t5c73844qkg
+IBM job d6bac1ng4t5c73844qkg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6bac1ng4t5c73844qkg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bac1ng4t5c73844qkg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 13 ok, 0 failed)
+[ibm_quantum] Usage check: 572s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 572s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=572.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bac4cnsg9c7398pf1g
+IBM job d6bac4cnsg9c7398pf1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bac4cnsg9c7398pf1g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bac4cnsg9c7398pf1g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 14 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 570s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=570.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bac6snsg9c7398pf4g
+IBM job d6bac6snsg9c7398pf4g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bac6snsg9c7398pf4g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bac6snsg9c7398pf4g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 15 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 568s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=568.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bac9ng4t5c73844qtg
+IBM job d6bac9ng4t5c73844qtg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6bac9ng4t5c73844qtg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=113.2
+IBM job completed | backend=ibm_marrakesh job_id=d6bac9ng4t5c73844qtg unique_bitstrings=1000
+Job completed on ibm_quantum in 116.0s (total: 16 ok, 0 failed)
+[ibm_quantum] Usage check: 560s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 560s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=560.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bad717ce2c73ff6db0
+IBM job d6bad717ce2c73ff6db0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bad717ce2c73ff6db0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=32.5
+IBM job completed | backend=ibm_marrakesh job_id=d6bad717ce2c73ff6db0 unique_bitstrings=1000
+Job completed on ibm_quantum in 35.6s (total: 17 ok, 0 failed)
+[ibm_quantum] Usage check: 558s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 558s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=558.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6badgh54hss73b74n9g
+IBM job d6badgh54hss73b74n9g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6badgh54hss73b74n9g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_marrakesh job_id=d6badgh54hss73b74n9g unique_bitstrings=1000
+Job completed on ibm_quantum in 13.9s (total: 18 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 556s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=556.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6badkh54hss73b74neg
+IBM job d6badkh54hss73b74neg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6badkh54hss73b74neg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6badkh54hss73b74neg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 19 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 554s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=554.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6badn97ce2c73ff6dv0
+IBM job d6badn97ce2c73ff6dv0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6badn97ce2c73ff6dv0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_marrakesh job_id=d6badn97ce2c73ff6dv0 unique_bitstrings=1000
+Job completed on ibm_quantum in 14.5s (total: 20 ok, 0 failed)
+[ibm_quantum] Usage check: 552s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 552s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=552.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6badrknsg9c7398pgug
+IBM job d6badrknsg9c7398pgug (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6badrknsg9c7398pgug (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=10.9
+IBM job completed | backend=ibm_marrakesh job_id=d6badrknsg9c7398pgug unique_bitstrings=1000
+Job completed on ibm_quantum in 13.9s (total: 21 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 550s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=550.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6badvknsg9c7398ph40
+IBM job d6badvknsg9c7398ph40 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6badvknsg9c7398ph40 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6badvknsg9c7398ph40 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 22 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 548s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=548.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bae2h7ce2c73ff6ebg
+IBM job d6bae2h7ce2c73ff6ebg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bae2h7ce2c73ff6ebg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=102.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bae2h7ce2c73ff6ebg unique_bitstrings=1000
+Job completed on ibm_quantum in 106.0s (total: 23 ok, 0 failed)
+[ibm_quantum] Usage check: 545s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 545s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=545.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6baetknsg9c7398pi30
+IBM job d6baetknsg9c7398pi30 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6baetknsg9c7398pi30 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6baetknsg9c7398pi30 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 24 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 543s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=543.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6baf0fg4t5c73844ttg
+IBM job d6baf0fg4t5c73844ttg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6baf0fg4t5c73844ttg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_marrakesh job_id=d6baf0fg4t5c73844ttg unique_bitstrings=1000
+Job completed on ibm_quantum in 13.9s (total: 25 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 541s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=541.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6baf4fg4t5c73844u1g
+IBM job d6baf4fg4t5c73844u1g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6baf4fg4t5c73844u1g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6baf4fg4t5c73844u1g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 26 ok, 0 failed)
+[ibm_quantum] Usage check: 539s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 539s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=539.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6baf77g4t5c73844u70
+IBM job d6baf77g4t5c73844u70 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6baf77g4t5c73844u70 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6baf77g4t5c73844u70 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 27 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 537s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=537.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6baf9vg4t5c73844ua0
+IBM job d6baf9vg4t5c73844ua0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6baf9vg4t5c73844ua0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=6.1
+IBM job completed | backend=ibm_marrakesh job_id=d6baf9vg4t5c73844ua0 unique_bitstrings=1000
+Job completed on ibm_quantum in 9.2s (total: 28 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 535s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=535.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bafcsnsg9c7398pikg
+IBM job d6bafcsnsg9c7398pikg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bafcsnsg9c7398pikg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bafcsnsg9c7398pikg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 29 ok, 0 failed)
+[ibm_quantum] Usage check: 533s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 533s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=533.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6baffknsg9c7398piog
+IBM job d6baffknsg9c7398piog (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6baffknsg9c7398piog (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6baffknsg9c7398piog unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 30 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 531s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=531.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bafifg4t5c73844ulg
+IBM job d6bafifg4t5c73844ulg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bafifg4t5c73844ulg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bafifg4t5c73844ulg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 31 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 529s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=529.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bafl17ce2c73ff6g4g
+IBM job d6bafl17ce2c73ff6g4g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bafl17ce2c73ff6g4g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bafl17ce2c73ff6g4g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.7s (total: 32 ok, 0 failed)
+[ibm_quantum] Usage check: 527s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 527s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=527.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bafnvg4t5c73844usg
+IBM job d6bafnvg4t5c73844usg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bafnvg4t5c73844usg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bafnvg4t5c73844usg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 33 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 525s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=525.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bafqh7ce2c73ff6gb0
+IBM job d6bafqh7ce2c73ff6gb0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bafqh7ce2c73ff6gb0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bafqh7ce2c73ff6gb0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.5s (total: 34 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 523s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=523.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6baftfg4t5c73844v3g
+IBM job d6baftfg4t5c73844v3g (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.4
+IBM job d6baftfg4t5c73844v3g (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6baftfg4t5c73844v3g unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 35 ok, 0 failed)
+[ibm_quantum] Usage check: 521s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 521s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=521.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bag097ce2c73ff6gj0
+IBM job d6bag097ce2c73ff6gj0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bag097ce2c73ff6gj0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bag097ce2c73ff6gj0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 36 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 519s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=1
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=1 runtime_remaining_sec=519.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bag34nsg9c7398pjf0
+IBM job d6bag34nsg9c7398pjf0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bag34nsg9c7398pjf0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bag34nsg9c7398pjf0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.8s (total: 37 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 517s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=517.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bag5p7ce2c73ff6gpg
+IBM job d6bag5p7ce2c73ff6gpg (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bag5p7ce2c73ff6gpg (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bag5p7ce2c73ff6gpg unique_bitstrings=1000
+Job completed on ibm_quantum in 8.9s (total: 38 ok, 0 failed)
+[ibm_quantum] Usage check: 515s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 515s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=515.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bag8h7ce2c73ff6gu0
+IBM job d6bag8h7ce2c73ff6gu0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bag8h7ce2c73ff6gu0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.7
+IBM job completed | backend=ibm_marrakesh job_id=d6bag8h7ce2c73ff6gu0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 39 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 513s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=513.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bagbfg4t5c73844vl0
+IBM job d6bagbfg4t5c73844vl0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bagbfg4t5c73844vl0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bagbfg4t5c73844vl0 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.6s (total: 40 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 511s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=511.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bage4nsg9c7398pju0
+IBM job d6bage4nsg9c7398pju0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bage4nsg9c7398pju0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=11.0
+IBM job completed | backend=ibm_marrakesh job_id=d6bage4nsg9c7398pju0 unique_bitstrings=1000
+Job completed on ibm_quantum in 13.9s (total: 41 ok, 0 failed)
+[ibm_quantum] Usage check: 509s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 509s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=509.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bagih54hss73b74qq0
+IBM job d6bagih54hss73b74qq0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bagih54hss73b74qq0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=37.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bagih54hss73b74qq0 unique_bitstrings=1000
+Job completed on ibm_quantum in 41.0s (total: 42 ok, 0 failed)
+[ibm_quantum] Usage check: 502s remaining (threshold: 50s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 502s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=502.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bagtfg4t5c73845090
+IBM job d6bagtfg4t5c73845090 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bagtfg4t5c73845090 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_marrakesh job_id=d6bagtfg4t5c73845090 unique_bitstrings=1000
+Job completed on ibm_quantum in 8.4s (total: 43 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 500s left
+Selected IBM backend | selection=least_busy backend=ibm_marrakesh qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_marrakesh required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=500.0 shots=1000
+IBM job submitted | backend=ibm_marrakesh job_id=d6bah04nsg9c7398pkj0
+IBM job d6bah04nsg9c7398pkj0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6bah04nsg9c7398pkj0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=182.5
+IBM job d6bah04nsg9c7398pkj0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=364.8

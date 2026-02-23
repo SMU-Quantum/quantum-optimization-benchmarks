@@ -1,0 +1,78 @@
+{
+  "problem": "qap",
+  "method": "cvar_vqe",
+  "total_instances": 11,
+  "ok_count": 0,
+  "total_runtime_sec": 12659.176096800016,
+  "results": [
+    {
+      "instance": "chr12a.dat",
+      "qubits": 144,
+      "status": "FAILED",
+      "reason": "QPU 'ibm_quantum' unavailable: Runtime budget low: 48s < 50s",
+      "time_sec": 12561.327419000096
+    },
+    {
+      "instance": "chr12b.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "chr12c.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "had12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "nug12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "rou12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "scr12.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai10a.dat",
+      "qubits": 100,
+      "status": "FAILED",
+      "reason": "Maximum allowed dimension exceeded",
+      "time_sec": 2.5469227000139654
+    },
+    {
+      "instance": "tai10b.dat",
+      "qubits": 100,
+      "status": "FAILED",
+      "reason": "Maximum allowed dimension exceeded",
+      "time_sec": 2.454243200016208
+    },
+    {
+      "instance": "tai12a.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "tai12b.dat",
+      "qubits": 144,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    }
+  ]
+}

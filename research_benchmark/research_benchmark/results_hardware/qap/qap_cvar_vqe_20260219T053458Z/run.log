@@ -1,0 +1,229 @@
+Run start | problem=qap method=cvar_vqe mode=multi seed=0
+Instances discovered | problem=qap count=11
+  - chr12a.dat
+  - chr12b.dat
+  - chr12c.dat
+  - had12.dat
+  - nug12.dat
+  - rou12.dat
+  - scr12.dat
+  - tai10a.dat
+  - tai10b.dat
+  - tai12a.dat
+  - tai12b.dat
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 85m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] Ready - IQM Emerald (54 qubits, window: 0m remaining)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 595m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 600s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=909), ibm_marrakesh(156q, pending=4), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_torino, ibm_marrakesh
+[local_qiskit] Ready (max 100 qubits)
+[ibm_quantum] Usage check: 600s remaining (threshold: 50s)
+QPUs skipped for 0-qubit problem:
+  iqm_emerald: outside availability window
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+Execution plan | mode=multi qpus=['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum'] instances=11
+
+[1/11] Starting instance: chr12a.dat
+
+======================================================================
+  Instance: chr12a.dat
+======================================================================
+  Problem: qap | Instance: chr12a.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 144-qubit instance chr12a.dat
+
+[2/11] Starting instance: chr12b.dat
+
+======================================================================
+  Instance: chr12b.dat
+======================================================================
+  Problem: qap | Instance: chr12b.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 144-qubit instance chr12b.dat
+
+[3/11] Starting instance: chr12c.dat
+
+======================================================================
+  Instance: chr12c.dat
+======================================================================
+  Problem: qap | Instance: chr12c.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 144-qubit instance chr12c.dat
+
+[4/11] Starting instance: had12.dat
+
+======================================================================
+  Instance: had12.dat
+======================================================================
+  Problem: qap | Instance: had12.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 144-qubit instance had12.dat
+
+[5/11] Starting instance: nug12.dat
+
+======================================================================
+  Instance: nug12.dat
+======================================================================
+  Problem: qap | Instance: nug12.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 144-qubit instance nug12.dat
+
+[6/11] Starting instance: rou12.dat
+
+======================================================================
+  Instance: rou12.dat
+======================================================================
+  Problem: qap | Instance: rou12.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 144-qubit instance rou12.dat
+
+[7/11] Starting instance: scr12.dat
+
+======================================================================
+  Instance: scr12.dat
+======================================================================
+  Problem: qap | Instance: scr12.dat | Qubits: 144
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+QPUs skipped for 144-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 144)
+  iqm_emerald: too few qubits (54 < 144)
+  iqm_garnet: too few qubits (20 < 144)
+  amazon_sv1: too few qubits (34 < 144)
+  ibm_quantum: too few qubits (133 < 144)
+  local_qiskit: too few qubits (100 < 144)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 144-qubit instance scr12.dat
+
+[8/11] Starting instance: tai10a.dat
+
+======================================================================
+  Instance: tai10a.dat
+======================================================================
+  Problem: qap | Instance: tai10a.dat | Qubits: 100
+QPUs skipped for 100-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 100)
+  iqm_emerald: too few qubits (54 < 100)
+  iqm_garnet: too few qubits (20 < 100)
+  amazon_sv1: too few qubits (34 < 100)
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['ibm_quantum']
+  Ansatz | reps=3 entanglement=circular parameters=400 depth=305 2q_gates=300
+  Optimization | method=cvar_vqe objective=cvar shots=1000 maxiter=200 qpus=['ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> ibm_quantum | shots=1000 qubits=100 | IBM budget: 600s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=100 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=600.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6ba29vg4t5c73844e30
+IBM job d6ba29vg4t5c73844e30 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.4

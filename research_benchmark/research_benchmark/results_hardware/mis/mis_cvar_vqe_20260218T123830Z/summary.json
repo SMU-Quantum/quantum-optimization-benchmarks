@@ -1,0 +1,92 @@
+{
+  "problem": "mis",
+  "method": "cvar_vqe",
+  "total_instances": 7,
+  "ok_count": 5,
+  "total_runtime_sec": 1586.9545870000147,
+  "results": [
+    {
+      "instance": "1dc.128.txt",
+      "qubits": 128,
+      "status": "OK",
+      "objective": 40.0,
+      "feasible": false,
+      "time_sec": 465.9625656999997,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_cvar_vqe_20260218T123830Z\\1dc_128_txt"
+    },
+    {
+      "instance": "1dc.64.txt",
+      "qubits": 64,
+      "status": "OK",
+      "objective": 20.0,
+      "feasible": false,
+      "time_sec": 288.2845282999915,
+      "qpus": [
+        "rigetti_ankaa3",
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_cvar_vqe_20260218T123830Z\\1dc_64_txt"
+    },
+    {
+      "instance": "1et.64.txt",
+      "qubits": 64,
+      "status": "FAILED",
+      "reason": "'Cannot bind parameters (theta_0, theta_1, theta_2, theta_3, theta_4, theta_5, theta_6, theta_7, theta_8, theta_9, theta_10, theta_11, theta_12, theta_13, theta_14, theta_15, theta_16, theta_17, theta",
+      "time_sec": 10.627375199983362
+    },
+    {
+      "instance": "1tc.16.txt",
+      "qubits": 16,
+      "status": "OK",
+      "objective": 7.0,
+      "feasible": true,
+      "time_sec": 431.6531701000058,
+      "qpus": [
+        "rigetti_ankaa3",
+        "iqm_emerald",
+        "iqm_garnet",
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_cvar_vqe_20260218T123830Z\\1tc_16_txt"
+    },
+    {
+      "instance": "1tc.32.txt",
+      "qubits": 32,
+      "status": "OK",
+      "objective": 9.0,
+      "feasible": false,
+      "time_sec": 196.3982219999889,
+      "qpus": [
+        "rigetti_ankaa3",
+        "iqm_emerald",
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_cvar_vqe_20260218T123830Z\\1tc_32_txt"
+    },
+    {
+      "instance": "1tc.64.txt",
+      "qubits": 64,
+      "status": "FAILED",
+      "reason": "'Cannot bind parameters (theta_0, theta_1, theta_2, theta_3, theta_4, theta_5, theta_6, theta_7, theta_8, theta_9, theta_10, theta_11, theta_12, theta_13, theta_14, theta_15, theta_16, theta_17, theta",
+      "time_sec": 12.233679500001017
+    },
+    {
+      "instance": "1tc.8.txt",
+      "qubits": 8,
+      "status": "OK",
+      "objective": 4.0,
+      "feasible": true,
+      "time_sec": 155.53924519999418,
+      "qpus": [
+        "rigetti_ankaa3",
+        "iqm_emerald",
+        "iqm_garnet",
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_cvar_vqe_20260218T123830Z\\1tc_8_txt"
+    }
+  ]
+}

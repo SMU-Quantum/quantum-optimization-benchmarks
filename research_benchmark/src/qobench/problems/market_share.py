@@ -90,6 +90,48 @@ class MarketShareProblem(BenchmarkProblem):
     problem_type = ProblemType.MARKET_SHARE
     description = "Market sharing with target demand split and deviation minimization."
 
+    # Parameter grid for generated instances
+    SEEDS = [0, 1]
+    NUM_PRODUCTS_RANGE = [2, 3, 4, 5]
+
+    @staticmethod
+    def make_generated_instance_name(seed: int, num_products: int) -> str:
+        """Create a canonical filename for a generated instance."""
+        return f"ms_seed{seed}_prod{num_products}.gen"
+
+    @staticmethod
+    def parse_generated_instance_name(name: str) -> tuple[int, int] | None:
+        """Extract (seed, num_products) from a generated instance filename.
+
+        Returns None if the filename does not match the expected pattern.
+        """
+        import re
+        m = re.match(r"ms_seed(\d+)_prod(\d+)\.gen$", name)
+        if m:
+            return int(m.group(1)), int(m.group(2))
+        return None
+
+    def default_instance(self, project_root: Path) -> Path | None:
+        """Return a virtual path for the smallest generated instance."""
+        return Path(self.make_generated_instance_name(seed=0, num_products=2))
+
+    def list_instances(self, project_root: Path, limit: int | None = None) -> list[Path]:
+        """Generate virtual instance paths for all (seed, num_products) combos.
+
+        Market Share instances are generated procedurally, so there are no
+        data files to discover.  Instead we return synthetic Path objects
+        whose filenames encode the parameters.  The runner must call
+        ``parse_generated_instance_name`` on these paths and pass the
+        extracted seed/num_products to ``load_instance``.
+        """
+        paths: list[Path] = []
+        for seed in self.SEEDS:
+            for num_products in self.NUM_PRODUCTS_RANGE:
+                paths.append(Path(self.make_generated_instance_name(seed, num_products)))
+                if limit is not None and len(paths) >= limit:
+                    return paths
+        return paths
+
     def load_instance(self, instance_path: Path | None, **kwargs: Any) -> MarketShareInstance:
         seed = int(kwargs.get("seed", 0))
         target_ratio = float(kwargs.get("target_ratio", 0.5))

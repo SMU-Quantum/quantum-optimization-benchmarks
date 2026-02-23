@@ -4,6 +4,7 @@ import json
 import logging
 import math
 import threading
+import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
 from typing import Any, Literal, Optional
@@ -11,7 +12,7 @@ from typing import Any, Literal, Optional
 import numpy as np
 from scipy.optimize import minimize
 
-from .hardware_manager import HAS_BRAKET, normalize_counts
+from .hardware_manager import HAS_BRAKET, QPUWindowExpiredError, normalize_counts
 
 
 LOGGER = logging.getLogger("qobench.quantum_methods")
@@ -200,18 +201,81 @@ def build_ansatz_bundle(num_qubits: int, layers: int, entanglement: str) -> Ansa
 
 
 class QpuScheduler:
-    def __init__(self, mode: Literal["single", "multi"], qpu_ids: list[str]) -> None:
+    """Round-robin QPU scheduler with availability-window awareness.
+
+    Periodically calls ``manager.refresh_qpu_windows()`` to detect QPUs
+    whose windows have opened or closed, and adjusts the active QPU list
+    accordingly.
+    """
+
+    _WINDOW_CHECK_INTERVAL_SEC = 60.0  # re-check windows at most once per minute
+
+    def __init__(
+        self,
+        mode: Literal["single", "multi"],
+        qpu_ids: list[str],
+        *,
+        manager: Any = None,
+        num_qubits: int = 0,
+    ) -> None:
         if not qpu_ids:
             raise ValueError("qpu_ids must not be empty")
         self.mode = mode
-        self.qpu_ids = qpu_ids
+        self.qpu_ids = list(qpu_ids)
+        self._all_qpu_ids = list(qpu_ids)  # original full set
         self._rr_index = 0
         self._lock = threading.Lock()
+        self._manager = manager
+        self._num_qubits = num_qubits
+        self._last_window_check = time.time()
+
+    # ------------------------------------------------------------------
+    # Window refresh helpers
+    # ------------------------------------------------------------------
+    def _maybe_refresh_windows(self) -> None:
+        """Periodically re-check QPU availability windows."""
+        if self._manager is None:
+            return
+        now = time.time()
+        if now - self._last_window_check < self._WINDOW_CHECK_INTERVAL_SEC:
+            return
+        self._last_window_check = now
+        available = self._manager.refresh_qpu_windows(
+            num_qubits=self._num_qubits
+        )
+        # Re-add QPUs that have come back online
+        for qpu_id in self._all_qpu_ids:
+            if qpu_id in available and qpu_id not in self.qpu_ids:
+                self.qpu_ids.append(qpu_id)
+                LOGGER.info(
+                    "Scheduler: QPU '%s' re-added to active pool", qpu_id,
+                )
+
+    def mark_offline(self, qpu_id: str) -> None:
+        """Remove a QPU from the active rotation."""
+        with self._lock:
+            if qpu_id in self.qpu_ids:
+                self.qpu_ids.remove(qpu_id)
+                LOGGER.info(
+                    "Scheduler: QPU '%s' removed from active pool  "
+                    "(remaining: %s)",
+                    qpu_id, self.qpu_ids or "(none)",
+                )
+
+    @property
+    def has_available_qpus(self) -> bool:
+        return len(self.qpu_ids) > 0
 
     def next_qpu(self) -> str:
-        if self.mode == "single" or len(self.qpu_ids) == 1:
-            return self.qpu_ids[0]
+        self._maybe_refresh_windows()
         with self._lock:
+            if not self.qpu_ids:
+                raise RuntimeError(
+                    "No QPUs available in scheduler. "
+                    "All QPU windows may have closed."
+                )
+            if self.mode == "single" or len(self.qpu_ids) == 1:
+                return self.qpu_ids[0]
             qpu_id = self.qpu_ids[self._rr_index % len(self.qpu_ids)]
             self._rr_index += 1
             return qpu_id
@@ -242,6 +306,8 @@ def _evaluate_theta(
         shots,
         timeout_sec,
     )
+    # QPUWindowExpiredError is intentionally NOT caught here;
+    # callers (_objective_fn / PCE loop) handle failover.
     counts, metadata = manager.run_counts(
         qpu_id=qpu_id,
         qiskit_template=ansatz.qiskit_template,
@@ -375,18 +441,63 @@ def run_variational_method(
     def _objective_fn(theta: np.ndarray) -> float:
         nonlocal best_value, best_theta, best_counts, best_bitstring, best_energy, eval_counter
         eval_counter += 1
-        qpu_id = scheduler.next_qpu()
-        result = _evaluate_theta(
-            theta=theta,
-            qpu_id=qpu_id,
-            manager=manager,
-            ansatz=ansatz,
-            objective=objective,
-            shots=shots,
-            timeout_sec=timeout_sec,
-            objective_mode=objective_mode,
-            cvar_alpha=cvar_alpha,
-        )
+
+        # Retry loop: try each available QPU before giving up
+        max_retries = max(len(scheduler._all_qpu_ids), 2)
+        last_error: Exception | None = None
+        for attempt in range(max_retries):
+            if not scheduler.has_available_qpus:
+                LOGGER.warning(
+                    "All QPUs offline at eval=%s. "
+                    "Forcing window refresh...",
+                    eval_counter,
+                )
+                scheduler._maybe_refresh_windows()
+                if not scheduler.has_available_qpus:
+                    raise RuntimeError(
+                        "No QPUs available — all availability windows are closed."
+                    )
+
+            qpu_id = scheduler.next_qpu()
+            try:
+                result = _evaluate_theta(
+                    theta=theta,
+                    qpu_id=qpu_id,
+                    manager=manager,
+                    ansatz=ansatz,
+                    objective=objective,
+                    shots=shots,
+                    timeout_sec=timeout_sec,
+                    objective_mode=objective_mode,
+                    cvar_alpha=cvar_alpha,
+                )
+                break  # success
+            except QPUWindowExpiredError as exc:
+                last_error = exc
+                LOGGER.warning(
+                    "QPU '%s' window expired at eval=%s (attempt %d/%d). "
+                    "Trying next QPU...",
+                    qpu_id, eval_counter, attempt + 1, max_retries,
+                )
+                scheduler.mark_offline(qpu_id)
+                continue
+            except Exception as exc:
+                last_error = exc
+                LOGGER.warning(
+                    "QPU '%s' failed at eval=%s (attempt %d/%d): %s  "
+                    "Trying next QPU...",
+                    qpu_id, eval_counter, attempt + 1, max_retries,
+                    str(exc)[:200],
+                )
+                # Don't permanently remove — device errors may be transient
+                continue
+        else:
+            # All retries exhausted
+            raise RuntimeError(
+                f"All QPUs failed at eval={eval_counter}. "
+                f"Last error: {last_error}"
+            ) from last_error
+
         value = float(result["objective_value"])
         qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + 1
 
@@ -556,21 +667,40 @@ def run_pce_method(
                     eval_results.append(future.result())
         else:
             for idx in range(population_size):
-                qpu_id = scheduler.next_qpu()
-                qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + 1
-                eval_results.append(
-                    _evaluate_theta(
-                        theta=candidates[idx],
-                        qpu_id=qpu_id,
-                        manager=manager,
-                        ansatz=ansatz,
-                        objective=objective,
-                        shots=shots,
-                        timeout_sec=timeout_sec,
-                        objective_mode="expectation",
-                        cvar_alpha=1.0,
+                # Retry with failover on window expiry
+                max_retries = max(len(scheduler._all_qpu_ids), 2)
+                for attempt in range(max_retries):
+                    qpu_id = scheduler.next_qpu()
+                    try:
+                        result = _evaluate_theta(
+                            theta=candidates[idx],
+                            qpu_id=qpu_id,
+                            manager=manager,
+                            ansatz=ansatz,
+                            objective=objective,
+                            shots=shots,
+                            timeout_sec=timeout_sec,
+                            objective_mode="expectation",
+                            cvar_alpha=1.0,
+                        )
+                        qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + 1
+                        eval_results.append(result)
+                        break
+                    except QPUWindowExpiredError:
+                        LOGGER.warning(
+                            "PCE: QPU '%s' window expired (attempt %d/%d). Trying next...",
+                            qpu_id, attempt + 1, max_retries,
+                        )
+                        scheduler.mark_offline(qpu_id)
+                    except Exception as exc:
+                        LOGGER.warning(
+                            "PCE: QPU '%s' failed (attempt %d/%d): %s  Trying next...",
+                            qpu_id, attempt + 1, max_retries, str(exc)[:200],
+                        )
+                else:
+                    raise RuntimeError(
+                        "All QPUs failed during PCE evaluation"
                     )
-                )
 
         scored: list[tuple[float, dict[str, Any]]] = []
         for result in eval_results:

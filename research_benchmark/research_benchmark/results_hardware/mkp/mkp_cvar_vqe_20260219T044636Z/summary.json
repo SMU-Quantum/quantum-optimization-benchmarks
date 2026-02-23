@@ -1,0 +1,101 @@
+{
+  "problem": "mkp",
+  "method": "cvar_vqe",
+  "total_instances": 12,
+  "ok_count": 2,
+  "total_runtime_sec": 33840.711141999986,
+  "results": [
+    {
+      "instance": "hp1.dat",
+      "qubits": 60,
+      "status": "OK",
+      "objective": 2261.0,
+      "feasible": true,
+      "time_sec": 3446.4993931000354,
+      "qpus": [
+        "rigetti_ankaa3",
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_cvar_vqe_20260219T044636Z\\hp1_dat"
+    },
+    {
+      "instance": "hp2.dat",
+      "qubits": 67,
+      "status": "OK",
+      "objective": 2680.0,
+      "feasible": true,
+      "time_sec": 3974.273963099986,
+      "qpus": [
+        "rigetti_ankaa3",
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_cvar_vqe_20260219T044636Z\\hp2_dat"
+    },
+    {
+      "instance": "pb1.dat",
+      "qubits": 59,
+      "status": "FAILED",
+      "reason": "QPU 'ibm_quantum' unavailable: Runtime budget low: 48s < 50s",
+      "time_sec": 26324.92601529992
+    },
+    {
+      "instance": "pb2.dat",
+      "qubits": 66,
+      "status": "FAILED",
+      "reason": "Maximum allowed dimension exceeded",
+      "time_sec": 3.0706735000712797
+    },
+    {
+      "instance": "pb4.dat",
+      "qubits": 45,
+      "status": "FAILED",
+      "reason": "Unable to allocate 512. TiB for an array with shape (35184372088832,) and data type complex128",
+      "time_sec": 3.0146998000564054
+    },
+    {
+      "instance": "pb5.dat",
+      "qubits": 116,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "pet2.dat",
+      "qubits": 99,
+      "status": "FAILED",
+      "reason": "Maximum allowed dimension exceeded",
+      "time_sec": 3.0782693999353796
+    },
+    {
+      "instance": "pet3.dat",
+      "qubits": 102,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "pet4.dat",
+      "qubits": 107,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "pet5.dat",
+      "qubits": 122,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "pet6.dat",
+      "qubits": 86,
+      "status": "FAILED",
+      "reason": "Maximum allowed dimension exceeded",
+      "time_sec": 2.478452199953608
+    },
+    {
+      "instance": "pet7.dat",
+      "qubits": 100,
+      "status": "FAILED",
+      "reason": "Maximum allowed dimension exceeded",
+      "time_sec": 2.451807399978861
+    }
+  ]
+}

@@ -73,15 +73,28 @@ class MISProblem(BenchmarkProblem):
     description = "Maximum Independent Set (DIMACS edge format)."
 
     def default_instance(self, project_root: Path) -> Path | None:
-        return (
+        candidate = (
             project_root
             / "Maximum_Independent_Set"
             / "mis_benchmark_instances"
-            / "1dc.64.txt"
+            / "1tc.8.txt"
         )
+        if candidate.exists():
+            return candidate
+        candidate_parent = (
+            project_root.parent
+            / "Maximum_Independent_Set"
+            / "mis_benchmark_instances"
+            / "1tc.8.txt"
+        )
+        if candidate_parent.exists():
+            return candidate_parent
+        return candidate
 
     def list_instances(self, project_root: Path, limit: int | None = None) -> list[Path]:
         folder = project_root / "Maximum_Independent_Set" / "mis_benchmark_instances"
+        if not folder.exists():
+            folder = project_root.parent / "Maximum_Independent_Set" / "mis_benchmark_instances"
         if not folder.exists():
             return []
         instances = sorted(folder.glob("*.txt"))

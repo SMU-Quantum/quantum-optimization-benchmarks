@@ -1,0 +1,26 @@
+{
+  "chr12a.dat": {
+    "instance": "chr12a.dat",
+    "qubits": 144,
+    "status": "OK",
+    "objective": 777612.0,
+    "feasible": false,
+    "time_sec": 2981.1610966000007,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_vqe_20260222T090857Z\\chr12a_dat"
+  },
+  "chr12b.dat": {
+    "instance": "chr12b.dat",
+    "qubits": 144,
+    "status": "OK",
+    "objective": 732674.0,
+    "feasible": false,
+    "time_sec": 8653.924101399956,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_vqe_20260222T090857Z\\chr12b_dat"
+  }
+}

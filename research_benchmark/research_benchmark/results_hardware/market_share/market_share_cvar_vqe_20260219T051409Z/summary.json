@@ -1,0 +1,73 @@
+{
+  "problem": "market_share",
+  "method": "cvar_vqe",
+  "total_instances": 8,
+  "ok_count": 2,
+  "total_runtime_sec": 32307.31743309996,
+  "results": [
+    {
+      "instance": "ms_seed0_prod2.gen",
+      "qubits": 48,
+      "status": "OK",
+      "objective": 27.0,
+      "feasible": true,
+      "time_sec": 3102.1595881000394,
+      "qpus": [
+        "rigetti_ankaa3",
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_cvar_vqe_20260219T051409Z\\ms_seed0_prod2_gen"
+    },
+    {
+      "instance": "ms_seed0_prod3.gen",
+      "qubits": 84,
+      "status": "OK",
+      "objective": 347.0,
+      "feasible": true,
+      "time_sec": 2524.208417000016,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_cvar_vqe_20260219T051409Z\\ms_seed0_prod3_gen"
+    },
+    {
+      "instance": "ms_seed0_prod4.gen",
+      "qubits": 118,
+      "status": "FAILED",
+      "reason": "QPU 'ibm_quantum' unavailable: Runtime budget low: 45s < 50s",
+      "time_sec": 26620.164816399978
+    },
+    {
+      "instance": "ms_seed0_prod5.gen",
+      "qubits": 150,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "ms_seed1_prod2.gen",
+      "qubits": 50,
+      "status": "FAILED",
+      "reason": "Unable to allocate 16.0 PiB for an array with shape (1125899906842624,) and data type complex128",
+      "time_sec": 2.498788599972613
+    },
+    {
+      "instance": "ms_seed1_prod3.gen",
+      "qubits": 84,
+      "status": "FAILED",
+      "reason": "Maximum allowed dimension exceeded",
+      "time_sec": 3.2493554999819025
+    },
+    {
+      "instance": "ms_seed1_prod4.gen",
+      "qubits": 118,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    },
+    {
+      "instance": "ms_seed1_prod5.gen",
+      "qubits": 156,
+      "status": "SKIPPED",
+      "reason": "No QPU available"
+    }
+  ]
+}
