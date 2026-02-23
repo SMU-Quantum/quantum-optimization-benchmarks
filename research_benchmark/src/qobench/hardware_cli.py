@@ -14,8 +14,10 @@ from .problem_registry import get_problem
 from .quantum_methods import (
     QpuScheduler,
     QuboObjective,
-    build_ansatz_bundle,
+    build_algorithm_ansatz_bundle,
+    estimate_qrao_num_qubits,
     run_pce_method,
+    run_qrao_method,
     run_variational_method,
     serialize_trace,
 )
@@ -504,13 +506,26 @@ def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
         prog="qobench-hardware",
         description=(
-            "Run benchmark problems on quantum hardware/backends with VQE, CVaR-VQE, or PCE."
+            "Run benchmark problems on quantum hardware/backends with VQE/QAOA-family methods, PCE, or QRAO."
         ),
     )
     parser.add_argument("--problem", required=True, choices=[p.value for p in ProblemType])
     parser.add_argument("--instance", default=None, help="Path to problem instance. If omitted, uses problem default.")
     parser.add_argument("--project-root", default=".")
-    parser.add_argument("--method", required=True, choices=["vqe", "cvar_vqe", "pce"])
+    parser.add_argument(
+        "--method",
+        required=True,
+        choices=[
+            "vqe",
+            "cvar_vqe",
+            "qaoa",
+            "cvar_qaoa",
+            "ws_qaoa",
+            "ma_qaoa",
+            "pce",
+            "qrao",
+        ],
+    )
     parser.add_argument("--execution-mode", default="single", choices=["single", "multi"])
     parser.add_argument("--qpu-id", default=None, help="QPU id for single mode (e.g., ibm_quantum, rigetti_ankaa3, local_qiskit).")
     parser.add_argument("--qpus", default=None, help="Comma-separated QPU ids to restrict scheduling in multi mode.")
@@ -535,6 +550,12 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--qubo-penalty", type=float, default=None)
 
     parser.add_argument("--cvar-alpha", type=float, default=0.25, help="Alpha for CVaR objective.")
+    parser.add_argument(
+        "--ws-epsilon",
+        type=float,
+        default=1e-3,
+        help="Warm-start clipping epsilon for WS-QAOA continuous relaxation values.",
+    )
     parser.add_argument("--pce-population", type=int, default=8)
     parser.add_argument("--pce-elite-frac", type=float, default=0.25)
     parser.add_argument("--pce-parallel-workers", type=int, default=2)
@@ -544,10 +565,44 @@ def build_parser() -> argparse.ArgumentParser:
         default=1,
         help="Number of PCE candidates to submit in one hardware job (single-QPU mode).",
     )
+    parser.add_argument(
+        "--qrao-max-vars-per-qubit",
+        type=int,
+        default=3,
+        help="QRAO only: maximum binary variables encoded per qubit.",
+    )
+    parser.add_argument(
+        "--qrao-reps",
+        type=int,
+        default=2,
+        help="QRAO only: EfficientSU2 repetition depth for the min-eigen solver ansatz.",
+    )
+    parser.add_argument(
+        "--qrao-rounding",
+        type=str.lower,
+        choices=["magic", "semideterministic"],
+        default="magic",
+        help="QRAO only: rounding scheme used to decode compressed solutions.",
+    )
+    parser.add_argument(
+        "--qrao-optimizer",
+        type=str.lower,
+        choices=["cobyla", "powell", "slsqp", "spsa"],
+        default="cobyla",
+        help="QRAO only: classical optimizer for the VQE inner loop.",
+    )
 
     parser.add_argument("--aws-profile", "--profile", dest="aws_profile", default=None)
     parser.add_argument("--ibm-token", default=None)
     parser.add_argument("--ibm-instance", default=None)
+    parser.add_argument(
+        "--ibm-credentials-json",
+        default=None,
+        help=(
+            "Path to a JSON file containing rotating IBM credentials (token + instance/CRN). "
+            "When runtime budget is low, the file is reloaded and the next credential is used."
+        ),
+    )
     parser.add_argument(
         "--qiskit-optimization-level",
         type=int,
@@ -700,25 +755,46 @@ def _solve_single_instance(
         else QuadraticProgramToQubo()
     )
     qubo = converter.convert(qp)
-    num_qubits = int(qubo.get_num_vars())
+    logical_num_qubits = int(qubo.get_num_vars())
+    execution_num_qubits = logical_num_qubits
+    if args.method == "qrao":
+        execution_num_qubits = int(
+            estimate_qrao_num_qubits(
+                qubo=qubo,
+                max_vars_per_qubit=int(args.qrao_max_vars_per_qubit),
+            )
+        )
     LOGGER.info(
         "  Problem: %s | Instance: %s | Qubits: %d",
-        problem_type.value, instance_name, num_qubits,
+        problem_type.value,
+        instance_name,
+        logical_num_qubits,
     )
+    if args.method == "qrao":
+        LOGGER.info(
+            "  QRAO encoding | original_vars=%d encoded_qubits=%d max_vars_per_qubit=%d",
+            logical_num_qubits,
+            execution_num_qubits,
+            int(args.qrao_max_vars_per_qubit),
+        )
 
-    if int(args.max_qubits) > 0 and num_qubits > int(args.max_qubits):
+    if int(args.max_qubits) > 0 and execution_num_qubits > int(args.max_qubits):
         LOGGER.warning(
             "  SKIPPED: %s requires %d qubits, exceeds --max-qubits=%s",
-            instance_name, num_qubits, args.max_qubits,
+            instance_name,
+            execution_num_qubits,
+            args.max_qubits,
         )
         return {
-            "instance": instance_name, "qubits": num_qubits,
-            "status": "SKIPPED", "reason": f"Too many qubits ({num_qubits})",
+            "instance": instance_name,
+            "qubits": execution_num_qubits,
+            "status": "SKIPPED",
+            "reason": f"Too many qubits ({execution_num_qubits})",
         }
 
     # Re-check QPU availability for this problem size
     available_qpus = manager.get_available_qpus_for_size(
-        num_qubits=num_qubits,
+        num_qubits=execution_num_qubits,
         include_simulators=include_simulators,
     )
     # Use pre-selected QPUs but filter for this size
@@ -726,17 +802,19 @@ def _solve_single_instance(
     if not usable_qpus:
         # Try with simulators as fallback
         available_with_sims = manager.get_available_qpus_for_size(
-            num_qubits=num_qubits, include_simulators=True,
+            num_qubits=execution_num_qubits, include_simulators=True,
         )
         usable_qpus = [q for q in available_with_sims if q in scheduler_qpus] or list(available_with_sims)
 
     if not usable_qpus:
         LOGGER.warning(
             "  SKIPPED: No QPU available for %d-qubit instance %s",
-            num_qubits, instance_name,
+            execution_num_qubits,
+            instance_name,
         )
         return {
-            "instance": instance_name, "qubits": num_qubits,
+            "instance": instance_name,
+            "qubits": execution_num_qubits,
             "status": "SKIPPED", "reason": "No QPU available",
         }
 
@@ -744,26 +822,49 @@ def _solve_single_instance(
         mode=args.execution_mode,
         qpu_ids=usable_qpus,
         manager=manager,
-        num_qubits=num_qubits,
+        num_qubits=execution_num_qubits,
     )
-    ansatz = build_ansatz_bundle(
-        num_qubits=num_qubits,
-        layers=int(args.layers),
-        entanglement=str(args.entanglement),
-    )
-    ansatz_metrics = _collect_ansatz_metrics(ansatz)
     objective = QuboObjective(qubo=qubo)
-    LOGGER.info(
-        "  Ansatz | reps=%s entanglement=%s parameters=%s depth=%s 2q_gates=%s",
-        args.layers, args.entanglement,
-        ansatz_metrics.get("trainable_parameters"),
-        ansatz_metrics.get("depth"),
-        ansatz_metrics.get("two_qubit_gates"),
-    )
+    ansatz = None
+    ansatz_metrics: dict[str, Any] = {}
+    if args.method != "qrao":
+        ansatz = build_algorithm_ansatz_bundle(
+            method=args.method,
+            qubo=qubo,
+            layers=int(args.layers),
+            entanglement=str(args.entanglement),
+            qp=qp,
+            ws_epsilon=float(args.ws_epsilon),
+        )
+        ansatz_metrics = _collect_ansatz_metrics(ansatz)
+        LOGGER.info(
+            "  Ansatz | reps=%s entanglement=%s parameters=%s depth=%s 2q_gates=%s",
+            args.layers,
+            args.entanglement,
+            ansatz_metrics.get("trainable_parameters"),
+            ansatz_metrics.get("depth"),
+            ansatz_metrics.get("two_qubit_gates"),
+        )
+    else:
+        ansatz_metrics = {
+            "num_qubits": int(execution_num_qubits),
+            "trainable_parameters": None,
+            "depth": None,
+            "one_qubit_gates": None,
+            "two_qubit_gates": None,
+            "measurement_ops": None,
+        }
+
+    method_objective_label = "expectation"
+    if args.method in {"cvar_vqe", "cvar_qaoa"}:
+        method_objective_label = "cvar"
+    elif args.method == "qrao":
+        method_objective_label = "qrao"
+
     LOGGER.info(
         "  Optimization | method=%s objective=%s shots=%s maxiter=%s qpus=%s",
         args.method,
-        "cvar" if args.method == "cvar_vqe" else "expectation",
+        method_objective_label,
         args.shots, args.maxiter, usable_qpus,
     )
     LOGGER.info(
@@ -778,7 +879,7 @@ def _solve_single_instance(
 
     solve_start = time.perf_counter()
     try:
-        if args.method in ("vqe", "cvar_vqe"):
+        if args.method in ("vqe", "cvar_vqe", "qaoa", "cvar_qaoa", "ws_qaoa", "ma_qaoa"):
             optimization = run_variational_method(
                 method=args.method,
                 manager=manager,
@@ -791,7 +892,7 @@ def _solve_single_instance(
                 cvar_alpha=float(args.cvar_alpha),
                 timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
             )
-        else:
+        elif args.method == "pce":
             optimization = run_pce_method(
                 manager=manager,
                 scheduler=scheduler,
@@ -806,11 +907,27 @@ def _solve_single_instance(
                 parallel_workers=int(args.pce_parallel_workers),
                 batch_size=int(args.pce_batch_size),
             )
+        elif args.method == "qrao":
+            optimization = run_qrao_method(
+                manager=manager,
+                scheduler=scheduler,
+                qubo=qubo,
+                shots=int(args.shots),
+                maxiter=int(args.maxiter),
+                seed=int(args.seed),
+                max_vars_per_qubit=int(args.qrao_max_vars_per_qubit),
+                reps=int(args.qrao_reps),
+                rounding_scheme=str(args.qrao_rounding),
+                optimizer_name=str(args.qrao_optimizer),
+            )
+        else:
+            raise ValueError(f"Unsupported method '{args.method}'")
     except Exception as exc:
         solve_runtime_sec = float(time.perf_counter() - solve_start)
         LOGGER.warning("  FAILED: %s after %.1fs - %s", instance_name, solve_runtime_sec, exc)
         return {
-            "instance": instance_name, "qubits": num_qubits,
+            "instance": instance_name,
+            "qubits": execution_num_qubits,
             "status": "FAILED", "reason": str(exc)[:200],
             "time_sec": solve_runtime_sec,
         }
@@ -884,7 +1001,11 @@ def _solve_single_instance(
         },
         "objective_measured": {
             "optimizer_objective": optimization.objective_mode,
-            "cvar_alpha": float(args.cvar_alpha) if args.method == "cvar_vqe" else None,
+            "cvar_alpha": (
+                float(args.cvar_alpha)
+                if args.method in {"cvar_vqe", "cvar_qaoa"}
+                else None
+            ),
             "reported_best_sample_energy": optimization.best_energy,
             "reported_expected_value": optimization.best_value,
             "post_processed_objective": obj_value,
@@ -946,13 +1067,23 @@ def _solve_single_instance(
             "job_ids": all_job_ids,
             "total_jobs_dispatched": len(all_job_metadata),
             "seed": int(args.seed),
+            "qrao": (
+                {
+                    "max_vars_per_qubit": int(args.qrao_max_vars_per_qubit),
+                    "rounding": str(args.qrao_rounding),
+                    "optimizer": str(args.qrao_optimizer),
+                }
+                if args.method == "qrao"
+                else None
+            ),
         },
 
         # --- Circuit Metrics (pre-transpilation) ---
         "circuit_metrics": {
-            "num_qubits": num_qubits,
-            "ansatz_reps": int(args.layers),
-            "ansatz_entanglement": str(args.entanglement),
+            "num_qubits": execution_num_qubits,
+            "logical_qubits_before_encoding": logical_num_qubits,
+            "ansatz_reps": int(args.qrao_reps) if args.method == "qrao" else int(args.layers),
+            "ansatz_entanglement": "linear" if args.method == "qrao" else str(args.entanglement),
             "trainable_parameters": ansatz_metrics.get("trainable_parameters"),
             "depth_pretranspile": ansatz_metrics.get("depth"),
             "one_qubit_gates_pretranspile": ansatz_metrics.get("one_qubit_gates"),
@@ -1026,7 +1157,7 @@ def _solve_single_instance(
 
     return {
         "instance": instance_name,
-        "qubits": num_qubits,
+        "qubits": execution_num_qubits,
         "status": "OK",
         "objective": obj_value,
         "feasible": feasible,
@@ -1040,6 +1171,11 @@ def run(args: argparse.Namespace) -> int:
     run_start = time.perf_counter()
     project_root = Path(args.project_root).resolve()
     problem_type = ProblemType(args.problem)
+    if args.method == "qrao":
+        if args.execution_mode != "single":
+            raise ValueError("--method=qrao currently requires --execution-mode single.")
+        if int(args.qrao_max_vars_per_qubit) < 1:
+            raise ValueError("--qrao-max-vars-per-qubit must be >= 1.")
     now_utc = datetime.now(timezone.utc)
     run_stamp = now_utc.strftime("%Y%m%dT%H%M%SZ")
     output_root = Path(args.output_root).resolve()
@@ -1118,6 +1254,7 @@ def run(args: argparse.Namespace) -> int:
         aws_profile=args.aws_profile,
         ibm_token=args.ibm_token,
         ibm_instance=args.ibm_instance,
+        ibm_credentials_json=args.ibm_credentials_json,
         use_aws=not bool(args.no_aws),
         use_ibm=not bool(args.no_ibm),
         allow_simulators=True,
@@ -1180,6 +1317,17 @@ def run(args: argparse.Namespace) -> int:
             scheduler_qpus = list(avail)
         if not scheduler_qpus:
             raise RuntimeError("No QPUs available. Try --include-simulators or relax --qpus.")
+
+    if args.method == "qrao":
+        qrao_supported_qpus = {"ibm_quantum", "local_qiskit"}
+        scheduler_qpus = [q for q in scheduler_qpus if q in qrao_supported_qpus]
+        if not scheduler_qpus:
+            raise RuntimeError(
+                "QRAO requires ibm_quantum or local_qiskit. "
+                "Select one with --qpu-id/--only-qpu."
+            )
+        # Single-backend execution only.
+        scheduler_qpus = [scheduler_qpus[0]]
 
     LOGGER.info(
         "Execution plan | mode=%s qpus=%s instances=%d",

@@ -52,6 +52,13 @@ class OptimizationResult:
     trace: list[dict[str, Any]]
 
 
+@dataclass(slots=True)
+class IsingTerms:
+    num_qubits: int
+    linear_terms: list[tuple[int, float]]
+    quadratic_terms: list[tuple[int, int, float]]
+
+
 class QuboObjective:
     def __init__(self, qubo: Any) -> None:
         self.qubo = qubo
@@ -140,6 +147,52 @@ class QuboObjective:
         }
 
 
+def extract_ising_terms(qubo: Any) -> IsingTerms:
+    hamiltonian, _ = qubo.to_ising()
+    linear_terms: dict[int, float] = {}
+    quadratic_terms: dict[tuple[int, int], float] = {}
+
+    for pauli, coeff in zip(hamiltonian.paulis, hamiltonian.coeffs):
+        value = float(np.real(coeff))
+        if not math.isfinite(value) or abs(value) <= 1e-12:
+            continue
+        if np.any(pauli.x):
+            # QUBO->Ising should only produce Z/I terms; ignore anything else.
+            continue
+        z_indices = [int(idx) for idx, bit in enumerate(pauli.z) if bool(bit)]
+        if len(z_indices) == 1:
+            q = z_indices[0]
+            linear_terms[q] = linear_terms.get(q, 0.0) + value
+        elif len(z_indices) == 2:
+            u, v = sorted(z_indices)
+            key = (u, v)
+            quadratic_terms[key] = quadratic_terms.get(key, 0.0) + value
+
+    linear_list = sorted(linear_terms.items(), key=lambda item: item[0])
+    quadratic_list = sorted(
+        [(u, v, c) for (u, v), c in quadratic_terms.items()],
+        key=lambda item: (item[0], item[1]),
+    )
+    return IsingTerms(
+        num_qubits=int(hamiltonian.num_qubits),
+        linear_terms=[(int(q), float(c)) for q, c in linear_list],
+        quadratic_terms=[(int(u), int(v), float(c)) for u, v, c in quadratic_list],
+    )
+
+
+def estimate_qrao_num_qubits(qubo: Any, max_vars_per_qubit: int) -> int:
+    try:
+        from qiskit_optimization.algorithms.qrao import QuantumRandomAccessEncoding
+    except Exception as exc:
+        raise ModuleNotFoundError(
+            "QRAO support requires qiskit-optimization[qrao] components."
+        ) from exc
+
+    encoding = QuantumRandomAccessEncoding(max_vars_per_qubit=int(max_vars_per_qubit))
+    encoding.encode(qubo)
+    return int(encoding.num_qubits)
+
+
 def _entanglement_pairs(num_qubits: int, entanglement: str) -> list[tuple[int, int]]:
     if num_qubits < 2:
         return []
@@ -153,7 +206,7 @@ def _entanglement_pairs(num_qubits: int, entanglement: str) -> list[tuple[int, i
     return [(i, i + 1) for i in range(num_qubits - 1)]
 
 
-def build_ansatz_bundle(num_qubits: int, layers: int, entanglement: str) -> AnsatzBundle:
+def build_vqe_ansatz_bundle(num_qubits: int, layers: int, entanglement: str) -> AnsatzBundle:
     from qiskit import QuantumCircuit
     from qiskit.circuit import Parameter
 
@@ -198,6 +251,225 @@ def build_ansatz_bundle(num_qubits: int, layers: int, entanglement: str) -> Ansa
         braket_template=braket_qc,
         braket_parameters=braket_params if braket_params is not None else [],
     )
+
+
+def _build_warm_start_angles(
+    *,
+    qp: Any | None,
+    num_qubits: int,
+    epsilon: float,
+) -> list[float]:
+    safe_epsilon = min(0.49, max(0.0, float(epsilon)))
+    if qp is None:
+        return [float(math.pi / 2.0) for _ in range(num_qubits)]
+    try:
+        import copy
+
+        from qiskit_optimization.algorithms import CplexOptimizer
+        from qiskit_optimization.problems.variable import VarType
+
+        relaxed_problem = copy.deepcopy(qp)
+        for variable in relaxed_problem.variables:
+            variable.vartype = VarType.CONTINUOUS
+
+        solution = CplexOptimizer().solve(relaxed_problem)
+        values = np.asarray(solution.x, dtype=float)
+        if values.size != num_qubits:
+            raise ValueError(
+                f"Warm-start solution size mismatch: expected {num_qubits}, got {values.size}"
+            )
+        values = np.nan_to_num(values, nan=0.5, posinf=1.0, neginf=0.0)
+        if safe_epsilon > 0.0:
+            values = np.clip(values, safe_epsilon, 1.0 - safe_epsilon)
+        else:
+            values = np.clip(values, 0.0, 1.0)
+        return [float(2.0 * np.arcsin(np.sqrt(v))) for v in values]
+    except Exception as exc:
+        LOGGER.warning(
+            "Warm-start relaxation failed (%s). Falling back to uniform warm-start state.",
+            str(exc)[:200],
+        )
+        return [float(math.pi / 2.0) for _ in range(num_qubits)]
+
+
+def build_qaoa_ansatz_bundle(
+    *,
+    ising_terms: IsingTerms,
+    layers: int,
+    multi_angle: bool = False,
+    warm_start_angles: list[float] | None = None,
+) -> AnsatzBundle:
+    from qiskit import QuantumCircuit
+    from qiskit.circuit import Parameter
+
+    num_qubits = int(ising_terms.num_qubits)
+    qiskit_qc = QuantumCircuit(num_qubits, num_qubits)
+    qiskit_params: list[Any] = []
+
+    braket_qc = None
+    braket_params: list[Any] = []
+    if HAS_BRAKET and Circuit is not None and FreeParameter is not None:
+        braket_qc = Circuit()
+
+    param_counter = 0
+
+    def _new_parameter(prefix: str) -> tuple[Any, Any]:
+        nonlocal param_counter
+        name = f"{prefix}_{param_counter}"
+        param_counter += 1
+        qiskit_param = Parameter(name)
+        qiskit_params.append(qiskit_param)
+        braket_param = None
+        if braket_qc is not None:
+            braket_param = FreeParameter(name)
+            braket_params.append(braket_param)
+        return qiskit_param, braket_param
+
+    if warm_start_angles is None:
+        for q in range(num_qubits):
+            qiskit_qc.h(q)
+            if braket_qc is not None:
+                braket_qc.h(q)
+    else:
+        if len(warm_start_angles) != num_qubits:
+            raise ValueError(
+                f"warm_start_angles length mismatch: expected {num_qubits}, got {len(warm_start_angles)}"
+            )
+        for q, angle in enumerate(warm_start_angles):
+            qiskit_qc.ry(float(angle), q)
+            if braket_qc is not None:
+                braket_qc.ry(q, float(angle))
+
+    for _layer in range(int(layers)):
+        if multi_angle:
+            linear_params: list[tuple[int, float, Any, Any]] = []
+            quad_params: list[tuple[int, int, float, Any, Any]] = []
+            for q, coeff in ising_terms.linear_terms:
+                q_param, b_param = _new_parameter("gamma")
+                linear_params.append((int(q), float(coeff), q_param, b_param))
+            for u, v, coeff in ising_terms.quadratic_terms:
+                q_param, b_param = _new_parameter("gamma")
+                quad_params.append((int(u), int(v), float(coeff), q_param, b_param))
+        else:
+            shared_q_param, shared_b_param = _new_parameter("gamma")
+            linear_params = [
+                (int(q), float(coeff), shared_q_param, shared_b_param)
+                for q, coeff in ising_terms.linear_terms
+            ]
+            quad_params = [
+                (int(u), int(v), float(coeff), shared_q_param, shared_b_param)
+                for u, v, coeff in ising_terms.quadratic_terms
+            ]
+
+        for q, coeff, q_param, b_param in linear_params:
+            qiskit_qc.rz((2.0 * coeff) * q_param, q)
+            if braket_qc is not None:
+                braket_qc.rz(q, (2.0 * coeff) * b_param)
+
+        for u, v, coeff, q_param, b_param in quad_params:
+            angle_q = (2.0 * coeff) * q_param
+            qiskit_qc.rzz(angle_q, u, v)
+            if braket_qc is not None:
+                angle_b = (2.0 * coeff) * b_param
+                # Braket does not expose a direct RZZ gate in all SDK versions.
+                braket_qc.cnot(u, v)
+                braket_qc.rz(v, angle_b)
+                braket_qc.cnot(u, v)
+
+        if warm_start_angles is None:
+            if multi_angle:
+                for q in range(num_qubits):
+                    q_param, b_param = _new_parameter("beta")
+                    qiskit_qc.rx(2.0 * q_param, q)
+                    if braket_qc is not None:
+                        braket_qc.rx(q, 2.0 * b_param)
+            else:
+                q_param, b_param = _new_parameter("beta")
+                for q in range(num_qubits):
+                    qiskit_qc.rx(2.0 * q_param, q)
+                    if braket_qc is not None:
+                        braket_qc.rx(q, 2.0 * b_param)
+        else:
+            q_param, b_param = _new_parameter("beta")
+            for q, angle in enumerate(warm_start_angles):
+                theta = float(angle)
+                qiskit_qc.ry(-theta, q)
+                qiskit_qc.rz(-2.0 * q_param, q)
+                qiskit_qc.ry(theta, q)
+                if braket_qc is not None:
+                    braket_qc.ry(q, -theta)
+                    braket_qc.rz(q, -2.0 * b_param)
+                    braket_qc.ry(q, theta)
+
+    qiskit_qc.measure(range(num_qubits), range(num_qubits))
+    if warm_start_angles is not None:
+        ansatz_label = "ws_qaoa"
+    elif multi_angle:
+        ansatz_label = "ma_qaoa"
+    else:
+        ansatz_label = "qaoa"
+
+    return AnsatzBundle(
+        ansatz_id=f"{ansatz_label}_n{num_qubits}_l{layers}",
+        num_qubits=num_qubits,
+        num_parameters=len(qiskit_params),
+        qiskit_template=qiskit_qc,
+        qiskit_parameters=qiskit_params,
+        braket_template=braket_qc,
+        braket_parameters=braket_params,
+    )
+
+
+def build_algorithm_ansatz_bundle(
+    *,
+    method: str,
+    qubo: Any,
+    layers: int,
+    entanglement: str,
+    qp: Any | None = None,
+    ws_epsilon: float = 1e-3,
+) -> AnsatzBundle:
+    m = str(method).lower()
+    if m in {"vqe", "cvar_vqe", "pce"}:
+        return build_vqe_ansatz_bundle(
+            num_qubits=int(qubo.get_num_vars()),
+            layers=int(layers),
+            entanglement=entanglement,
+        )
+
+    terms = extract_ising_terms(qubo)
+    if m in {"qaoa", "cvar_qaoa"}:
+        return build_qaoa_ansatz_bundle(
+            ising_terms=terms,
+            layers=int(layers),
+            multi_angle=False,
+            warm_start_angles=None,
+        )
+    if m == "ws_qaoa":
+        warm_start = _build_warm_start_angles(
+            qp=qp,
+            num_qubits=int(terms.num_qubits),
+            epsilon=float(ws_epsilon),
+        )
+        return build_qaoa_ansatz_bundle(
+            ising_terms=terms,
+            layers=int(layers),
+            multi_angle=False,
+            warm_start_angles=warm_start,
+        )
+    if m == "ma_qaoa":
+        return build_qaoa_ansatz_bundle(
+            ising_terms=terms,
+            layers=int(layers),
+            multi_angle=True,
+            warm_start_angles=None,
+        )
+    raise ValueError(f"Unsupported ansatz method '{method}'.")
+
+
+def build_ansatz_bundle(num_qubits: int, layers: int, entanglement: str) -> AnsatzBundle:
+    # Backward-compatible wrapper for existing callers.
+    return build_vqe_ansatz_bundle(num_qubits=num_qubits, layers=layers, entanglement=entanglement)
 
 
 class QpuScheduler:
@@ -402,7 +674,7 @@ def _evaluate_thetas_batch(
 
 def run_variational_method(
     *,
-    method: Literal["vqe", "cvar_vqe"],
+    method: Literal["vqe", "cvar_vqe", "qaoa", "cvar_qaoa", "ws_qaoa", "ma_qaoa"],
     manager: Any,
     scheduler: QpuScheduler,
     ansatz: AnsatzBundle,
@@ -414,7 +686,7 @@ def run_variational_method(
     timeout_sec: float | None,
 ) -> OptimizationResult:
     objective_mode: Literal["expectation", "cvar"] = "expectation"
-    if method == "cvar_vqe":
+    if method in {"cvar_vqe", "cvar_qaoa"}:
         objective_mode = "cvar"
 
     rng = np.random.default_rng(seed)
@@ -784,6 +1056,233 @@ def run_pce_method(
         optimizer_message="PCE finished",
         total_evaluations=int(eval_counter),
         qpu_usage=qpu_usage,
+        trace=trace,
+    )
+
+
+def run_qrao_method(
+    *,
+    manager: Any,
+    scheduler: QpuScheduler,
+    qubo: Any,
+    shots: int,
+    maxiter: int,
+    seed: int,
+    max_vars_per_qubit: int,
+    reps: int,
+    rounding_scheme: Literal["magic", "semideterministic"],
+    optimizer_name: str,
+) -> OptimizationResult:
+    try:
+        from qiskit.circuit.library import EfficientSU2
+        try:
+            from qiskit.primitives import BackendEstimatorV2 as BackendEstimator
+            from qiskit.primitives import BackendSamplerV2 as BackendSampler
+        except Exception:
+            from qiskit.primitives import BackendEstimator, BackendSampler
+        from qiskit_algorithms import VQE
+        from qiskit_algorithms.optimizers import COBYLA, POWELL, SPSA, SLSQP
+        from qiskit_algorithms.utils import algorithm_globals
+        from qiskit_optimization.algorithms.qrao import (
+            MagicRounding,
+            QuantumRandomAccessEncoding,
+            QuantumRandomAccessOptimizer,
+            SemideterministicRounding,
+        )
+    except Exception as exc:
+        raise ModuleNotFoundError(
+            "QRAO dependencies are missing. Install qiskit, qiskit-algorithms, and qiskit-optimization."
+        ) from exc
+
+    if scheduler.mode == "multi" and len(scheduler.qpu_ids) > 1:
+        raise ValueError("QRAO currently supports a single selected QPU/backend.")
+
+    encoding = QuantumRandomAccessEncoding(max_vars_per_qubit=int(max_vars_per_qubit))
+    encoding.encode(qubo)
+    encoded_qubits = int(encoding.num_qubits)
+
+    qpu_id = scheduler.next_qpu()
+    qpu = manager.qpus.get(qpu_id)
+    if qpu is None:
+        raise RuntimeError(f"Unknown QPU id selected for QRAO: {qpu_id}")
+
+    backend = None
+    backend_name = qpu_id
+    pending_jobs = None
+
+    if qpu.provider == "ibm":
+        manager._refresh_ibm_usage_if_needed()
+        if not qpu.is_available:
+            raise RuntimeError(f"IBM unavailable: {qpu.last_error}")
+        backend_info = manager._select_ibm_backend_info(encoded_qubits)
+        if backend_info is None:
+            raise RuntimeError(
+                f"No IBM backend supports encoded QRAO size ({encoded_qubits} qubits)"
+            )
+        backend = backend_info["backend"]
+        backend_name = str(backend_info.get("name", getattr(backend, "name", qpu_id)))
+        pending_jobs = backend_info.get("pending_jobs")
+    elif qpu.provider == "local_qiskit":
+        try:
+            from qiskit_aer import AerSimulator
+        except Exception as exc:
+            raise ModuleNotFoundError(
+                "QRAO on local_qiskit requires qiskit-aer to be installed."
+            ) from exc
+        backend = AerSimulator(method="matrix_product_state")
+        backend_name = "aer_simulator_mps"
+    else:
+        raise RuntimeError(
+            f"QRAO currently supports only IBM or local_qiskit backends (got '{qpu.provider}')."
+        )
+
+    def _build_primitive(cls: Any) -> Any:
+        try:
+            return cls(backend=backend)
+        except Exception:
+            return cls(backend)
+
+    estimator = _build_primitive(BackendEstimator)
+    try:
+        sampler = BackendSampler(backend=backend, options={"default_shots": int(shots)})
+    except Exception:
+        try:
+            sampler = BackendSampler(backend=backend)
+        except Exception:
+            sampler = BackendSampler(backend)
+
+    optimizer_key = str(optimizer_name).strip().lower()
+    if optimizer_key == "powell":
+        optimizer = POWELL(maxiter=int(maxiter))
+    elif optimizer_key == "slsqp":
+        optimizer = SLSQP(maxiter=int(maxiter))
+    elif optimizer_key == "spsa":
+        optimizer = SPSA(maxiter=int(maxiter))
+    else:
+        optimizer_key = "cobyla"
+        optimizer = COBYLA(maxiter=int(maxiter))
+
+    algorithm_globals.random_seed = int(seed)
+    ansatz = EfficientSU2(num_qubits=encoded_qubits, entanglement="linear", reps=int(reps)).decompose()
+
+    trace: list[dict[str, Any]] = [
+        {
+            "qrao_setup": {
+                "qpu_id": qpu_id,
+                "backend_name": backend_name,
+                "backend_pending_jobs": pending_jobs,
+                "encoded_qubits": encoded_qubits,
+                "original_variables": int(qubo.get_num_vars()),
+                "max_vars_per_qubit": int(max_vars_per_qubit),
+                "compression_ratio": (
+                    float(encoding.num_vars) / float(encoding.num_qubits)
+                    if int(encoding.num_qubits) > 0
+                    else None
+                ),
+                "rounding_scheme": rounding_scheme,
+                "optimizer": optimizer_key,
+            }
+        }
+    ]
+    eval_counter = 0
+
+    def _callback(*args: Any) -> None:
+        nonlocal eval_counter
+        eval_counter += 1
+        objective_value = float("nan")
+        if len(args) >= 3:
+            try:
+                objective_value = float(args[2])
+            except Exception:
+                objective_value = float("nan")
+        trace.append(
+            {
+                "evaluation": int(eval_counter),
+                "qpu_id": qpu_id,
+                "backend_name": backend_name,
+                "objective_value": objective_value,
+            }
+        )
+
+    vqe = VQE(
+        ansatz=ansatz,
+        optimizer=optimizer,
+        estimator=estimator,
+        callback=_callback,
+    )
+
+    if rounding_scheme == "magic":
+        rounding = MagicRounding(sampler=sampler)
+    else:
+        rounding = SemideterministicRounding()
+
+    qrao = QuantumRandomAccessOptimizer(
+        min_eigen_solver=vqe,
+        rounding_scheme=rounding,
+    )
+    result = qrao.solve(qubo)
+
+    best_vector = [int(v) for v in list(result.x)]
+    best_bitstring = "".join("1" if v == 1 else "0" for v in best_vector)
+    best_energy = float(qubo.objective.evaluate(best_vector))
+    best_value = float(getattr(result, "fval", best_energy))
+
+    best_counts: dict[str, int] = {}
+    samples = list(getattr(result, "samples", []) or [])
+    for sample in samples[:64]:
+        try:
+            sample_vec = [int(v) for v in list(sample.x)]
+            bitstring = "".join("1" if v == 1 else "0" for v in sample_vec)
+            probability = float(getattr(sample, "probability", 0.0))
+            count = int(round(probability * float(shots)))
+            if count > 0:
+                best_counts[bitstring] = best_counts.get(bitstring, 0) + count
+        except Exception:
+            continue
+    if not best_counts:
+        best_counts[best_bitstring] = int(max(1, shots))
+
+    min_eigen_result = getattr(result, "min_eigen_solver_result", None)
+    best_theta: list[float] = []
+    if min_eigen_result is not None:
+        optimal_point = getattr(min_eigen_result, "optimal_point", None)
+        if optimal_point is not None:
+            try:
+                best_theta = [float(v) for v in list(optimal_point)]
+            except Exception:
+                best_theta = []
+        if not best_theta:
+            optimal_parameters = getattr(min_eigen_result, "optimal_parameters", None)
+            if isinstance(optimal_parameters, dict):
+                try:
+                    items = sorted(
+                        optimal_parameters.items(),
+                        key=lambda item: str(item[0]),
+                    )
+                    best_theta = [float(v) for _, v in items]
+                except Exception:
+                    best_theta = []
+
+    optimizer_status = "0"
+    optimizer_message = "QRAO finished"
+    if min_eigen_result is not None:
+        optimizer_result = getattr(min_eigen_result, "optimizer_result", None)
+        if optimizer_result is not None:
+            optimizer_status = str(getattr(optimizer_result, "status", optimizer_status))
+            optimizer_message = str(getattr(optimizer_result, "message", optimizer_message))
+
+    return OptimizationResult(
+        method="qrao",
+        objective_mode="qrao",
+        best_value=float(best_value),
+        best_theta=best_theta,
+        best_bitstring=best_bitstring,
+        best_energy=float(best_energy),
+        best_counts=best_counts,
+        optimizer_status=optimizer_status,
+        optimizer_message=optimizer_message,
+        total_evaluations=int(max(eval_counter, 1)),
+        qpu_usage={qpu_id: int(max(eval_counter, 1))},
         trace=trace,
     )
 

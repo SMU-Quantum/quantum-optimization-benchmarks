@@ -11,7 +11,7 @@ It supports four problems:
 You can run:
 - the original notebook versions in the top-level problem folders
 - the Python CLI for model/QUBO runs
-- the hardware CLI for `vqe`, `cvar_vqe`, and `pce` on IBM, AWS, or local qiskit
+- the hardware CLI for `vqe`, `cvar_vqe`, `qaoa`, `cvar_qaoa`, `ws_qaoa`, `ma_qaoa`, `pce`, and `qrao`
 
 ## Setup
 
@@ -59,6 +59,16 @@ Main entrypoint:
 .venv/bin/python research_benchmark/run_hardware_benchmark.py --help
 ```
 
+Supported methods:
+- `vqe`
+- `cvar_vqe`
+- `qaoa`
+- `cvar_qaoa`
+- `ws_qaoa`
+- `ma_qaoa`
+- `pce`
+- `qrao`
+
 ### Single QPU (example: MKP + CVaR-VQE on IBM)
 
 ```bash
@@ -88,6 +98,39 @@ Main entrypoint:
   --maxiter 20
 ```
 
+### Single QPU (example: MIS + MA-QAOA on AWS Rigetti)
+
+```bash
+.venv/bin/python research_benchmark/run_hardware_benchmark.py \
+  --problem mis \
+  --instance Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt \
+  --method ma_qaoa \
+  --execution-mode single \
+  --qpu-id rigetti_ankaa3 \
+  --only-qpu rigetti_ankaa3 \
+  --aws-profile quantum \
+  --shots 512 \
+  --maxiter 20
+```
+
+### Single QPU (example: MKP + QRAO on IBM)
+
+```bash
+.venv/bin/python research_benchmark/run_hardware_benchmark.py \
+  --problem mkp \
+  --instance Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat \
+  --method qrao \
+  --execution-mode single \
+  --qpu-id ibm_quantum \
+  --only-qpu ibm_quantum \
+  --qrao-max-vars-per-qubit 3 \
+  --qrao-reps 2 \
+  --qrao-rounding magic \
+  --qrao-optimizer cobyla \
+  --shots 1000 \
+  --maxiter 20
+```
+
 ### Multi QPU (example: MIS + PCE)
 
 ```bash
@@ -105,11 +148,36 @@ Main entrypoint:
 
 - IBM credentials are loaded from saved system account by default.
 - `--ibm-token` and `--ibm-instance` are optional overrides.
+- `--ibm-credentials-json` enables automatic IBM credential rotation when runtime budget falls below `--ibm-min-runtime-seconds` (default `50` seconds).
 - AWS auth uses `--profile` or `--aws-profile`.
 - IBM backend is selected from least-busy eligible devices.
 - Queue status is printed at `--queue-status-seconds` interval (default: `120` seconds).
 - Qiskit transpilation uses `--qiskit-optimization-level` (default: `3`).
 - `--only-qpu` forces strict single-backend filtering.
+- `qrao` currently runs on `ibm_quantum` or `local_qiskit` in single-QPU mode.
+
+### IBM Rotating Credential JSON Format
+
+```json
+{
+  "credentials": [
+    {
+      "label": "account-1",
+      "token": "YOUR_TOKEN_1",
+      "instance": "crn:v1:bluemix:public:quantum-computing:..."
+    },
+    {
+      "label": "account-2",
+      "token": "YOUR_TOKEN_2",
+      "crn": "crn:v1:bluemix:public:quantum-computing:..."
+    }
+  ]
+}
+```
+
+You can update this file while a benchmark run is active. When IBM runtime is low, the runner reloads the file, switches to the next credential, saves that account, and continues.
+
+Template file: `research_benchmark/examples/ibm_credentials.example.json`
 
 ## Outputs
 
@@ -145,3 +213,25 @@ Quick manual test:
 ```
 
 Use `--dry-run` to print the exact command without submitting jobs.
+
+## Quick Smoke Test (All Algorithms)
+
+Run all implemented methods on one discovered instance with short budget (`maxiter=10`):
+
+```bash
+python3 research_benchmark/run_all_algorithms_smoke.py \
+  --problem mis \
+  --qpu-id local_qiskit \
+  --maxiter 10 \
+  --shots 128
+```
+
+You can also pass a specific instance:
+
+```bash
+python3 research_benchmark/run_all_algorithms_smoke.py \
+  --problem mkp \
+  --instance Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat \
+  --qpu-id local_qiskit \
+  --maxiter 10
+```

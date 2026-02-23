@@ -43,7 +43,20 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help="Path to MKP instance. Defaults to sac94/hp/hp1.dat in this repository.",
     )
-    parser.add_argument("--method", choices=["vqe", "cvar_vqe", "pce"], default="cvar_vqe")
+    parser.add_argument(
+        "--method",
+        choices=[
+            "vqe",
+            "cvar_vqe",
+            "qaoa",
+            "cvar_qaoa",
+            "ws_qaoa",
+            "ma_qaoa",
+            "pce",
+            "qrao",
+        ],
+        default="cvar_vqe",
+    )
     parser.add_argument("--execution-mode", choices=["single", "multi"], default="single")
     parser.add_argument(
         "--qpu-id",
@@ -74,6 +87,30 @@ def build_parser() -> argparse.ArgumentParser:
         help="PCE-only: number of candidates per hardware submission.",
     )
     parser.add_argument(
+        "--qrao-max-vars-per-qubit",
+        type=int,
+        default=3,
+        help="QRAO-only: maximum variables encoded per qubit.",
+    )
+    parser.add_argument(
+        "--qrao-reps",
+        type=int,
+        default=2,
+        help="QRAO-only: EfficientSU2 ansatz repetition depth.",
+    )
+    parser.add_argument(
+        "--qrao-rounding",
+        choices=["magic", "semideterministic"],
+        default="magic",
+        help="QRAO-only: rounding strategy.",
+    )
+    parser.add_argument(
+        "--qrao-optimizer",
+        choices=["cobyla", "powell", "slsqp", "spsa"],
+        default="cobyla",
+        help="QRAO-only: classical optimizer for the VQE inner loop.",
+    )
+    parser.add_argument(
         "--queue-status-seconds",
         type=float,
         default=120.0,
@@ -90,6 +127,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--profile", default=None, help="AWS profile name (same behavior as evaluate_multi_qpu_bandits.py).")
     parser.add_argument("--ibm-instance", default=None, help="Optional IBM instance CRN.")
     parser.add_argument("--ibm-token", default=None, help="Optional IBM token (not required if saved system-wide).")
+    parser.add_argument(
+        "--ibm-credentials-json",
+        default=None,
+        help="Optional JSON file with rotating IBM credentials (token + instance/CRN).",
+    )
     parser.add_argument("--no-aws", action="store_true")
     parser.add_argument("--no-ibm", action="store_true")
     parser.add_argument("--include-simulators", action="store_true")
@@ -197,12 +239,19 @@ def main() -> int:
         command.extend(["--timeout-sec", str(float(args.timeout_sec))])
     if args.method == "pce":
         command.extend(["--pce-batch-size", str(int(args.pce_batch_size))])
+    if args.method == "qrao":
+        command.extend(["--qrao-max-vars-per-qubit", str(int(args.qrao_max_vars_per_qubit))])
+        command.extend(["--qrao-reps", str(int(args.qrao_reps))])
+        command.extend(["--qrao-rounding", args.qrao_rounding])
+        command.extend(["--qrao-optimizer", args.qrao_optimizer])
     if args.profile:
         command.extend(["--profile", args.profile])
     if args.ibm_instance:
         command.extend(["--ibm-instance", args.ibm_instance])
     if args.ibm_token:
         command.extend(["--ibm-token", args.ibm_token])
+    if args.ibm_credentials_json:
+        command.extend(["--ibm-credentials-json", args.ibm_credentials_json])
     if args.no_aws:
         command.append("--no-aws")
     if args.no_ibm:

@@ -1,0 +1,2 @@
+Dependency error: No module named 'numpy'
+Run this command in your benchmark virtual environment, e.g. `.venv/bin/python`.

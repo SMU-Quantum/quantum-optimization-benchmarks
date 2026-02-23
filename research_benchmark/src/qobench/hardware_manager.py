@@ -1,10 +1,12 @@
 from __future__ import annotations
 
+import json
 import logging
 import threading
 import time
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
+from pathlib import Path
 from typing import Any, Optional
 
 # Optional imports for hardware backends.
@@ -242,6 +244,7 @@ class QuantumHardwareManager:
         aws_profile: str | None = None,
         ibm_token: str | None = None,
         ibm_instance: str | None = None,
+        ibm_credentials_json: str | None = None,
         use_aws: bool = True,
         use_ibm: bool = True,
         allow_simulators: bool = True,
@@ -251,6 +254,20 @@ class QuantumHardwareManager:
         self.aws_profile = aws_profile
         self.ibm_token = ibm_token
         self.ibm_instance = ibm_instance
+        self.ibm_credentials_json = (
+            Path(ibm_credentials_json).expanduser().resolve()
+            if ibm_credentials_json
+            else None
+        )
+        self._ibm_credential_pool: list[dict[str, str]] = []
+        self._ibm_credential_file_mtime_ns: int | None = None
+        self._ibm_credential_next_index = 0
+        self._ibm_active_credential_key: str | None = None
+        self._ibm_credential_missing_warned = False
+        if self.ibm_token and self.ibm_instance:
+            self._ibm_active_credential_key = (
+                f"{self.ibm_token.strip()}||{self.ibm_instance.strip()}"
+            )
         self.use_aws = use_aws
         self.use_ibm = use_ibm
         self.allow_simulators = allow_simulators
@@ -280,6 +297,9 @@ class QuantumHardwareManager:
         self._ibm_usage_check_interval = 30.0
         self._ibm_last_reconnect_attempt = 0.0
         self._ibm_reconnect_interval = 120.0
+        if self.ibm_credentials_json is not None:
+            # Rotate quickly when using a live-updated credential file.
+            self._ibm_reconnect_interval = 10.0
         self._ibm_last_backend_refresh = 0.0
         self.ibm_backend_refresh_interval = 300.0
         self.min_window_remaining_minutes = MIN_WINDOW_REMAINING_MINUTES
@@ -287,14 +307,237 @@ class QuantumHardwareManager:
         self.ibm_min_runtime_seconds = IBM_MIN_RUNTIME_SECONDS
         self.job_status_log_interval = 30.0
         LOGGER.debug(
-            "QuantumHardwareManager initialized | use_aws=%s use_ibm=%s allow_simulators=%s aws_profile=%s enabled_qpus=%s qiskit_optimization_level=%s",
+            "QuantumHardwareManager initialized | use_aws=%s use_ibm=%s allow_simulators=%s aws_profile=%s enabled_qpus=%s qiskit_optimization_level=%s ibm_credentials_json=%s",
             self.use_aws,
             self.use_ibm,
             self.allow_simulators,
             self.aws_profile,
             sorted(self.enabled_qpu_ids) if self.enabled_qpu_ids is not None else "all",
             self.qiskit_optimization_level,
+            str(self.ibm_credentials_json) if self.ibm_credentials_json is not None else "(none)",
         )
+
+    @staticmethod
+    def _credential_key(token: str, instance: str) -> str:
+        return f"{token.strip()}||{instance.strip()}"
+
+    @staticmethod
+    def _mask_token(token: str) -> str:
+        t = str(token or "").strip()
+        if len(t) <= 8:
+            return "***"
+        return f"{t[:4]}...{t[-4:]}"
+
+    @staticmethod
+    def _extract_credential_entries(data: Any) -> list[Any]:
+        if isinstance(data, list):
+            return data
+        if isinstance(data, dict):
+            for key in ("credentials", "accounts", "ibm_credentials", "items"):
+                value = data.get(key)
+                if isinstance(value, list):
+                    return value
+            if any(k in data for k in ("token", "api_key", "apikey")):
+                return [data]
+        return []
+
+    @staticmethod
+    def _parse_credential_entry(entry: Any) -> Optional[dict[str, str]]:
+        if not isinstance(entry, dict):
+            return None
+        enabled = entry.get("enabled", True)
+        if isinstance(enabled, str):
+            enabled = enabled.strip().lower() not in {"0", "false", "no"}
+        if enabled is False:
+            return None
+
+        token = (
+            entry.get("token")
+            or entry.get("api_key")
+            or entry.get("apikey")
+            or entry.get("ibm_token")
+        )
+        instance = (
+            entry.get("instance")
+            or entry.get("crn")
+            or entry.get("ibm_instance")
+        )
+        if token is None or instance is None:
+            return None
+        token_s = str(token).strip()
+        instance_s = str(instance).strip()
+        if token_s == "" or instance_s == "":
+            return None
+        label = str(entry.get("label") or entry.get("name") or "").strip()
+        return {
+            "token": token_s,
+            "instance": instance_s,
+            "label": label,
+        }
+
+    def _load_ibm_credential_pool(self, force: bool = False) -> bool:
+        path = self.ibm_credentials_json
+        if path is None:
+            return False
+        try:
+            stat = path.stat()
+        except FileNotFoundError:
+            if not self._ibm_credential_missing_warned:
+                LOGGER.warning(
+                    "[ibm_quantum] Credential JSON not found: %s",
+                    path,
+                )
+                self._ibm_credential_missing_warned = True
+            return False
+        except Exception as exc:
+            LOGGER.warning(
+                "[ibm_quantum] Could not stat credential JSON %s: %s",
+                path,
+                str(exc)[:200],
+            )
+            return False
+        self._ibm_credential_missing_warned = False
+
+        if (
+            not force
+            and self._ibm_credential_file_mtime_ns is not None
+            and stat.st_mtime_ns == self._ibm_credential_file_mtime_ns
+        ):
+            return False
+
+        try:
+            raw = path.read_text(encoding="utf-8")
+        except Exception as exc:
+            LOGGER.warning(
+                "[ibm_quantum] Could not read credential JSON %s: %s",
+                path,
+                str(exc)[:200],
+            )
+            return False
+
+        try:
+            payload = json.loads(raw)
+        except Exception as exc:
+            LOGGER.warning(
+                "[ibm_quantum] Credential JSON parse failed (%s). Keeping previous credential pool.",
+                str(exc)[:200],
+            )
+            return False
+
+        entries = self._extract_credential_entries(payload)
+        parsed: list[dict[str, str]] = []
+        seen: set[str] = set()
+        for entry in entries:
+            cred = self._parse_credential_entry(entry)
+            if cred is None:
+                continue
+            key = self._credential_key(cred["token"], cred["instance"])
+            if key in seen:
+                continue
+            seen.add(key)
+            parsed.append(cred)
+
+        self._ibm_credential_pool = parsed
+        self._ibm_credential_file_mtime_ns = stat.st_mtime_ns
+        if self._ibm_active_credential_key is not None and parsed:
+            for idx, cred in enumerate(parsed):
+                key = self._credential_key(cred["token"], cred["instance"])
+                if key == self._ibm_active_credential_key:
+                    self._ibm_credential_next_index = (idx + 1) % len(parsed)
+                    break
+            else:
+                self._ibm_credential_next_index = 0
+        else:
+            self._ibm_credential_next_index = 0
+
+        LOGGER.info(
+            "[ibm_quantum] Credential pool reloaded from %s (%d usable entries)",
+            path,
+            len(parsed),
+        )
+        return True
+
+    def _persist_ibm_account(self, token: str, instance: str) -> None:
+        if not HAS_IBM_RUNTIME:
+            return
+        save_kwargs = {
+            "token": token,
+            "instance": instance,
+            "set_as_default": True,
+            "overwrite": True,
+        }
+        for channel in ("ibm_cloud", "ibm_quantum"):
+            try:
+                QiskitRuntimeService.save_account(channel=channel, **save_kwargs)
+                LOGGER.info(
+                    "[ibm_quantum] Saved IBM account credentials via channel=%s",
+                    channel,
+                )
+                return
+            except TypeError:
+                # Older qiskit-ibm-runtime versions may not accept channel in save_account.
+                try:
+                    QiskitRuntimeService.save_account(**save_kwargs)
+                    LOGGER.info("[ibm_quantum] Saved IBM account credentials")
+                    return
+                except Exception:
+                    continue
+            except Exception:
+                continue
+
+    def _set_ibm_credential(
+        self,
+        *,
+        token: str,
+        instance: str,
+        persist_account: bool,
+        reason: str,
+    ) -> None:
+        self.ibm_token = token
+        self.ibm_instance = instance
+        self._ibm_active_credential_key = self._credential_key(token, instance)
+        LOGGER.info(
+            "[ibm_quantum] Switched credentials (%s) token=%s instance=%s",
+            reason,
+            self._mask_token(token),
+            "set",
+        )
+        if persist_account:
+            try:
+                self._persist_ibm_account(token, instance)
+            except Exception as exc:
+                LOGGER.warning(
+                    "[ibm_quantum] Failed to persist IBM account credentials: %s",
+                    str(exc)[:200],
+                )
+
+    def _rotate_ibm_credential_from_pool(
+        self,
+        *,
+        force_reload: bool,
+        allow_current: bool,
+        reason: str,
+    ) -> bool:
+        self._load_ibm_credential_pool(force=force_reload)
+        if not self._ibm_credential_pool:
+            return False
+
+        attempts = len(self._ibm_credential_pool)
+        for _ in range(attempts):
+            idx = self._ibm_credential_next_index % len(self._ibm_credential_pool)
+            self._ibm_credential_next_index = (idx + 1) % len(self._ibm_credential_pool)
+            cred = self._ibm_credential_pool[idx]
+            key = self._credential_key(cred["token"], cred["instance"])
+            if not allow_current and key == self._ibm_active_credential_key and len(self._ibm_credential_pool) > 1:
+                continue
+            self._set_ibm_credential(
+                token=cred["token"],
+                instance=cred["instance"],
+                persist_account=True,
+                reason=reason,
+            )
+            return True
+        return False
 
     def _is_enabled(self, qpu_id: str) -> bool:
         if self.enabled_qpu_ids is None:
@@ -592,6 +835,15 @@ class QuantumHardwareManager:
 
     def _init_ibm_device(self) -> bool:
         qpu = self.qpus["ibm_quantum"]
+        if self.ibm_credentials_json is not None:
+            # Auto-load initial credential from file if token/instance were not explicitly set.
+            self._load_ibm_credential_pool(force=False)
+            if (not self.ibm_token or not self.ibm_instance) and self._ibm_credential_pool:
+                self._rotate_ibm_credential_from_pool(
+                    force_reload=False,
+                    allow_current=True,
+                    reason="initialization",
+                )
         LOGGER.info(
             "[ibm_quantum] Connecting (token=%s, instance=%s)...",
             "yes" if self.ibm_token else "saved",
@@ -823,28 +1075,62 @@ class QuantumHardwareManager:
             if now - self._ibm_last_reconnect_attempt >= self._ibm_reconnect_interval:
                 self._ibm_last_reconnect_attempt = now
                 LOGGER.info("[ibm_quantum] Attempting mid-run re-auth/reload...")
-                try:
-                    success = self._init_ibm_device()
-                    refreshed_service = self.sessions.get("ibm_quantum")
-                    refreshed_remaining = (
-                        _get_ibm_usage_remaining_seconds(refreshed_service)
-                        if refreshed_service else None
-                    )
-                    if success and refreshed_remaining is not None and refreshed_remaining >= threshold:
-                        qpu.is_available = True
-                        qpu.last_error = ""
-                        LOGGER.info(
-                            "[ibm_quantum] Re-auth succeeded - %.0fs available (>= %.0fs). Re-enabled.",
-                            refreshed_remaining, threshold,
+                max_attempts = 1
+                if self.ibm_credentials_json is not None:
+                    self._load_ibm_credential_pool(force=True)
+                    max_attempts = max(1, len(self._ibm_credential_pool))
+
+                for attempt in range(max_attempts):
+                    try:
+                        if self.ibm_credentials_json is not None:
+                            rotated = self._rotate_ibm_credential_from_pool(
+                                force_reload=False,
+                                allow_current=(attempt == 0),
+                                reason=f"runtime_low_attempt_{attempt + 1}",
+                            )
+                            if not rotated:
+                                LOGGER.info(
+                                    "[ibm_quantum] No rotating credential available in JSON; retrying current/saved credentials."
+                                )
+
+                        success = self._init_ibm_device()
+                        refreshed_service = self.sessions.get("ibm_quantum")
+                        refreshed_remaining = (
+                            _get_ibm_usage_remaining_seconds(refreshed_service)
+                            if refreshed_service
+                            else None
                         )
-                    else:
-                        remaining_str = f"{refreshed_remaining:.0f}s" if refreshed_remaining is not None else "unknown"
+                        if success and refreshed_remaining is not None and refreshed_remaining >= threshold:
+                            qpu.is_available = True
+                            qpu.last_error = ""
+                            LOGGER.info(
+                                "[ibm_quantum] Re-auth succeeded - %.0fs available (>= %.0fs). Re-enabled.",
+                                refreshed_remaining, threshold,
+                            )
+                            break
+
+                        remaining_str = (
+                            f"{refreshed_remaining:.0f}s"
+                            if refreshed_remaining is not None
+                            else "unknown"
+                        )
                         LOGGER.info(
-                            "[ibm_quantum] Re-auth completed but still unavailable (remaining=%s)",
+                            "[ibm_quantum] Re-auth attempt %d/%d completed but still unavailable (remaining=%s)",
+                            attempt + 1,
+                            max_attempts,
                             remaining_str,
                         )
-                except Exception as e:
-                    LOGGER.warning("[ibm_quantum] Mid-run re-auth failed: %s", e)
+                    except Exception as e:
+                        LOGGER.warning(
+                            "[ibm_quantum] Mid-run re-auth attempt %d/%d failed: %s",
+                            attempt + 1,
+                            max_attempts,
+                            e,
+                        )
+                else:
+                    LOGGER.info(
+                        "[ibm_quantum] Re-auth attempts exhausted; waiting for fresh credentials/runtime budget."
+                    )
         else:
             if not qpu.is_available:
                 LOGGER.info("[ibm_quantum] Runtime available again (%.0fs). Re-enabling.", remaining)
@@ -915,6 +1201,8 @@ class QuantumHardwareManager:
             self._init_braket_device(qpu_id)
 
     def refresh_credentials_if_needed(self) -> None:
+        if self.ibm_credentials_json is not None:
+            self._load_ibm_credential_pool(force=False)
         self._refresh_ibm_usage_if_needed()
         self._refresh_ibm_backends_if_needed(force=False)
         now = time.time()

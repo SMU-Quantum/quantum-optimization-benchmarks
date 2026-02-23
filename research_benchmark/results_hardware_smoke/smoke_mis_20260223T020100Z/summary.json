@@ -1,0 +1,57 @@
+{
+  "timestamp_utc": "20260223T020100Z",
+  "problem": "mis",
+  "instance": "/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1dc.128.txt",
+  "qpu_id": "local_qiskit",
+  "maxiter": 1,
+  "shots": 32,
+  "methods": [
+    "vqe"
+  ],
+  "ok_count": 0,
+  "total": 1,
+  "results": [
+    {
+      "method": "vqe",
+      "command": [
+        "/opt/homebrew/opt/python@3.13/bin/python3.13",
+        "/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py",
+        "--problem",
+        "mis",
+        "--instance",
+        "/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1dc.128.txt",
+        "--method",
+        "vqe",
+        "--execution-mode",
+        "single",
+        "--qpu-id",
+        "local_qiskit",
+        "--only-qpu",
+        "local_qiskit",
+        "--shots",
+        "32",
+        "--maxiter",
+        "1",
+        "--seed",
+        "0",
+        "--layers",
+        "2",
+        "--entanglement",
+        "chain",
+        "--log-level",
+        "INFO",
+        "--output-root",
+        "/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T020100Z/hardware_runs",
+        "--force-rerun",
+        "--include-simulators",
+        "--timeout-sec",
+        "60.0"
+      ],
+      "return_code": 1,
+      "elapsed_sec": 0.04956983400188619,
+      "stdout_log": "/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T020100Z/vqe/stdout.log",
+      "result_dir": null,
+      "status": "FAILED"
+    }
+  ]
+}
