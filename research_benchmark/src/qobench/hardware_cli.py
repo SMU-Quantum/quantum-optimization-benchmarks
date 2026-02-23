@@ -618,7 +618,8 @@ def build_parser() -> argparse.ArgumentParser:
         default=None,
         help=(
             "Path to a JSON file containing rotating IBM credentials (token + instance/CRN). "
-            "When runtime budget is low, the file is reloaded and the next credential is used."
+            "When runtime budget is low, the file is reloaded and the next credential is used. "
+            "Defaults to research_benchmark/examples/ibm_credentials.example.json if not provided."
         ),
     )
     parser.add_argument(
@@ -1383,11 +1384,28 @@ def run(args: argparse.Namespace) -> int:
         include_simulators = True
 
     enabled_qpus = {args.only_qpu} if args.only_qpu is not None else None
+
+    # Default IBM credentials JSON to the example file if not explicitly provided
+    ibm_creds_json = args.ibm_credentials_json
+    if ibm_creds_json is None:
+        _default_creds = (
+            Path(__file__).resolve().parent.parent.parent  # up from src/qobench/ to research_benchmark/
+            / "examples" / "ibm_credentials.example.json"
+        )
+        if _default_creds.is_file():
+            ibm_creds_json = str(_default_creds)
+            LOGGER.info("Using default IBM credentials file: %s", ibm_creds_json)
+        else:
+            LOGGER.debug(
+                "Default IBM credentials file not found at %s; proceeding without.",
+                _default_creds,
+            )
+
     manager = QuantumHardwareManager(
         aws_profile=args.aws_profile,
         ibm_token=args.ibm_token,
         ibm_instance=args.ibm_instance,
-        ibm_credentials_json=args.ibm_credentials_json,
+        ibm_credentials_json=ibm_creds_json,
         use_aws=not bool(args.no_aws),
         use_ibm=not bool(args.no_ibm),
         allow_simulators=True,

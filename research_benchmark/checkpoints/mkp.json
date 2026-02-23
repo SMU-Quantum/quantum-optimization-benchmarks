@@ -118,5 +118,17 @@
       "ibm_quantum"
     ],
     "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_vqe_20260222T085110Z\\pet5_dat"
+  },
+  "pet6.dat": {
+    "instance": "pet6.dat",
+    "qubits": 86,
+    "status": "OK",
+    "objective": 8469.0,
+    "feasible": true,
+    "time_sec": 2469.579470999999,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_vqe_20260223T041613Z\\pet6_dat"
   }
 }

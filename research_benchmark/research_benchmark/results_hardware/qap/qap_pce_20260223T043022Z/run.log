@@ -1,0 +1,69 @@
+Run start | problem=qap method=pce mode=multi seed=0
+Instances discovered | problem=qap count=11
+  - chr12a.dat
+  - chr12b.dat
+  - chr12c.dat
+  - had12.dat
+  - nug12.dat
+  - rou12.dat
+  - scr12.dat
+  - tai10a.dat
+  - tai10b.dat
+  - tai12a.dat
+  - tai12b.dat
+Using default IBM credentials file: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 150m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] OFFLINE (status=OFFLINE)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 660m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Credential pool reloaded from C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json (4 usable entries)
+[ibm_quantum] Switched credentials (initialization) token=S15j...Ip2E instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 394s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=0), ibm_marrakesh(156q, pending=344), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_fez, ibm_torino
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 390s remaining (threshold: 50s)
+QPUs skipped for 0-qubit problem:
+  iqm_emerald: unavailable - Device status: OFFLINE
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+Execution plan | mode=multi qpus=['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum'] instances=11
+Checkpoint loaded | 2 completed instances for qap
+
+[1/11] SKIPPING (already completed): chr12a.dat  [obj=777612.0, feasible=False]
+
+[2/11] SKIPPING (already completed): chr12b.dat  [obj=732674.0, feasible=False]
+
+[3/11] Starting instance: chr12c.dat
+
+======================================================================
+  Instance: chr12c.dat
+======================================================================
+  Problem: qap | Instance: chr12c.dat | Logical Qubits: 144 | Execution Qubits: 11
+  PCE encoding | original_vars=144 encoded_qubits=11 compression_k=2
+QPUs skipped for 11-qubit problem:
+  iqm_emerald: unavailable - Device status: OFFLINE
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+  Ansatz | family=Brickwork reps=22 entanglement=brickwork trainable_parameters=462 depth=89 2q_gates=220
+  PCE setup | k=2 logical_vars=144 encoded_qubits=11 pauli_strings=144 brickwork_depth=22
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=11 | window: 150m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=11
+Dispatching job -> iqm_garnet | shots=1000 qubits=11 | window: 660m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=11

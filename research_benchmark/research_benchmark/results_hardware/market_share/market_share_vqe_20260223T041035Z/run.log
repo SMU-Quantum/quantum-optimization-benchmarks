@@ -1,0 +1,73 @@
+Run start | problem=market_share method=vqe mode=multi seed=0
+Instances discovered | problem=market_share count=8
+  - ms_seed0_prod2.gen
+  - ms_seed0_prod3.gen
+  - ms_seed0_prod4.gen
+  - ms_seed0_prod5.gen
+  - ms_seed1_prod2.gen
+  - ms_seed1_prod3.gen
+  - ms_seed1_prod4.gen
+  - ms_seed1_prod5.gen
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 170m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] OFFLINE (status=OFFLINE)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 680m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+QPUs skipped for 0-qubit problem:
+  iqm_emerald: unavailable - Device status: OFFLINE
+  ibm_quantum: unavailable - Runtime budget low: 49s < 50s
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet']
+Execution plan | mode=multi qpus=['rigetti_ankaa3', 'iqm_garnet'] instances=8
+Checkpoint loaded | 8 completed instances for market_share
+
+[1/8] SKIPPING (already completed): ms_seed0_prod2.gen  [obj=4.0, feasible=True]
+
+[2/8] SKIPPING (already completed): ms_seed0_prod3.gen  [obj=127.0, feasible=True]
+
+[3/8] SKIPPING (already completed): ms_seed0_prod4.gen  [obj=188.0, feasible=True]
+
+[4/8] SKIPPING (already completed): ms_seed0_prod5.gen  [obj=644.0, feasible=True]
+
+[5/8] SKIPPING (already completed): ms_seed1_prod2.gen  [obj=215.0, feasible=True]
+
+[6/8] SKIPPING (already completed): ms_seed1_prod3.gen  [obj=12.0, feasible=True]
+
+[7/8] SKIPPING (already completed): ms_seed1_prod4.gen  [obj=273.0, feasible=True]
+
+[8/8] SKIPPING (already completed): ms_seed1_prod5.gen  [obj=439.0, feasible=True]
+
+======================================================================
+  BENCHMARK SUMMARY | MARKET_SHARE vqe
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  ms_seed0_prod2.gen     48 OK                4.0     True   2340.3
+  ms_seed0_prod3.gen     84 OK              127.0     True   2461.0
+  ms_seed0_prod4.gen    118 OK              188.0     True   2516.7
+  ms_seed0_prod5.gen    150 OK              644.0     True   3076.3
+  ms_seed1_prod2.gen     50 OK              215.0     True   2344.4
+  ms_seed1_prod3.gen     84 OK               12.0     True   2439.7
+  ms_seed1_prod4.gen    118 OK              273.0     True   3074.6
+  ms_seed1_prod5.gen    156 OK              439.0     True   2697.6
+  -----------------------------------------------------------------
+  Total: 8 instances | 8 OK | 21.8s total runtime
+  Results: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\market_share\market_share_vqe_20260223T041035Z

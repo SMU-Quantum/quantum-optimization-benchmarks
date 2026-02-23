@@ -1,0 +1,149 @@
+Run start | problem=mkp method=vqe mode=multi seed=0
+Instances discovered | problem=mkp count=12
+  - hp1.dat
+  - hp2.dat
+  - pb1.dat
+  - pb2.dat
+  - pb4.dat
+  - pb5.dat
+  - pet2.dat
+  - pet3.dat
+  - pet4.dat
+  - pet5.dat
+  - pet6.dat
+  - pet7.dat
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 168m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] OFFLINE (status=OFFLINE)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 678m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+QPUs skipped for 0-qubit problem:
+  iqm_emerald: unavailable - Device status: OFFLINE
+  ibm_quantum: unavailable - Runtime budget low: 49s < 50s
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet']
+Execution plan | mode=multi qpus=['rigetti_ankaa3', 'iqm_garnet'] instances=12
+Checkpoint loaded | 10 completed instances for mkp
+
+[1/12] SKIPPING (already completed): hp1.dat  [obj=2497.0, feasible=True]
+
+[2/12] SKIPPING (already completed): hp2.dat  [obj=2615.0, feasible=True]
+
+[3/12] SKIPPING (already completed): pb1.dat  [obj=2391.0, feasible=True]
+
+[4/12] SKIPPING (already completed): pb2.dat  [obj=2333.0, feasible=True]
+
+[5/12] SKIPPING (already completed): pb4.dat  [obj=63162.0, feasible=True]
+
+[6/12] SKIPPING (already completed): pb5.dat  [obj=1503.0, feasible=True]
+
+[7/12] SKIPPING (already completed): pet2.dat  [obj=72276.0, feasible=True]
+
+[8/12] SKIPPING (already completed): pet3.dat  [obj=2715.0, feasible=True]
+
+[9/12] SKIPPING (already completed): pet4.dat  [obj=3385.0, feasible=True]
+
+[10/12] SKIPPING (already completed): pet5.dat  [obj=9220.0, feasible=True]
+
+[11/12] Starting instance: pet6.dat
+
+======================================================================
+  Instance: pet6.dat
+======================================================================
+  Problem: mkp | Instance: pet6.dat | Qubits: 86
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+QPUs skipped for 86-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 86)
+  iqm_emerald: unavailable - Device status: OFFLINE
+  iqm_garnet: too few qubits (20 < 86)
+  amazon_sv1: too few qubits (34 < 86)
+  ibm_quantum: unavailable - Runtime budget low: 49s < 50s
+  local_qiskit: too few qubits (28 < 86)
+QPUs selected: (none)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+QPUs skipped for 86-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 86)
+  iqm_emerald: unavailable - Device status: OFFLINE
+  iqm_garnet: too few qubits (20 < 86)
+  amazon_sv1: too few qubits (34 < 86)
+  ibm_quantum: unavailable - Runtime budget low: 49s < 50s
+  local_qiskit: too few qubits (28 < 86)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 86-qubit instance pet6.dat
+
+[12/12] Starting instance: pet7.dat
+
+======================================================================
+  Instance: pet7.dat
+======================================================================
+  Problem: mkp | Instance: pet7.dat | Qubits: 100
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+QPUs skipped for 100-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 100)
+  iqm_emerald: unavailable - Device status: OFFLINE
+  iqm_garnet: too few qubits (20 < 100)
+  amazon_sv1: too few qubits (34 < 100)
+  ibm_quantum: unavailable - Runtime budget low: 49s < 50s
+  local_qiskit: too few qubits (28 < 100)
+QPUs selected: (none)
+[ibm_quantum] Connecting (token=saved, instance=default)...
+[ibm_quantum] Connected via saved credentials
+[ibm_quantum] Runtime budget: 49s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 49s < 50s
+QPUs skipped for 100-qubit problem:
+  rigetti_ankaa3: too few qubits (82 < 100)
+  iqm_emerald: unavailable - Device status: OFFLINE
+  iqm_garnet: too few qubits (20 < 100)
+  amazon_sv1: too few qubits (34 < 100)
+  ibm_quantum: unavailable - Runtime budget low: 49s < 50s
+  local_qiskit: too few qubits (28 < 100)
+QPUs selected: (none)
+  SKIPPED: No QPU available for 100-qubit instance pet7.dat
+
+======================================================================
+  BENCHMARK SUMMARY | MKP vqe
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  hp1.dat                60 OK             2497.0     True   2586.6
+  hp2.dat                67 OK             2615.0     True   2525.7
+  pb1.dat                59 OK             2391.0     True   2182.6
+  pb2.dat                66 OK             2333.0     True   2478.9
+  pb4.dat                45 OK            63162.0     True   2252.8
+  pb5.dat               116 OK             1503.0     True   2666.4
+  pet2.dat               99 OK            72276.0     True   2566.0
+  pet3.dat              102 OK             2715.0     True   2334.7
+  pet4.dat              107 OK             3385.0     True   5228.4
+  pet5.dat              122 OK             9220.0     True   6294.9
+  pet6.dat               86 SKIPPED  No QPU avail               0.0
+  pet7.dat              100 SKIPPED  No QPU avail               0.0
+  -----------------------------------------------------------------
+  Total: 12 instances | 10 OK | 36.1s total runtime
+  Results: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_hardware\mkp\mkp_vqe_20260223T041204Z
