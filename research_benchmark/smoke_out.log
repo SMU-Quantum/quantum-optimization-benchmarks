@@ -1,0 +1,686 @@
+Smoke Test Configuration
+  Problem:   mis
+  Instance:  /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt
+  Methods:   vqe, cvar_vqe, qaoa, cvar_qaoa, ws_qaoa, ma_qaoa, pce, qrao
+  QPU:       local_qiskit
+  Max Iter:  10
+  Shots:     128
+  Output:    /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z
+
+[preflight] compileall: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python -m compileall research_benchmark/src/qobench research_benchmark/run_all_algorithms_smoke.py
+[preflight] compileall: OK (log: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/preflight/compileall.log)
+[preflight] parsers_unittest: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python -m unittest research_benchmark/tests/test_parsers.py
+[preflight] parsers_unittest: OK (log: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/preflight/parsers_unittest.log)
+
+[vqe]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method vqe --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators
+Run start | problem=mis method=vqe mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:51 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Qubits: 8
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=chain trainable_parameters=48 depth=16 2q_gates=14
+  Optimization | method=vqe objective=expectation shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 10 ok, 0 failed)
+  Optimization finished | evaluations=10 status=2 time=0.1s
+  Result | objective=4.0 feasible=True postprocess_improved=False
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS vqe
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               8 OK                4.0     True      0.1
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.1s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_vqe_20260223T035153Z
+  Status: OK | elapsed=1.2s
+
+[cvar_vqe]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method cvar_vqe --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators --cvar-alpha 0.25
+Run start | problem=mis method=cvar_vqe mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:51 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Qubits: 8
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=chain trainable_parameters=48 depth=16 2q_gates=14
+  Optimization | method=cvar_vqe objective=cvar shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 10 ok, 0 failed)
+  Optimization finished | evaluations=10 status=2 time=0.1s
+  Result | objective=4.0 feasible=True postprocess_improved=False
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS cvar_vqe
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               8 OK                4.0     True      0.1
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.1s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_cvar_vqe_20260223T035155Z
+  Status: OK | elapsed=1.2s
+
+[qaoa]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method qaoa --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators
+Run start | problem=mis method=qaoa mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:51 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Qubits: 8
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=QAOAAnsatz reps=2 entanglement=problem_hamiltonian trainable_parameters=4 depth=12 2q_gates=12
+  Optimization | method=qaoa objective=expectation shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 10 ok, 0 failed)
+  Optimization finished | evaluations=10 status=2 time=0.1s
+  Result | objective=4.0 feasible=True postprocess_improved=True
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS qaoa
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               8 OK                4.0     True      0.1
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.1s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_qaoa_20260223T035156Z
+  Status: OK | elapsed=1.2s
+
+[cvar_qaoa]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method cvar_qaoa --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators --cvar-alpha 0.25
+Run start | problem=mis method=cvar_qaoa mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:51 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Qubits: 8
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=QAOAAnsatz reps=2 entanglement=problem_hamiltonian trainable_parameters=4 depth=12 2q_gates=12
+  Optimization | method=cvar_qaoa objective=cvar shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 10 ok, 0 failed)
+  Optimization finished | evaluations=10 status=2 time=0.1s
+  Result | objective=4.0 feasible=True postprocess_improved=False
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS cvar_qaoa
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               8 OK                4.0     True      0.1
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.1s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_cvar_qaoa_20260223T035157Z
+  Status: OK | elapsed=1.2s
+
+[ws_qaoa]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method ws_qaoa --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators --ws-epsilon 0.001
+Run start | problem=mis method=ws_qaoa mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:51 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Qubits: 8
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=QAOAAnsatz reps=2 entanglement=problem_hamiltonian trainable_parameters=4 depth=16 2q_gates=12
+  Warm-start | enabled=True source=relaxed_qp epsilon=0.001 initial_params=gamma=pi,beta=pi/2 angle_min=1.5708 angle_max=3.0783 angle_mean=1.9477
+  Optimization | method=ws_qaoa objective=expectation shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 10 ok, 0 failed)
+  Optimization finished | evaluations=10 status=2 time=0.0s
+  Result | objective=4.0 feasible=True postprocess_improved=False
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS ws_qaoa
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               8 OK                4.0     True      0.0
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.3s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_ws_qaoa_20260223T035158Z
+  Status: OK | elapsed=1.5s
+
+[ma_qaoa]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method ma_qaoa --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators
+Run start | problem=mis method=ma_qaoa mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:52 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Qubits: 8
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=QAOAAnsatz (multi-angle) reps=2 entanglement=problem_hamiltonian trainable_parameters=44 depth=12 2q_gates=12
+  Optimization | method=ma_qaoa objective=expectation shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=8
+Job completed on local_qiskit in 0.0s (total: 10 ok, 0 failed)
+  Optimization finished | evaluations=10 status=2 time=0.1s
+  Result | objective=4.0 feasible=True postprocess_improved=False
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS ma_qaoa
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               8 OK                4.0     True      0.1
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.1s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_ma_qaoa_20260223T035200Z
+  Status: OK | elapsed=1.2s
+
+[pce]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method pce --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators --pce-compression-k 2 --pce-depth 0 --pce-population 6 --pce-elite-frac 0.34 --pce-parallel-workers 1 --pce-batch-size 1
+Run start | problem=mis method=pce mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:52 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Logical Qubits: 8 | Execution Qubits: 3
+  PCE encoding | original_vars=8 encoded_qubits=3 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 3-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=Brickwork reps=6 entanglement=brickwork trainable_parameters=30 depth=25 2q_gates=12
+  PCE setup | k=2 logical_vars=8 encoded_qubits=3 pauli_strings=8 brickwork_depth=6
+  Optimization | method=pce objective=expectation shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 10 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 11 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 12 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 13 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 14 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 15 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 16 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 17 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 18 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 19 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 20 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 21 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 22 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 23 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 24 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 25 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 26 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 27 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 28 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 29 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 30 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 31 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 32 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 33 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 34 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 35 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 36 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 37 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 38 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 39 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 40 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 41 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 42 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 43 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 44 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 45 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 46 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 47 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 48 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 49 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 50 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 51 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 52 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 53 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 54 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 55 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 56 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 57 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 58 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 59 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=128 qubits=3
+Job completed on local_qiskit in 0.0s (total: 60 ok, 0 failed)
+  Optimization finished | evaluations=60 status=0 time=0.2s
+  Result | objective=1.0 feasible=True postprocess_improved=True
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS pce
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               3 OK                1.0     True      0.2
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.2s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_pce_20260223T035201Z
+  Status: OK | elapsed=1.3s
+
+[qrao]
+  Command: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/.venv/bin/python /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/run_hardware_benchmark.py --problem mis --instance /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt --method qrao --execution-mode single --qpu-id local_qiskit --only-qpu local_qiskit --shots 128 --maxiter 10 --seed 0 --layers 2 --entanglement chain --log-level INFO --output-root /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs --force-rerun --include-simulators --qrao-max-vars-per-qubit 3 --qrao-reps 2 --qrao-rounding magic --qrao-optimizer cobyla
+Run start | problem=mis method=qrao mode=single seed=0
+Instances discovered | problem=mis count=1
+  - 1tc.8.txt
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[local_qiskit] Ready (max 28 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+
+  Time (SGT): 2026-02-23 11:52 Mon
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  Disabled by --only-qpu filter
+  iqm_emerald          OFFLINE          54  Disabled by --only-qpu filter
+  iqm_garnet           OFFLINE          20  Disabled by --only-qpu filter
+  amazon_sv1           OFFLINE          34  Disabled by --only-qpu filter
+  ibm_quantum          OFFLINE         156  Disabled by --only-qpu filter
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+  Problem: mis | Instance: 1tc.8.txt | Logical Qubits: 8 | Execution Qubits: 4
+  QRAO encoding | original_vars=8 encoded_qubits=4 max_vars_per_qubit=3
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 4-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=24 depth=11 2q_gates=6
+  Optimization | method=qrao objective=qrao shots=128 maxiter=10 qpus=['local_qiskit']
+  Protocol | shots=128 maxiter=10 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+QRAO magic rounding not supported with sampler=StatevectorSampler; falling back to semideterministic rounding.
+  Optimization finished | evaluations=1 status=0 time=0.0s
+  Result | objective=4.0 feasible=True postprocess_improved=False
+  Checkpoint saved | 1tc.8.txt -> /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/checkpoints/mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS qrao
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1tc.8.txt               4 OK                4.0     True      0.0
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 0.2s total runtime
+  Results: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/hardware_runs/mis/mis_qrao_20260223T035202Z
+  Status: OK | elapsed=1.4s
+
+Smoke Test Summary
+  Passed: 8/8
+  Summary JSON: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/smoke_mis_20260223T035152Z/summary.json

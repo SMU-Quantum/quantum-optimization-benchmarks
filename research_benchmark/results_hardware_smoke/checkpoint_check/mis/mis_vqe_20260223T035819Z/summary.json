@@ -1,0 +1,21 @@
+{
+  "problem": "mis",
+  "method": "vqe",
+  "total_instances": 1,
+  "ok_count": 1,
+  "total_runtime_sec": 0.06943937499454478,
+  "results": [
+    {
+      "instance": "1tc.8.txt",
+      "qubits": 8,
+      "status": "OK",
+      "objective": 4.0,
+      "feasible": true,
+      "time_sec": 0.009725417003210168,
+      "qpus": [
+        "local_qiskit"
+      ],
+      "result_dir": "/Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/results_hardware_smoke/checkpoint_check/mis/mis_vqe_20260223T035819Z/1tc_8_txt"
+    }
+  ]
+}

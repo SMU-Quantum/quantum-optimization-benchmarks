@@ -55,10 +55,19 @@ def _resolve_instance(
     if instance_arg:
         candidate = Path(instance_arg)
         if not candidate.is_absolute():
-            candidate = (repo_root / candidate).resolve()
+            cwd_candidate = (Path.cwd() / candidate).resolve()
+            if cwd_candidate.exists():
+                return cwd_candidate
+            repo_candidate = (repo_root / candidate).resolve()
+            if repo_candidate.exists():
+                return repo_candidate
+            raise FileNotFoundError(
+                "Instance not found. Tried: "
+                f"{cwd_candidate} and {repo_candidate}"
+            )
         if not candidate.exists():
             raise FileNotFoundError(f"Instance not found: {candidate}")
-        return candidate
+        return candidate.resolve()
 
     src_path = (repo_root / "research_benchmark" / "src").resolve()
     if str(src_path) not in sys.path:
@@ -128,8 +137,11 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--timeout-sec", type=float, default=None)
     parser.add_argument(
         "--output-root",
-        default="research_benchmark/results_hardware_smoke",
-        help="Folder where smoke test logs and summary are written.",
+        default=None,
+        help=(
+            "Folder where smoke test logs and summary are written. "
+            "Default: <repo>/research_benchmark/results_hardware_smoke."
+        ),
     )
     parser.add_argument(
         "--benchmark-log-level",
@@ -212,7 +224,14 @@ def main() -> int:
         instance_arg=args.instance,
     )
 
-    output_root = Path(args.output_root).resolve()
+    if args.output_root is None:
+        output_root = (repo_root / "research_benchmark" / "results_hardware_smoke").resolve()
+    else:
+        output_root = Path(args.output_root)
+        if not output_root.is_absolute():
+            output_root = (Path.cwd() / output_root).resolve()
+        else:
+            output_root = output_root.resolve()
     output_root.mkdir(parents=True, exist_ok=True)
     run_stamp = datetime.now(timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     run_root = output_root / f"smoke_{args.problem}_{run_stamp}"
@@ -292,6 +311,10 @@ def main() -> int:
         if method == "pce":
             command.extend(
                 [
+                    "--pce-compression-k",
+                    "2",
+                    "--pce-depth",
+                    "0",
                     "--pce-population",
                     "6",
                     "--pce-elite-frac",

@@ -12,9 +12,11 @@ from typing import Any, Sequence
 from .hardware_manager import QuantumHardwareManager
 from .problem_registry import get_problem
 from .quantum_methods import (
+    PceEncoding,
     QpuScheduler,
     QuboObjective,
     build_algorithm_ansatz_bundle,
+    estimate_pce_num_qubits,
     estimate_qrao_num_qubits,
     run_pce_method,
     run_qrao_method,
@@ -54,7 +56,7 @@ def _parse_qpu_list(raw: str | None) -> list[str]:
     return [item.strip() for item in raw.split(",") if item.strip()]
 
 
-def _collect_ansatz_metrics(ansatz: Any) -> dict[str, int]:
+def _collect_ansatz_metrics(ansatz: Any) -> dict[str, Any]:
     one_qubit_gates = 0
     two_qubit_gates = 0
     measurement_ops = 0
@@ -69,6 +71,10 @@ def _collect_ansatz_metrics(ansatz: Any) -> dict[str, int]:
             two_qubit_gates += 1
 
     return {
+        "ansatz_family": str(getattr(ansatz, "ansatz_family", "custom")),
+        "ansatz_reps": getattr(ansatz, "ansatz_reps", None),
+        "ansatz_entanglement": getattr(ansatz, "ansatz_entanglement", None),
+        "ansatz_metadata": getattr(ansatz, "metadata", None) or {},
         "num_qubits": int(ansatz.num_qubits),
         "trainable_parameters": int(ansatz.num_parameters),
         "depth": int(ansatz.qiskit_template.depth()),
@@ -560,6 +566,18 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument("--pce-elite-frac", type=float, default=0.25)
     parser.add_argument("--pce-parallel-workers", type=int, default=2)
     parser.add_argument(
+        "--pce-compression-k",
+        type=int,
+        default=2,
+        help="PCE only: compression factor k used in Pauli-correlation encoding (default: 2).",
+    )
+    parser.add_argument(
+        "--pce-depth",
+        type=int,
+        default=0,
+        help="PCE only: Brickwork ansatz depth. Use 0 for auto depth=2*encoded_qubits.",
+    )
+    parser.add_argument(
         "--pce-batch-size",
         type=int,
         default=1,
@@ -764,18 +782,41 @@ def _solve_single_instance(
                 max_vars_per_qubit=int(args.qrao_max_vars_per_qubit),
             )
         )
-    LOGGER.info(
-        "  Problem: %s | Instance: %s | Qubits: %d",
-        problem_type.value,
-        instance_name,
-        logical_num_qubits,
-    )
+    elif args.method == "pce":
+        execution_num_qubits = int(
+            estimate_pce_num_qubits(
+                num_variables=logical_num_qubits,
+                compression_k=int(args.pce_compression_k),
+            )
+        )
+    if args.method in {"qrao", "pce"}:
+        LOGGER.info(
+            "  Problem: %s | Instance: %s | Logical Qubits: %d | Execution Qubits: %d",
+            problem_type.value,
+            instance_name,
+            logical_num_qubits,
+            execution_num_qubits,
+        )
+    else:
+        LOGGER.info(
+            "  Problem: %s | Instance: %s | Qubits: %d",
+            problem_type.value,
+            instance_name,
+            logical_num_qubits,
+        )
     if args.method == "qrao":
         LOGGER.info(
             "  QRAO encoding | original_vars=%d encoded_qubits=%d max_vars_per_qubit=%d",
             logical_num_qubits,
             execution_num_qubits,
             int(args.qrao_max_vars_per_qubit),
+        )
+    elif args.method == "pce":
+        LOGGER.info(
+            "  PCE encoding | original_vars=%d encoded_qubits=%d compression_k=%d",
+            logical_num_qubits,
+            execution_num_qubits,
+            int(args.pce_compression_k),
         )
 
     if int(args.max_qubits) > 0 and execution_num_qubits > int(args.max_qubits):
@@ -835,18 +876,46 @@ def _solve_single_instance(
             entanglement=str(args.entanglement),
             qp=qp,
             ws_epsilon=float(args.ws_epsilon),
+            pce_compression_k=int(args.pce_compression_k),
+            pce_depth=int(args.pce_depth),
         )
         ansatz_metrics = _collect_ansatz_metrics(ansatz)
         LOGGER.info(
-            "  Ansatz | reps=%s entanglement=%s parameters=%s depth=%s 2q_gates=%s",
-            args.layers,
-            args.entanglement,
+            "  Ansatz | family=%s reps=%s entanglement=%s trainable_parameters=%s depth=%s 2q_gates=%s",
+            ansatz_metrics.get("ansatz_family"),
+            ansatz_metrics.get("ansatz_reps"),
+            ansatz_metrics.get("ansatz_entanglement"),
             ansatz_metrics.get("trainable_parameters"),
             ansatz_metrics.get("depth"),
             ansatz_metrics.get("two_qubit_gates"),
         )
+        if args.method == "ws_qaoa":
+            warm_start = ansatz_metrics.get("ansatz_metadata", {}).get("warm_start", {})
+            LOGGER.info(
+                "  Warm-start | enabled=%s source=%s epsilon=%s initial_params=gamma=pi,beta=pi/2 angle_min=%.4f angle_max=%.4f angle_mean=%.4f",
+                bool(warm_start.get("enabled", False)),
+                warm_start.get("source", "unknown"),
+                args.ws_epsilon,
+                float(warm_start.get("angle_min", float("nan"))),
+                float(warm_start.get("angle_max", float("nan"))),
+                float(warm_start.get("angle_mean", float("nan"))),
+            )
+        if args.method == "pce":
+            pce_meta = ansatz_metrics.get("ansatz_metadata", {}).get("pce_encoding", {})
+            LOGGER.info(
+                "  PCE setup | k=%s logical_vars=%s encoded_qubits=%s pauli_strings=%s brickwork_depth=%s",
+                pce_meta.get("compression_k", args.pce_compression_k),
+                pce_meta.get("logical_num_vars", logical_num_qubits),
+                pce_meta.get("encoded_num_qubits", execution_num_qubits),
+                len(pce_meta.get("pauli_strings", [])),
+                ansatz_metrics.get("ansatz_reps"),
+            )
     else:
         ansatz_metrics = {
+            "ansatz_family": "EfficientSU2",
+            "ansatz_reps": int(args.qrao_reps),
+            "ansatz_entanglement": "linear",
+            "ansatz_metadata": {},
             "num_qubits": int(execution_num_qubits),
             "trainable_parameters": None,
             "depth": None,
@@ -854,6 +923,43 @@ def _solve_single_instance(
             "two_qubit_gates": None,
             "measurement_ops": None,
         }
+        try:
+            from qiskit.circuit.library import EfficientSU2
+
+            qrao_preview = EfficientSU2(
+                num_qubits=int(execution_num_qubits),
+                entanglement="linear",
+                reps=int(args.qrao_reps),
+            ).decompose()
+            one_qubit_gates = 0
+            two_qubit_gates = 0
+            for instruction, qargs, _ in qrao_preview.data:
+                if instruction.name == "measure":
+                    continue
+                if len(qargs) == 1:
+                    one_qubit_gates += 1
+                elif len(qargs) == 2:
+                    two_qubit_gates += 1
+            ansatz_metrics.update(
+                {
+                    "trainable_parameters": int(qrao_preview.num_parameters),
+                    "depth": int(qrao_preview.depth()),
+                    "one_qubit_gates": int(one_qubit_gates),
+                    "two_qubit_gates": int(two_qubit_gates),
+                    "measurement_ops": 0,
+                }
+            )
+        except Exception:
+            pass
+        LOGGER.info(
+            "  Ansatz | family=%s reps=%s entanglement=%s trainable_parameters=%s depth=%s 2q_gates=%s",
+            ansatz_metrics.get("ansatz_family"),
+            ansatz_metrics.get("ansatz_reps"),
+            ansatz_metrics.get("ansatz_entanglement"),
+            ansatz_metrics.get("trainable_parameters"),
+            ansatz_metrics.get("depth"),
+            ansatz_metrics.get("two_qubit_gates"),
+        )
 
     method_objective_label = "expectation"
     if args.method in {"cvar_vqe", "cvar_qaoa"}:
@@ -893,6 +999,18 @@ def _solve_single_instance(
                 timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
             )
         elif args.method == "pce":
+            pce_encoding: PceEncoding | None = None
+            pce_meta = ansatz_metrics.get("ansatz_metadata", {}).get("pce_encoding", {})
+            if isinstance(pce_meta, dict):
+                try:
+                    pce_encoding = PceEncoding(
+                        logical_num_vars=int(pce_meta.get("logical_num_vars", logical_num_qubits)),
+                        encoded_num_qubits=int(pce_meta.get("encoded_num_qubits", execution_num_qubits)),
+                        compression_k=int(pce_meta.get("compression_k", args.pce_compression_k)),
+                        pauli_strings=[str(v) for v in list(pce_meta.get("pauli_strings", []))],
+                    )
+                except Exception:
+                    pce_encoding = None
             optimization = run_pce_method(
                 manager=manager,
                 scheduler=scheduler,
@@ -906,6 +1024,7 @@ def _solve_single_instance(
                 timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
                 parallel_workers=int(args.pce_parallel_workers),
                 batch_size=int(args.pce_batch_size),
+                pce_encoding=pce_encoding,
             )
         elif args.method == "qrao":
             optimization = run_qrao_method(
@@ -1076,14 +1195,23 @@ def _solve_single_instance(
                 if args.method == "qrao"
                 else None
             ),
+            "pce": (
+                {
+                    "compression_k": int(args.pce_compression_k),
+                    "brickwork_depth": int(args.pce_depth) if int(args.pce_depth) > 0 else None,
+                }
+                if args.method == "pce"
+                else None
+            ),
         },
 
         # --- Circuit Metrics (pre-transpilation) ---
         "circuit_metrics": {
             "num_qubits": execution_num_qubits,
             "logical_qubits_before_encoding": logical_num_qubits,
-            "ansatz_reps": int(args.qrao_reps) if args.method == "qrao" else int(args.layers),
-            "ansatz_entanglement": "linear" if args.method == "qrao" else str(args.entanglement),
+            "ansatz_family": ansatz_metrics.get("ansatz_family"),
+            "ansatz_reps": ansatz_metrics.get("ansatz_reps"),
+            "ansatz_entanglement": ansatz_metrics.get("ansatz_entanglement"),
             "trainable_parameters": ansatz_metrics.get("trainable_parameters"),
             "depth_pretranspile": ansatz_metrics.get("depth"),
             "one_qubit_gates_pretranspile": ansatz_metrics.get("one_qubit_gates"),
@@ -1176,6 +1304,11 @@ def run(args: argparse.Namespace) -> int:
             raise ValueError("--method=qrao currently requires --execution-mode single.")
         if int(args.qrao_max_vars_per_qubit) < 1:
             raise ValueError("--qrao-max-vars-per-qubit must be >= 1.")
+    if args.method == "pce":
+        if int(args.pce_compression_k) < 1:
+            raise ValueError("--pce-compression-k must be >= 1.")
+        if int(args.pce_depth) < 0:
+            raise ValueError("--pce-depth must be >= 0.")
     now_utc = datetime.now(timezone.utc)
     run_stamp = now_utc.strftime("%Y%m%dT%H%M%SZ")
     output_root = Path(args.output_root).resolve()
@@ -1439,7 +1572,7 @@ def run(args: argparse.Namespace) -> int:
         json.dumps(to_jsonable(summary), indent=2), encoding="utf-8",
     )
 
-    return 0
+    return 0 if ok_count == len(results) else 1
 
 
 def main(argv: Sequence[str] | None = None) -> int:
