@@ -833,154 +833,237 @@ class QuantumHardwareManager:
             LOGGER.warning("[%s] Init failed - %s", qpu_id, qpu.last_error)
             return False
 
+    def _connect_ibm_service(
+        self,
+        *,
+        token: str | None,
+        instance: str | None,
+        allow_saved_fallback: bool,
+    ) -> Any | None:
+        service = None
+
+        if token and instance:
+            for channel in ("ibm_cloud", "ibm_quantum"):
+                try:
+                    service = QiskitRuntimeService(
+                        channel=channel,
+                        token=token,
+                        instance=instance,
+                    )
+                    if service.active_account() is not None:
+                        LOGGER.info("[ibm_quantum] Connected via %s channel", channel)
+                        return service
+                except Exception:
+                    service = None
+
+        if allow_saved_fallback:
+            try:
+                service = QiskitRuntimeService()
+                if service.active_account() is not None:
+                    LOGGER.info("[ibm_quantum] Connected via saved credentials")
+                    return service
+                service = None
+            except Exception:
+                service = None
+
+        if allow_saved_fallback and token:
+            try:
+                service = QiskitRuntimeService(
+                    channel="ibm_quantum",
+                    token=token,
+                )
+                if service.active_account() is not None:
+                    LOGGER.info("[ibm_quantum] Connected via token")
+                    return service
+            except Exception:
+                service = None
+
+        return None
+
+    def _configure_ibm_session(
+        self,
+        *,
+        service: Any,
+        qpu: QPUConfig,
+    ) -> tuple[bool, Optional[float]]:
+        # Check runtime budget.
+        remaining = _get_ibm_usage_remaining_seconds(service)
+        threshold = float(self.ibm_min_runtime_seconds)
+        if remaining is not None:
+            LOGGER.info(
+                "[ibm_quantum] Runtime budget: %.0fs remaining (threshold: %.0fs)",
+                remaining,
+                threshold,
+            )
+            if remaining < threshold:
+                qpu.is_available = False
+                qpu.last_error = f"Runtime budget low: {remaining:.0f}s < {threshold:.0f}s"
+                LOGGER.warning("[ibm_quantum] %s", qpu.last_error)
+                return False, remaining
+        else:
+            LOGGER.info("[ibm_quantum] Runtime budget: unavailable from API")
+
+        # Discover backends.
+        self.ibm_backends = []
+        try:
+            backends = service.backends(operational=True, simulator=False)
+        except Exception:
+            backends = []
+
+        for backend in backends:
+            try:
+                pending_jobs = None
+                try:
+                    status = backend.status()
+                    pending_jobs = getattr(status, "pending_jobs", None)
+                except Exception:
+                    pending_jobs = None
+                self.ibm_backends.append(
+                    {
+                        "backend": backend,
+                        "name": backend.name,
+                        "num_qubits": int(backend.num_qubits),
+                        "pending_jobs": pending_jobs,
+                    }
+                )
+            except Exception:
+                continue
+
+        self.ibm_backends.sort(key=lambda item: item["num_qubits"], reverse=True)
+
+        candidates = [
+            item for item in self.ibm_backends if item.get("pending_jobs") is not None
+        ]
+        if candidates:
+            candidates.sort(
+                key=lambda item: (
+                    int(item.get("pending_jobs", 10**9)),
+                    -int(item.get("num_qubits", 0)),
+                )
+            )
+            self.ibm_backends_preferred = candidates[:2]
+        else:
+            self.ibm_backends_preferred = self.ibm_backends[:2]
+
+        if self.ibm_backends_preferred:
+            qpu.backend_name = self.ibm_backends_preferred[0]["name"]
+        # max_qubits should reflect the largest backend, not just the preferred one.
+        if self.ibm_backends:
+            qpu.max_qubits = max(int(b["num_qubits"]) for b in self.ibm_backends)
+
+        self.sessions["ibm_quantum"] = service
+        qpu.is_available = len(self.ibm_backends) > 0
+        qpu.last_error = "" if qpu.is_available else "No operational IBM backend found"
+        self._ibm_last_backend_refresh = time.time()
+
+        if self.ibm_backends:
+            backend_strs = [
+                f"{b['name']}({b['num_qubits']}q, pending={b.get('pending_jobs', 'n/a')})"
+                for b in self.ibm_backends
+            ]
+            LOGGER.info(
+                "[ibm_quantum] %d backends found: %s",
+                len(self.ibm_backends),
+                ", ".join(backend_strs),
+            )
+            if self.ibm_backends_preferred:
+                pref_strs = [b["name"] for b in self.ibm_backends_preferred]
+                LOGGER.info("[ibm_quantum] Preferred (least busy): %s", ", ".join(pref_strs))
+        else:
+            LOGGER.warning("[ibm_quantum] No operational backends found")
+
+        return qpu.is_available, remaining
+
+    def _init_ibm_device_from_pool(self) -> bool:
+        qpu = self.qpus["ibm_quantum"]
+        if not self._ibm_credential_pool:
+            return False
+
+        # At startup, always begin from the first credential in the JSON pool.
+        if self.sessions.get("ibm_quantum") is None:
+            self._ibm_credential_next_index = 0
+
+        total = len(self._ibm_credential_pool)
+        threshold = float(self.ibm_min_runtime_seconds)
+        for attempt in range(total):
+            rotated = self._rotate_ibm_credential_from_pool(
+                force_reload=False,
+                allow_current=(attempt == 0),
+                reason="initialization" if attempt == 0 else f"initialization_attempt_{attempt + 1}",
+            )
+            if not rotated:
+                break
+
+            LOGGER.info(
+                "[ibm_quantum] Connecting with credential %d/%d from JSON pool (token=%s, instance=%s)...",
+                attempt + 1,
+                total,
+                "yes" if self.ibm_token else "saved",
+                "yes" if self.ibm_instance else "default",
+            )
+            service = self._connect_ibm_service(
+                token=self.ibm_token,
+                instance=self.ibm_instance,
+                allow_saved_fallback=False,
+            )
+            if service is None:
+                qpu.is_available = False
+                qpu.last_error = "Could not connect to IBM Quantum using selected JSON credential"
+                LOGGER.warning("[ibm_quantum] %s", qpu.last_error)
+                continue
+
+            success, remaining = self._configure_ibm_session(service=service, qpu=qpu)
+            if success:
+                return True
+
+            if remaining is not None and remaining < threshold:
+                LOGGER.info(
+                    "[ibm_quantum] Credential %d/%d runtime too low (%.0fs < %.0fs). Trying next credential.",
+                    attempt + 1,
+                    total,
+                    remaining,
+                    threshold,
+                )
+            else:
+                LOGGER.info(
+                    "[ibm_quantum] Credential %d/%d unusable (%s). Trying next credential.",
+                    attempt + 1,
+                    total,
+                    qpu.last_error or "unknown error",
+                )
+
+        qpu.is_available = False
+        qpu.last_error = (
+            f"No IBM credential met runtime threshold >= {threshold:.0f}s or backend availability."
+        )
+        LOGGER.warning("[ibm_quantum] %s", qpu.last_error)
+        return False
+
     def _init_ibm_device(self) -> bool:
         qpu = self.qpus["ibm_quantum"]
         if self.ibm_credentials_json is not None:
-            # Auto-load initial credential from file if token/instance were not explicitly set.
             self._load_ibm_credential_pool(force=False)
-            if (not self.ibm_token or not self.ibm_instance) and self._ibm_credential_pool:
-                self._rotate_ibm_credential_from_pool(
-                    force_reload=False,
-                    allow_current=True,
-                    reason="initialization",
-                )
+            if self._ibm_credential_pool:
+                return self._init_ibm_device_from_pool()
+
         LOGGER.info(
             "[ibm_quantum] Connecting (token=%s, instance=%s)...",
             "yes" if self.ibm_token else "saved",
             "yes" if self.ibm_instance else "default",
         )
         try:
-            service = None
-
-            if self.ibm_token and self.ibm_instance:
-                for channel in ("ibm_cloud", "ibm_quantum"):
-                    try:
-                        service = QiskitRuntimeService(
-                            channel=channel,
-                            token=self.ibm_token,
-                            instance=self.ibm_instance,
-                        )
-                        if service.active_account() is not None:
-                            LOGGER.info("[ibm_quantum] Connected via %s channel", channel)
-                            break
-                    except Exception:
-                        service = None
-
-            if service is None:
-                try:
-                    service = QiskitRuntimeService()
-                    if service.active_account() is None:
-                        service = None
-                    else:
-                        LOGGER.info("[ibm_quantum] Connected via saved credentials")
-                except Exception:
-                    service = None
-
-            if service is None and self.ibm_token:
-                try:
-                    service = QiskitRuntimeService(
-                        channel="ibm_quantum",
-                        token=self.ibm_token,
-                    )
-                    if service.active_account() is None:
-                        service = None
-                    else:
-                        LOGGER.info("[ibm_quantum] Connected via token")
-                except Exception:
-                    service = None
-
+            service = self._connect_ibm_service(
+                token=self.ibm_token,
+                instance=self.ibm_instance,
+                allow_saved_fallback=True,
+            )
             if service is None:
                 qpu.is_available = False
                 qpu.last_error = "Could not connect to IBM Quantum"
                 LOGGER.warning("[ibm_quantum] All connection methods failed")
                 return False
-
-            # Check runtime budget
-            remaining = _get_ibm_usage_remaining_seconds(service)
-            threshold = float(self.ibm_min_runtime_seconds)
-            if remaining is not None:
-                LOGGER.info(
-                    "[ibm_quantum] Runtime budget: %.0fs remaining (threshold: %.0fs)",
-                    remaining, threshold,
-                )
-                if remaining < threshold:
-                    qpu.is_available = False
-                    qpu.last_error = f"Runtime budget low: {remaining:.0f}s < {threshold:.0f}s"
-                    LOGGER.warning("[ibm_quantum] %s", qpu.last_error)
-                    return False
-            else:
-                LOGGER.info("[ibm_quantum] Runtime budget: unavailable from API")
-
-            # Discover backends
-            self.ibm_backends = []
-            try:
-                backends = service.backends(operational=True, simulator=False)
-            except Exception:
-                backends = []
-
-            for backend in backends:
-                try:
-                    pending_jobs = None
-                    try:
-                        status = backend.status()
-                        pending_jobs = getattr(status, "pending_jobs", None)
-                    except Exception:
-                        pending_jobs = None
-                    self.ibm_backends.append(
-                        {
-                            "backend": backend,
-                            "name": backend.name,
-                            "num_qubits": int(backend.num_qubits),
-                            "pending_jobs": pending_jobs,
-                        }
-                    )
-                except Exception:
-                    continue
-
-            self.ibm_backends.sort(key=lambda item: item["num_qubits"], reverse=True)
-
-            candidates = [
-                item for item in self.ibm_backends if item.get("pending_jobs") is not None
-            ]
-            if candidates:
-                candidates.sort(
-                    key=lambda item: (
-                        int(item.get("pending_jobs", 10**9)),
-                        -int(item.get("num_qubits", 0)),
-                    )
-                )
-                self.ibm_backends_preferred = candidates[:2]
-            else:
-                self.ibm_backends_preferred = self.ibm_backends[:2]
-
-            if self.ibm_backends_preferred:
-                qpu.backend_name = self.ibm_backends_preferred[0]["name"]
-            # max_qubits should reflect the LARGEST backend, not just the
-            # preferred one, so that the size filter in
-            # get_available_qpus_for_size doesn't reject problems that
-            # larger backends can handle.
-            if self.ibm_backends:
-                qpu.max_qubits = max(int(b["num_qubits"]) for b in self.ibm_backends)
-
-            self.sessions["ibm_quantum"] = service
-            qpu.is_available = len(self.ibm_backends) > 0
-            qpu.last_error = "" if qpu.is_available else "No operational IBM backend found"
-            self._ibm_last_backend_refresh = time.time()
-
-            # Log discovered backends
-            if self.ibm_backends:
-                backend_strs = [
-                    f"{b['name']}({b['num_qubits']}q, pending={b.get('pending_jobs', 'n/a')})"
-                    for b in self.ibm_backends
-                ]
-                LOGGER.info("[ibm_quantum] %d backends found: %s", len(self.ibm_backends), ", ".join(backend_strs))
-                if self.ibm_backends_preferred:
-                    pref_strs = [b['name'] for b in self.ibm_backends_preferred]
-                    LOGGER.info("[ibm_quantum] Preferred (least busy): %s", ", ".join(pref_strs))
-            else:
-                LOGGER.warning("[ibm_quantum] No operational backends found")
-
-            return qpu.is_available
+            success, _ = self._configure_ibm_session(service=service, qpu=qpu)
+            return success
         except Exception as exc:
             qpu.is_available = False
             qpu.last_error = str(exc)[:120]
