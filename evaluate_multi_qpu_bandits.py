@@ -143,7 +143,7 @@ from datetime import datetime, timezone, timedelta
 SGT = timezone(timedelta(hours=8))
 MIN_WINDOW_REMAINING_MINUTES = 10  # Generic minimum window (minutes)
 MIN_AWS_WINDOW_REMAINING_MINUTES = 30  # Strict minimum for AWS Braket hardware QPUs
-IBM_MIN_RUNTIME_SECONDS = 50.0  # Minimum IBM runtime budget required to schedule new jobs
+IBM_MIN_RUNTIME_SECONDS = 15.0  # Minimum IBM runtime budget required to schedule new jobs
 
 @dataclass
 class QPUConfig:

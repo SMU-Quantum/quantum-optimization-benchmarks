@@ -1,0 +1,157 @@
+Run start | problem=mkp method=pce mode=multi seed=0
+Instances discovered | problem=mkp count=12
+  - hp1.dat
+  - hp2.dat
+  - pb1.dat
+  - pb2.dat
+  - pb4.dat
+  - pb5.dat
+  - pet2.dat
+  - pet3.dat
+  - pet4.dat
+  - pet5.dat
+  - pet6.dat
+  - pet7.dat
+Using default IBM credentials file: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json
+Initializing backends | use_aws=True use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Connecting to Rigetti Ankaa-3 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+SSO Token refresh succeeded
+[rigetti_ankaa3] Ready - Rigetti Ankaa-3 (82 qubits, window: 45m remaining)
+[iqm_emerald] Connecting to IQM Emerald (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_emerald] OFFLINE (status=OFFLINE)
+[iqm_garnet] Connecting to IQM Garnet (region=eu-north-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[iqm_garnet] Ready - IQM Garnet (20 qubits, window: 555m remaining)
+[amazon_sv1] Connecting to Amazon SV1 (region=us-west-1, profile=quantum)...
+Loading cached SSO token for Quantum
+[amazon_sv1] Ready - Amazon SV1 (34 qubits, window: always-on)
+[ibm_quantum] Credential pool reloaded from C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json (8 usable entries)
+[ibm_quantum] Switched credentials (initialization) token=S15j...Ip2E instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 1/8 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 39s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 39s < 50s
+[ibm_quantum] Credential 1/8 runtime too low (39s < 50s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_2) token=qGjU...aZV0 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 2/8 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 45s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 45s < 50s
+[ibm_quantum] Credential 2/8 runtime too low (45s < 50s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_3) token=A7ub...7bQg instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 3/8 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 45s remaining (threshold: 50s)
+[ibm_quantum] Runtime budget low: 45s < 50s
+[ibm_quantum] Credential 3/8 runtime too low (45s < 50s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_4) token=Yzmh...YfO4 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 4/8 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 600s remaining (threshold: 50s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=18), ibm_marrakesh(156q, pending=355), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_torino, ibm_fez
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 600s remaining (threshold: 50s)
+QPUs skipped for 0-qubit problem:
+  iqm_emerald: unavailable - Device status: OFFLINE
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+Execution plan | mode=multi qpus=['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum'] instances=12
+
+[1/12] Starting instance: hp1.dat
+
+======================================================================
+  Instance: hp1.dat
+======================================================================
+  Problem: mkp | Instance: hp1.dat | Logical Qubits: 60 | Execution Qubits: 7
+  PCE encoding | original_vars=60 encoded_qubits=7 compression_k=2
+QPUs skipped for 7-qubit problem:
+  iqm_emerald: unavailable - Device status: OFFLINE
+  amazon_sv1: simulator reserved as fallback
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+  Ansatz | family=Brickwork reps=14 entanglement=brickwork trainable_parameters=182 depth=57 2q_gates=84
+  PCE setup | k=2 logical_vars=60 encoded_qubits=7 pauli_strings=60 brickwork_depth=14
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['rigetti_ankaa3', 'iqm_garnet', 'ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> iqm_garnet | shots=1000 qubits=7 | window: 554m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=7
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=7 | window: 44m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=7
+Quantum job failed | qpu_id=rigetti_ankaa3 provider=braket_rigetti elapsed_sec=3.660 error=An error occurred (ValidationException) when calling the CreateQuantumTask operation: [line 11] uses a gate: xx which is not supported by the device or defined via a defcal
+Traceback (most recent call last):
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 2196, in run_counts
+    counts, metadata = self._run_braket_counts(
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 1621, in _run_braket_counts
+    task = device.run(bound_circuit, shots=int(shots))
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_device.py", line 210, in run
+    return AwsQuantumTask.create(
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_quantum_task.py", line 227, in create
+    return _create_internal(
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\functools.py", line 889, in wrapper
+    return dispatch(args[0].__class__)(*args, **kw)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_quantum_task.py", line 793, in _
+    task_arn = aws_session.create_quantum_task(**create_task_kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_session.py", line 273, in create_quantum_task
+    response = self.braket_client.create_quantum_task(**boto3_kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\client.py", line 1078, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.ValidationException: An error occurred (ValidationException) when calling the CreateQuantumTask operation: [line 11] uses a gate: xx which is not supported by the device or defined via a defcal
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/543d2784-c65f-4bef-b334-2690f5a5ec22
+Dispatching job -> ibm_quantum | shots=1000 qubits=7 | IBM budget: 600s left
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/543d2784-c65f-4bef-b334-2690f5a5ec22 status | state=QUEUED queue_position=1 elapsed_sec=0.8
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=7 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=600.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6dv1fsnsg9c739bs4eg
+IBM job d6dv1fsnsg9c739bs4eg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/543d2784-c65f-4bef-b334-2690f5a5ec22 status | state=COMPLETED queue_position=None elapsed_sec=6.9
+AWS Braket task completed | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/543d2784-c65f-4bef-b334-2690f5a5ec22 unique_bitstrings=128
+Job completed on iqm_garnet in 12.7s (total: 1 ok, 0 failed)
+IBM job d6dv1fsnsg9c739bs4eg (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+Dispatching job -> rigetti_ankaa3 | shots=1000 qubits=7 | window: 44m left
+Submitting AWS Braket task | qpu_id=rigetti_ankaa3 provider=braket_rigetti shots=1000 qubits=7
+IBM job completed | backend=ibm_torino job_id=d6dv1fsnsg9c739bs4eg unique_bitstrings=124
+Job completed on ibm_quantum in 8.9s (total: 1 ok, 0 failed)
+Dispatching job -> iqm_garnet | shots=1000 qubits=7 | window: 554m left
+Submitting AWS Braket task | qpu_id=iqm_garnet provider=braket_iqm_garnet shots=1000 qubits=7
+Quantum job failed | qpu_id=rigetti_ankaa3 provider=braket_rigetti elapsed_sec=0.487 error=An error occurred (ValidationException) when calling the CreateQuantumTask operation: [line 11] uses a gate: xx which is not supported by the device or defined via a defcal
+Traceback (most recent call last):
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 2196, in run_counts
+    counts, metadata = self._run_braket_counts(
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\src\qobench\hardware_manager.py", line 1621, in _run_braket_counts
+    task = device.run(bound_circuit, shots=int(shots))
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_device.py", line 210, in run
+    return AwsQuantumTask.create(
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_quantum_task.py", line 227, in create
+    return _create_internal(
+  File "C:\Program Files\WindowsApps\PythonSoftwareFoundation.Python.3.10_3.10.3056.0_x64__qbz5n2kfra8p0\lib\functools.py", line 889, in wrapper
+    return dispatch(args[0].__class__)(*args, **kw)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_quantum_task.py", line 793, in _
+    task_arn = aws_session.create_quantum_task(**create_task_kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\braket\aws\aws_session.py", line 273, in create_quantum_task
+    response = self.braket_client.create_quantum_task(**boto3_kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\client.py", line 602, in _api_call
+    return self._make_api_call(operation_name, kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\context.py", line 123, in wrapper
+    return func(*args, **kwargs)
+  File "C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\botocore\client.py", line 1078, in _make_api_call
+    raise error_class(parsed_response, operation_name)
+botocore.errorfactory.ValidationException: An error occurred (ValidationException) when calling the CreateQuantumTask operation: [line 11] uses a gate: xx which is not supported by the device or defined via a defcal
+AWS Braket task submitted | qpu_id=iqm_garnet task_id=arn:aws:braket:eu-north-1:145023100654:quantum-task/f3365ec5-b511-4072-a755-6dbaccb9c8ce
+Dispatching job -> ibm_quantum | shots=1000 qubits=7 | IBM budget: 598s left
+AWS task arn:aws:braket:eu-north-1:145023100654:quantum-task/f3365ec5-b511-4072-a755-6dbaccb9c8ce status | state=QUEUED queue_position=1 elapsed_sec=0.7
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=7 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=598.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6dv1i4nsg9c739bs4hg
+IBM job d6dv1i4nsg9c739bs4hg (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3

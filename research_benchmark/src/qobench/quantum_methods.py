@@ -1158,208 +1158,129 @@ def run_pce_method(
     batch_size: int,
     pce_encoding: PceEncoding | None = None,
 ) -> OptimizationResult:
-    if population_size < 2:
-        raise ValueError("population_size must be >= 2")
-    if not (0.0 < elite_frac <= 1.0):
-        raise ValueError("elite_frac must be in (0, 1].")
-    if batch_size < 1:
-        raise ValueError("batch_size must be >= 1")
+    counts_transform: Callable[[dict[str, int]], dict[str, int]] | None = None
+    if pce_encoding is not None:
+        counts_transform = lambda c: decode_pce_counts(counts=c, encoding=pce_encoding)
 
     rng = np.random.default_rng(seed)
-    mean = rng.uniform(0.0, 2.0 * np.pi, size=(ansatz.num_parameters,))
-    std = np.full(shape=(ansatz.num_parameters,), fill_value=np.pi / 2.0)
-    elite_count = max(1, int(math.ceil(population_size * elite_frac)))
+    theta0 = rng.uniform(0.0, 2.0 * np.pi, size=(ansatz.num_parameters,))
+
     LOGGER.debug(
-        "PCE optimizer start | qpu_mode=%s qpus=%s shots=%s maxiter=%s population=%s elite_count=%s batch_size=%s pce_k=%s encoded_qubits=%s logical_vars=%s",
+        "PCE optimizer start | qpu_mode=%s qpus=%s shots=%s maxiter=%s pce_k=%s encoded_qubits=%s logical_vars=%s",
         scheduler.mode,
         scheduler.qpu_ids,
         shots,
         maxiter,
-        population_size,
-        elite_count,
-        batch_size,
         None if pce_encoding is None else int(pce_encoding.compression_k),
         int(ansatz.num_qubits),
         int(objective.num_qubits),
     )
 
-    counts_transform: Callable[[dict[str, int]], dict[str, int]] | None = None
-    if pce_encoding is not None:
-        counts_transform = lambda c: decode_pce_counts(counts=c, encoding=pce_encoding)
-
     trace: list[dict[str, Any]] = []
     qpu_usage: dict[str, int] = {}
     best_value = float("inf")
-    best_theta = [float(x) for x in mean]
+    best_theta = [float(x) for x in theta0]
     best_bitstring = "0" * int(objective.num_qubits)
     best_energy = float("inf")
     best_counts: dict[str, int] = {}
     eval_counter = 0
 
-    for iteration in range(1, int(maxiter) + 1):
-        LOGGER.debug("PCE iteration start | iteration=%s/%s", iteration, maxiter)
-        candidates = rng.normal(loc=mean, scale=np.maximum(std, 1e-3), size=(population_size, ansatz.num_parameters))
-        candidates = np.mod(candidates, 2.0 * np.pi)
+    def _objective_fn(theta: np.ndarray) -> float:
+        nonlocal best_value, best_theta, best_counts, best_bitstring, best_energy, eval_counter
+        eval_counter += 1
 
-        eval_results: list[dict[str, Any]] = []
-        use_batching = batch_size > 1 and (
-            scheduler.mode == "single" or len(scheduler.qpu_ids) == 1
-        )
-        if batch_size > 1 and not use_batching and iteration == 1:
-            LOGGER.debug(
-                "PCE batching requested but disabled for multi-QPU scheduling; falling back to per-evaluation submissions."
-            )
-
-        if use_batching:
-            for start_idx in range(0, population_size, batch_size):
-                end_idx = min(population_size, start_idx + batch_size)
-                qpu_id = scheduler.next_qpu()
-                chunk = candidates[start_idx:end_idx]
-                qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + len(chunk)
-                eval_results.extend(
-                    _evaluate_thetas_batch(
-                        thetas=chunk,
-                        qpu_id=qpu_id,
-                        manager=manager,
-                        ansatz=ansatz,
-                        objective=objective,
-                        shots=shots,
-                        timeout_sec=timeout_sec,
-                        counts_transform=counts_transform,
-                    )
-                )
-        elif parallel_workers > 1 and scheduler.mode == "multi" and len(scheduler.qpu_ids) > 1:
-            max_workers = min(int(parallel_workers), population_size)
-            with ThreadPoolExecutor(max_workers=max_workers) as pool:
-                futures = []
-                for idx in range(population_size):
-                    qpu_id = scheduler.next_qpu()
-                    qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + 1
-                    futures.append(
-                        pool.submit(
-                            _evaluate_theta,
-                            theta=candidates[idx],
-                            qpu_id=qpu_id,
-                            manager=manager,
-                            ansatz=ansatz,
-                            objective=objective,
-                            shots=shots,
-                            timeout_sec=timeout_sec,
-                            objective_mode="expectation",
-                            cvar_alpha=1.0,
-                            counts_transform=counts_transform,
-                        )
-                    )
-                for future in as_completed(futures):
-                    eval_results.append(future.result())
-        else:
-            for idx in range(population_size):
-                # Retry with failover on window expiry
-                max_retries = max(len(scheduler._all_qpu_ids), 2)
-                for attempt in range(max_retries):
-                    qpu_id = scheduler.next_qpu()
-                    try:
-                        result = _evaluate_theta(
-                            theta=candidates[idx],
-                            qpu_id=qpu_id,
-                            manager=manager,
-                            ansatz=ansatz,
-                            objective=objective,
-                            shots=shots,
-                            timeout_sec=timeout_sec,
-                            objective_mode="expectation",
-                            cvar_alpha=1.0,
-                            counts_transform=counts_transform,
-                        )
-                        qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + 1
-                        eval_results.append(result)
-                        break
-                    except QPUWindowExpiredError:
-                        LOGGER.warning(
-                            "PCE: QPU '%s' window expired (attempt %d/%d). Trying next...",
-                            qpu_id, attempt + 1, max_retries,
-                        )
-                        scheduler.mark_offline(qpu_id)
-                    except Exception as exc:
-                        LOGGER.warning(
-                            "PCE: QPU '%s' failed (attempt %d/%d): %s  Trying next...",
-                            qpu_id, attempt + 1, max_retries, str(exc)[:200],
-                        )
-                else:
-                    raise RuntimeError(
-                        "All QPUs failed during PCE evaluation"
-                    )
-
-        scored: list[tuple[float, dict[str, Any]]] = []
-        for result in eval_results:
-            value = float(result["objective_value"])
-            qpu_id = str(result.get("qpu_id", result.get("metadata", {}).get("qpu_id", "unknown")))
-            eval_counter += 1
-            LOGGER.debug(
-                "PCE evaluation | eval=%s iteration=%s qpu_id=%s objective=%.8f best_sample_energy=%.8f",
-                eval_counter,
-                iteration,
-                qpu_id,
-                value,
-                float(result["best_energy"]),
-            )
-            trace.append(
-                {
-                    "evaluation": eval_counter,
-                    "iteration": iteration,
-                    "qpu_id": qpu_id,
-                    "objective_value": value,
-                    "best_sample_energy": float(result["best_energy"]),
-                    "best_sample_bitstring": str(result["best_bitstring"]),
-                    "metadata": result["metadata"],
-                    "top_counts": _top_counts(result["counts"]),
-                }
-            )
-            scored.append((value, result))
-
-            if value < best_value:
-                best_value = value
-                best_theta = [float(x) for x in result["theta"]]
-                best_counts = dict(result["counts"])
-                best_bitstring = str(result["best_bitstring"])
-                best_energy = float(result["best_energy"])
-                LOGGER.debug(
-                    "New PCE incumbent | eval=%s iteration=%s qpu_id=%s objective=%.8f bitstring=%s",
+        max_retries = max(len(scheduler._all_qpu_ids), 2)
+        last_error: Exception | None = None
+        for attempt in range(max_retries):
+            if not scheduler.has_available_qpus:
+                LOGGER.warning(
+                    "All QPUs offline at eval=%s. Forcing window refresh...",
                     eval_counter,
-                    iteration,
-                    qpu_id,
-                    best_value,
-                    best_bitstring,
                 )
+                scheduler._maybe_refresh_windows()
+                if not scheduler.has_available_qpus:
+                    raise RuntimeError("No QPUs available — all availability windows are closed.")
 
-        scored.sort(key=lambda item: item[0])
-        elite = scored[:elite_count]
-        elite_thetas = np.array([entry[1]["theta"] for entry in elite], dtype=float)
-        mean = np.mean(elite_thetas, axis=0)
-        std = np.std(elite_thetas, axis=0)
+            qpu_id = scheduler.next_qpu()
+            try:
+                result = _evaluate_theta(
+                    theta=theta,
+                    qpu_id=qpu_id,
+                    manager=manager,
+                    ansatz=ansatz,
+                    objective=objective,
+                    shots=shots,
+                    timeout_sec=timeout_sec,
+                    objective_mode="expectation",
+                    cvar_alpha=1.0,
+                    counts_transform=counts_transform,
+                )
+                break
+            except QPUWindowExpiredError as exc:
+                last_error = exc
+                LOGGER.warning(
+                    "PCE: QPU '%s' window expired at eval=%s (attempt %d/%d). Trying next QPU...",
+                    qpu_id, eval_counter, attempt + 1, max_retries,
+                )
+                scheduler.mark_offline(qpu_id)
+                continue
+            except Exception as exc:
+                last_error = exc
+                LOGGER.warning(
+                    "PCE: QPU '%s' failed at eval=%s (attempt %d/%d): %s  Trying next QPU...",
+                    qpu_id, eval_counter, attempt + 1, max_retries, str(exc)[:200],
+                )
+                continue
+        else:
+            raise RuntimeError(f"All QPUs failed at eval={eval_counter}. Last error: {last_error}") from last_error
 
-        trace.append(
-            {
-                "iteration_summary": iteration,
-                "elite_count": elite_count,
-                "best_value_so_far": float(best_value),
-                "mean_theta_norm": float(np.linalg.norm(mean)),
-                "std_theta_norm": float(np.linalg.norm(std)),
-            }
-        )
+        value = float(result["objective_value"])
+        qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + 1
+
         LOGGER.debug(
-            "PCE iteration summary | iteration=%s best_value_so_far=%.8f mean_norm=%.4f std_norm=%.4f",
-            iteration,
-            best_value,
-            float(np.linalg.norm(mean)),
-            float(np.linalg.norm(std)),
+            "PCE evaluation | eval=%s qpu_id=%s objective=%.8f best_sample_energy=%.8f",
+            eval_counter,
+            qpu_id,
+            value,
+            float(result["best_energy"]),
         )
+
+        trace.append({
+            "evaluation": eval_counter,
+            "qpu_id": qpu_id,
+            "objective_value": value,
+            "best_sample_energy": float(result["best_energy"]),
+            "best_sample_bitstring": result["best_bitstring"],
+            "metadata": result["metadata"],
+            "top_counts": _top_counts(result["counts"]),
+        })
+
+        if value < best_value:
+            best_value = value
+            best_theta = [float(x) for x in result["theta"]]
+            best_counts = dict(result["counts"])
+            best_bitstring = str(result["best_bitstring"])
+            best_energy = float(result["best_energy"])
+            LOGGER.debug(
+                "New PCE incumbent | eval=%s qpu_id=%s objective=%.8f bitstring=%s",
+                eval_counter, qpu_id, best_value, best_bitstring,
+            )
+        return value
+
+    minimize_result = minimize(
+        fun=_objective_fn,
+        x0=theta0,
+        method="COBYLA",
+        options={"maxiter": int(maxiter), "rhobeg": 0.4},
+    )
 
     LOGGER.debug(
-        "PCE optimizer complete | evaluations=%s best_objective=%.8f",
+        "PCE optimizer complete | status=%s evaluations=%s best_objective=%.8f",
+        minimize_result.status,
         eval_counter,
         best_value,
     )
+
     return OptimizationResult(
         method="pce",
         objective_mode="expectation",
@@ -1368,8 +1289,8 @@ def run_pce_method(
         best_bitstring=best_bitstring,
         best_energy=float(best_energy),
         best_counts=best_counts,
-        optimizer_status="0",
-        optimizer_message="PCE finished",
+        optimizer_status=str(minimize_result.status),
+        optimizer_message=str(minimize_result.message),
         total_evaluations=int(eval_counter),
         qpu_usage=qpu_usage,
         trace=trace,

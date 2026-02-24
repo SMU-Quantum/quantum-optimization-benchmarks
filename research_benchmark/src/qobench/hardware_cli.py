@@ -562,7 +562,7 @@ def build_parser() -> argparse.ArgumentParser:
         default=1e-3,
         help="Warm-start clipping epsilon for WS-QAOA continuous relaxation values.",
     )
-    parser.add_argument("--pce-population", type=int, default=8)
+    parser.add_argument("--pce-population", type=int, default=1)
     parser.add_argument("--pce-elite-frac", type=float, default=0.25)
     parser.add_argument("--pce-parallel-workers", type=int, default=2)
     parser.add_argument(
@@ -647,7 +647,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--ibm-min-runtime-seconds",
         type=float,
-        default=50.0,
+        default=15.0,
         help="Minimum IBM runtime budget required to schedule jobs.",
     )
     parser.add_argument(

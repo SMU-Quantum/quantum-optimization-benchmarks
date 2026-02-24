@@ -46,7 +46,7 @@ except Exception:
 SGT = timezone(timedelta(hours=8))
 MIN_WINDOW_REMAINING_MINUTES = 10.0
 MIN_AWS_WINDOW_REMAINING_MINUTES = 30.0
-IBM_MIN_RUNTIME_SECONDS = 50.0
+IBM_MIN_RUNTIME_SECONDS = 15.0
 
 LOGGER = logging.getLogger("qobench.hardware_manager")
 

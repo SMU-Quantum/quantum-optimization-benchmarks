@@ -1,0 +1,133 @@
+Run start | problem=mkp method=pce mode=single seed=0
+Instances discovered | problem=mkp count=12
+  - hp1.dat
+  - hp2.dat
+  - pb1.dat
+  - pb2.dat
+  - pb4.dat
+  - pb5.dat
+  - pet2.dat
+  - pet3.dat
+  - pet4.dat
+  - pet5.dat
+  - pet6.dat
+  - pet7.dat
+Using default IBM credentials file: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json
+Initializing backends | use_aws=False use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Unavailable - AWS disabled
+[iqm_emerald] Unavailable - AWS disabled
+[iqm_garnet] Unavailable - AWS disabled
+[amazon_sv1] Unavailable - AWS disabled
+[ibm_quantum] Credential pool reloaded from C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json (27 usable entries)
+[ibm_quantum] Switched credentials (initialization) token=S15j...Ip2E instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 1/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 22s remaining (threshold: 15s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=0), ibm_marrakesh(156q, pending=672), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_fez, ibm_torino
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 20s remaining (threshold: 15s)
+QPUs skipped for 0-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['ibm_quantum']
+Execution plan | mode=single qpus=['ibm_quantum'] instances=12
+Checkpoint loaded | 9 completed instances for mkp
+
+[1/12] SKIPPING (already completed): hp1.dat  [obj=2965.0, feasible=True]
+
+[2/12] SKIPPING (already completed): hp2.dat  [obj=2722.0, feasible=True]
+
+[3/12] SKIPPING (already completed): pb1.dat  [obj=2386.0, feasible=True]
+
+[4/12] SKIPPING (already completed): pb2.dat  [obj=2505.0, feasible=True]
+
+[5/12] SKIPPING (already completed): pb4.dat  [obj=74898.0, feasible=True]
+
+[6/12] SKIPPING (already completed): pb5.dat  [obj=1760.0, feasible=True]
+
+[7/12] SKIPPING (already completed): pet2.dat  [obj=85592.0, feasible=True]
+
+[8/12] SKIPPING (already completed): pet3.dat  [obj=3695.0, feasible=True]
+
+[9/12] SKIPPING (already completed): pet4.dat  [obj=4870.0, feasible=True]
+
+[10/12] Starting instance: pet5.dat
+
+======================================================================
+  Instance: pet5.dat
+======================================================================
+  Problem: mkp | Instance: pet5.dat | Logical Qubits: 122 | Execution Qubits: 10
+  PCE encoding | original_vars=122 encoded_qubits=10 compression_k=2
+QPUs skipped for 10-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['ibm_quantum']
+  Ansatz | family=Brickwork reps=20 entanglement=brickwork trainable_parameters=380 depth=81 2q_gates=180
+  PCE setup | k=2 logical_vars=122 encoded_qubits=10 pauli_strings=122 brickwork_depth=20
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> ibm_quantum | shots=1000 qubits=10 | IBM budget: 20s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=10 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=20.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6ehcucnsg9c739ch95g
+IBM job d6ehcucnsg9c739ch95g (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6ehcucnsg9c739ch95g (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6ehcucnsg9c739ch95g unique_bitstrings=618
+Job completed on ibm_quantum in 8.5s (total: 1 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=10 | IBM budget: 18s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_fez qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_fez required_qubits=10 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=16.0 shots=1000
+IBM job submitted | backend=ibm_fez job_id=d6ehd0knsg9c739ch9a0
+IBM job d6ehd0knsg9c739ch9a0 (ibm_fez) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6ehd0knsg9c739ch9a0 (ibm_fez) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_fez job_id=d6ehd0knsg9c739ch9a0 unique_bitstrings=594
+Job completed on ibm_quantum in 8.8s (total: 2 ok, 0 failed)
+IBM runtime budget low (14s remaining < 15s threshold) — refreshing backend inventory
+[ibm_quantum] Usage check: 14s remaining (threshold: 15s)
+[ibm_quantum] Disabled - Runtime budget low: 14s < 15s
+[ibm_quantum] Attempting mid-run re-auth/reload...
+[ibm_quantum] Credential pool reloaded from C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json (27 usable entries)
+[ibm_quantum] Switched credentials (runtime_low_attempt_1) token=qGjU...aZV0 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Switched credentials (initialization) token=A7ub...7bQg instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 1/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 45s remaining (threshold: 15s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=0), ibm_marrakesh(156q, pending=672), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_fez, ibm_torino
+[ibm_quantum] Re-auth succeeded - 45s available (>= 15s). Re-enabled.
+Dispatching job -> ibm_quantum | shots=1000 qubits=10 | IBM budget: 45s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=10 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=45.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6ehd6954hss73batij0
+IBM job d6ehd6954hss73batij0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6ehd6954hss73batij0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_torino job_id=d6ehd6954hss73batij0 unique_bitstrings=619
+Job completed on ibm_quantum in 9.0s (total: 3 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=10 | IBM budget: 43s left
+Selected IBM backend | selection=least_busy backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=10 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=43.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6ehd8ng4t5c7387qsl0
+IBM job d6ehd8ng4t5c7387qsl0 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6ehd8ng4t5c7387qsl0 (ibm_torino) status | state=DONE queue_position=n/a elapsed_sec=5.8
+IBM job completed | backend=ibm_torino job_id=d6ehd8ng4t5c7387qsl0 unique_bitstrings=605
+Job completed on ibm_quantum in 9.0s (total: 4 ok, 0 failed)
+[ibm_quantum] Usage check: 39s remaining (threshold: 15s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=10 | IBM budget: 39s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_fez qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_fez required_qubits=10 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=39.0 shots=1000
+IBM job submitted | backend=ibm_fez job_id=d6ehdb17ce2c73fis2o0
+IBM job d6ehdb17ce2c73fis2o0 (ibm_fez) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
+IBM job d6ehdb17ce2c73fis2o0 (ibm_fez) status | state=DONE queue_position=n/a elapsed_sec=5.6
+IBM job completed | backend=ibm_fez job_id=d6ehdb17ce2c73fis2o0 unique_bitstrings=587
+Job completed on ibm_quantum in 8.7s (total: 5 ok, 0 failed)
+Dispatching job -> ibm_quantum | shots=1000 qubits=10 | IBM budget: 35s left

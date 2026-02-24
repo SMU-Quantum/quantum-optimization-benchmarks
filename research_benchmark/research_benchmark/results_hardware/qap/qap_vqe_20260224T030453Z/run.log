@@ -1,0 +1,72 @@
+Run start | problem=qap method=vqe mode=single seed=0
+Instances discovered | problem=qap count=11
+  - chr12a.dat
+  - chr12b.dat
+  - chr12c.dat
+  - had12.dat
+  - nug12.dat
+  - rou12.dat
+  - scr12.dat
+  - tai10a.dat
+  - tai10b.dat
+  - tai12a.dat
+  - tai12b.dat
+Using default IBM credentials file: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json
+Initializing backends | use_aws=False use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Unavailable - Braket SDK not installed
+[iqm_emerald] Unavailable - Braket SDK not installed
+[iqm_garnet] Unavailable - Braket SDK not installed
+[amazon_sv1] Unavailable - Braket SDK not installed
+[ibm_quantum] Credential pool reloaded from C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json (27 usable entries)
+[ibm_quantum] Switched credentials (initialization) token=S15j...Ip2E instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 1/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: unavailable from API
+[ibm_quantum] No operational backends found
+[ibm_quantum] Credential 1/27 unusable (No operational IBM backend found). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_2) token=qGjU...aZV0 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 2/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: unavailable from API
+[ibm_quantum] No operational backends found
+[ibm_quantum] Credential 2/27 unusable (No operational IBM backend found). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_3) token=A7ub...7bQg instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 3/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: unavailable from API
+[ibm_quantum] No operational backends found
+[ibm_quantum] Credential 3/27 unusable (No operational IBM backend found). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_4) token=Yzmh...YfO4 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 4/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: unavailable from API
+[ibm_quantum] No operational backends found
+[ibm_quantum] Credential 4/27 unusable (No operational IBM backend found). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_5) token=pFQu...fZCT instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 5/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: unavailable from API
+[ibm_quantum] No operational backends found
+[ibm_quantum] Credential 5/27 unusable (No operational IBM backend found). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_6) token=1H1y...RbOn instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 6/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: unavailable from API
+[ibm_quantum] No operational backends found
+[ibm_quantum] Credential 6/27 unusable (No operational IBM backend found). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_7) token=qKqh...rBUS instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 7/27 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: unavailable from API
+[ibm_quantum] No operational backends found
+[ibm_quantum] Credential 7/27 unusable (No operational IBM backend found). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_8) token=mr6d...qYZC instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 8/27 from JSON pool (token=yes, instance=yes)...
