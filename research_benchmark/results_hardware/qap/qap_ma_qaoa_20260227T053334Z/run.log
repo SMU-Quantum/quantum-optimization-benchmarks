@@ -3908,3 +3908,12 @@ IBM job submitted | backend=ibm_marrakesh job_id=d6gnio2thhns739161b0
 IBM job d6gnio2thhns739161b0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
 IBM job d6gnio2thhns739161b0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=183.0
 IBM job d6gnio2thhns739161b0 (ibm_marrakesh) status | state=QUEUED queue_position=n/a elapsed_sec=365.3
+IBM job d6gnio2thhns739161b0 (ibm_marrakesh) status | state=DONE queue_position=n/a elapsed_sec=494.4
+IBM job completed | backend=ibm_marrakesh job_id=d6gnio2thhns739161b0 unique_bitstrings=1000
+Job completed on ibm_quantum in 507.0s (total: 420 ok, 0 failed)
+[ibm_quantum] Usage check: 556s remaining (threshold: 15s)
+Dispatching job -> ibm_quantum | shots=1000 qubits=144 | IBM budget: 556s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_fez qubits=156 pending_jobs=0
+Preparing IBM submission | backend=ibm_fez required_qubits=144 backend_qubits=156 pending_jobs=0 runtime_remaining_sec=556.0 shots=1000
+IBM job submitted | backend=ibm_fez job_id=d6gnmnu48nic73am2r50
+IBM job d6gnmnu48nic73am2r50 (ibm_fez) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
