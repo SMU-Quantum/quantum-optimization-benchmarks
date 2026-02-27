@@ -1,0 +1,153 @@
+{
+  "problem": "mkp",
+  "method": "pce",
+  "total_instances": 12,
+  "ok_count": 12,
+  "total_runtime_sec": 9866.886667300001,
+  "results": [
+    {
+      "instance": "hp1.dat",
+      "qubits": 7,
+      "status": "OK",
+      "objective": 2965.0,
+      "feasible": true,
+      "time_sec": 2423.1344525999993,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\hp1_dat"
+    },
+    {
+      "instance": "hp2.dat",
+      "qubits": 8,
+      "status": "OK",
+      "objective": 2722.0,
+      "feasible": true,
+      "time_sec": 2220.1676178999987,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\hp2_dat"
+    },
+    {
+      "instance": "pb1.dat",
+      "qubits": 7,
+      "status": "OK",
+      "objective": 2386.0,
+      "feasible": true,
+      "time_sec": 2611.4671242999975,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\pb1_dat"
+    },
+    {
+      "instance": "pb2.dat",
+      "qubits": 8,
+      "status": "OK",
+      "objective": 2505.0,
+      "feasible": true,
+      "time_sec": 2534.8166004999985,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\pb2_dat"
+    },
+    {
+      "instance": "pb4.dat",
+      "qubits": 6,
+      "status": "OK",
+      "objective": 74898.0,
+      "feasible": true,
+      "time_sec": 2463.2933206000016,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\pb4_dat"
+    },
+    {
+      "instance": "pb5.dat",
+      "qubits": 10,
+      "status": "OK",
+      "objective": 1760.0,
+      "feasible": true,
+      "time_sec": 4361.207964400004,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\pb5_dat"
+    },
+    {
+      "instance": "pet2.dat",
+      "qubits": 9,
+      "status": "OK",
+      "objective": 85592.0,
+      "feasible": true,
+      "time_sec": 2855.3469536999983,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\pet2_dat"
+    },
+    {
+      "instance": "pet3.dat",
+      "qubits": 9,
+      "status": "OK",
+      "objective": 3695.0,
+      "feasible": true,
+      "time_sec": 8846.993001499999,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\pet3_dat"
+    },
+    {
+      "instance": "pet4.dat",
+      "qubits": 9,
+      "status": "OK",
+      "objective": 4870.0,
+      "feasible": true,
+      "time_sec": 4302.8811412,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260223T084106Z\\pet4_dat"
+    },
+    {
+      "instance": "pet5.dat",
+      "qubits": 10,
+      "status": "OK",
+      "objective": 7750.0,
+      "feasible": true,
+      "time_sec": 2442.041985299991,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260224T030928Z\\pet5_dat"
+    },
+    {
+      "instance": "pet6.dat",
+      "qubits": 9,
+      "status": "OK",
+      "objective": 8503.0,
+      "feasible": true,
+      "time_sec": 2751.456069599997,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260224T030928Z\\pet6_dat"
+    },
+    {
+      "instance": "pet7.dat",
+      "qubits": 9,
+      "status": "OK",
+      "objective": 12358.0,
+      "feasible": true,
+      "time_sec": 4657.919664400004,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_pce_20260224T030928Z\\pet7_dat"
+    }
+  ]
+}

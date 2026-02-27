@@ -264,6 +264,7 @@ class QuantumHardwareManager:
         self._ibm_credential_next_index = 0
         self._ibm_active_credential_key: str | None = None
         self._ibm_credential_missing_warned = False
+        self._ibm_depleted_credential_keys: set[str] = set()  # permanently exhausted credentials
         if self.ibm_token and self.ibm_instance:
             self._ibm_active_credential_key = (
                 f"{self.ibm_token.strip()}||{self.ibm_instance.strip()}"
@@ -434,6 +435,13 @@ class QuantumHardwareManager:
             key = self._credential_key(cred["token"], cred["instance"])
             if key in seen:
                 continue
+            # Skip credentials that were permanently depleted during this session.
+            if key in self._ibm_depleted_credential_keys:
+                LOGGER.debug(
+                    "[ibm_quantum] Skipping depleted credential (label=%s) during pool reload.",
+                    cred.get("label", "?"),
+                )
+                continue
             seen.add(key)
             parsed.append(cred)
 
@@ -451,9 +459,10 @@ class QuantumHardwareManager:
             self._ibm_credential_next_index = 0
 
         LOGGER.info(
-            "[ibm_quantum] Credential pool reloaded from %s (%d usable entries)",
+            "[ibm_quantum] Credential pool reloaded from %s (%d usable entries, %d depleted)",
             path,
             len(parsed),
+            len(self._ibm_depleted_credential_keys),
         )
         return True
 
@@ -974,6 +983,28 @@ class QuantumHardwareManager:
 
         return qpu.is_available, remaining
 
+    def _remove_depleted_credential(self, cred: dict[str, str]) -> None:
+        """Permanently remove a depleted credential from the pool."""
+        key = self._credential_key(cred["token"], cred["instance"])
+        self._ibm_depleted_credential_keys.add(key)
+        try:
+            self._ibm_credential_pool.remove(cred)
+        except ValueError:
+            pass
+        # Fix the next_index after removal.
+        if self._ibm_credential_pool:
+            self._ibm_credential_next_index = (
+                self._ibm_credential_next_index % len(self._ibm_credential_pool)
+            )
+        else:
+            self._ibm_credential_next_index = 0
+        LOGGER.info(
+            "[ibm_quantum] Credential (label=%s) permanently removed — depleted. "
+            "%d credentials remaining in pool.",
+            cred.get("label", "?"),
+            len(self._ibm_credential_pool),
+        )
+
     def _init_ibm_device_from_pool(self) -> bool:
         qpu = self.qpus["ibm_quantum"]
         if not self._ibm_credential_pool:
@@ -983,58 +1014,77 @@ class QuantumHardwareManager:
         if self.sessions.get("ibm_quantum") is None:
             self._ibm_credential_next_index = 0
 
-        total = len(self._ibm_credential_pool)
         threshold = float(self.ibm_min_runtime_seconds)
-        for attempt in range(total):
-            rotated = self._rotate_ibm_credential_from_pool(
-                force_reload=False,
-                allow_current=(attempt == 0),
-                reason="initialization" if attempt == 0 else f"initialization_attempt_{attempt + 1}",
-            )
-            if not rotated:
-                break
+
+        # --- Sequential drain strategy: try the current credential first.
+        #     If it's depleted, permanently remove it and advance to the next
+        #     one in line. Repeat until we find a usable one or exhaust all. ---
+        while self._ibm_credential_pool:
+            idx = self._ibm_credential_next_index % len(self._ibm_credential_pool)
+            cred = self._ibm_credential_pool[idx]
+            label = cred.get("label", "?")
+            pool_size = len(self._ibm_credential_pool)
 
             LOGGER.info(
-                "[ibm_quantum] Connecting with credential %d/%d from JSON pool (token=%s, instance=%s)...",
-                attempt + 1,
-                total,
-                "yes" if self.ibm_token else "saved",
-                "yes" if self.ibm_instance else "default",
+                "[ibm_quantum] Trying credential %d/%d (label=%s)...",
+                idx + 1, pool_size, label,
             )
+
+            self._set_ibm_credential(
+                token=cred["token"],
+                instance=cred["instance"],
+                persist_account=True,
+                reason=f"sequential_drain_{idx + 1}_of_{pool_size}",
+            )
+
             service = self._connect_ibm_service(
-                token=self.ibm_token,
-                instance=self.ibm_instance,
+                token=cred["token"],
+                instance=cred["instance"],
                 allow_saved_fallback=False,
             )
             if service is None:
-                qpu.is_available = False
-                qpu.last_error = "Could not connect to IBM Quantum using selected JSON credential"
-                LOGGER.warning("[ibm_quantum] %s", qpu.last_error)
+                LOGGER.warning(
+                    "[ibm_quantum] Credential (label=%s) could not connect. Removing.",
+                    label,
+                )
+                self._remove_depleted_credential(cred)
                 continue
 
-            success, remaining = self._configure_ibm_session(service=service, qpu=qpu)
-            if success:
-                return True
-
-            if remaining is not None and remaining < threshold:
+            remaining = _get_ibm_usage_remaining_seconds(service)
+            if remaining is not None:
                 LOGGER.info(
-                    "[ibm_quantum] Credential %d/%d runtime too low (%.0fs < %.0fs). Trying next credential.",
-                    attempt + 1,
-                    total,
-                    remaining,
-                    threshold,
+                    "[ibm_quantum] Credential (label=%s) has %.0fs remaining (threshold: %.0fs).",
+                    label, remaining, threshold,
                 )
+                if remaining < threshold:
+                    LOGGER.info(
+                        "[ibm_quantum] Credential (label=%s) depleted (%.0fs < %.0fs). Removing and advancing.",
+                        label, remaining, threshold,
+                    )
+                    self._remove_depleted_credential(cred)
+                    continue
             else:
                 LOGGER.info(
-                    "[ibm_quantum] Credential %d/%d unusable (%s). Trying next credential.",
-                    attempt + 1,
-                    total,
-                    qpu.last_error or "unknown error",
+                    "[ibm_quantum] Credential (label=%s) budget unavailable from API, treating as usable.",
+                    label,
                 )
+
+            # This credential is usable — configure the session.
+            success, _ = self._configure_ibm_session(service=service, qpu=qpu)
+            if success:
+                return True
+            else:
+                LOGGER.warning(
+                    "[ibm_quantum] Credential (label=%s) session configuration failed. Removing.",
+                    label,
+                )
+                self._remove_depleted_credential(cred)
+                continue
 
         qpu.is_available = False
         qpu.last_error = (
-            f"No IBM credential met runtime threshold >= {threshold:.0f}s or backend availability."
+            f"All IBM credentials exhausted or depleted (threshold >= {threshold:.0f}s). "
+            f"{len(self._ibm_depleted_credential_keys)} total depleted."
         )
         LOGGER.warning("[ibm_quantum] %s", qpu.last_error)
         return False
@@ -1154,71 +1204,64 @@ class QuantumHardwareManager:
             qpu.is_available = False
             qpu.last_error = f"Runtime budget low: {remaining:.0f}s < {threshold:.0f}s"
             LOGGER.warning("[ibm_quantum] Disabled - %s", qpu.last_error)
-            # Attempt mid-run re-auth/reload to pick up refreshed account.
-            # Force mode bypasses reconnect cooldown so budget-low handling can
-            # immediately consume a newly-added credential from JSON.
-            reconnect_ready = (now - self._ibm_last_reconnect_attempt >= self._ibm_reconnect_interval)
-            if force:
-                reconnect_ready = True
-            if reconnect_ready:
-                self._ibm_last_reconnect_attempt = now
-                LOGGER.info("[ibm_quantum] Attempting mid-run re-auth/reload...")
-                max_attempts = 1
-                if self.ibm_credentials_json is not None:
-                    self._load_ibm_credential_pool(force=True)
-                    max_attempts = max(1, len(self._ibm_credential_pool))
 
-                for attempt in range(max_attempts):
-                    try:
-                        if self.ibm_credentials_json is not None:
-                            rotated = self._rotate_ibm_credential_from_pool(
-                                force_reload=False,
-                                allow_current=(attempt == 0),
-                                reason=f"runtime_low_attempt_{attempt + 1}",
-                            )
-                            if not rotated:
-                                LOGGER.info(
-                                    "[ibm_quantum] No rotating credential available in JSON; retrying current/saved credentials."
-                                )
+            # Current credential is depleted — permanently remove it and
+            # advance to the next one in line.
+            if self.ibm_credentials_json is not None and self._ibm_credential_pool:
+                # Find and remove the currently active credential.
+                active_key = self._ibm_active_credential_key
+                removed = False
+                for cred in list(self._ibm_credential_pool):
+                    key = self._credential_key(cred["token"], cred["instance"])
+                    if key == active_key:
+                        self._remove_depleted_credential(cred)
+                        removed = True
+                        break
 
-                        success = self._init_ibm_device()
-                        refreshed_service = self.sessions.get("ibm_quantum")
-                        refreshed_remaining = (
-                            _get_ibm_usage_remaining_seconds(refreshed_service)
-                            if refreshed_service
-                            else None
-                        )
-                        if success and refreshed_remaining is not None and refreshed_remaining >= threshold:
-                            qpu.is_available = True
-                            qpu.last_error = ""
-                            LOGGER.info(
-                                "[ibm_quantum] Re-auth succeeded - %.0fs available (>= %.0fs). Re-enabled.",
-                                refreshed_remaining, threshold,
-                            )
-                            break
+                if not removed:
+                    LOGGER.debug(
+                        "[ibm_quantum] Active credential not found in pool for removal."
+                    )
 
-                        remaining_str = (
-                            f"{refreshed_remaining:.0f}s"
-                            if refreshed_remaining is not None
-                            else "unknown"
-                        )
-                        LOGGER.info(
-                            "[ibm_quantum] Re-auth attempt %d/%d completed but still unavailable (remaining=%s)",
-                            attempt + 1,
-                            max_attempts,
-                            remaining_str,
-                        )
-                    except Exception as e:
+                # Now try the next credential in line.
+                if self._ibm_credential_pool:
+                    LOGGER.info(
+                        "[ibm_quantum] Advancing to next credential in line (%d remaining in pool)...",
+                        len(self._ibm_credential_pool),
+                    )
+                    self._ibm_last_reconnect_attempt = now
+                    success = self._init_ibm_device_from_pool()
+                    if success:
+                        qpu.is_available = True
+                        qpu.last_error = ""
+                        LOGGER.info("[ibm_quantum] Successfully switched to next credential.")
+                    else:
                         LOGGER.warning(
-                            "[ibm_quantum] Mid-run re-auth attempt %d/%d failed: %s",
-                            attempt + 1,
-                            max_attempts,
-                            e,
+                            "[ibm_quantum] All remaining credentials also exhausted."
                         )
                 else:
-                    LOGGER.info(
-                        "[ibm_quantum] Re-auth attempts exhausted; waiting for fresh credentials/runtime budget."
+                    LOGGER.warning(
+                        "[ibm_quantum] Credential pool completely exhausted. "
+                        "%d total credentials depleted.",
+                        len(self._ibm_depleted_credential_keys),
                     )
+            else:
+                # No credential pool — try single-credential re-auth
+                reconnect_ready = (now - self._ibm_last_reconnect_attempt >= self._ibm_reconnect_interval)
+                if force:
+                    reconnect_ready = True
+                if reconnect_ready:
+                    self._ibm_last_reconnect_attempt = now
+                    LOGGER.info("[ibm_quantum] Attempting single-credential re-auth...")
+                    try:
+                        success = self._init_ibm_device()
+                        if success:
+                            qpu.is_available = True
+                            qpu.last_error = ""
+                    except Exception as e:
+                        LOGGER.warning(
+                            "[ibm_quantum] Single-credential re-auth failed: %s", e,
+                        )
         else:
             if not qpu.is_available:
                 LOGGER.info("[ibm_quantum] Runtime available again (%.0fs). Re-enabling.", remaining)
@@ -1805,28 +1848,129 @@ class QuantumHardwareManager:
             qiskit_parameters[i].name: float(theta[i])
             for i in range(len(qiskit_parameters))
         }
+
+        transpiled_params = list(compiled_template.parameters)
+        num_transpiled_params = len(transpiled_params)
+
+        # Safety check: if transpilation eliminated or changed the number of
+        # parameters, re-transpile without the cache.
+        if num_transpiled_params != len(qiskit_parameters):
+            LOGGER.warning(
+                "Parameter count mismatch after transpilation: "
+                "original=%d transpiled=%d. Clearing transpile cache for this backend.",
+                len(qiskit_parameters), num_transpiled_params,
+            )
+            cache_key = (
+                str(backend_name),
+                ansatz_id,
+                str(self.qiskit_optimization_level),
+            )
+            self._transpile_cache.pop(cache_key, None)
+            compiled_template = self._get_transpiled_template(
+                backend=backend,
+                ansatz_id=ansatz_id,
+                qiskit_template=qiskit_template,
+            )
+            transpiled_params = list(compiled_template.parameters)
+            num_transpiled_params = len(transpiled_params)
+
+        # Try name-based binding first.
         bind_map = {}
-        for p in compiled_template.parameters:
+        for p in transpiled_params:
             if p.name in name_to_value:
                 bind_map[p] = name_to_value[p.name]
-        bound_circuit = compiled_template.assign_parameters(bind_map)
 
         submit_time_utc = datetime.now(timezone.utc).isoformat()
         sampler = SamplerV2(backend)
-        job = sampler.run([bound_circuit], shots=int(shots))
+
+        if len(bind_map) == num_transpiled_params and num_transpiled_params > 0:
+            # All parameters matched by name — bind and submit as before.
+            bound_circuit = compiled_template.assign_parameters(bind_map)
+            LOGGER.debug(
+                "Parameter binding: name-based | bound=%d/%d",
+                len(bind_map), num_transpiled_params,
+            )
+            job = sampler.run([bound_circuit], shots=int(shots))
+        elif num_transpiled_params > 0:
+            # Name-based binding failed or was incomplete.
+            # Use the SamplerV2 PUB format: (circuit, parameter_values)
+            # which passes values positionally to the transpiled circuit.
+            LOGGER.warning(
+                "Parameter binding: name-based matched only %d/%d params. "
+                "Falling back to SamplerV2 PUB positional format.",
+                len(bind_map), num_transpiled_params,
+            )
+            # Build positional parameter values matching the transpiled circuit's
+            # parameter order.  Try to match by name; if a transpiled parameter
+            # name is not found, fall back to positional order from the original.
+            param_values = []
+            positional_idx = 0
+            for p in transpiled_params:
+                if p.name in name_to_value:
+                    param_values.append(name_to_value[p.name])
+                elif positional_idx < len(theta):
+                    param_values.append(float(theta[positional_idx]))
+                    positional_idx += 1
+                else:
+                    param_values.append(0.0)  # should not happen
+            job = sampler.run(
+                [(compiled_template, param_values)],
+                shots=int(shots),
+            )
+        else:
+            # No parameters (fully concrete circuit) — submit directly.
+            job = sampler.run([compiled_template], shots=int(shots))
+
         job_id = getattr(job, "job_id", None)
         if callable(job_id):
             job_id = job_id()
         LOGGER.info("IBM job submitted | backend=%s job_id=%s", backend_name, job_id)
 
-        self._wait_for_terminal_status(
-            runtime_handle=job,
-            label=f"IBM job {job_id or 'unknown'} ({backend_name})",
-            timeout_sec=timeout_sec,
-            terminal_states={"DONE", "ERROR", "CANCELLED"},
-            success_states={"DONE"},
-            min_log_interval_sec=120.0,
-        )
+        try:
+            self._wait_for_terminal_status(
+                runtime_handle=job,
+                label=f"IBM job {job_id or 'unknown'} ({backend_name})",
+                timeout_sec=timeout_sec,
+                terminal_states={"DONE", "ERROR", "CANCELLED"},
+                success_states={"DONE"},
+                min_log_interval_sec=120.0,
+            )
+        except RuntimeError as err:
+            # Job ended in ERROR or CANCELLED state — try to extract the actual
+            # error message from the job for better diagnostics.
+            error_detail = str(err)
+            try:
+                error_msg = getattr(job, "error_message", None)
+                if callable(error_msg):
+                    error_msg = error_msg()
+                if error_msg:
+                    error_detail = f"{error_detail} | detail: {str(error_msg)[:300]}"
+            except Exception:
+                pass
+            try:
+                # Some IBM Runtime versions expose .result() even on failure
+                # and the exception message contains the backend error.
+                _ = job.result()
+            except Exception as result_exc:
+                result_detail = str(result_exc)[:300]
+                if result_detail and result_detail not in error_detail:
+                    error_detail = f"{error_detail} | result_error: {result_detail}"
+
+            # Invalidate transpile cache for this backend — the transpiled
+            # circuit itself may be causing the backend-side error.
+            cache_key = (
+                str(backend_name),
+                ansatz_id,
+                str(self.qiskit_optimization_level),
+            )
+            if cache_key in self._transpile_cache:
+                del self._transpile_cache[cache_key]
+                LOGGER.info(
+                    "Cleared transpile cache for backend=%s ansatz=%s after job ERROR.",
+                    backend_name, ansatz_id,
+                )
+            raise RuntimeError(error_detail) from err
+
         result = job.result()
         complete_time_utc = datetime.now(timezone.utc).isoformat()
         counts = self._extract_sampler_v2_counts(result=result, num_qubits=num_qubits)
@@ -1894,20 +2038,69 @@ class QuantumHardwareManager:
         # parameter list, then bind using the *transpiled* circuit's own
         # Parameter objects.  Transpilation (especially at opt-level 3) can
         # replace Parameter instances, so binding by original references fails.
-        bound_circuits = []
+        transpiled_params = list(compiled_template.parameters)
+        num_transpiled_params = len(transpiled_params)
+
+        # Safety check: if transpilation changed the parameter count, re-transpile.
+        if num_transpiled_params != len(qiskit_parameters):
+            LOGGER.warning(
+                "Batch: parameter count mismatch after transpilation: "
+                "original=%d transpiled=%d. Clearing cache.",
+                len(qiskit_parameters), num_transpiled_params,
+            )
+            cache_key = (
+                str(backend_name),
+                ansatz_id,
+                str(self.qiskit_optimization_level),
+            )
+            self._transpile_cache.pop(cache_key, None)
+            compiled_template = self._get_transpiled_template(
+                backend=backend, ansatz_id=ansatz_id, qiskit_template=qiskit_template,
+            )
+            transpiled_params = list(compiled_template.parameters)
+            num_transpiled_params = len(transpiled_params)
+
+        # Check if name-based binding will work using the first theta.
+        test_name_to_value = {
+            qiskit_parameters[i].name: 0.0 for i in range(len(qiskit_parameters))
+        }
+        test_bind_map = {p: 0.0 for p in transpiled_params if p.name in test_name_to_value}
+        use_pub_format = (len(test_bind_map) != num_transpiled_params and num_transpiled_params > 0)
+
+        if use_pub_format:
+            LOGGER.warning(
+                "Batch: name-based binding matched only %d/%d params. "
+                "Using SamplerV2 PUB positional format.",
+                len(test_bind_map), num_transpiled_params,
+            )
+
+        pubs = []
         for theta in thetas:
             name_to_value = {
                 qiskit_parameters[i].name: float(theta[i])
                 for i in range(len(qiskit_parameters))
             }
-            bind_map = {}
-            for p in compiled_template.parameters:
-                if p.name in name_to_value:
-                    bind_map[p] = name_to_value[p.name]
-            bound_circuits.append(compiled_template.assign_parameters(bind_map))
+            if use_pub_format:
+                param_values = []
+                positional_idx = 0
+                for p in transpiled_params:
+                    if p.name in name_to_value:
+                        param_values.append(name_to_value[p.name])
+                    elif positional_idx < len(theta):
+                        param_values.append(float(theta[positional_idx]))
+                        positional_idx += 1
+                    else:
+                        param_values.append(0.0)
+                pubs.append((compiled_template, param_values))
+            else:
+                bind_map = {}
+                for p in transpiled_params:
+                    if p.name in name_to_value:
+                        bind_map[p] = name_to_value[p.name]
+                pubs.append(compiled_template.assign_parameters(bind_map))
 
         sampler = SamplerV2(backend)
-        job = sampler.run(bound_circuits, shots=int(shots))
+        job = sampler.run(pubs, shots=int(shots))
         job_id = getattr(job, "job_id", None)
         if callable(job_id):
             job_id = job_id()

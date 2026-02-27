@@ -1,0 +1,54 @@
+Run start | problem=mis method=qrao mode=single seed=0
+Instances discovered | problem=mis count=7
+  - 1dc.128.txt
+  - 1dc.64.txt
+  - 1et.64.txt
+  - 1tc.16.txt
+  - 1tc.32.txt
+  - 1tc.64.txt
+  - 1tc.8.txt
+Using default IBM credentials file: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json
+Initializing backends | use_aws=False use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Unavailable - AWS disabled
+[iqm_emerald] Unavailable - AWS disabled
+[iqm_garnet] Unavailable - AWS disabled
+[amazon_sv1] Unavailable - AWS disabled
+[ibm_quantum] Credential pool reloaded from C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json (7 usable entries, 0 depleted)
+[ibm_quantum] Trying credential 1/7 (label=account-1)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_7) token=98J7...bVR2 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-1) has 3s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-1) depleted (3s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-1) permanently removed — depleted. 6 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/6 (label=account-2)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_6) token=6zgh...2Ij1 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-2) has 5s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-2) depleted (5s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-2) permanently removed — depleted. 5 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/5 (label=account-3)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_5) token=zQfJ...eVW- instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-3) has 356s remaining (threshold: 15s).
+[ibm_quantum] Runtime budget: 356s remaining (threshold: 15s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=0), ibm_marrakesh(156q, pending=0), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_fez, ibm_marrakesh
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 356s remaining (threshold: 15s)
+QPUs skipped for 0-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['ibm_quantum']
+Execution plan | mode=single qpus=['ibm_quantum'] instances=7
+
+[1/7] Starting instance: 1dc.128.txt
+
+======================================================================
+  Instance: 1dc.128.txt
+======================================================================

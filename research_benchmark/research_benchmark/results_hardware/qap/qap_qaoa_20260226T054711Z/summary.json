@@ -1,0 +1,141 @@
+{
+  "problem": "qap",
+  "method": "qaoa",
+  "total_instances": 11,
+  "ok_count": 11,
+  "total_runtime_sec": 19493.351282999996,
+  "results": [
+    {
+      "instance": "chr12a.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 75298.0,
+      "feasible": false,
+      "time_sec": 2067.722440400001,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260224T112700Z\\chr12a_dat"
+    },
+    {
+      "instance": "chr12b.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 46380.0,
+      "feasible": false,
+      "time_sec": 3044.7419334000006,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260224T112700Z\\chr12b_dat"
+    },
+    {
+      "instance": "chr12c.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 74100.0,
+      "feasible": false,
+      "time_sec": 1970.5018665000098,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260224T112700Z\\chr12c_dat"
+    },
+    {
+      "instance": "had12.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 1656.0,
+      "feasible": false,
+      "time_sec": 2530.7487795999914,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260224T112700Z\\had12_dat"
+    },
+    {
+      "instance": "nug12.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 1846.0,
+      "feasible": false,
+      "time_sec": 3583.2368103000044,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260226T054711Z\\nug12_dat"
+    },
+    {
+      "instance": "rou12.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 376938.0,
+      "feasible": false,
+      "time_sec": 2180.417488699997,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260226T054711Z\\rou12_dat"
+    },
+    {
+      "instance": "scr12.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 83170.0,
+      "feasible": false,
+      "time_sec": 3303.126088200006,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260226T054711Z\\scr12_dat"
+    },
+    {
+      "instance": "tai10a.dat",
+      "qubits": 100,
+      "status": "OK",
+      "objective": 347100.0,
+      "feasible": false,
+      "time_sec": 3149.9026977999893,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260226T054711Z\\tai10a_dat"
+    },
+    {
+      "instance": "tai10b.dat",
+      "qubits": 100,
+      "status": "OK",
+      "objective": 3284056.0,
+      "feasible": false,
+      "time_sec": 1778.0392206999968,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260226T054711Z\\tai10b_dat"
+    },
+    {
+      "instance": "tai12a.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 623782.0,
+      "feasible": false,
+      "time_sec": 2638.5963955000043,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260226T054711Z\\tai12a_dat"
+    },
+    {
+      "instance": "tai12b.dat",
+      "qubits": 144,
+      "status": "OK",
+      "objective": 134862873.0,
+      "feasible": false,
+      "time_sec": 2730.829257000005,
+      "qpus": [
+        "ibm_quantum"
+      ],
+      "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\qap\\qap_qaoa_20260226T054711Z\\tai12b_dat"
+    }
+  ]
+}

@@ -520,6 +520,9 @@ def _build_warm_start_angles(
     safe_epsilon = min(0.49, max(0.0, float(epsilon)))
     if qp is None:
         return [float(math.pi / 2.0) for _ in range(num_qubits)], "uniform_no_qp"
+
+    # Attempt 1: Use CplexOptimizer from qiskit_optimization (may fail due to
+    # BaseSampler import issue in newer Qiskit versions).
     try:
         import copy
 
@@ -542,10 +545,131 @@ def _build_warm_start_angles(
         else:
             values = np.clip(values, 0.0, 1.0)
         return [float(2.0 * np.arcsin(np.sqrt(v))) for v in values], "relaxed_qp"
-    except Exception as exc:
+    except Exception as exc_qiskit:
+        LOGGER.debug(
+            "Warm-start via CplexOptimizer failed (%s). Trying DOcplex direct LP relaxation.",
+            str(exc_qiskit)[:200],
+        )
+
+    # Attempt 2: Solve the LP relaxation directly via DOcplex, bypassing the
+    # qiskit_optimization import chain that triggers the BaseSampler issue.
+    try:
+        from docplex.mp.model import Model as DocplexModel
+
+        # Extract the LP relaxation from the QuadraticProgram manually.
+        lp_model = DocplexModel(name="warm_start_relaxation")
+        lp_vars = []
+        for i in range(num_qubits):
+            var_name = f"x_{i}"
+            # Try to get bounds from the original QP
+            try:
+                orig_var = qp.get_variable(var_name)
+                lb = float(getattr(orig_var, "lowerbound", 0.0))
+                ub = float(getattr(orig_var, "upperbound", 1.0))
+            except Exception:
+                lb, ub = 0.0, 1.0
+            lp_vars.append(lp_model.continuous_var(lb=lb, ub=ub, name=var_name))
+
+        # Build objective from the QP
+        obj_expr = lp_model.linear_expr()
+        try:
+            obj_sense = qp.objective.sense.value  # 1=minimize, -1=maximize
+        except Exception:
+            obj_sense = 1  # default to minimize
+
+        # Linear terms
+        try:
+            linear_dict = qp.objective.linear.to_dict()
+            for idx, coeff in linear_dict.items():
+                obj_expr += float(coeff) * lp_vars[int(idx)]
+        except Exception:
+            pass
+
+        # Quadratic terms
+        try:
+            quad_dict = qp.objective.quadratic.to_dict()
+            for (i, j), coeff in quad_dict.items():
+                # For LP relaxation, approximate x_i * x_j as 0.5*(x_i + x_j) - 0.25
+                obj_expr += float(coeff) * (0.5 * (lp_vars[int(i)] + lp_vars[int(j)]) - 0.25)
+        except Exception:
+            pass
+
+        if obj_sense >= 0:
+            lp_model.minimize(obj_expr)
+        else:
+            lp_model.maximize(obj_expr)
+
+        # Add linear constraints from the QP
+        try:
+            for constraint in qp.linear_constraints:
+                lhs = lp_model.linear_expr()
+                for idx, coeff in constraint.linear.to_dict().items():
+                    lhs += float(coeff) * lp_vars[int(idx)]
+                sense = str(constraint.sense.name).lower()
+                rhs = float(constraint.rhs)
+                if sense in ("le", "<="):
+                    lp_model.add_constraint(lhs <= rhs)
+                elif sense in ("ge", ">="):
+                    lp_model.add_constraint(lhs >= rhs)
+                else:
+                    lp_model.add_constraint(lhs == rhs)
+        except Exception:
+            pass
+
+        sol = lp_model.solve()
+        if sol is not None:
+            values = np.array([sol.get_value(v) for v in lp_vars], dtype=float)
+            values = np.nan_to_num(values, nan=0.5, posinf=1.0, neginf=0.0)
+            if safe_epsilon > 0.0:
+                values = np.clip(values, safe_epsilon, 1.0 - safe_epsilon)
+            else:
+                values = np.clip(values, 0.0, 1.0)
+            LOGGER.info("Warm-start: DOcplex direct LP relaxation succeeded.")
+            return [float(2.0 * np.arcsin(np.sqrt(v))) for v in values], "relaxed_docplex"
+        else:
+            LOGGER.debug("Warm-start: DOcplex LP relaxation returned no solution.")
+    except Exception as exc_docplex:
+        LOGGER.debug(
+            "Warm-start via DOcplex failed (%s). Trying heuristic warm-start.",
+            str(exc_docplex)[:200],
+        )
+
+    # Attempt 3: Heuristic warm-start based on QUBO linear coefficients.
+    # Instead of uniform pi/2 (which encodes 0.5 for every variable),
+    # use the sign of linear coefficients to bias towards 0 or 1.
+    try:
+        angles = []
+        for i in range(num_qubits):
+            try:
+                linear_dict = qp.objective.linear.to_dict()
+                coeff = float(linear_dict.get(i, 0.0))
+            except Exception:
+                coeff = 0.0
+
+            # For minimisation: negative coeff => prefer x=1, positive => prefer x=0
+            try:
+                obj_sense = qp.objective.sense.value  # 1=minimize, -1=maximize
+            except Exception:
+                obj_sense = 1
+            effective_coeff = coeff * obj_sense
+
+            if effective_coeff < -1e-8:
+                # Bias toward x=1
+                v = max(safe_epsilon, 0.75) if safe_epsilon > 0 else 0.75
+            elif effective_coeff > 1e-8:
+                # Bias toward x=0
+                v = min(1.0 - safe_epsilon, 0.25) if safe_epsilon > 0 else 0.25
+            else:
+                v = 0.5
+
+            angles.append(float(2.0 * np.arcsin(np.sqrt(v))))
+
+        LOGGER.info("Warm-start: Using heuristic warm-start from linear coefficients.")
+        return angles, "heuristic_linear_coefficients"
+    except Exception as exc_heuristic:
         LOGGER.warning(
-            "Warm-start relaxation failed (%s). Falling back to uniform warm-start state.",
-            str(exc)[:200],
+            "Warm-start all methods failed. Final fallback: (%s). Using uniform warm-start state.",
+            str(exc_heuristic)[:200],
         )
         return [float(math.pi / 2.0) for _ in range(num_qubits)], "uniform_fallback"
 
@@ -1312,11 +1436,31 @@ def run_qrao_method(
 ) -> OptimizationResult:
     try:
         from qiskit.circuit.library import EfficientSU2
+        # qiskit_algorithms.VQE requires V1 primitives (BackendEstimator/BackendSampler).
+        # V2 primitives (BackendEstimatorV2/BackendSamplerV2) have an incompatible interface.
+        # Try V1 first from qiskit.primitives, then from qiskit_aer.primitives,
+        # and only fall back to V2 as a last resort for non-VQE use cases.
+        BackendEstimator = None
+        BackendSampler = None
+        # Attempt 1: V1 from qiskit.primitives (available in qiskit < 1.x)
         try:
+            from qiskit.primitives import BackendEstimator as _BE, BackendSampler as _BS
+            BackendEstimator = _BE
+            BackendSampler = _BS
+        except (ImportError, AttributeError):
+            pass
+        # Attempt 2: V1 from qiskit_aer.primitives
+        if BackendEstimator is None:
+            try:
+                from qiskit_aer.primitives import Estimator as _BE, Sampler as _BS
+                BackendEstimator = _BE
+                BackendSampler = _BS
+            except (ImportError, AttributeError):
+                pass
+        # Attempt 3: V2 from qiskit.primitives (last resort)
+        if BackendEstimator is None:
             from qiskit.primitives import BackendEstimatorV2 as BackendEstimator
             from qiskit.primitives import BackendSamplerV2 as BackendSampler
-        except Exception:
-            from qiskit.primitives import BackendEstimator, BackendSampler
         from qiskit_algorithms import NumPyMinimumEigensolver, VQE
         from qiskit_algorithms.optimizers import COBYLA, POWELL, SPSA, SLSQP
         from qiskit_algorithms.utils import algorithm_globals

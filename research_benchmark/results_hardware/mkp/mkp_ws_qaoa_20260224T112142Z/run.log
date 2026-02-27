@@ -1,0 +1,314 @@
+Run start | problem=mkp method=ws_qaoa mode=single seed=0
+Instances discovered | problem=mkp count=12
+  - hp1.dat
+  - hp2.dat
+  - pb1.dat
+  - pb2.dat
+  - pb4.dat
+  - pb5.dat
+  - pet2.dat
+  - pet3.dat
+  - pet4.dat
+  - pet5.dat
+  - pet6.dat
+  - pet7.dat
+Using default IBM credentials file: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json
+Initializing backends | use_aws=False use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Unavailable - AWS disabled
+[iqm_emerald] Unavailable - AWS disabled
+[iqm_garnet] Unavailable - AWS disabled
+[amazon_sv1] Unavailable - AWS disabled
+[ibm_quantum] Credential pool reloaded from C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\examples\ibm_credentials.example.json (45 usable entries)
+[ibm_quantum] Switched credentials (initialization) token=S15j...Ip2E instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 1/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 12s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 12s < 15s
+[ibm_quantum] Credential 1/45 runtime too low (12s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_2) token=qGjU...aZV0 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 2/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 13s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 13s < 15s
+[ibm_quantum] Credential 2/45 runtime too low (13s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_3) token=A7ub...7bQg instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 3/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 3/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_4) token=Yzmh...YfO4 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 4/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 14s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 14s < 15s
+[ibm_quantum] Credential 4/45 runtime too low (14s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_5) token=pFQu...fZCT instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 5/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 5/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_6) token=1H1y...RbOn instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 6/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 13s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 13s < 15s
+[ibm_quantum] Credential 6/45 runtime too low (13s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_7) token=qKqh...rBUS instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 7/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 13s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 13s < 15s
+[ibm_quantum] Credential 7/45 runtime too low (13s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_8) token=mr6d...qYZC instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 8/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 13s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 13s < 15s
+[ibm_quantum] Credential 8/45 runtime too low (13s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_9) token=C4_u...USdd instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 9/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 13s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 13s < 15s
+[ibm_quantum] Credential 9/45 runtime too low (13s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_10) token=W_6Y...a6qB instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 10/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 14s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 14s < 15s
+[ibm_quantum] Credential 10/45 runtime too low (14s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_11) token=cnG3...gIYE instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 11/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 11/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_12) token=I28p...fP-1 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 12/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 14s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 14s < 15s
+[ibm_quantum] Credential 12/45 runtime too low (14s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_13) token=PRPg...G999 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 13/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 13/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_14) token=uV2E...1sLM instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 14/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 12s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 12s < 15s
+[ibm_quantum] Credential 14/45 runtime too low (12s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_15) token=J2Ll...b6ZK instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 15/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 12s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 12s < 15s
+[ibm_quantum] Credential 15/45 runtime too low (12s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_16) token=qqdZ...mR1y instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 16/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 9s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 9s < 15s
+[ibm_quantum] Credential 16/45 runtime too low (9s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_17) token=ZiHc...rhVr instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 17/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 13s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 13s < 15s
+[ibm_quantum] Credential 17/45 runtime too low (13s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_18) token=GN5Q..._4FO instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 18/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 18/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_19) token=BfHh...kilc instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 19/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 14s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 14s < 15s
+[ibm_quantum] Credential 19/45 runtime too low (14s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_20) token=O9To...8MgR instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 20/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 12s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 12s < 15s
+[ibm_quantum] Credential 20/45 runtime too low (12s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_21) token=ieJ6...71aJ instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 21/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 21/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_22) token=p4vJ...QaGh instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 22/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 12s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 12s < 15s
+[ibm_quantum] Credential 22/45 runtime too low (12s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_23) token=TbQE...CP-y instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 23/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 14s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 14s < 15s
+[ibm_quantum] Credential 23/45 runtime too low (14s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_24) token=s4cZ...qwBZ instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 24/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 24/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_25) token=ZHRF...jY1q instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 25/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 9s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 9s < 15s
+[ibm_quantum] Credential 25/45 runtime too low (9s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_26) token=P75X...6rXX instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 26/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 9s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 9s < 15s
+[ibm_quantum] Credential 26/45 runtime too low (9s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_27) token=Ls77...NyRz instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 27/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 12s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 12s < 15s
+[ibm_quantum] Credential 27/45 runtime too low (12s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_28) token=1RcL...FTFS instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 28/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 8s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 8s < 15s
+[ibm_quantum] Credential 28/45 runtime too low (8s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_29) token=Aa3X...wEnk instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 29/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 11s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 11s < 15s
+[ibm_quantum] Credential 29/45 runtime too low (11s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_30) token=Tyq4...waTG instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 30/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 10s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 10s < 15s
+[ibm_quantum] Credential 30/45 runtime too low (10s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_31) token=WOSu...NT-s instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 31/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 13s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 13s < 15s
+[ibm_quantum] Credential 31/45 runtime too low (13s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_32) token=6sUl...Sm6J instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 32/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 6s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 6s < 15s
+[ibm_quantum] Credential 32/45 runtime too low (6s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_33) token=i9n7...WSFk instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 33/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 8s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 8s < 15s
+[ibm_quantum] Credential 33/45 runtime too low (8s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_34) token=bVE8...7hSi instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 34/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 5s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 5s < 15s
+[ibm_quantum] Credential 34/45 runtime too low (5s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_35) token=db0W...c0mi instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 35/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 10s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 10s < 15s
+[ibm_quantum] Credential 35/45 runtime too low (10s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_36) token=VG23...uPuX instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 36/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 7s remaining (threshold: 15s)
+[ibm_quantum] Runtime budget low: 7s < 15s
+[ibm_quantum] Credential 36/45 runtime too low (7s < 15s). Trying next credential.
+[ibm_quantum] Switched credentials (initialization_attempt_37) token=neYQ...qq_p instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connecting with credential 37/45 from JSON pool (token=yes, instance=yes)...
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Runtime budget: 321s remaining (threshold: 15s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=0), ibm_marrakesh(156q, pending=898), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_fez, ibm_torino
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 319s remaining (threshold: 15s)
+QPUs skipped for 0-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['ibm_quantum']
+Execution plan | mode=single qpus=['ibm_quantum'] instances=12
+
+[1/12] Starting instance: hp1.dat
+
+======================================================================
+  Instance: hp1.dat
+======================================================================
+  Problem: mkp | Instance: hp1.dat | Qubits: 60
+QPUs skipped for 60-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: too few qubits (28 < 60)
+QPUs selected: ['ibm_quantum']
+Warm-start relaxation failed (cannot import name 'BaseSampler' from 'qiskit.primitives' (C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\.venv\lib\site-packages\qiskit\primitives\__init__.py)). Falling back to uniform warm-start state.
+  Ansatz | family=QAOAAnsatz reps=3 entanglement=problem_hamiltonian trainable_parameters=6 depth=226 2q_gates=3765
+  Warm-start | enabled=True source=uniform_fallback epsilon=0.001 initial_params=gamma=pi,beta=pi/2 angle_min=1.5708 angle_max=1.5708 angle_mean=1.5708
+  Optimization | method=ws_qaoa objective=expectation shots=1000 maxiter=200 qpus=['ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> ibm_quantum | shots=1000 qubits=60 | IBM budget: 316s left
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0
+Preparing IBM submission | backend=ibm_torino required_qubits=60 backend_qubits=133 pending_jobs=0 runtime_remaining_sec=316.0 shots=1000
+IBM job submitted | backend=ibm_torino job_id=d6eokg7g4t5c73885730
+IBM job d6eokg7g4t5c73885730 (ibm_torino) status | state=QUEUED queue_position=n/a elapsed_sec=0.3
