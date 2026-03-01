@@ -1,0 +1,80 @@
+Run start | problem=mkp method=qrao mode=single seed=0
+Instances discovered | problem=mkp count=12
+  - hp1.dat
+  - hp2.dat
+  - pb1.dat
+  - pb2.dat
+  - pb4.dat
+  - pb5.dat
+  - pet2.dat
+  - pet3.dat
+  - pet4.dat
+  - pet5.dat
+  - pet6.dat
+  - pet7.dat
+Using default IBM credentials file: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/examples/ibm_credentials.example.json
+Initializing backends | use_aws=False use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Unavailable - AWS disabled
+[iqm_emerald] Unavailable - AWS disabled
+[iqm_garnet] Unavailable - AWS disabled
+[amazon_sv1] Unavailable - AWS disabled
+[ibm_quantum] Credential pool reloaded from /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/examples/ibm_credentials.example.json (2 usable entries, 0 depleted)
+[ibm_quantum] Trying credential 1/2 (label=account-17)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_2) token=Lypt...GQJr instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+qiskit_runtime_service._discover_account:WARNING:2026-03-01 20:36:37,810: Loading account with the given token. A saved account will not be used.
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-17) has 10s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-17) depleted (10s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-17) permanently removed — depleted. 1 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/1 (label=account-18)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_1) token=fYk4...Xhd2 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+qiskit_runtime_service._discover_account:WARNING:2026-03-01 20:36:44,970: Loading account with the given token. A saved account will not be used.
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-18) has 600s remaining (threshold: 15s).
+[ibm_quantum] Runtime budget: 600s remaining (threshold: 15s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=1), ibm_marrakesh(156q, pending=0), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_marrakesh, ibm_torino
+[local_qiskit] Ready (max 28 qubits)
+
+  Time (SGT): 2026-03-01 20:37 Sun
+  IBM Runtime Budget: 10m 0s remaining
+
+  QPU                  Status       Qubits  Detail
+  ------------------------------------------------
+  rigetti_ankaa3       OFFLINE          82  AWS disabled
+  iqm_emerald          OFFLINE          54  AWS disabled
+  iqm_garnet           OFFLINE          20  AWS disabled
+  amazon_sv1           OFFLINE          34  AWS disabled
+  ibm_quantum          READY           156  3 backends, preferred: ibm_marrakesh, ibm_torino
+  local_qiskit         READY            28  Local Qiskit Statevector Simulator
+
+[ibm_quantum] Usage check: 600s remaining (threshold: 15s)
+QPUs skipped for 0-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['ibm_quantum']
+Execution plan | mode=single qpus=['ibm_quantum'] instances=12
+
+[1/12] Starting instance: hp1.dat
+
+======================================================================
+  Instance: hp1.dat
+======================================================================
+  Problem: mkp | Instance: hp1.dat | Logical Qubits: 60 | Execution Qubits: 38
+  QRAO encoding | original_vars=60 encoded_qubits=38 max_vars_per_qubit=3
+QPUs skipped for 38-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: too few qubits (28 < 38)
+QPUs selected: ['ibm_quantum']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=228 depth=45 2q_gates=74
+  Optimization | method=qrao objective=qrao shots=1000 maxiter=200 qpus=['ibm_quantum']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Selected IBM backend | selection=least_busy_tie_round_robin backend=ibm_torino qubits=133 pending_jobs=0

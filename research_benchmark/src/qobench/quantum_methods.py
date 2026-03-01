@@ -1436,32 +1436,6 @@ def run_qrao_method(
 ) -> OptimizationResult:
     try:
         from qiskit.circuit.library import EfficientSU2
-        # qiskit_algorithms.VQE requires V1 primitives (BackendEstimator/BackendSampler).
-        # V2 primitives (BackendEstimatorV2/BackendSamplerV2) have an incompatible interface.
-        # Try V1 first from qiskit.primitives, then from qiskit_aer.primitives,
-        # and only fall back to V2 as a last resort for non-VQE use cases.
-        BackendEstimator = None
-        BackendSampler = None
-        # Attempt 1: V1 from qiskit.primitives (available in qiskit < 1.x)
-        try:
-            from qiskit.primitives import BackendEstimator as _BE, BackendSampler as _BS
-            BackendEstimator = _BE
-            BackendSampler = _BS
-        except (ImportError, AttributeError):
-            pass
-        # Attempt 2: V1 from qiskit_aer.primitives
-        if BackendEstimator is None:
-            try:
-                from qiskit_aer.primitives import Estimator as _BE, Sampler as _BS
-                BackendEstimator = _BE
-                BackendSampler = _BS
-            except (ImportError, AttributeError):
-                pass
-        # Attempt 3: V2 from qiskit.primitives (last resort)
-        if BackendEstimator is None:
-            from qiskit.primitives import BackendEstimatorV2 as BackendEstimator
-            from qiskit.primitives import BackendSamplerV2 as BackendSampler
-        from qiskit_algorithms import NumPyMinimumEigensolver, VQE
         from qiskit_algorithms.optimizers import COBYLA, POWELL, SPSA, SLSQP
         from qiskit_algorithms.utils import algorithm_globals
         from qiskit_optimization.algorithms.qrao import (
@@ -1470,6 +1444,7 @@ def run_qrao_method(
             QuantumRandomAccessOptimizer,
             SemideterministicRounding,
         )
+        from qiskit_optimization.minimum_eigensolvers import NumPyMinimumEigensolver, VQE
     except Exception as exc:
         raise ModuleNotFoundError(
             "QRAO dependencies are missing. Install qiskit, qiskit-algorithms, and qiskit-optimization."
@@ -1490,9 +1465,70 @@ def run_qrao_method(
     backend = None
     backend_name = qpu_id
     pending_jobs = None
-    use_statevector_primitives = False
-    statevector_estimator_cls: Any | None = None
-    statevector_sampler_cls: Any | None = None
+    pass_manager = None
+    primitive_kind = "unknown"
+    estimator: Any | None = None
+    sampler: Any | None = None
+    use_numpy_min_eigensolver = False
+    try:
+        optimization_level = int(getattr(manager, "qiskit_optimization_level", 1))
+    except Exception:
+        optimization_level = 1
+    optimization_level = max(0, min(3, optimization_level))
+    effective_rounding_scheme = str(rounding_scheme).strip().lower()
+
+    def _set_nested_attr(target: Any, dotted_name: str, value: Any) -> bool:
+        current = target
+        parts = dotted_name.split(".")
+        for name in parts[:-1]:
+            if not hasattr(current, name):
+                return False
+            try:
+                current = getattr(current, name)
+            except Exception:
+                return False
+        leaf = parts[-1]
+        if not hasattr(current, leaf):
+            return False
+        try:
+            setattr(current, leaf, value)
+        except Exception:
+            return False
+        return True
+
+    def _configure_sampler_shots(target: Any) -> None:
+        if target is None:
+            return
+        if hasattr(target, "set_options"):
+            try:
+                target.set_options(shots=int(shots))
+            except Exception:
+                pass
+        _set_nested_attr(target, "options.shots", int(shots))
+        _set_nested_attr(target, "options.default_shots", int(shots))
+        try:
+            setattr(target, "default_shots", int(shots))
+        except Exception:
+            pass
+
+    def _configure_estimator_defaults(target: Any) -> None:
+        if target is None:
+            return
+        _set_nested_attr(target, "options.default_shots", int(shots))
+        _set_nested_attr(target, "options.default_precision", 0.05)
+        try:
+            setattr(target, "default_shots", int(shots))
+        except Exception:
+            pass
+
+    def _configure_ibm_runtime_options(target: Any) -> None:
+        if target is None:
+            return
+        _set_nested_attr(target, "options.resilience_level", 1)
+        _set_nested_attr(target, "options.dynamical_decoupling.enable", True)
+        _set_nested_attr(target, "options.dynamical_decoupling.sequence_type", "XY4")
+        _set_nested_attr(target, "options.twirling.enable_gates", True)
+        _set_nested_attr(target, "options.twirling.num_randomizations", "auto")
 
     if qpu.provider == "ibm":
         manager._refresh_ibm_usage_if_needed()
@@ -1506,61 +1542,83 @@ def run_qrao_method(
         backend = backend_info["backend"]
         backend_name = str(backend_info.get("name", getattr(backend, "name", qpu_id)))
         pending_jobs = backend_info.get("pending_jobs")
-    elif qpu.provider == "local_qiskit":
         try:
-            from qiskit_aer import AerSimulator
+            from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
+            from qiskit_ibm_runtime import EstimatorV2 as RuntimeEstimator
+            from qiskit_ibm_runtime import SamplerV2 as RuntimeSampler
+        except Exception as exc:
+            raise ModuleNotFoundError(
+                "IBM QRAO execution requires qiskit-ibm-runtime with Runtime V2 primitives."
+            ) from exc
 
-            backend = AerSimulator(method="matrix_product_state")
-            backend_name = "aer_simulator_mps"
-        except Exception:
+        pass_manager = generate_preset_pass_manager(
+            backend=backend,
+            optimization_level=optimization_level,
+        )
+        estimator = RuntimeEstimator(mode=backend)
+        sampler = RuntimeSampler(mode=backend)
+        _configure_estimator_defaults(estimator)
+        _configure_sampler_shots(sampler)
+        _configure_ibm_runtime_options(estimator)
+        _configure_ibm_runtime_options(sampler)
+        primitive_kind = "runtime_v2"
+    elif qpu.provider == "local_qiskit":
+        if encoded_qubits <= 20:
             try:
                 from qiskit.primitives import StatevectorEstimator, StatevectorSampler
 
-                use_statevector_primitives = True
-                statevector_estimator_cls = StatevectorEstimator
-                statevector_sampler_cls = StatevectorSampler
+                estimator = StatevectorEstimator(seed=int(seed))
+                sampler = StatevectorSampler(
+                    default_shots=int(shots),
+                    seed=int(seed),
+                )
                 backend_name = "statevector_primitives"
+                primitive_kind = "statevector_v2"
             except Exception:
+                estimator = None
+                sampler = None
+
+        if estimator is None or sampler is None:
+            try:
+                from qiskit.primitives import BackendEstimatorV2, BackendSamplerV2
+                from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
+
                 try:
+                    from qiskit_aer import AerSimulator
+
+                    backend = AerSimulator(method="matrix_product_state")
+                    backend_name = "aer_simulator_mps"
+                except Exception:
                     from qiskit.providers.basic_provider import BasicSimulator
 
                     backend = BasicSimulator()
                     backend_name = "basic_simulator"
-                except Exception as exc:
-                    raise ModuleNotFoundError(
-                        "QRAO on local_qiskit requires qiskit-aer, statevector primitives, or qiskit basic_provider."
-                    ) from exc
+
+                pass_manager = generate_preset_pass_manager(
+                    backend=backend,
+                    optimization_level=optimization_level,
+                )
+                estimator = BackendEstimatorV2(backend=backend)
+                sampler = BackendSamplerV2(backend=backend)
+                _configure_estimator_defaults(estimator)
+                _configure_sampler_shots(sampler)
+                primitive_kind = "backend_v2"
+            except Exception:
+                estimator = None
+                sampler = None
+                use_numpy_min_eigensolver = True
+                backend_name = "numpy_minimum_eigensolver"
+                primitive_kind = "numpy"
     else:
         raise RuntimeError(
             f"QRAO currently supports only IBM or local_qiskit backends (got '{qpu.provider}')."
         )
 
-    if use_statevector_primitives:
-        estimator = statevector_estimator_cls()
-        sampler = statevector_sampler_cls()
-    else:
-        def _build_primitive(cls: Any) -> Any:
-            try:
-                return cls(backend=backend)
-            except Exception:
-                return cls(backend)
-
-        estimator = _build_primitive(BackendEstimator)
-        try:
-            sampler = BackendSampler(backend=backend, options={"default_shots": int(shots)})
-        except Exception:
-            try:
-                sampler = BackendSampler(backend=backend)
-            except Exception:
-                sampler = BackendSampler(backend)
-
-    effective_rounding_scheme = str(rounding_scheme).strip().lower()
     if effective_rounding_scheme == "magic":
-        sampler_has_options = hasattr(sampler, "options")
-        if use_statevector_primitives or not sampler_has_options:
+        if sampler is None:
             LOGGER.warning(
-                "QRAO magic rounding not supported with sampler=%s; falling back to semideterministic rounding.",
-                type(sampler).__name__,
+                "QRAO magic rounding is unavailable for backend=%s; falling back to semideterministic rounding.",
+                backend_name,
             )
             effective_rounding_scheme = "semideterministic"
 
@@ -1577,6 +1635,7 @@ def run_qrao_method(
 
     algorithm_globals.random_seed = int(seed)
     ansatz = EfficientSU2(num_qubits=encoded_qubits, entanglement="linear", reps=int(reps)).decompose()
+    initial_point = np.zeros(ansatz.num_parameters, dtype=float)
     qrao_one_q = 0
     qrao_two_q = 0
     for inst, qargs, _ in ansatz.data:
@@ -1609,20 +1668,20 @@ def run_qrao_method(
                 "ansatz_two_qubit_gates": int(qrao_two_q),
                 "rounding_scheme": effective_rounding_scheme,
                 "optimizer": optimizer_key,
+                "primitive_kind": primitive_kind,
+                "transpilation_optimization_level": (
+                    int(optimization_level) if pass_manager is not None else None
+                ),
             }
         }
     ]
     eval_counter = 0
-    use_numpy_min_eigensolver = bool(
-        qpu.provider == "local_qiskit"
-        and (use_statevector_primitives or backend_name == "basic_simulator")
-    )
     if use_numpy_min_eigensolver:
         trace.append(
             {
                 "qrao_solver": {
                     "min_eigen_solver": "NumPyMinimumEigensolver",
-                    "reason": "local_qiskit fallback without Aer backend support",
+                    "reason": "local_qiskit fallback without supported primitive backend",
                 }
             }
         )
@@ -1650,11 +1709,18 @@ def run_qrao_method(
             ansatz=ansatz,
             optimizer=optimizer,
             estimator=estimator,
+            initial_point=initial_point,
             callback=_callback,
+            pass_manager=pass_manager,
         )
 
     if effective_rounding_scheme == "magic":
-        rounding = MagicRounding(sampler=sampler)
+        rounding = MagicRounding(
+            sampler=sampler,
+            basis_sampling="uniform",
+            seed=int(seed),
+            pass_manager=pass_manager,
+        )
     else:
         rounding = SemideterministicRounding()
 

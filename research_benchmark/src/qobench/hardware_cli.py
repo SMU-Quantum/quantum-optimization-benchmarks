@@ -599,7 +599,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--qrao-rounding",
         type=str.lower,
         choices=["magic", "semideterministic"],
-        default="magic",
+        default="semideterministic",
         help="QRAO only: rounding scheme used to decode compressed solutions.",
     )
     parser.add_argument(

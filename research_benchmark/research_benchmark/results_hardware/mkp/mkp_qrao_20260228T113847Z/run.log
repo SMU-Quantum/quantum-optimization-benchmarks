@@ -1,0 +1,150 @@
+Run start | problem=mkp method=qrao mode=single seed=0
+Instances discovered | problem=mkp count=12
+  - hp1.dat
+  - hp2.dat
+  - pb1.dat
+  - pb2.dat
+  - pb4.dat
+  - pb5.dat
+  - pet2.dat
+  - pet3.dat
+  - pet4.dat
+  - pet5.dat
+  - pet6.dat
+  - pet7.dat
+Using default IBM credentials file: /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/examples/ibm_credentials.example.json
+Initializing backends | use_aws=False use_ibm=True allow_simulators=True
+[rigetti_ankaa3] Unavailable - AWS disabled
+[iqm_emerald] Unavailable - AWS disabled
+[iqm_garnet] Unavailable - AWS disabled
+[amazon_sv1] Unavailable - AWS disabled
+[ibm_quantum] Credential pool reloaded from /Users/monitsharma/SMU-Quantum/quantum-optimization-benchmarks/research_benchmark/examples/ibm_credentials.example.json (17 usable entries, 0 depleted)
+[ibm_quantum] Trying credential 1/17 (label=account-1)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_17) token=98J7...bVR2 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-1) has 3s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-1) depleted (3s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-1) permanently removed — depleted. 16 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/16 (label=account-2)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_16) token=6zgh...2Ij1 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-2) has 5s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-2) depleted (5s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-2) permanently removed — depleted. 15 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/15 (label=account-3)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_15) token=zQfJ...eVW- instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-3) has 8s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-3) depleted (8s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-3) permanently removed — depleted. 14 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/14 (label=account-4)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_14) token=elrS...JCQD instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-4) has 14s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-4) depleted (14s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-4) permanently removed — depleted. 13 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/13 (label=account-5)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_13) token=RjVH...pbSV instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-5) has 9s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-5) depleted (9s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-5) permanently removed — depleted. 12 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/12 (label=account-6)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_12) token=Weju...SmBX instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-6) has 12s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-6) depleted (12s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-6) permanently removed — depleted. 11 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/11 (label=account-7)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_11) token=CqVK...MIy7 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-7) has 9s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-7) depleted (9s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-7) permanently removed — depleted. 10 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/10 (label=account-8)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_10) token=Wp6d...lRj0 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-8) has 10s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-8) depleted (10s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-8) permanently removed — depleted. 9 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/9 (label=account-9)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_9) token=BFk-...aymg instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-9) has 11s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-9) depleted (11s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-9) permanently removed — depleted. 8 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/8 (label=account-10)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_8) token=tQGo...HYtm instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-10) has 12s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-10) depleted (12s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-10) permanently removed — depleted. 7 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/7 (label=account-11)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_7) token=5NmW...Dtv7 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-11) has 11s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-11) depleted (11s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-11) permanently removed — depleted. 6 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/6 (label=account-12)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_6) token=9dAe...uNdq instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-12) has 4s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-12) depleted (4s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-12) permanently removed — depleted. 5 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/5 (label=account-13)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_5) token=8lZa...0yx3 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-13) has 8s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-13) depleted (8s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-13) permanently removed — depleted. 4 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/4 (label=account-14)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_4) token=AQoO...RTGA instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-14) has 6s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-14) depleted (6s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-14) permanently removed — depleted. 3 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/3 (label=account-15)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_3) token=C5PH...-X87 instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-15) has 14s remaining (threshold: 15s).
+[ibm_quantum] Credential (label=account-15) depleted (14s < 15s). Removing and advancing.
+[ibm_quantum] Credential (label=account-15) permanently removed — depleted. 2 credentials remaining in pool.
+[ibm_quantum] Trying credential 1/2 (label=account-16)...
+[ibm_quantum] Switched credentials (sequential_drain_1_of_2) token=DykV...PgCH instance=set
+[ibm_quantum] Saved IBM account credentials via channel=ibm_cloud
+[ibm_quantum] Connected via ibm_cloud channel
+[ibm_quantum] Credential (label=account-16) has 496s remaining (threshold: 15s).
+[ibm_quantum] Runtime budget: 496s remaining (threshold: 15s)
+[ibm_quantum] 3 backends found: ibm_fez(156q, pending=0), ibm_marrakesh(156q, pending=0), ibm_torino(133q, pending=0)
+[ibm_quantum] Preferred (least busy): ibm_fez, ibm_marrakesh
+[local_qiskit] Ready (max 28 qubits)
+[ibm_quantum] Usage check: 496s remaining (threshold: 15s)
+QPUs skipped for 0-qubit problem:
+  rigetti_ankaa3: unavailable - AWS disabled
+  iqm_emerald: unavailable - AWS disabled
+  iqm_garnet: unavailable - AWS disabled
+  amazon_sv1: unavailable - AWS disabled
+  local_qiskit: simulator reserved as fallback
+QPUs selected: ['ibm_quantum']
+Execution plan | mode=single qpus=['ibm_quantum'] instances=12
+
+[1/12] Starting instance: hp1.dat
+
+======================================================================
+  Instance: hp1.dat
+======================================================================
