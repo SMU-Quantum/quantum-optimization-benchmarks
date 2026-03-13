@@ -84,7 +84,7 @@ stack-data==0.6.3
 stevedore==5.7.0
 symengine==0.13.0
 sympy==1.13.3
-tornado==6.5.4
+tornado==6.5.5
 traitlets==5.14.3
 typing-extensions==4.15.0
 typing-inspection==0.4.2
