@@ -63,7 +63,7 @@ pycparser==3.0
 pydantic==2.12.5
 pydantic-core==2.41.5
 pygments==2.19.2
-pyjwt==2.11.0
+pyjwt==2.12.0
 pyparsing==3.3.2
 pyspnego==0.12.0
 python-dateutil==2.9.0.post0
