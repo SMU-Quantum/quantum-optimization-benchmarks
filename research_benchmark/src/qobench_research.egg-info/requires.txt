@@ -1,0 +1,4 @@
+numpy>=2.0
+docplex>=2.29
+networkx>=3.0
+qiskit-optimization>=0.6.0

@@ -1,0 +1,4 @@
+[console_scripts]
+qobench = qobench.cli:main
+qobench-hardware = qobench.hardware_cli:main
+qobench-smoke = qobench.smoke:main

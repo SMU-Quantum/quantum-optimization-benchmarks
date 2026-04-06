@@ -15,5 +15,10 @@ dependencies = [
   "qiskit-optimization>=0.6.0",
 ]
 
+[project.scripts]
+qobench = "qobench.cli:main"
+qobench-hardware = "qobench.hardware_cli:main"
+qobench-smoke = "qobench.smoke:main"
+
 [tool.setuptools.packages.find]
 where = ["src"]

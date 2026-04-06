@@ -1,3 +1,14 @@
+Metadata-Version: 2.4
+Name: qobench-research
+Version: 0.1.0
+Summary: Research-grade benchmark pipeline for combinatorial optimization datasets.
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: numpy>=2.0
+Requires-Dist: docplex>=2.29
+Requires-Dist: networkx>=3.0
+Requires-Dist: qiskit-optimization>=0.6.0
+
 # Research Benchmark Pipeline
 
 This directory contains the runnable research project inside the repository.

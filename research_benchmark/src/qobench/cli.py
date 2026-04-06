@@ -4,6 +4,7 @@ import argparse
 from pathlib import Path
 from typing import Sequence
 
+from .paths import DEFAULT_PROJECT_ROOT
 from .problem_registry import get_problem
 from .runner import run_experiment
 from .types import ProblemType, RunConfig
@@ -26,7 +27,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     list_parser.add_argument("--problem", required=True, choices=_problem_choices())
     list_parser.add_argument("--limit", type=int, default=20)
-    list_parser.add_argument("--project-root", default=".")
+    list_parser.add_argument("--project-root", default=str(DEFAULT_PROJECT_ROOT))
 
     run_parser = subparsers.add_parser(
         "run",
@@ -40,7 +41,7 @@ def build_parser() -> argparse.ArgumentParser:
     run_parser.add_argument("--export-lp", action="store_true")
     run_parser.add_argument("--output-dir", default=None)
     run_parser.add_argument("--num-products", type=int, default=2)
-    run_parser.add_argument("--project-root", default=".")
+    run_parser.add_argument("--project-root", default=str(DEFAULT_PROJECT_ROOT))
 
     return parser
 

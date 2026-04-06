@@ -1,141 +1,114 @@
 # Quantum Optimization Benchmarks
 
-This repository, **Quantum Optimization Benchmarks**, provides a collection of benchmark datasets and Jupyter notebooks for solving combinatorial optimization problems. The repository includes benchmark instances for problems like **Market Share**, **Maximum Independent Set**, **Multi-Dimensional Knapsack**, and **Quadratic Assignment Problem**. It also provides Python code for formulating these problems and analyzing results.
+This repository is the code and artifact companion for the paper
+_A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems_.
 
-See [Quantum Optimization Algorithms](https://github.com/SMU-Quantum/quantum-optimization-algorithms) for implementation details
+It now has two clearly separated layers:
 
----
+- Legacy benchmark notebooks and raw datasets in the top-level problem folders.
+- A reproducible `qobench` research pipeline in [research_benchmark/README.md](research_benchmark/README.md) for scripted runs, smoke tests, hardware submissions, and structured result artifacts.
 
-## Repository Structure
+## Quickstart
 
-```plaintext
-QUANTUM_OPTIMIZATION_BENCHMARKS/
-- Market_Share/: Market share optimization problem
-  - market_share_classical_results.ipynb: Classical results for the Market Share problem
-  - market_share.ipynb: Code for solving the Market Share problem
-  - readme.md: Documentation for the Market Share problem
-- Maximum_Independent_Set/: Maximum Independent Set problem
-  - mis_benchmark_instances/: Instances for the MIS problem
-  - mis.ipynb: Code for solving the MIS problem
-  - readme.md: Documentation for the MIS problem
-- Multi_Dimension_Knapsack/: Multi-Dimensional Knapsack Problem
-  - MKP_Instances/: Benchmark instances for MKP
-  - mdkp.ipynb: Code for solving the MKP
-  - readme.md: Documentation for the MKP problem
-- Quadratic_Assignment_Problem/: Quadratic Assignment Problem
-  - qapdata/: Benchmark instances for QAP
-  - qap.ipynb: Code for solving the QAP
-  - README.md: Documentation for the QAP problem
-- requirements.txt: Python dependencies
-- research_benchmark/: research-oriented Python pipeline + hardware runner
-```
-
----
-
-## Getting Started
-
-
-### Clone the Repository
-```
-git clone https://github.com/SMU-Quantum/quantum-optimization-benchmarks
-cd quantum-optimization-benchmarks  
-```
-
-
-
-### Set Up Virtual Environment
-It is recommended to use a virtual environment to manage dependencies: 
-
-```
-python -m venv .venv  
-source .venv/bin/activate  (Linux/macOS)  
-.venv\Scripts\activate     (Windows)  
-```
-
-### Install Dependencies
-Install the required Python libraries:  
-
-```
-pip install -r requirements.txt  
-```
-
----
-
-## Problem-Specific Details
-
-### 1. Market Share Problem
-- Directory: Market_Share/
-- Description: A benchmark dataset and code to solve the Market Share problem using combinatorial optimization techniques.
-- Notebook: market_share.ipynb contains the implementation.
-- Benchmark Data: Details of classical results and test instances are stored in market_share_classical_results.ipynb.
-
-### 2. Maximum Independent Set (MIS)
-- Directory: Maximum_Independent_Set/
-- Description: Instances for the Maximum Independent Set problem, which involves finding the largest subset of vertices such that no two are adjacent.
-- Notebook: mis.ipynb provides the implementation.
-
-### 3. Multi-Dimensional Knapsack Problem (MKP)
-- Directory: Multi_Dimension_Knapsack/
-- Description: Benchmark datasets and code for solving the Multi-Dimensional Knapsack Problem.
-- Notebook: mdkp.ipynb contains the MKP implementation.
-- Benchmark Data: Instances for testing are stored in MKP_Instances/.
-
-### 4. Quadratic Assignment Problem (QAP)
-- Directory: Quadratic_Assignment_Problem/
-- Description: A benchmark dataset and implementation for the Quadratic Assignment Problem.
-- Notebook: qap.ipynb contains the code for solving QAP.
-- Benchmark Data: Stored in the qapdata/ directory.
-
----
-
-## How to Use
-
-1. Navigate to the problem-specific directory.
-2. Open the Jupyter notebook (.ipynb) to explore the code.
-3. Use the provided instances in the respective directories for testing.
-
-## Research-Friendly Python + Hardware Workflow
-
-For the refactored research pipeline (problem loaders, QUBO flow, and hardware execution on IBM/AWS/local backends), use:
-
-- `research_benchmark/README.md`
-
-Main hardware entrypoint:
+From the repository root:
 
 ```bash
-.venv/bin/python research_benchmark/run_hardware_benchmark.py --help
+python3 -m venv .venv
+.venv/bin/python -m pip install --upgrade pip
+.venv/bin/python -m pip install -r requirements.txt
+.venv/bin/python -m pip install -e research_benchmark
 ```
 
-Cite the paper, if you use this work
-
-[A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems](https://arxiv.org/abs/2503.12121)
+You can also use the repo targets:
 
 ```bash
+make venv
+make install
+make test
+```
+
+## Common Commands
+
+List a few benchmark instances:
+
+```bash
+make list-instances PROBLEM=mis LIST_LIMIT=5
+```
+
+Run one classical/QUBO benchmark instance:
+
+```bash
+make run PROBLEM=mis INSTANCE=Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt
+```
+
+Run one local simulator benchmark:
+
+```bash
+make simulate PROBLEM=mkp METHOD=qaoa INSTANCE=Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat
+```
+
+Run the short multi-method smoke suite:
+
+```bash
+make smoke PROBLEM=mis
+```
+
+You can also call the installed console scripts directly:
+
+```bash
+qobench list-instances --problem mis --limit 5
+qobench-hardware --help
+qobench-smoke --problem mis
+```
+
+## Repository Guide
+
+| Path | Purpose |
+| --- | --- |
+| [docs/PROJECT_LAYOUT.md](docs/PROJECT_LAYOUT.md) | High-level map of code, datasets, and artifacts. |
+| [docs/REPRODUCIBILITY.md](docs/REPRODUCIBILITY.md) | Environment, commands, and artifact-writing conventions. |
+| [research_benchmark/README.md](research_benchmark/README.md) | Main documentation for the packaged research pipeline. |
+| [research_benchmark/research_benchmark/README.md](research_benchmark/research_benchmark/README.md) | Checked-in paper artifacts and figure/table outputs. |
+| [research_benchmark/all_logs/README.md](research_benchmark/all_logs/README.md) | Preserved raw run logs from exploratory sweeps. |
+| [research_benchmark/checkpoints/README.md](research_benchmark/checkpoints/README.md) | Resume metadata for long-running benchmark sweeps. |
+
+## Benchmarks Included
+
+- [Market_Share](Market_Share)
+- [Maximum_Independent_Set](Maximum_Independent_Set)
+- [Multi_Dimension_Knapsack](Multi_Dimension_Knapsack)
+- [Quadratic_Assignment_Problem](Quadratic_Assignment_Problem)
+
+The original notebooks remain in place for paper alignment and historical traceability.
+The recommended entrypoint for new runs is the packaged workflow under `research_benchmark/`.
+
+## Artifacts and Logs
+
+The repository intentionally keeps the paper-facing artifacts in version control so visitors can inspect the reported outputs:
+
+- `research_benchmark/research_benchmark/results_hardware/`
+- `research_benchmark/research_benchmark/results_simulator/`
+- `research_benchmark/all_logs/`
+- `research_benchmark/checkpoints/`
+
+Those directories are documented in-place instead of being hidden behind generated-only paths.
+
+## Citation
+
+If you use this repository, please cite:
+
+```bibtex
 @misc{sharma2025comparativestudyquantumoptimization,
-      title={A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems}, 
-      author={Monit Sharma and Hoong Chuin Lau},
-      year={2025},
-      eprint={2503.12121},
-      archivePrefix={arXiv},
-      primaryClass={quant-ph},
-      url={https://arxiv.org/abs/2503.12121}, 
+  title={A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems},
+  author={Monit Sharma and Hoong Chuin Lau},
+  year={2025},
+  eprint={2503.12121},
+  archivePrefix={arXiv},
+  primaryClass={quant-ph},
+  url={https://arxiv.org/abs/2503.12121}
 }
 ```
 
----
-
-## Contribution
-
-We welcome contributions! If you have additional benchmark datasets, new formulations, or improvements, feel free to open an issue or submit a pull request.
-
----
-
 ## License
 
-This repository is licensed under the MIT License.
-
----
-
-## Contact
-
-For questions or suggestions, please reach out to monitsharma@smu.edu.sg or open an issue in this repository.
+MIT. See [LICENSE](LICENSE).

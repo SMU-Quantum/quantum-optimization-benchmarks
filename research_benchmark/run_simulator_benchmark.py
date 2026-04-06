@@ -46,6 +46,11 @@ def main(argv: Sequence[str] | None = None) -> int:
 
     try:
         from qobench.hardware_cli import main as cli_main
+        from qobench.paths import (
+            DEFAULT_PROJECT_ROOT,
+            DEFAULT_SIMULATOR_CHECKPOINT_ROOT,
+            DEFAULT_SIMULATOR_RESULTS_ROOT,
+        )
     except ModuleNotFoundError as exc:
         print(f"Dependency error: {exc}")
         print("Run this command in your benchmark virtual environment, e.g. `.venv/bin/python`.")
@@ -57,6 +62,20 @@ def main(argv: Sequence[str] | None = None) -> int:
     os.environ.setdefault("QOBENCH_LOCAL_MAX_QUBITS", "512")
 
     raw_argv = list(argv) if argv is not None else sys.argv[1:]
+    if "--project-root" not in raw_argv and not any(token.startswith("--project-root=") for token in raw_argv):
+        raw_argv.extend(["--project-root", str(DEFAULT_PROJECT_ROOT)])
+
+    def _has_flag(flag: str) -> bool:
+        for token in raw_argv:
+            if token == flag or token.startswith(f"{flag}="):
+                return True
+        return False
+
+    if not _has_flag("--output-root"):
+        raw_argv.extend(["--output-root", str(DEFAULT_SIMULATOR_RESULTS_ROOT)])
+    if not _has_flag("--checkpoint-dir"):
+        raw_argv.extend(["--checkpoint-dir", str(DEFAULT_SIMULATOR_CHECKPOINT_ROOT)])
+
     return cli_main(_force_simulator_args(raw_argv))
 
 

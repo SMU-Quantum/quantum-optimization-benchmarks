@@ -6,6 +6,7 @@ from datetime import datetime, timezone
 from pathlib import Path
 from typing import Any
 
+from .paths import DEFAULT_RUNS_ROOT
 from .problem_registry import get_problem
 from .qubo import convert_docplex_to_qubo
 from .serialization import to_jsonable
@@ -35,7 +36,7 @@ def _resolve_output_dir(config: RunConfig, run_id: str) -> Path:
     if config.output_dir is not None:
         base = config.output_dir if config.output_dir.is_absolute() else config.project_root / config.output_dir
     else:
-        base = config.project_root / "research_benchmark" / "runs"
+        base = DEFAULT_RUNS_ROOT
     output_dir = (base / run_id).resolve()
     output_dir.mkdir(parents=True, exist_ok=True)
     return output_dir
@@ -154,4 +155,3 @@ def run_experiment(config: RunConfig) -> RunArtifacts:
         qubo_lp=qubo_lp_path,
         status=status,
     )
-

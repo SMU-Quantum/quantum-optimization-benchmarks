@@ -10,6 +10,13 @@ from pathlib import Path
 from typing import Any, Sequence
 
 from .hardware_manager import QuantumHardwareManager
+from .paths import (
+    DEFAULT_CHECKPOINTS_DIR,
+    DEFAULT_EXAMPLES_DIR,
+    DEFAULT_HARDWARE_RESULTS_ROOT,
+    DEFAULT_PROJECT_ROOT,
+    resolve_from_project_root,
+)
 from .problem_registry import get_problem
 from .quantum_methods import (
     PceEncoding,
@@ -537,7 +544,7 @@ def build_parser() -> argparse.ArgumentParser:
     )
     parser.add_argument("--problem", required=True, choices=[p.value for p in ProblemType])
     parser.add_argument("--instance", default=None, help="Path to problem instance. If omitted, uses problem default.")
-    parser.add_argument("--project-root", default=".")
+    parser.add_argument("--project-root", default=str(DEFAULT_PROJECT_ROOT))
     parser.add_argument(
         "--method",
         required=True,
@@ -688,12 +695,12 @@ def build_parser() -> argparse.ArgumentParser:
 
     parser.add_argument(
         "--output-root",
-        default="research_benchmark/results_hardware",
+        default=str(DEFAULT_HARDWARE_RESULTS_ROOT),
         help="Output root directory. Results are grouped by problem name.",
     )
     parser.add_argument(
         "--checkpoint-dir",
-        default="checkpoints",
+        default=str(DEFAULT_CHECKPOINTS_DIR),
         help="Directory for per-problem checkpoint JSONs that track completed instances.",
     )
     parser.add_argument(
@@ -1433,7 +1440,7 @@ def run(args: argparse.Namespace) -> int:
             raise ValueError("--pce-depth must be >= 0.")
     now_utc = datetime.now(timezone.utc)
     run_stamp = now_utc.strftime("%Y%m%dT%H%M%SZ")
-    output_root = Path(args.output_root).resolve()
+    output_root = resolve_from_project_root(project_root, args.output_root)
     run_dir = output_root / problem_type.value / f"{problem_type.value}_{args.method}_{run_stamp}"
     run_dir.mkdir(parents=True, exist_ok=True)
     log_path = _configure_logging(
@@ -1509,10 +1516,7 @@ def run(args: argparse.Namespace) -> int:
     # Default IBM credentials JSON to the example file only when IBM is enabled.
     ibm_creds_json = args.ibm_credentials_json
     if (not bool(args.no_ibm)) and ibm_creds_json is None:
-        _default_creds = (
-            Path(__file__).resolve().parent.parent.parent  # up from src/qobench/ to research_benchmark/
-            / "examples" / "ibm_credentials.example.json"
-        )
+        _default_creds = DEFAULT_EXAMPLES_DIR / "ibm_credentials.example.json"
         if _default_creds.is_file():
             ibm_creds_json = str(_default_creds)
             LOGGER.info("Using default IBM credentials file: %s", ibm_creds_json)
@@ -1607,7 +1611,7 @@ def run(args: argparse.Namespace) -> int:
     )
 
     # --- Checkpoint setup ---
-    checkpoint_dir = Path(args.checkpoint_dir).resolve()
+    checkpoint_dir = resolve_from_project_root(project_root, args.checkpoint_dir)
     checkpoint_path = checkpoint_dir / f"{problem_type.value}.json"
     checkpoint: dict[str, Any] = {}
     if not bool(getattr(args, "force_rerun", False)):
