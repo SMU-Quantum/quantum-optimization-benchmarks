@@ -16,6 +16,8 @@ from .quantum_methods import (
     QpuScheduler,
     QuboObjective,
     build_algorithm_ansatz_bundle,
+    cobyla_max_supported_parameters,
+    cobyla_workspace_would_overflow,
     estimate_pce_num_qubits,
     estimate_qrao_num_qubits,
     run_pce_method,
@@ -82,6 +84,24 @@ def _collect_ansatz_metrics(ansatz: Any) -> dict[str, Any]:
         "two_qubit_gates": int(two_qubit_gates),
         "measurement_ops": int(measurement_ops),
     }
+
+
+def _objective_label_for_method(method: str) -> str:
+    if method in {"cvar_vqe", "cvar_qaoa"}:
+        return "cvar"
+    if method == "qrao":
+        return "qrao"
+    return "expectation"
+
+
+def _is_cobyla_dimension_error(exc: Exception) -> bool:
+    message = str(exc).lower()
+    if "cobyla workspace overflow" in message:
+        return True
+    return (
+        "failed to create intent(cache|hide)|optional array" in message
+        and "must have defined dimensions" in message
+    )
 
 
 def _resolve_log_level(level_name: str) -> int:
@@ -575,7 +595,7 @@ def build_parser() -> argparse.ArgumentParser:
         "--pce-depth",
         type=int,
         default=0,
-        help="PCE only: Brickwork ansatz depth. Use 0 for auto depth=2*encoded_qubits.",
+        help="PCE only: EfficientSU2 repetition depth. Use 0 for notebook-default reps=2.",
     )
     parser.add_argument(
         "--pce-batch-size",
@@ -592,14 +612,14 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--qrao-reps",
         type=int,
-        default=2,
+        default=3,
         help="QRAO only: EfficientSU2 repetition depth for the min-eigen solver ansatz.",
     )
     parser.add_argument(
         "--qrao-rounding",
         type=str.lower,
         choices=["magic", "semideterministic"],
-        default="semideterministic",
+        default="magic",
         help="QRAO only: rounding scheme used to decode compressed solutions.",
     )
     parser.add_argument(
@@ -647,7 +667,7 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--ibm-min-runtime-seconds",
         type=float,
-        default=15.0,
+        default=45.0,
         help="Minimum IBM runtime budget required to schedule jobs.",
     )
     parser.add_argument(
@@ -904,7 +924,7 @@ def _solve_single_instance(
         if args.method == "pce":
             pce_meta = ansatz_metrics.get("ansatz_metadata", {}).get("pce_encoding", {})
             LOGGER.info(
-                "  PCE setup | k=%s logical_vars=%s encoded_qubits=%s pauli_strings=%s brickwork_depth=%s",
+                "  PCE setup | k=%s logical_vars=%s encoded_qubits=%s pauli_strings=%s su2_reps=%s",
                 pce_meta.get("compression_k", args.pce_compression_k),
                 pce_meta.get("logical_num_vars", logical_num_qubits),
                 pce_meta.get("encoded_num_qubits", execution_num_qubits),
@@ -962,16 +982,59 @@ def _solve_single_instance(
             ansatz_metrics.get("two_qubit_gates"),
         )
 
-    method_objective_label = "expectation"
-    if args.method in {"cvar_vqe", "cvar_qaoa"}:
-        method_objective_label = "cvar"
-    elif args.method == "qrao":
-        method_objective_label = "qrao"
+    requested_method = str(args.method)
+    effective_method = str(args.method)
+    recovery_actions: list[dict[str, Any]] = []
+
+    if (
+        effective_method == "ma_qaoa"
+        and ansatz is not None
+        and cobyla_workspace_would_overflow(int(ansatz.num_parameters))
+    ):
+        from_parameters = int(ansatz.num_parameters)
+        max_supported = cobyla_max_supported_parameters()
+        LOGGER.warning(
+            "  Auto-recovery | ma_qaoa has %d trainable parameters (COBYLA safe limit: %d). "
+            "Switching this instance to qaoa shared-angle ansatz before dispatch.",
+            from_parameters,
+            max_supported,
+        )
+        ansatz = build_algorithm_ansatz_bundle(
+            method="qaoa",
+            qubo=qubo,
+            layers=int(args.layers),
+            entanglement=str(args.entanglement),
+            qp=qp,
+            ws_epsilon=float(args.ws_epsilon),
+            pce_compression_k=int(args.pce_compression_k),
+            pce_depth=int(args.pce_depth),
+        )
+        ansatz_metrics = _collect_ansatz_metrics(ansatz)
+        effective_method = "qaoa"
+        recovery_actions.append(
+            {
+                "trigger": "preflight_cobyla_dimension_guard",
+                "from_method": "ma_qaoa",
+                "to_method": "qaoa",
+                "from_trainable_parameters": from_parameters,
+                "to_trainable_parameters": int(ansatz.num_parameters),
+                "detail": (
+                    f"ma_qaoa parameters exceeded COBYLA safe limit "
+                    f"({from_parameters} > {max_supported})"
+                ),
+            }
+        )
+        LOGGER.info(
+            "  Retry patch | method=ma_qaoa -> qaoa trainable_parameters=%s depth=%s 2q_gates=%s",
+            ansatz_metrics.get("trainable_parameters"),
+            ansatz_metrics.get("depth"),
+            ansatz_metrics.get("two_qubit_gates"),
+        )
 
     LOGGER.info(
         "  Optimization | method=%s objective=%s shots=%s maxiter=%s qpus=%s",
-        args.method,
-        method_objective_label,
+        effective_method,
+        _objective_label_for_method(effective_method),
         args.shots, args.maxiter, usable_qpus,
     )
     LOGGER.info(
@@ -985,77 +1048,123 @@ def _solve_single_instance(
     inst_dir.mkdir(parents=True, exist_ok=True)
 
     solve_start = time.perf_counter()
-    try:
-        if args.method in ("vqe", "cvar_vqe", "qaoa", "cvar_qaoa", "ws_qaoa", "ma_qaoa"):
-            optimization = run_variational_method(
-                method=args.method,
-                manager=manager,
-                scheduler=scheduler,
-                ansatz=ansatz,
-                objective=objective,
-                shots=int(args.shots),
-                maxiter=int(args.maxiter),
-                seed=int(args.seed),
-                cvar_alpha=float(args.cvar_alpha),
-                timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
-            )
-        elif args.method == "pce":
-            pce_encoding: PceEncoding | None = None
-            pce_meta = ansatz_metrics.get("ansatz_metadata", {}).get("pce_encoding", {})
-            if isinstance(pce_meta, dict):
-                try:
-                    pce_encoding = PceEncoding(
-                        logical_num_vars=int(pce_meta.get("logical_num_vars", logical_num_qubits)),
-                        encoded_num_qubits=int(pce_meta.get("encoded_num_qubits", execution_num_qubits)),
-                        compression_k=int(pce_meta.get("compression_k", args.pce_compression_k)),
-                        pauli_strings=[str(v) for v in list(pce_meta.get("pauli_strings", []))],
-                    )
-                except Exception:
-                    pce_encoding = None
-            optimization = run_pce_method(
-                manager=manager,
-                scheduler=scheduler,
-                ansatz=ansatz,
-                objective=objective,
-                shots=int(args.shots),
-                maxiter=int(args.maxiter),
-                seed=int(args.seed),
-                population_size=int(args.pce_population),
-                elite_frac=float(args.pce_elite_frac),
-                timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
-                parallel_workers=int(args.pce_parallel_workers),
-                batch_size=int(args.pce_batch_size),
-                pce_encoding=pce_encoding,
-            )
-        elif args.method == "qrao":
-            optimization = run_qrao_method(
-                manager=manager,
-                scheduler=scheduler,
-                qubo=qubo,
-                shots=int(args.shots),
-                maxiter=int(args.maxiter),
-                seed=int(args.seed),
-                max_vars_per_qubit=int(args.qrao_max_vars_per_qubit),
-                reps=int(args.qrao_reps),
-                rounding_scheme=str(args.qrao_rounding),
-                optimizer_name=str(args.qrao_optimizer),
-            )
-        else:
-            raise ValueError(f"Unsupported method '{args.method}'")
-    except Exception as exc:
-        solve_runtime_sec = float(time.perf_counter() - solve_start)
-        LOGGER.warning("  FAILED: %s after %.1fs - %s", instance_name, solve_runtime_sec, exc)
-        return {
-            "instance": instance_name,
-            "qubits": execution_num_qubits,
-            "status": "FAILED", "reason": str(exc)[:200],
-            "time_sec": solve_runtime_sec,
-        }
+    while True:
+        try:
+            if effective_method in ("vqe", "cvar_vqe", "qaoa", "cvar_qaoa", "ws_qaoa", "ma_qaoa"):
+                optimization = run_variational_method(
+                    method=effective_method,
+                    manager=manager,
+                    scheduler=scheduler,
+                    ansatz=ansatz,
+                    objective=objective,
+                    shots=int(args.shots),
+                    maxiter=int(args.maxiter),
+                    seed=int(args.seed),
+                    cvar_alpha=float(args.cvar_alpha),
+                    timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
+                )
+            elif effective_method == "pce":
+                pce_encoding: PceEncoding | None = None
+                pce_meta = ansatz_metrics.get("ansatz_metadata", {}).get("pce_encoding", {})
+                if isinstance(pce_meta, dict):
+                    try:
+                        pce_encoding = PceEncoding(
+                            logical_num_vars=int(pce_meta.get("logical_num_vars", logical_num_qubits)),
+                            encoded_num_qubits=int(pce_meta.get("encoded_num_qubits", execution_num_qubits)),
+                            compression_k=int(pce_meta.get("compression_k", args.pce_compression_k)),
+                            pauli_strings=[str(v) for v in list(pce_meta.get("pauli_strings", []))],
+                        )
+                    except Exception:
+                        pce_encoding = None
+                optimization = run_pce_method(
+                    manager=manager,
+                    scheduler=scheduler,
+                    ansatz=ansatz,
+                    objective=objective,
+                    shots=int(args.shots),
+                    maxiter=int(args.maxiter),
+                    seed=int(args.seed),
+                    population_size=int(args.pce_population),
+                    elite_frac=float(args.pce_elite_frac),
+                    timeout_sec=float(args.timeout_sec) if args.timeout_sec is not None else None,
+                    parallel_workers=int(args.pce_parallel_workers),
+                    batch_size=int(args.pce_batch_size),
+                    pce_encoding=pce_encoding,
+                )
+            elif effective_method == "qrao":
+                optimization = run_qrao_method(
+                    manager=manager,
+                    scheduler=scheduler,
+                    qubo=qubo,
+                    shots=int(args.shots),
+                    maxiter=int(args.maxiter),
+                    seed=int(args.seed),
+                    max_vars_per_qubit=int(args.qrao_max_vars_per_qubit),
+                    reps=int(args.qrao_reps),
+                    rounding_scheme=str(args.qrao_rounding),
+                    optimizer_name=str(args.qrao_optimizer),
+                )
+            else:
+                raise ValueError(f"Unsupported method '{effective_method}'")
+            break
+        except Exception as exc:
+            if requested_method == "ma_qaoa" and effective_method == "ma_qaoa" and _is_cobyla_dimension_error(exc):
+                from_parameters = int(ansatz.num_parameters) if ansatz is not None else None
+                max_supported = cobyla_max_supported_parameters()
+                LOGGER.warning(
+                    "  Optimization failed for ma_qaoa (%s). "
+                    "Applying auto-recovery patch for this instance: ma_qaoa -> qaoa.",
+                    str(exc)[:200],
+                )
+                ansatz = build_algorithm_ansatz_bundle(
+                    method="qaoa",
+                    qubo=qubo,
+                    layers=int(args.layers),
+                    entanglement=str(args.entanglement),
+                    qp=qp,
+                    ws_epsilon=float(args.ws_epsilon),
+                    pce_compression_k=int(args.pce_compression_k),
+                    pce_depth=int(args.pce_depth),
+                )
+                ansatz_metrics = _collect_ansatz_metrics(ansatz)
+                effective_method = "qaoa"
+                recovery_actions.append(
+                    {
+                        "trigger": "cobyla_dimension_error",
+                        "from_method": "ma_qaoa",
+                        "to_method": "qaoa",
+                        "from_trainable_parameters": from_parameters,
+                        "to_trainable_parameters": int(ansatz.num_parameters),
+                        "detail": str(exc)[:200],
+                        "safe_parameter_limit": int(max_supported),
+                    }
+                )
+                LOGGER.info(
+                    "  Retry patch | method=ma_qaoa -> qaoa trainable_parameters=%s depth=%s 2q_gates=%s",
+                    ansatz_metrics.get("trainable_parameters"),
+                    ansatz_metrics.get("depth"),
+                    ansatz_metrics.get("two_qubit_gates"),
+                )
+                LOGGER.info(
+                    "  Optimization | method=%s objective=%s shots=%s maxiter=%s qpus=%s",
+                    effective_method,
+                    _objective_label_for_method(effective_method),
+                    args.shots, args.maxiter, usable_qpus,
+                )
+                continue
+            solve_runtime_sec = float(time.perf_counter() - solve_start)
+            LOGGER.warning("  FAILED: %s after %.1fs - %s", instance_name, solve_runtime_sec, exc)
+            return {
+                "instance": instance_name,
+                "qubits": execution_num_qubits,
+                "status": "FAILED", "reason": str(exc)[:200],
+                "time_sec": solve_runtime_sec,
+            }
 
     solve_runtime_sec = float(time.perf_counter() - solve_start)
     LOGGER.info(
-        "  Optimization finished | evaluations=%s status=%s time=%.1fs",
-        optimization.total_evaluations, optimization.optimizer_status, solve_runtime_sec,
+        "  Optimization finished | method=%s evaluations=%s status=%s time=%.1fs",
+        effective_method, optimization.total_evaluations, optimization.optimizer_status, solve_runtime_sec,
     )
 
     variable_names_in_order = [
@@ -1123,7 +1232,7 @@ def _solve_single_instance(
             "optimizer_objective": optimization.objective_mode,
             "cvar_alpha": (
                 float(args.cvar_alpha)
-                if args.method in {"cvar_vqe", "cvar_qaoa"}
+                if effective_method in {"cvar_vqe", "cvar_qaoa"}
                 else None
             ),
             "reported_best_sample_energy": optimization.best_energy,
@@ -1181,27 +1290,39 @@ def _solve_single_instance(
 
         # --- Device & Execution Info ---
         "execution": {
-            "method": args.method,
+            "method": effective_method,
+            "requested_method": requested_method,
             "execution_mode": args.execution_mode,
             "selected_qpus": usable_qpus,
             "job_ids": all_job_ids,
             "total_jobs_dispatched": len(all_job_metadata),
             "seed": int(args.seed),
+            "recovery_actions": recovery_actions,
             "qrao": (
                 {
                     "max_vars_per_qubit": int(args.qrao_max_vars_per_qubit),
                     "rounding": str(args.qrao_rounding),
                     "optimizer": str(args.qrao_optimizer),
                 }
-                if args.method == "qrao"
+                if effective_method == "qrao"
                 else None
             ),
             "pce": (
                 {
                     "compression_k": int(args.pce_compression_k),
-                    "brickwork_depth": int(args.pce_depth) if int(args.pce_depth) > 0 else None,
+                    "su2_reps": (
+                        int(ansatz_metrics.get("ansatz_reps"))
+                        if ansatz_metrics.get("ansatz_reps") is not None
+                        else None
+                    ),
+                    # Backward compatibility for older analysis scripts.
+                    "brickwork_depth": (
+                        int(ansatz_metrics.get("ansatz_reps"))
+                        if ansatz_metrics.get("ansatz_reps") is not None
+                        else None
+                    ),
                 }
-                if args.method == "pce"
+                if effective_method == "pce"
                 else None
             ),
         },
@@ -1385,9 +1506,9 @@ def run(args: argparse.Namespace) -> int:
 
     enabled_qpus = {args.only_qpu} if args.only_qpu is not None else None
 
-    # Default IBM credentials JSON to the example file if not explicitly provided
+    # Default IBM credentials JSON to the example file only when IBM is enabled.
     ibm_creds_json = args.ibm_credentials_json
-    if ibm_creds_json is None:
+    if (not bool(args.no_ibm)) and ibm_creds_json is None:
         _default_creds = (
             Path(__file__).resolve().parent.parent.parent  # up from src/qobench/ to research_benchmark/
             / "examples" / "ibm_credentials.example.json"
@@ -1539,6 +1660,10 @@ def run(args: argparse.Namespace) -> int:
                 "  Checkpoint saved | %s -> %s",
                 inst_name, checkpoint_path,
             )
+
+        # Print IBM credential budgets only when IBM is actively enabled.
+        if not bool(args.no_ibm):
+            manager.dump_ibm_budgets()
 
     # --- Summary ---
     total_runtime_sec = float(time.perf_counter() - run_start)

@@ -1,0 +1,1629 @@
+{
+  "schema_version": "2.0",
+  "run_timestamp_utc": "20260306T054219Z",
+  "run_directory": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_qrao_20260306T054219Z\\1tc_8_txt",
+  "log_file": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_qrao_20260306T054219Z\\run.log",
+  "problem": "mis",
+  "instance_path": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\Maximum_Independent_Set\\mis_benchmark_instances\\1tc.8.txt",
+  "instance_name": "1tc.8.txt",
+  "benchmark_protocol": {
+    "budget": {
+      "shots_per_circuit": 1000,
+      "max_optimizer_iterations": 200,
+      "total_circuit_evaluations": 200,
+      "wall_clock_cap_sec": null,
+      "queue_time_policy": "included_in_wall_clock"
+    },
+    "objective_measured": {
+      "optimizer_objective": "qrao",
+      "cvar_alpha": null,
+      "reported_best_sample_energy": -4.0,
+      "reported_expected_value": -4.0,
+      "post_processed_objective": 4.0,
+      "note": "optimizer_objective is used to guide parameter updates; best_sample_energy is the lowest QUBO energy from any single bitstring; post_processed_objective is after local-swap repair"
+    },
+    "feasibility_policy": {
+      "repair_allowed": true,
+      "repair_method": "one_round_local_swap",
+      "repair_description": "After optimization, the best raw bitstring is taken. A single round of local bit-flip swap is applied: each variable is flipped and the resulting QUBO energy is checked. If any flip improves the objective, the best flip is kept.",
+      "repair_applied": false,
+      "candidates_checked": 24,
+      "raw_objective_before_repair": 4.0,
+      "raw_feasible_before_repair": true
+    },
+    "stopping_rule": {
+      "type": "fixed_iterations",
+      "max_iterations": 200,
+      "actual_iterations": 200,
+      "optimizer_status": "0",
+      "optimizer_message": "QRAO finished"
+    }
+  },
+  "execution": {
+    "method": "qrao",
+    "execution_mode": "single",
+    "selected_qpus": [
+      "local_qiskit"
+    ],
+    "job_ids": [],
+    "total_jobs_dispatched": 200,
+    "seed": 0,
+    "qrao": {
+      "max_vars_per_qubit": 3,
+      "rounding": "magic",
+      "optimizer": "cobyla"
+    },
+    "pce": null
+  },
+  "circuit_metrics": {
+    "num_qubits": 4,
+    "logical_qubits_before_encoding": 8,
+    "ansatz_family": "EfficientSU2",
+    "ansatz_reps": 3,
+    "ansatz_entanglement": "linear",
+    "trainable_parameters": 32,
+    "depth_pretranspile": 15,
+    "one_qubit_gates_pretranspile": 32,
+    "two_qubit_gates_pretranspile": 9,
+    "measurement_count": 0
+  },
+  "transpiler_settings": {
+    "qiskit_optimization_level": 3,
+    "routing_method": "preset_passmanager_default",
+    "note": "transpiled circuit metrics available per-job in job_metadata"
+  },
+  "device_calibration": {
+    "ibm_ibm_fez": {
+      "provider": "ibm",
+      "backend_name": "ibm_fez",
+      "num_qubits": 156,
+      "timestamp_utc": "2026-03-06T14:44:44.745849+00:00",
+      "coupling_map_edges": 352,
+      "t1_us": {
+        "mean": 144.95,
+        "min": 10.46
+      },
+      "t2_us": {
+        "mean": 100.83,
+        "min": 4.82
+      },
+      "readout_error": {
+        "mean": 0.028298,
+        "max": 0.47998
+      }
+    },
+    "ibm_ibm_marrakesh": {
+      "provider": "ibm",
+      "backend_name": "ibm_marrakesh",
+      "num_qubits": 156,
+      "timestamp_utc": "2026-03-06T14:44:44.746855+00:00",
+      "coupling_map_edges": 352,
+      "t1_us": {
+        "mean": 199.93,
+        "min": 6.55
+      },
+      "t2_us": {
+        "mean": 114.97,
+        "min": 5.04
+      },
+      "readout_error": {
+        "mean": 0.028233,
+        "max": 0.497925
+      }
+    },
+    "ibm_ibm_torino": {
+      "provider": "ibm",
+      "backend_name": "ibm_torino",
+      "num_qubits": 133,
+      "timestamp_utc": "2026-03-06T14:44:44.748859+00:00",
+      "coupling_map_edges": 300,
+      "t1_us": {
+        "mean": 179.01,
+        "min": 2.86
+      },
+      "t2_us": {
+        "mean": 136.89,
+        "min": 4.48
+      },
+      "readout_error": {
+        "mean": 0.043725,
+        "max": 0.464111
+      }
+    }
+  },
+  "timing": {
+    "solve_runtime_sec": 1.5017145000165328,
+    "total_instance_sec": 15.669006600044668
+  },
+  "qpu_status_snapshot": {
+    "rigetti_ankaa3": {
+      "name": "Rigetti Ankaa-3",
+      "provider": "braket_rigetti",
+      "is_available": false,
+      "max_qubits": 82,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 76.0
+    },
+    "iqm_emerald": {
+      "name": "IQM Emerald",
+      "provider": "braket_iqm_emerald",
+      "is_available": false,
+      "max_qubits": 54,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 106.0
+    },
+    "iqm_garnet": {
+      "name": "IQM Garnet",
+      "provider": "braket_iqm_garnet",
+      "is_available": false,
+      "max_qubits": 20,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 46.0
+    },
+    "amazon_sv1": {
+      "name": "Amazon SV1",
+      "provider": "braket_sim_sv1",
+      "is_available": false,
+      "max_qubits": 34,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "ibm_quantum": {
+      "name": "IBM Quantum",
+      "provider": "ibm",
+      "is_available": false,
+      "max_qubits": 156,
+      "backend_name": "ibm_fez",
+      "last_error": "Runtime budget low: 9s < 45s",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "local_qiskit": {
+      "name": "Local Qiskit Statevector Simulator",
+      "provider": "local_qiskit",
+      "is_available": true,
+      "max_qubits": 28,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    }
+  },
+  "optimizer": {
+    "status": "0",
+    "message": "QRAO finished",
+    "total_evaluations": 200,
+    "qpu_usage": {
+      "local_qiskit": 200
+    }
+  },
+  "job_metadata": [
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "statevector_primitives",
+      "shots": 1000
+    }
+  ],
+  "best_result": {
+    "optimization_objective_mode": "qrao",
+    "optimization_objective_value": -4.0,
+    "objective_value": 4.0,
+    "feasible": true,
+    "best_sample_energy": -4.0,
+    "raw_best_bitstring": "11010001",
+    "best_bitstring": "11010001",
+    "best_theta": [],
+    "raw_decoded_solution": {
+      "active_variable_count": 4,
+      "active_variables": [
+        "x_0",
+        "x_1",
+        "x_3",
+        "x_7"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        1,
+        3,
+        7
+      ],
+      "selected_indices_one_based": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "raw_reconstructed_problem_objective": {
+      "objective_label": "maximum_independent_set_cardinality",
+      "objective_sense": "maximize",
+      "objective_value": 4.0,
+      "feasible": true,
+      "constraint_violations": {
+        "edge_conflicts": 0
+      }
+    },
+    "postprocess": {
+      "name": "one_round_local_swap",
+      "improved": false,
+      "candidates_checked": 24
+    },
+    "decoded_solution": {
+      "active_variable_count": 4,
+      "active_variables": [
+        "x_0",
+        "x_1",
+        "x_3",
+        "x_7"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        1,
+        3,
+        7
+      ],
+      "selected_indices_one_based": [
+        1,
+        2,
+        4,
+        8
+      ]
+    },
+    "reconstructed_problem_objective": {
+      "objective_label": "maximum_independent_set_cardinality",
+      "objective_sense": "maximize",
+      "objective_value": 4.0,
+      "feasible": true,
+      "constraint_violations": {
+        "edge_conflicts": 0
+      }
+    },
+    "active_assignment": {
+      "x_0": 1,
+      "x_1": 1,
+      "x_2": 0,
+      "x_3": 1,
+      "x_4": 0,
+      "x_5": 0,
+      "x_6": 0,
+      "x_7": 1
+    }
+  },
+  "raw_bitstring_counts": {
+    "11010001": 16,
+    "10100101": 11,
+    "10001011": 1,
+    "10001101": 10,
+    "10100011": 1,
+    "10011001": 7,
+    "10110001": 14,
+    "11000011": 7,
+    "11000101": 15,
+    "11010000": 5,
+    "00100101": 11,
+    "00001101": 7,
+    "00100011": 4,
+    "10100100": 5,
+    "10001100": 4,
+    "10000101": 13,
+    "01010001": 16,
+    "10001001": 5,
+    "10000011": 2,
+    "10100001": 1,
+    "10010001": 8,
+    "10011000": 4,
+    "01000011": 12,
+    "10110000": 12,
+    "01000101": 14,
+    "11000010": 3,
+    "11000100": 11,
+    "00110001": 12,
+    "11000001": 12,
+    "00011001": 2,
+    "00100100": 8,
+    "00000101": 10,
+    "00001100": 3,
+    "00100001": 9,
+    "00000011": 4,
+    "00100010": 2,
+    "01010000": 3,
+    "10000001": 6,
+    "10000100": 7,
+    "10100000": 1,
+    "10010000": 4,
+    "01000001": 15,
+    "01000100": 6,
+    "01000010": 4,
+    "11000000": 9,
+    "00011000": 2,
+    "00010001": 13,
+    "00110000": 7,
+    "00000100": 6,
+    "00100000": 6,
+    "00000001": 3,
+    "10000000": 2,
+    "01000000": 5,
+    "00010000": 6,
+    "11010011": 13,
+    "11010101": 11,
+    "11110001": 5,
+    "11011001": 7,
+    "10001111": 3,
+    "10101101": 8,
+    "10100111": 5,
+    "10101011": 1,
+    "10110011": 9,
+    "10111001": 7
+  },
+  "config": {
+    "problem": "mis",
+    "instance": null,
+    "project_root": ".",
+    "method": "qrao",
+    "execution_mode": "single",
+    "qpu_id": null,
+    "qpus": null,
+    "only_qpu": null,
+    "layers": 3,
+    "entanglement": "circular",
+    "shots": 1000,
+    "maxiter": 200,
+    "seed": 0,
+    "timeout_sec": null,
+    "max_qubits": 0,
+    "qubo_penalty": null,
+    "cvar_alpha": 0.25,
+    "ws_epsilon": 0.001,
+    "pce_population": 1,
+    "pce_elite_frac": 0.25,
+    "pce_parallel_workers": 2,
+    "pce_compression_k": 2,
+    "pce_depth": 0,
+    "pce_batch_size": 1,
+    "qrao_max_vars_per_qubit": 3,
+    "qrao_reps": 3,
+    "qrao_rounding": "magic",
+    "qrao_optimizer": "cobyla",
+    "aws_profile": null,
+    "ibm_token": null,
+    "ibm_instance": null,
+    "ibm_credentials_json": null,
+    "qiskit_optimization_level": 3,
+    "no_aws": true,
+    "no_ibm": false,
+    "include_simulators": false,
+    "min_window_minutes": 10.0,
+    "min_aws_window_minutes": 20.0,
+    "ibm_min_runtime_seconds": 45.0,
+    "ibm_backend_refresh_seconds": 300.0,
+    "queue_status_seconds": 180.0,
+    "model_time_limit": 60.0,
+    "num_products": 2,
+    "output_root": "research_benchmark/results_hardware",
+    "checkpoint_dir": "checkpoints",
+    "force_rerun": false,
+    "log_level": "INFO",
+    "log_file": null
+  }
+}

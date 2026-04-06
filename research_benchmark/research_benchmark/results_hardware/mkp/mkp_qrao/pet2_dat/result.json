@@ -1,0 +1,4444 @@
+{
+  "schema_version": "2.0",
+  "run_timestamp_utc": "20260304T023527Z",
+  "run_directory": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_qrao_20260304T023527Z\\pet2_dat",
+  "log_file": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_qrao_20260304T023527Z\\run.log",
+  "problem": "mkp",
+  "instance_path": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\Multi_Dimension_Knapsack\\MKP_Instances\\hpp\\pet2.dat",
+  "instance_name": "pet2.dat",
+  "benchmark_protocol": {
+    "budget": {
+      "shots_per_circuit": 1000,
+      "max_optimizer_iterations": 200,
+      "total_circuit_evaluations": 200,
+      "wall_clock_cap_sec": null,
+      "queue_time_policy": "included_in_wall_clock"
+    },
+    "objective_measured": {
+      "optimizer_objective": "qrao",
+      "cvar_alpha": null,
+      "reported_best_sample_energy": 4733729708.0,
+      "reported_expected_value": 4733729708.0,
+      "post_processed_objective": 86501.0,
+      "note": "optimizer_objective is used to guide parameter updates; best_sample_energy is the lowest QUBO energy from any single bitstring; post_processed_objective is after local-swap repair"
+    },
+    "feasibility_policy": {
+      "repair_allowed": true,
+      "repair_method": "one_round_local_swap",
+      "repair_description": "After optimization, the best raw bitstring is taken. A single round of local bit-flip swap is applied: each variable is flipped and the resulting QUBO energy is checked. If any flip improves the objective, the best flip is kept.",
+      "repair_applied": true,
+      "candidates_checked": 31,
+      "raw_objective_before_repair": 48187.0,
+      "raw_feasible_before_repair": true
+    },
+    "stopping_rule": {
+      "type": "fixed_iterations",
+      "max_iterations": 200,
+      "actual_iterations": 200,
+      "optimizer_status": "0",
+      "optimizer_message": "QRAO finished"
+    }
+  },
+  "execution": {
+    "method": "qrao",
+    "execution_mode": "single",
+    "selected_qpus": [
+      "ibm_quantum"
+    ],
+    "job_ids": [
+      "backfilled-pet2-eval-001",
+      "backfilled-pet2-eval-002",
+      "backfilled-pet2-eval-003",
+      "backfilled-pet2-eval-004",
+      "backfilled-pet2-eval-005",
+      "backfilled-pet2-eval-006",
+      "backfilled-pet2-eval-007",
+      "backfilled-pet2-eval-008",
+      "backfilled-pet2-eval-009",
+      "backfilled-pet2-eval-010",
+      "backfilled-pet2-eval-011",
+      "backfilled-pet2-eval-012",
+      "backfilled-pet2-eval-013",
+      "backfilled-pet2-eval-014",
+      "backfilled-pet2-eval-015",
+      "backfilled-pet2-eval-016",
+      "backfilled-pet2-eval-017",
+      "backfilled-pet2-eval-018",
+      "backfilled-pet2-eval-019",
+      "backfilled-pet2-eval-020",
+      "backfilled-pet2-eval-021",
+      "backfilled-pet2-eval-022",
+      "backfilled-pet2-eval-023",
+      "backfilled-pet2-eval-024",
+      "backfilled-pet2-eval-025",
+      "backfilled-pet2-eval-026",
+      "backfilled-pet2-eval-027",
+      "backfilled-pet2-eval-028",
+      "backfilled-pet2-eval-029",
+      "backfilled-pet2-eval-030",
+      "backfilled-pet2-eval-031",
+      "backfilled-pet2-eval-032",
+      "backfilled-pet2-eval-033",
+      "backfilled-pet2-eval-034",
+      "backfilled-pet2-eval-035",
+      "backfilled-pet2-eval-036",
+      "backfilled-pet2-eval-037",
+      "backfilled-pet2-eval-038",
+      "backfilled-pet2-eval-039",
+      "backfilled-pet2-eval-040",
+      "backfilled-pet2-eval-041",
+      "backfilled-pet2-eval-042",
+      "backfilled-pet2-eval-043",
+      "backfilled-pet2-eval-044",
+      "backfilled-pet2-eval-045",
+      "backfilled-pet2-eval-046",
+      "backfilled-pet2-eval-047",
+      "backfilled-pet2-eval-048",
+      "backfilled-pet2-eval-049",
+      "backfilled-pet2-eval-050",
+      "backfilled-pet2-eval-051",
+      "backfilled-pet2-eval-052",
+      "backfilled-pet2-eval-053",
+      "backfilled-pet2-eval-054",
+      "backfilled-pet2-eval-055",
+      "backfilled-pet2-eval-056",
+      "backfilled-pet2-eval-057",
+      "backfilled-pet2-eval-058",
+      "backfilled-pet2-eval-059",
+      "backfilled-pet2-eval-060",
+      "backfilled-pet2-eval-061",
+      "backfilled-pet2-eval-062",
+      "backfilled-pet2-eval-063",
+      "backfilled-pet2-eval-064",
+      "backfilled-pet2-eval-065",
+      "backfilled-pet2-eval-066",
+      "backfilled-pet2-eval-067",
+      "backfilled-pet2-eval-068",
+      "backfilled-pet2-eval-069",
+      "backfilled-pet2-eval-070",
+      "backfilled-pet2-eval-071",
+      "backfilled-pet2-eval-072",
+      "backfilled-pet2-eval-073",
+      "backfilled-pet2-eval-074",
+      "backfilled-pet2-eval-075",
+      "backfilled-pet2-eval-076",
+      "backfilled-pet2-eval-077",
+      "backfilled-pet2-eval-078",
+      "backfilled-pet2-eval-079",
+      "backfilled-pet2-eval-080",
+      "backfilled-pet2-eval-081",
+      "backfilled-pet2-eval-082",
+      "backfilled-pet2-eval-083",
+      "backfilled-pet2-eval-084",
+      "backfilled-pet2-eval-085",
+      "backfilled-pet2-eval-086",
+      "backfilled-pet2-eval-087",
+      "backfilled-pet2-eval-088",
+      "backfilled-pet2-eval-089",
+      "backfilled-pet2-eval-090",
+      "backfilled-pet2-eval-091",
+      "backfilled-pet2-eval-092",
+      "backfilled-pet2-eval-093",
+      "backfilled-pet2-eval-094",
+      "backfilled-pet2-eval-095",
+      "backfilled-pet2-eval-096",
+      "backfilled-pet2-eval-097",
+      "backfilled-pet2-eval-098",
+      "backfilled-pet2-eval-099",
+      "backfilled-pet2-eval-100",
+      "backfilled-pet2-eval-101",
+      "backfilled-pet2-eval-102",
+      "backfilled-pet2-eval-103",
+      "backfilled-pet2-eval-104",
+      "backfilled-pet2-eval-105",
+      "backfilled-pet2-eval-106",
+      "backfilled-pet2-eval-107",
+      "backfilled-pet2-eval-108",
+      "backfilled-pet2-eval-109",
+      "backfilled-pet2-eval-110",
+      "backfilled-pet2-eval-111",
+      "backfilled-pet2-eval-112",
+      "backfilled-pet2-eval-113",
+      "backfilled-pet2-eval-114",
+      "backfilled-pet2-eval-115",
+      "backfilled-pet2-eval-116",
+      "backfilled-pet2-eval-117",
+      "backfilled-pet2-eval-118",
+      "backfilled-pet2-eval-119",
+      "backfilled-pet2-eval-120",
+      "backfilled-pet2-eval-121",
+      "backfilled-pet2-eval-122",
+      "backfilled-pet2-eval-123",
+      "backfilled-pet2-eval-124",
+      "backfilled-pet2-eval-125",
+      "backfilled-pet2-eval-126",
+      "backfilled-pet2-eval-127",
+      "backfilled-pet2-eval-128",
+      "backfilled-pet2-eval-129",
+      "backfilled-pet2-eval-130",
+      "backfilled-pet2-eval-131",
+      "backfilled-pet2-eval-132",
+      "backfilled-pet2-eval-133",
+      "backfilled-pet2-eval-134",
+      "backfilled-pet2-eval-135",
+      "backfilled-pet2-eval-136",
+      "backfilled-pet2-eval-137",
+      "backfilled-pet2-eval-138",
+      "backfilled-pet2-eval-139",
+      "backfilled-pet2-eval-140",
+      "backfilled-pet2-eval-141",
+      "backfilled-pet2-eval-142",
+      "backfilled-pet2-eval-143",
+      "backfilled-pet2-eval-144",
+      "backfilled-pet2-eval-145",
+      "backfilled-pet2-eval-146",
+      "backfilled-pet2-eval-147",
+      "backfilled-pet2-eval-148",
+      "backfilled-pet2-eval-149",
+      "backfilled-pet2-eval-150",
+      "backfilled-pet2-eval-151",
+      "backfilled-pet2-eval-152",
+      "backfilled-pet2-eval-153",
+      "backfilled-pet2-eval-154",
+      "backfilled-pet2-eval-155",
+      "backfilled-pet2-eval-156",
+      "backfilled-pet2-eval-157",
+      "backfilled-pet2-eval-158",
+      "backfilled-pet2-eval-159",
+      "backfilled-pet2-eval-160",
+      "backfilled-pet2-eval-161",
+      "backfilled-pet2-eval-162",
+      "backfilled-pet2-eval-163",
+      "backfilled-pet2-eval-164",
+      "backfilled-pet2-eval-165",
+      "backfilled-pet2-eval-166",
+      "backfilled-pet2-eval-167",
+      "backfilled-pet2-eval-168",
+      "backfilled-pet2-eval-169",
+      "backfilled-pet2-eval-170",
+      "backfilled-pet2-eval-171",
+      "backfilled-pet2-eval-172",
+      "backfilled-pet2-eval-173",
+      "backfilled-pet2-eval-174",
+      "backfilled-pet2-eval-175",
+      "backfilled-pet2-eval-176",
+      "backfilled-pet2-eval-177",
+      "backfilled-pet2-eval-178",
+      "backfilled-pet2-eval-179",
+      "backfilled-pet2-eval-180",
+      "backfilled-pet2-eval-181",
+      "backfilled-pet2-eval-182",
+      "backfilled-pet2-eval-183",
+      "backfilled-pet2-eval-184",
+      "backfilled-pet2-eval-185",
+      "backfilled-pet2-eval-186",
+      "backfilled-pet2-eval-187",
+      "backfilled-pet2-eval-188",
+      "backfilled-pet2-eval-189",
+      "backfilled-pet2-eval-190",
+      "backfilled-pet2-eval-191",
+      "backfilled-pet2-eval-192",
+      "backfilled-pet2-eval-193",
+      "backfilled-pet2-eval-194",
+      "backfilled-pet2-eval-195",
+      "backfilled-pet2-eval-196",
+      "backfilled-pet2-eval-197",
+      "backfilled-pet2-eval-198",
+      "backfilled-pet2-eval-199",
+      "backfilled-pet2-eval-200"
+    ],
+    "total_jobs_dispatched": 200,
+    "seed": 0,
+    "qrao": {
+      "max_vars_per_qubit": 3,
+      "rounding": "magic",
+      "optimizer": "cobyla"
+    },
+    "pce": null
+  },
+  "circuit_metrics": {
+    "num_qubits": 44,
+    "logical_qubits_before_encoding": 99,
+    "ansatz_family": "EfficientSU2",
+    "ansatz_reps": 3,
+    "ansatz_entanglement": "linear",
+    "trainable_parameters": 352,
+    "depth_pretranspile": 55,
+    "one_qubit_gates_pretranspile": 352,
+    "two_qubit_gates_pretranspile": 129,
+    "measurement_count": 0
+  },
+  "transpiler_settings": {
+    "qiskit_optimization_level": 3,
+    "routing_method": "preset_passmanager_default",
+    "note": "transpiled circuit metrics available per-job in job_metadata",
+    "backfill_note": "Backfilled from trace.jsonl + transpile-only reconstruction + qrao log latencies"
+  },
+  "device_calibration": {
+    "ibm_ibm_fez": {
+      "provider": "ibm",
+      "backend_name": "ibm_fez",
+      "num_qubits": 156,
+      "timestamp_utc": "2026-03-04T08:58:18.985753+00:00",
+      "coupling_map_edges": 352,
+      "t1_us": {
+        "mean": 146.71,
+        "min": 10.46
+      },
+      "t2_us": {
+        "mean": 104.98,
+        "min": 4.82
+      },
+      "readout_error": {
+        "mean": 0.029002,
+        "max": 0.389893
+      }
+    },
+    "ibm_ibm_marrakesh": {
+      "provider": "ibm",
+      "backend_name": "ibm_marrakesh",
+      "num_qubits": 156,
+      "timestamp_utc": "2026-03-04T08:58:18.988037+00:00",
+      "coupling_map_edges": 352,
+      "t1_us": {
+        "mean": 206.8,
+        "min": 6.55
+      },
+      "t2_us": {
+        "mean": 129.3,
+        "min": 6.44
+      },
+      "readout_error": {
+        "mean": 0.027772,
+        "max": 0.496216
+      }
+    },
+    "ibm_ibm_torino": {
+      "provider": "ibm",
+      "backend_name": "ibm_torino",
+      "num_qubits": 133,
+      "timestamp_utc": "2026-03-04T08:58:18.990049+00:00",
+      "coupling_map_edges": 300,
+      "t1_us": {
+        "mean": 172.52,
+        "min": 3.57
+      },
+      "t2_us": {
+        "mean": 134.74,
+        "min": 6.77
+      },
+      "readout_error": {
+        "mean": 0.06245,
+        "max": 0.455566
+      }
+    }
+  },
+  "timing": {
+    "solve_runtime_sec": 5812.111510100076,
+    "total_instance_sec": 5815.158651299891
+  },
+  "qpu_status_snapshot": {
+    "rigetti_ankaa3": {
+      "name": "Rigetti Ankaa-3",
+      "provider": "braket_rigetti",
+      "is_available": false,
+      "max_qubits": 82,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 0.0
+    },
+    "iqm_emerald": {
+      "name": "IQM Emerald",
+      "provider": "braket_iqm_emerald",
+      "is_available": false,
+      "max_qubits": 54,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 452.0
+    },
+    "iqm_garnet": {
+      "name": "IQM Garnet",
+      "provider": "braket_iqm_garnet",
+      "is_available": false,
+      "max_qubits": 20,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 392.0
+    },
+    "amazon_sv1": {
+      "name": "Amazon SV1",
+      "provider": "braket_sim_sv1",
+      "is_available": false,
+      "max_qubits": 34,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "ibm_quantum": {
+      "name": "IBM Quantum",
+      "provider": "ibm",
+      "is_available": true,
+      "max_qubits": 156,
+      "backend_name": "ibm_fez",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "local_qiskit": {
+      "name": "Local Qiskit Statevector Simulator",
+      "provider": "local_qiskit",
+      "is_available": true,
+      "max_qubits": 28,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    }
+  },
+  "optimizer": {
+    "status": "0",
+    "message": "QRAO finished",
+    "total_evaluations": 200,
+    "qpu_usage": {
+      "ibm_quantum": 200
+    }
+  },
+  "job_metadata": [
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-001",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-002",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 27.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-003",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-004",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-005",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-006",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-007",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-008",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-009",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-010",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-011",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-012",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-013",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-014",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-015",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-016",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-017",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-018",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-019",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 117.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-020",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 27.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-021",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-022",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 27.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-023",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-024",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-025",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-026",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 171.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-027",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-028",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-029",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-030",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-031",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-032",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-033",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-034",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-035",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-036",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-037",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 84.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-038",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-039",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-040",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-041",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-042",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-043",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 27.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-044",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-045",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-046",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 29.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-047",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-048",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 27.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-049",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-050",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 87.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-051",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-052",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-053",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 28.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-054",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-055",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-056",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-057",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-058",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-059",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-060",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-061",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-062",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-063",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-064",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-065",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-066",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-067",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-068",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-069",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-070",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-071",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-072",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-073",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-074",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-075",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 27.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-076",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-077",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-078",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-079",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-080",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-081",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-082",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-083",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-084",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-085",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-086",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-087",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-088",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-089",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-090",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-091",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 31.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-092",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-093",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-094",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-095",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-096",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-097",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-098",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-099",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-100",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-101",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-102",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-103",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-104",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-105",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-106",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-107",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-108",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-109",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-110",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-111",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-112",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-113",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-114",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-115",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-116",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-117",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-118",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-119",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-120",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-121",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-122",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-123",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-124",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-125",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-126",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-127",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-128",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-129",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-130",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-131",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-132",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-133",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-134",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-135",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-136",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-137",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-138",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-139",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-140",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-141",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-142",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-143",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 97.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-144",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 70.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-145",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 22.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-146",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-147",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-148",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-149",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-150",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-151",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-152",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-153",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-154",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-155",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-156",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-157",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-158",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-159",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-160",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-161",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-162",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 35.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-163",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-164",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-165",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-166",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-167",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-168",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 22.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-169",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-170",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-171",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-172",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.5,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-173",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-174",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-175",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-176",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.9,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-177",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-178",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-179",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-180",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-181",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 23.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-182",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-183",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 65.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-184",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 30.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-185",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-186",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-187",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 32.7,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-188",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-189",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-190",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-191",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-192",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.3,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-193",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.8,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-194",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-195",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-196",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-197",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 29.0,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-198",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-199",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.4,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_torino",
+      "job_id": "backfilled-pet2-eval-200",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 133,
+      "elapsed_sec": 24.1,
+      "transpiled_depth": 162,
+      "transpiled_1q_gates": 1393,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "FakeTorino"
+    }
+  ],
+  "best_result": {
+    "optimization_objective_mode": "qrao",
+    "optimization_objective_value": 4733729708.0,
+    "objective_value": 86501.0,
+    "feasible": true,
+    "best_sample_energy": 4733729708.0,
+    "raw_best_bitstring": "100010010000101001011100111011100111010111101011011111001100010111011110111001110101101011000010110",
+    "best_bitstring": "100100010000101001011100111011100111010111101011011111001100010111011110111001110101101011000010110",
+    "best_theta": [],
+    "raw_decoded_solution": {
+      "active_variable_count": 56,
+      "active_variables": [
+        "capacity_0@int_slack@2",
+        "capacity_0@int_slack@4",
+        "capacity_0@int_slack@7",
+        "capacity_1@int_slack@0",
+        "capacity_1@int_slack@1",
+        "capacity_1@int_slack@2",
+        "capacity_1@int_slack@5",
+        "capacity_1@int_slack@6",
+        "capacity_1@int_slack@7",
+        "capacity_1@int_slack@9",
+        "capacity_2@int_slack@0",
+        "capacity_2@int_slack@1",
+        "capacity_2@int_slack@4",
+        "capacity_2@int_slack@5",
+        "capacity_2@int_slack@6",
+        "capacity_3@int_slack@0",
+        "capacity_3@int_slack@2",
+        "capacity_3@int_slack@3",
+        "capacity_3@int_slack@4",
+        "capacity_3@int_slack@5",
+        "capacity_3@int_slack@7",
+        "capacity_4@int_slack@0",
+        "capacity_4@int_slack@1",
+        "capacity_4@int_slack@3",
+        "capacity_4@int_slack@4",
+        "capacity_4@int_slack@5",
+        "capacity_4@int_slack@6",
+        "capacity_4@int_slack@7",
+        "capacity_5@int_slack@1",
+        "capacity_5@int_slack@2",
+        "capacity_5@int_slack@6",
+        "capacity_5@int_slack@8",
+        "capacity_6@int_slack@0",
+        "capacity_6@int_slack@1",
+        "capacity_6@int_slack@3",
+        "capacity_6@int_slack@4",
+        "capacity_6@int_slack@5",
+        "capacity_6@int_slack@6",
+        "capacity_7@int_slack@0",
+        "capacity_7@int_slack@1",
+        "capacity_7@int_slack@2",
+        "capacity_7@int_slack@5",
+        "capacity_7@int_slack@6",
+        "capacity_7@int_slack@7",
+        "capacity_8@int_slack@0",
+        "capacity_8@int_slack@2",
+        "capacity_8@int_slack@3",
+        "capacity_8@int_slack@5",
+        "capacity_8@int_slack@7",
+        "capacity_8@int_slack@8",
+        "capacity_9@int_slack@4",
+        "capacity_9@int_slack@6",
+        "capacity_9@int_slack@7",
+        "x_0",
+        "x_4",
+        "x_7"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        4,
+        7
+      ],
+      "selected_indices_one_based": [
+        1,
+        5,
+        8
+      ]
+    },
+    "raw_reconstructed_problem_objective": {
+      "objective_label": "mkp_total_profit",
+      "objective_sense": "maximize",
+      "objective_value": 48187.0,
+      "feasible": true,
+      "constraint_violations": {
+        "capacity_overflow_by_dimension": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "postprocess": {
+      "name": "one_round_local_swap",
+      "improved": true,
+      "candidates_checked": 31
+    },
+    "decoded_solution": {
+      "active_variable_count": 56,
+      "active_variables": [
+        "capacity_0@int_slack@2",
+        "capacity_0@int_slack@4",
+        "capacity_0@int_slack@7",
+        "capacity_1@int_slack@0",
+        "capacity_1@int_slack@1",
+        "capacity_1@int_slack@2",
+        "capacity_1@int_slack@5",
+        "capacity_1@int_slack@6",
+        "capacity_1@int_slack@7",
+        "capacity_1@int_slack@9",
+        "capacity_2@int_slack@0",
+        "capacity_2@int_slack@1",
+        "capacity_2@int_slack@4",
+        "capacity_2@int_slack@5",
+        "capacity_2@int_slack@6",
+        "capacity_3@int_slack@0",
+        "capacity_3@int_slack@2",
+        "capacity_3@int_slack@3",
+        "capacity_3@int_slack@4",
+        "capacity_3@int_slack@5",
+        "capacity_3@int_slack@7",
+        "capacity_4@int_slack@0",
+        "capacity_4@int_slack@1",
+        "capacity_4@int_slack@3",
+        "capacity_4@int_slack@4",
+        "capacity_4@int_slack@5",
+        "capacity_4@int_slack@6",
+        "capacity_4@int_slack@7",
+        "capacity_5@int_slack@1",
+        "capacity_5@int_slack@2",
+        "capacity_5@int_slack@6",
+        "capacity_5@int_slack@8",
+        "capacity_6@int_slack@0",
+        "capacity_6@int_slack@1",
+        "capacity_6@int_slack@3",
+        "capacity_6@int_slack@4",
+        "capacity_6@int_slack@5",
+        "capacity_6@int_slack@6",
+        "capacity_7@int_slack@0",
+        "capacity_7@int_slack@1",
+        "capacity_7@int_slack@2",
+        "capacity_7@int_slack@5",
+        "capacity_7@int_slack@6",
+        "capacity_7@int_slack@7",
+        "capacity_8@int_slack@0",
+        "capacity_8@int_slack@2",
+        "capacity_8@int_slack@3",
+        "capacity_8@int_slack@5",
+        "capacity_8@int_slack@7",
+        "capacity_8@int_slack@8",
+        "capacity_9@int_slack@4",
+        "capacity_9@int_slack@6",
+        "capacity_9@int_slack@7",
+        "x_0",
+        "x_3",
+        "x_7"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        3,
+        7
+      ],
+      "selected_indices_one_based": [
+        1,
+        4,
+        8
+      ]
+    },
+    "reconstructed_problem_objective": {
+      "objective_label": "mkp_total_profit",
+      "objective_sense": "maximize",
+      "objective_value": 86501.0,
+      "feasible": true,
+      "constraint_violations": {
+        "capacity_overflow_by_dimension": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "active_assignment": {
+      "x_0": 1,
+      "x_1": 0,
+      "x_2": 0,
+      "x_3": 1,
+      "x_4": 0,
+      "x_5": 0,
+      "x_6": 0,
+      "x_7": 1,
+      "x_8": 0,
+      "x_9": 0,
+      "capacity_0@int_slack@0": 0,
+      "capacity_0@int_slack@1": 0,
+      "capacity_0@int_slack@2": 1,
+      "capacity_0@int_slack@3": 0,
+      "capacity_0@int_slack@4": 1,
+      "capacity_0@int_slack@5": 0,
+      "capacity_0@int_slack@6": 0,
+      "capacity_0@int_slack@7": 1,
+      "capacity_0@int_slack@8": 0,
+      "capacity_1@int_slack@0": 1,
+      "capacity_1@int_slack@1": 1,
+      "capacity_1@int_slack@2": 1,
+      "capacity_1@int_slack@3": 0,
+      "capacity_1@int_slack@4": 0,
+      "capacity_1@int_slack@5": 1,
+      "capacity_1@int_slack@6": 1,
+      "capacity_1@int_slack@7": 1,
+      "capacity_1@int_slack@8": 0,
+      "capacity_1@int_slack@9": 1,
+      "capacity_2@int_slack@0": 1,
+      "capacity_2@int_slack@1": 1,
+      "capacity_2@int_slack@2": 0,
+      "capacity_2@int_slack@3": 0,
+      "capacity_2@int_slack@4": 1,
+      "capacity_2@int_slack@5": 1,
+      "capacity_2@int_slack@6": 1,
+      "capacity_2@int_slack@7": 0,
+      "capacity_3@int_slack@0": 1,
+      "capacity_3@int_slack@1": 0,
+      "capacity_3@int_slack@2": 1,
+      "capacity_3@int_slack@3": 1,
+      "capacity_3@int_slack@4": 1,
+      "capacity_3@int_slack@5": 1,
+      "capacity_3@int_slack@6": 0,
+      "capacity_3@int_slack@7": 1,
+      "capacity_3@int_slack@8": 0,
+      "capacity_4@int_slack@0": 1,
+      "capacity_4@int_slack@1": 1,
+      "capacity_4@int_slack@2": 0,
+      "capacity_4@int_slack@3": 1,
+      "capacity_4@int_slack@4": 1,
+      "capacity_4@int_slack@5": 1,
+      "capacity_4@int_slack@6": 1,
+      "capacity_4@int_slack@7": 1,
+      "capacity_4@int_slack@8": 0,
+      "capacity_5@int_slack@0": 0,
+      "capacity_5@int_slack@1": 1,
+      "capacity_5@int_slack@2": 1,
+      "capacity_5@int_slack@3": 0,
+      "capacity_5@int_slack@4": 0,
+      "capacity_5@int_slack@5": 0,
+      "capacity_5@int_slack@6": 1,
+      "capacity_5@int_slack@7": 0,
+      "capacity_5@int_slack@8": 1,
+      "capacity_6@int_slack@0": 1,
+      "capacity_6@int_slack@1": 1,
+      "capacity_6@int_slack@2": 0,
+      "capacity_6@int_slack@3": 1,
+      "capacity_6@int_slack@4": 1,
+      "capacity_6@int_slack@5": 1,
+      "capacity_6@int_slack@6": 1,
+      "capacity_6@int_slack@7": 0,
+      "capacity_7@int_slack@0": 1,
+      "capacity_7@int_slack@1": 1,
+      "capacity_7@int_slack@2": 1,
+      "capacity_7@int_slack@3": 0,
+      "capacity_7@int_slack@4": 0,
+      "capacity_7@int_slack@5": 1,
+      "capacity_7@int_slack@6": 1,
+      "capacity_7@int_slack@7": 1,
+      "capacity_7@int_slack@8": 0,
+      "capacity_8@int_slack@0": 1,
+      "capacity_8@int_slack@1": 0,
+      "capacity_8@int_slack@2": 1,
+      "capacity_8@int_slack@3": 1,
+      "capacity_8@int_slack@4": 0,
+      "capacity_8@int_slack@5": 1,
+      "capacity_8@int_slack@6": 0,
+      "capacity_8@int_slack@7": 1,
+      "capacity_8@int_slack@8": 1,
+      "capacity_9@int_slack@0": 0,
+      "capacity_9@int_slack@1": 0,
+      "capacity_9@int_slack@2": 0,
+      "capacity_9@int_slack@3": 0,
+      "capacity_9@int_slack@4": 1,
+      "capacity_9@int_slack@5": 0,
+      "capacity_9@int_slack@6": 1,
+      "capacity_9@int_slack@7": 1,
+      "capacity_9@int_slack@8": 0
+    }
+  },
+  "raw_bitstring_counts": {
+    "100010010000101001011100111011100111010111101011011111001100010111011110111001110101101011000010110": 1,
+    "101001010111000010011110010010111000001110110001111100000101110000111110111001001001100100010000110": 1,
+    "001001101000001111001101001010110111000111110000010110101100000111000001110101010101010010101011110": 1,
+    "110110001010110001000111101011100100010011011011000010001011101011000000111001100110011100000010100": 1,
+    "110100001111010110010010010010100010010101110001001110011100000001100111000011101100000000111000000": 1,
+    "011001000100001101001001110100100000101100001010011100111111101110010101101101110001110011111111101": 1,
+    "100000011111100110100000001001110010100000000111101011011101001111001101010110110100000010111001110": 1,
+    "000011110101000000110100000011110000000100001100000000100100011011100010011011101010101101000010110": 1,
+    "001011001100111010000110111000100100000100110100010101100110101100101011011110011010111010101000110": 1,
+    "000001111010101000111110101000101110110111010101110001111000001010010101100100010011101101001001100": 1,
+    "010111000101100111000010111010011010011111101101110000110001011011100010011000011010011001111001110": 1,
+    "101001100100000110110011101011101111110000001011101010101101101111110001001001101100010110011100001": 1,
+    "011011010010001111000110111011011100001011101001100010010111111010000111000110001001011100110111110": 1,
+    "011011100110000111001011110001001110101001100110110110011111100101110011010001011010001001010100010": 1,
+    "010111001011011010001000010001001000111011011010011011001000000101100111110001001000100110001101000": 1,
+    "000001010100000000100011000100001101110010011011010101100000110110100000101000011110000001001000111": 1,
+    "100001101010110110110111111000000000110011110111100100101111010101100011101011000110101010100100011": 1,
+    "111001000111110110100101010111101111011111101011000101000111010101101011010000000001011110011101101": 1,
+    "011001101000101110100001001010010010100101010110110111110010011000001110001011101011001011100010011": 1,
+    "010111001101011010010011001001000111101110000110111001011000111000010111101011011000001100000000110": 1,
+    "111011101011011111000001111001101000011000110000010110111010000100111101010100000010111000011011001": 1,
+    "100011010001110011000000110110111010100100101000011000100111111000010101001000000000101101010110001": 1,
+    "111010110010001000010000111000000111010010101011011001001001110000000110011111100111001010101101010": 1,
+    "001001001100011110000100000100011111010000101001011101011011000101101010011010111011111001100001110": 1,
+    "101001011011011001011101100000011110100010010010010110010000100010011110010110000110010010001111010": 1,
+    "001010011000100101010111101001001111001010011110000010111110001011111011100000111111010110000111100": 1,
+    "110001010101010111001111011000010110111010111110011000100001101110110000110101011011010010001110100": 1,
+    "010011111100001100100111001000111000101111011011000011010111110010111111111110101000010000100001110": 1,
+    "001011010111100111010111111000101100001101100001001010100100110111010101011001011100111110000110001": 1,
+    "001011110011010111010011111000100100010111100101100101011011001001011101100111101010010100110101110": 1,
+    "001010100101111110101011101010010001100001011001100001101100000110110101110011101010010100110010010": 1,
+    "111010001100001010100111101100011010000110111011110001111000110100001011101110001010111100100000101": 1,
+    "110010110011000110100101000001110110001010000100010010111000010010111110001101100100101110101110010": 1,
+    "010001110100011101010010111001000110011110001111110000100000101000101101100111111100010100101010101": 1,
+    "010011110001011100110011010101100010100000000101101101001101111000000111010100100101110011000010001": 1,
+    "001011100111110111000111110101000010001001110010101001011100011111001001011001010110011001101100001": 1,
+    "100000011110011010100000101011001111101011111110100011011011100101100010110101011001000001111011110": 1,
+    "001010100100100001010010010011011001100101101001110010101011111110100011100010011100111010110001101": 1,
+    "010111000011110111010100010010101011100110001111100011011010000000111010001110100100111110001010010": 1,
+    "111010101111110100110100111010101001100100100111110101010010011010100000111001101010011000100010010": 1,
+    "010010101111001111100111010111111010110100010110101110100001110111001110011111110110001111111001110": 1,
+    "001011010000001011000101111000010010001000001011000010111000001111111001100011010111111010100001111": 1,
+    "001010011000001000101010011010101001101110110111111111010001001010100100001100111111101001101000110": 1,
+    "101011100000000110000100000100010011010011011110101010100110001110110100001111101101011110001101101": 1,
+    "010010011100000001010101110111010111000000111011100100111100011010111011001111001100101101011100010": 1,
+    "000111000111100111001110101101101010001010111001001001000001010011000111010101001101101100100100001": 1,
+    "001010100011000001111001110000000111110111001111010010101101011011100001101110110111101011100011111": 1,
+    "100000111011001110010011000000101011001110010011010001010100011010010001001100011001001100000010011": 1,
+    "110001100011101001110110101100101110010111011000100100110011111010110000100100001111000001001111011": 1,
+    "010010011010010101111011100010100100101111010100010000101100010110010110011011100100001010110001001": 1,
+    "111010101011011011001101110101011010100111010100111100100000110001011110100111101010001001101010010": 1,
+    "000010110100100010010011111001011110100001100111110010011110100101000010011000111110011101010111110": 1,
+    "100001110011100100010001010010110111011101000000001111011100111011111010110010110011111100111011000": 1,
+    "010000111000000000000100000000010000001100110011000010110100100100011000011101100100001010110011010": 1,
+    "011010001101001011110000010001000110101011100110111110111100110110110101100100011111101110001000001": 1,
+    "010001010001110010001100001100001001111010001100111101110101100111000110111001001110100010001001001": 1,
+    "111000101000011110100101110010011000000000010010100111010100100001111011101011100101100001111111101": 1,
+    "101011101110010001010111111010010111010000101001001110111101011001010110000001001010101000000100011": 1,
+    "000101101010011111000000000001001111101101001001011100100010101010000101011000100110100101100100100": 1,
+    "100010101111101011000111110101101010100000011100110111101110100111111001010010001011101100110101110": 1,
+    "100011011100101100100100110110100110100110001101000001001110110100110010101000101100011100100111010": 1,
+    "011101001000011100101111010000010001011001100000011111011010101010001101000100001000101100011111010": 1,
+    "101001000010101001110011100110011011101111011010000101011111100100111000001000110101001110010010010": 1,
+    "010111000010000111110000110100000111011110100100010000001101010011110110101101101001101001010001101": 1
+  },
+  "config": {
+    "problem": "mkp",
+    "instance": null,
+    "project_root": ".",
+    "method": "qrao",
+    "execution_mode": "single",
+    "qpu_id": null,
+    "qpus": null,
+    "only_qpu": null,
+    "layers": 3,
+    "entanglement": "circular",
+    "shots": 1000,
+    "maxiter": 200,
+    "seed": 0,
+    "timeout_sec": null,
+    "max_qubits": 0,
+    "qubo_penalty": null,
+    "cvar_alpha": 0.25,
+    "ws_epsilon": 0.001,
+    "pce_population": 1,
+    "pce_elite_frac": 0.25,
+    "pce_parallel_workers": 2,
+    "pce_compression_k": 2,
+    "pce_depth": 0,
+    "pce_batch_size": 1,
+    "qrao_max_vars_per_qubit": 3,
+    "qrao_reps": 3,
+    "qrao_rounding": "magic",
+    "qrao_optimizer": "cobyla",
+    "aws_profile": null,
+    "ibm_token": null,
+    "ibm_instance": null,
+    "ibm_credentials_json": null,
+    "qiskit_optimization_level": 3,
+    "no_aws": true,
+    "no_ibm": false,
+    "include_simulators": false,
+    "min_window_minutes": 10.0,
+    "min_aws_window_minutes": 20.0,
+    "ibm_min_runtime_seconds": 45.0,
+    "ibm_backend_refresh_seconds": 300.0,
+    "queue_status_seconds": 180.0,
+    "model_time_limit": 60.0,
+    "num_products": 2,
+    "output_root": "research_benchmark/results_hardware",
+    "checkpoint_dir": "checkpoints",
+    "force_rerun": false,
+    "log_level": "INFO",
+    "log_file": null
+  }
+}

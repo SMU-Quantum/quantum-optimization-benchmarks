@@ -1,0 +1,14 @@
+Instance,Backend,BackendQubits,LogicalQubits,LogicalDepth,LogicalGateCount,Logical2QGates,Parameters,TranspiledDepth,TranspiledTotalGates,Transpiled2QGates
+chr12a,ibm_fez,156,11,89,715,220,462,617.00,3817.00,440.00
+chr12a,ibm_torino,133,11,89,715,220,462,617.00,3817.00,440.00
+chr12b,ibm_fez,156,11,89,715,220,462,617.00,3817.00,440.00
+chr12b,ibm_torino,133,11,89,715,220,462,617.00,3817.00,440.00
+chr12c,ibm_fez,156,11,89,715,220,462,617.00,3817.00,440.00
+chr12c,ibm_torino,133,11,89,715,220,462,617.00,3817.00,440.00
+nug12,ibm_fez,156,11,18,86,20,66,51.00,245.00,20.00
+nug12,ibm_marrakesh,156,11,18,86,20,66,51.00,245.00,20.00
+had12,ibm_fez,156,11,18,86,20,66,51.00,245.00,20.00
+had12,ibm_marrakesh,156,11,18,86,20,66,51.00,245.00,20.00
+rou12,aer_simulator_mps,156,11,18,86,20,66,51.00,245.00,20.00
+rou12,ibm_fez,156,11,18,86,20,66,51.00,245.00,20.00
+rou12,ibm_marrakesh,156,11,18,86,20,66,51.00,245.00,20.00

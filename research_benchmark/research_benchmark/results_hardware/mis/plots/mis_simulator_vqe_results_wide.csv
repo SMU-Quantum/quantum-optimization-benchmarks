@@ -1,0 +1,7 @@
+Instance,OptimalBKS,Variables,VQE_Feas,VQE_GapRaw,CVAR_VQE_Feas,CVAR_VQE_GapRaw
+1tc.8,4,8,Yes,0.0,Yes,0.0
+1tc.16,8,16,Yes,25.0,Yes,12.5
+1tc.32,12,32,Yes,25.0,Yes,8.3
+1tc.64,20,64,Yes,60.0,Yes,60.0
+1et.64,18,64,Yes,22.2,Yes,22.2
+1dc.64,8,64,Yes,12.5,Yes,37.5

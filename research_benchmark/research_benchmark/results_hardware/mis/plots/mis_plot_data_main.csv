@@ -1,0 +1,15 @@
+Instance,Optimal,Qubits,Feas,Gap%,#Evals,Method,GapValue
+1tc.8,4,3,Yes,25.00,124,pce,25.0
+1tc.16,8,4,Yes,62.50,184,pce,62.5
+1tc.32,12,6,No,inf,200,pce,inf
+1tc.64,20,8,No,inf,200,pce,inf
+1et.64,18,8,No,inf,200,pce,inf
+1dc.64,10,8,No,inf,200,pce,inf
+1dc.128,16,10,No,inf,200,pce,inf
+1tc.8,4,4,Yes,0.00,200,qrao,0.0
+1tc.16,8,6,Yes,12.50,200,qrao,12.5
+1tc.32,12,13,Yes,25.00,200,qrao,25.0
+1tc.64,20,23,No,inf,200,qrao,inf
+1et.64,18,23,No,inf,200,qrao,inf
+1dc.64,10,25,No,inf,200,qrao,inf
+1dc.128,16,46,No,inf,200,qrao,inf

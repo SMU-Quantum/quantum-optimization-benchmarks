@@ -1,0 +1,9 @@
+Instance,Optimal,Qubits,ExactTargetMatch,ProductsWithDeviation,TotalAbsoluteDeviation,MaxAbsoluteDeviation,Gap%,#Evals
+ms_seed0_prod2,3,48,No,2,4,2,33.33,200
+ms_seed0_prod3,2,84,No,3,127,89,6250.00,200
+ms_seed0_prod4,1,118,No,4,188,85,18700.00,200
+ms_seed0_prod5,4,150,No,5,644,214,16000.00,200
+ms_seed1_prod2,3,50,No,2,215,121,7066.67,200
+ms_seed1_prod3,3,84,No,3,12,7,300.00,200
+ms_seed1_prod4,1,118,No,4,273,135,27200.00,200
+ms_seed1_prod5,4,156,No,5,439,152,10875.00,200

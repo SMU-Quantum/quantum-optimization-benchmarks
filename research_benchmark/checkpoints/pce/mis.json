@@ -1,86 +1,86 @@
 {
+  "1tc.8.txt": {
+    "instance": "1tc.8.txt",
+    "qubits": 3,
+    "status": "OK",
+    "objective": 3.0,
+    "feasible": true,
+    "time_sec": 6265.510950699914,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260309T091322Z\\1tc_8_txt"
+  },
   "1dc.128.txt": {
     "instance": "1dc.128.txt",
     "qubits": 10,
     "status": "OK",
-    "objective": 1.0,
-    "feasible": true,
-    "time_sec": 4068.2138917999982,
+    "objective": 46.0,
+    "feasible": false,
+    "time_sec": 4532.885692900047,
     "qpus": [
       "ibm_quantum"
     ],
-    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260224T063314Z\\1dc_128_txt"
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260309T110407Z\\1dc_128_txt"
   },
   "1dc.64.txt": {
     "instance": "1dc.64.txt",
     "qubits": 8,
     "status": "OK",
-    "objective": 1.0,
-    "feasible": true,
-    "time_sec": 3045.0089089999965,
+    "objective": 7.0,
+    "feasible": false,
+    "time_sec": 10026.99546310003,
     "qpus": [
       "ibm_quantum"
     ],
-    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260224T063314Z\\1dc_64_txt"
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260309T110407Z\\1dc_64_txt"
   },
   "1et.64.txt": {
     "instance": "1et.64.txt",
     "qubits": 8,
     "status": "OK",
-    "objective": 1.0,
-    "feasible": true,
-    "time_sec": 3023.424034399999,
+    "objective": 11.0,
+    "feasible": false,
+    "time_sec": 8205.97101590014,
     "qpus": [
       "ibm_quantum"
     ],
-    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260224T063314Z\\1et_64_txt"
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260310T030314Z\\1et_64_txt"
   },
   "1tc.16.txt": {
     "instance": "1tc.16.txt",
     "qubits": 4,
     "status": "OK",
-    "objective": 1.0,
+    "objective": 3.0,
     "feasible": true,
-    "time_sec": 3424.3191268999944,
+    "time_sec": 6790.759175000014,
     "qpus": [
       "ibm_quantum"
     ],
-    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260224T063314Z\\1tc_16_txt"
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260310T094729Z\\1tc_16_txt"
   },
   "1tc.32.txt": {
     "instance": "1tc.32.txt",
     "qubits": 6,
     "status": "OK",
-    "objective": 1.0,
-    "feasible": true,
-    "time_sec": 3456.1045050999965,
+    "objective": 8.0,
+    "feasible": false,
+    "time_sec": 9016.713942100061,
     "qpus": [
       "ibm_quantum"
     ],
-    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260224T063314Z\\1tc_32_txt"
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260311T030141Z\\1tc_32_txt"
   },
   "1tc.64.txt": {
     "instance": "1tc.64.txt",
     "qubits": 8,
     "status": "OK",
-    "objective": 1.0,
-    "feasible": true,
-    "time_sec": 2724.6025920999964,
+    "objective": 12.0,
+    "feasible": false,
+    "time_sec": 5163.067423200002,
     "qpus": [
       "ibm_quantum"
     ],
-    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260224T063314Z\\1tc_64_txt"
-  },
-  "1tc.8.txt": {
-    "instance": "1tc.8.txt",
-    "qubits": 3,
-    "status": "OK",
-    "objective": 1.0,
-    "feasible": true,
-    "time_sec": 2983.7252141000063,
-    "qpus": [
-      "ibm_quantum"
-    ],
-    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260224T063314Z\\1tc_8_txt"
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mis\\mis_pce_20260311T030141Z\\1tc_64_txt"
   }
 }

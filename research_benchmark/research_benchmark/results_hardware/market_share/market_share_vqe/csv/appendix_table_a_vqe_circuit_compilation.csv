@@ -1,0 +1,15 @@
+Instance,Backend,BackendQubits,LogicalQubits,LogicalDepth,LogicalGateCount,Logical2QGates,Parameters,TranspiledDepth,TranspiledTotalGates,Transpiled2QGates
+ms_seed0_prod2,ibm_fez,156,48,149,384,144,192,587.00,1392.00,144.00
+ms_seed0_prod2,ibm_torino,133,48,149,384,144,192,587.00,1392.00,144.00
+ms_seed0_prod3,ibm_fez,156,84,257,672,252,336,1019.00,2436.00,252.00
+ms_seed0_prod3,ibm_torino,133,84,257,672,252,336,1019.00,2436.00,252.00
+ms_seed0_prod4,ibm_fez,156,118,359,944,354,472,1532.00,3581.00,408.00
+ms_seed0_prod4,ibm_torino,133,118,359,944,354,472,1979.00,4704.00,808.00
+ms_seed0_prod5,ibm_fez,156,150,455,1200,450,600,3018.00,6901.00,1348.00
+ms_seed1_prod2,ibm_fez,156,50,155,400,150,200,914.00,2069.00,369.00
+ms_seed1_prod2,ibm_torino,133,50,155,400,150,200,796.00,1814.00,272.00
+ms_seed1_prod3,ibm_fez,156,84,257,672,252,336,1019.00,2436.00,252.00
+ms_seed1_prod3,ibm_torino,133,84,257,672,252,336,1019.00,2436.00,252.00
+ms_seed1_prod4,ibm_fez,156,118,359,944,354,472,1532.00,3581.00,408.00
+ms_seed1_prod4,ibm_torino,133,118,359,944,354,472,1979.00,4704.00,808.00
+ms_seed1_prod5,ibm_fez,156,156,473,1248,468,624,3276.00,7592.00,1536.00

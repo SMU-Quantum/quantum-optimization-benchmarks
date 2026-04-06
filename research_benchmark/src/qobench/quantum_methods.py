@@ -3,10 +3,12 @@ from __future__ import annotations
 import json
 import logging
 import math
+import os
 import threading
 import time
 from concurrent.futures import ThreadPoolExecutor, as_completed
 from dataclasses import dataclass
+from datetime import datetime, timezone
 from typing import Any, Callable, Literal, Optional
 
 import numpy as np
@@ -16,6 +18,23 @@ from .hardware_manager import HAS_BRAKET, QPUWindowExpiredError, normalize_count
 
 
 LOGGER = logging.getLogger("qobench.quantum_methods")
+
+COBYLA_INT32_MAX = (2 ** 31) - 1
+
+
+def cobyla_workspace_length(num_parameters: int) -> int:
+    n = max(0, int(num_parameters))
+    return int(n * (3 * n + 11) + 6)
+
+
+def cobyla_max_supported_parameters() -> int:
+    # Solve n*(3n+11)+6 <= int32_max exactly using integer arithmetic.
+    discriminant = int(12 * (COBYLA_INT32_MAX - 6) + 121)
+    return int((math.isqrt(discriminant) - 11) // 6)
+
+
+def cobyla_workspace_would_overflow(num_parameters: int) -> bool:
+    return cobyla_workspace_length(num_parameters) > COBYLA_INT32_MAX
 
 
 try:
@@ -367,146 +386,72 @@ def build_pce_ansatz_bundle(
     compression_k: int,
     depth: int,
 ) -> AnsatzBundle:
-    from qiskit import QuantumCircuit
-    from qiskit.circuit import Parameter
-
+    # PCE notebook workflow encodes the weighted MaxCut graph (QUBO vars + anchor node 0).
+    logical_qubo_vars = int(logical_num_vars)
+    maxcut_num_nodes = int(logical_qubo_vars + 1)
     encoded_num_qubits = estimate_pce_num_qubits(
-        num_variables=int(logical_num_vars),
+        num_variables=maxcut_num_nodes,
         compression_k=int(compression_k),
     )
-    effective_depth = int(depth)
-    if effective_depth <= 0:
-        effective_depth = max(1, 2 * int(encoded_num_qubits))
+    reps = int(depth) if int(depth) > 0 else 2
 
-    num_qubits = int(encoded_num_qubits)
-    num_layers = int(effective_depth)
-    qiskit_qc = QuantumCircuit(num_qubits, num_qubits)
-    qiskit_param_by_name: dict[str, Any] = {}
+    try:
+        from qiskit.circuit.library import efficient_su2
 
-    braket_qc = None
-    braket_param_by_name: dict[str, Any] = {}
-    if HAS_BRAKET and Circuit is not None and FreeParameter is not None:
-        braket_qc = Circuit()
+        qiskit_qc = efficient_su2(
+            int(encoded_num_qubits),
+            ["ry", "rz"],
+            reps=int(reps),
+        )
+    except Exception:
+        from qiskit.circuit.library import EfficientSU2
 
-    def _new_param(name: str) -> tuple[Any, Any]:
-        qparam = Parameter(name)
-        qiskit_param_by_name[name] = qparam
-        bparam = None
-        if braket_qc is not None:
-            bparam = FreeParameter(name)
-            braket_param_by_name[name] = bparam
-        return qparam, bparam
-
-    # Keep naming close to the notebook implementation.
-    first_block: list[tuple[Any, Any]] = []
-    second_block: list[tuple[Any, Any]] = []
-    for idx in range(1, (num_layers * num_qubits) + 1):
-        first_block.append(_new_param(f"phi{idx}"))
-    for idx in range((num_layers * num_qubits) + 1, (2 * num_layers * num_qubits) + 1):
-        second_block.append(_new_param(f"phi{idx}"))
-
-    for layer in range(num_layers):
-        first_start = layer * num_qubits
-        second_start = layer * num_qubits
-        for q in range(num_qubits):
-            qparam, bparam = first_block[first_start + q]
-            if (layer % 3) == 1:
-                qiskit_qc.ry(qparam, q)
-                if braket_qc is not None:
-                    braket_qc.ry(q, bparam)
-            elif (layer % 3) == 2:
-                qiskit_qc.rx(qparam, q)
-                if braket_qc is not None:
-                    braket_qc.rx(q, bparam)
-            else:
-                qiskit_qc.rz(qparam, q)
-                if braket_qc is not None:
-                    braket_qc.rz(q, bparam)
-
-        for q in range(0, num_qubits, 2):
-            if (q + 1) >= num_qubits:
-                continue
-            qparam, bparam = second_block[second_start + (q // 2)]
-            qiskit_qc.rxx(qparam, q, q + 1)
-            if braket_qc is not None:
-                try:
-                    braket_qc.xx(q, q + 1, bparam)
-                except Exception:
-                    braket_qc.cnot(q, q + 1)
-                    braket_qc.rx(q + 1, bparam)
-                    braket_qc.cnot(q, q + 1)
-
-        qiskit_qc.barrier()
-
-        for q in range(num_qubits):
-            qparam, bparam = first_block[first_start + q]
-            if (layer % 3) == 1:
-                qiskit_qc.rz(qparam, q)
-                if braket_qc is not None:
-                    braket_qc.rz(q, bparam)
-            elif (layer % 3) == 2:
-                qiskit_qc.ry(qparam, q)
-                if braket_qc is not None:
-                    braket_qc.ry(q, bparam)
-            else:
-                qiskit_qc.rx(qparam, q)
-                if braket_qc is not None:
-                    braket_qc.rx(q, bparam)
-
-        for q in range(1, num_qubits, 2):
-            if (q + 1) >= num_qubits:
-                continue
-            idx = second_start + (num_qubits // 2) + (q // 2)
-            if idx >= len(second_block):
-                continue
-            qparam, bparam = second_block[idx]
-            qiskit_qc.rxx(qparam, q, q + 1)
-            if braket_qc is not None:
-                try:
-                    braket_qc.xx(q, q + 1, bparam)
-                except Exception:
-                    braket_qc.cnot(q, q + 1)
-                    braket_qc.rx(q + 1, bparam)
-                    braket_qc.cnot(q, q + 1)
-        qiskit_qc.barrier()
-
-    qiskit_qc.measure(range(num_qubits), range(num_qubits))
+        qiskit_qc = EfficientSU2(
+            num_qubits=int(encoded_num_qubits),
+            su2_gates=["ry", "rz"],
+            entanglement="linear",
+            reps=int(reps),
+        )
+    qiskit_qc = qiskit_qc.decompose()
     qiskit_params = sorted(list(qiskit_qc.parameters), key=_parameter_sort_key)
-    braket_params = [
-        braket_param_by_name[p.name]
-        for p in qiskit_params
-        if p.name in braket_param_by_name
-    ]
 
     pauli_strings = generate_pce_pauli_strings(
-        num_qubits=num_qubits,
-        num_variables=int(logical_num_vars),
+        num_qubits=int(encoded_num_qubits),
+        num_variables=int(logical_qubo_vars),
         compression_k=int(compression_k),
     )
     pce_encoding = PceEncoding(
-        logical_num_vars=int(logical_num_vars),
-        encoded_num_qubits=num_qubits,
+        logical_num_vars=int(logical_qubo_vars),
+        encoded_num_qubits=int(encoded_num_qubits),
         compression_k=int(compression_k),
         pauli_strings=pauli_strings,
     )
+
+    # Qiskit-estimator PCE path is Qiskit-native only.
     return AnsatzBundle(
-        ansatz_id=f"pce_brickwork_n{num_qubits}_d{num_layers}_k{compression_k}_m{logical_num_vars}",
-        num_qubits=num_qubits,
+        ansatz_id=(
+            f"pce_qiskit_efficientsu2_n{encoded_num_qubits}_r{reps}"
+            f"_k{compression_k}_m{maxcut_num_nodes}"
+        ),
+        num_qubits=int(encoded_num_qubits),
         num_parameters=len(qiskit_params),
         qiskit_template=qiskit_qc,
         qiskit_parameters=qiskit_params,
-        braket_template=braket_qc,
-        braket_parameters=braket_params,
-        ansatz_family="Brickwork",
-        ansatz_reps=num_layers,
-        ansatz_entanglement="brickwork",
+        braket_template=None,
+        braket_parameters=[],
+        ansatz_family="EfficientSU2",
+        ansatz_reps=int(reps),
+        ansatz_entanglement="linear",
         metadata={
             "pce_encoding": {
                 "logical_num_vars": int(pce_encoding.logical_num_vars),
                 "encoded_num_qubits": int(pce_encoding.encoded_num_qubits),
                 "compression_k": int(pce_encoding.compression_k),
                 "pauli_strings": list(pce_encoding.pauli_strings),
-            }
+            },
+            "pce_maxcut_num_nodes": int(maxcut_num_nodes),
+            "pce_qubo_num_vars": int(logical_qubo_vars),
+            "pce_notebook_impl": "pce_generalized_merged",
         },
     )
 
@@ -1092,6 +1037,141 @@ def _evaluate_thetas_batch(
     return results
 
 
+def _qubo_to_maxcut_weight_matrix(qubo: Any) -> np.ndarray:
+    quadratic = np.asarray(qubo.objective.quadratic.to_array(), dtype=float).copy()
+    linear = np.asarray(qubo.objective.linear.to_array(), dtype=float).reshape(-1)
+    if quadratic.shape[0] != quadratic.shape[1]:
+        raise ValueError("QUBO quadratic matrix must be square.")
+    if quadratic.shape[0] != linear.shape[0]:
+        raise ValueError("QUBO linear and quadratic dimensions do not match.")
+
+    # Same conversion used in notebook helpers: push linear terms to diagonal.
+    diag = np.diag_indices_from(quadratic)
+    quadratic[diag] = quadratic[diag] + linear
+
+    n = int(linear.shape[0])
+    graph = np.zeros((n + 1, n + 1), dtype=float)
+
+    for i in range(1, n + 1):
+        weight = float(np.sum(quadratic[i - 1, :]) + np.sum(quadratic[:, i - 1]))
+        graph[0, i] = weight
+        graph[i, 0] = weight
+
+    for i in range(1, n + 1):
+        for j in range(i + 1, n + 1):
+            weight = float(quadratic[i - 1, j - 1] + quadratic[j - 1, i - 1])
+            graph[i, j] = weight
+            graph[j, i] = weight
+
+    return graph
+
+
+def _maxcut_edges_from_weight_matrix(weight_matrix: np.ndarray) -> list[tuple[int, int, float]]:
+    n = int(weight_matrix.shape[0])
+    edges: list[tuple[int, int, float]] = []
+    for i in range(n):
+        for j in range(i + 1, n):
+            w = float(weight_matrix[i, j])
+            if abs(w) > 1e-12:
+                edges.append((i, j, w))
+    return edges
+
+
+def _mst_weight(num_nodes: int, edges: list[tuple[int, int, float]]) -> float:
+    parent = list(range(num_nodes))
+    rank = [0] * num_nodes
+
+    def _find(x: int) -> int:
+        while parent[x] != x:
+            parent[x] = parent[parent[x]]
+            x = parent[x]
+        return x
+
+    def _union(a: int, b: int) -> bool:
+        ra = _find(a)
+        rb = _find(b)
+        if ra == rb:
+            return False
+        if rank[ra] < rank[rb]:
+            parent[ra] = rb
+        elif rank[ra] > rank[rb]:
+            parent[rb] = ra
+        else:
+            parent[rb] = ra
+            rank[ra] += 1
+        return True
+
+    total = 0.0
+    for u, v, w in sorted(edges, key=lambda item: float(item[2])):
+        if _union(int(u), int(v)):
+            total += float(w)
+    return float(total)
+
+
+def _pce_weighted_nu(num_nodes: int, edges: list[tuple[int, int, float]]) -> float:
+    if num_nodes <= 0:
+        return 0.0
+    w_graph = float(sum(float(w) for _, _, w in edges))
+    w_tree_min = _mst_weight(int(num_nodes), edges) if edges else 0.0
+    return float((w_graph / 2.0) + (w_tree_min / 4.0))
+
+
+def _maxcut_to_qubo_bitstring(maxcut_bits: list[int]) -> str:
+    if len(maxcut_bits) <= 1:
+        return ""
+    anchor = 1 if int(maxcut_bits[0]) == 1 else 0
+    qubo_bits = []
+    for bit in maxcut_bits[1:]:
+        b = 1 if int(bit) == 1 else 0
+        qubo_bits.append("1" if b == anchor else "0")
+    return "".join(qubo_bits)
+
+
+def _strip_final_measurements(circuit: Any) -> Any:
+    try:
+        return circuit.remove_final_measurements(inplace=False)
+    except Exception:
+        pass
+    try:
+        qc = circuit.copy()
+        kept = []
+        for item in getattr(qc, "data", []):
+            try:
+                op = item.operation
+                name = str(getattr(op, "name", ""))
+            except Exception:
+                op = item[0] if isinstance(item, (list, tuple)) and item else None
+                name = str(getattr(op, "name", ""))
+            if name == "measure":
+                continue
+            kept.append(item)
+        qc.data = kept
+        return qc
+    except Exception:
+        return circuit
+
+
+def _group_reversed_pce_pauli_operators(pauli_strings: list[str]) -> list[list[Any]]:
+    from qiskit.quantum_info import SparsePauliOp
+
+    x_labels: list[str] = []
+    y_labels: list[str] = []
+    z_labels: list[str] = []
+    for label in pauli_strings:
+        if "X" in label:
+            x_labels.append(label[::-1])
+        elif "Y" in label:
+            y_labels.append(label[::-1])
+        else:
+            z_labels.append(label[::-1])
+
+    return [
+        [SparsePauliOp.from_list([(p, 1.0)]) for p in x_labels],
+        [SparsePauliOp.from_list([(p, 1.0)]) for p in y_labels],
+        [SparsePauliOp.from_list([(p, 1.0)]) for p in z_labels],
+    ]
+
+
 def run_variational_method(
     *,
     method: Literal["vqe", "cvar_vqe", "qaoa", "cvar_qaoa", "ws_qaoa", "ma_qaoa"],
@@ -1105,6 +1185,15 @@ def run_variational_method(
     cvar_alpha: float,
     timeout_sec: float | None,
 ) -> OptimizationResult:
+    if cobyla_workspace_would_overflow(ansatz.num_parameters):
+        max_supported = cobyla_max_supported_parameters()
+        workspace_len = cobyla_workspace_length(ansatz.num_parameters)
+        raise RuntimeError(
+            "COBYLA workspace overflow: "
+            f"trainable_parameters={int(ansatz.num_parameters)} exceeds safe limit "
+            f"{max_supported} (workspace={workspace_len} > int32_max={COBYLA_INT32_MAX})."
+        )
+
     objective_mode: Literal["expectation", "cvar"] = "expectation"
     if method in {"cvar_vqe", "cvar_qaoa"}:
         objective_mode = "cvar"
@@ -1266,7 +1355,7 @@ def run_variational_method(
     )
 
 
-def run_pce_method(
+def _run_pce_method_legacy_counts(
     *,
     manager: Any,
     scheduler: QpuScheduler,
@@ -1421,6 +1510,1290 @@ def run_pce_method(
     )
 
 
+def run_pce_method(
+    *,
+    manager: Any,
+    scheduler: QpuScheduler,
+    ansatz: AnsatzBundle,
+    objective: QuboObjective,
+    shots: int,
+    maxiter: int,
+    seed: int,
+    population_size: int,
+    elite_frac: float,
+    timeout_sec: float | None,
+    parallel_workers: int,
+    batch_size: int,
+    pce_encoding: PceEncoding | None = None,
+) -> OptimizationResult:
+    try:
+        from qiskit.transpiler import generate_preset_pass_manager
+    except Exception:
+        LOGGER.warning(
+            "PCE Qiskit-estimator implementation unavailable (missing transpiler). "
+            "Falling back to legacy counts-based PCE."
+        )
+        return _run_pce_method_legacy_counts(
+            manager=manager,
+            scheduler=scheduler,
+            ansatz=ansatz,
+            objective=objective,
+            shots=shots,
+            maxiter=maxiter,
+            seed=seed,
+            population_size=population_size,
+            elite_frac=elite_frac,
+            timeout_sec=timeout_sec,
+            parallel_workers=parallel_workers,
+            batch_size=batch_size,
+            pce_encoding=pce_encoding,
+        )
+
+    # If non-Qiskit providers are selected, preserve previous behaviour.
+    selected_providers: set[str] = set()
+    for qpu_id in scheduler.qpu_ids:
+        qpu = manager.qpus.get(qpu_id)
+        provider = str(getattr(qpu, "provider", "")).strip()
+        if provider:
+            selected_providers.add(provider)
+    unsupported = [p for p in selected_providers if p not in {"local_qiskit", "ibm"}]
+    if unsupported:
+        LOGGER.warning(
+            "PCE Qiskit-estimator path supports only local_qiskit/ibm providers. "
+            "Selected providers=%s. Falling back to legacy counts-based PCE.",
+            sorted(selected_providers),
+        )
+        return _run_pce_method_legacy_counts(
+            manager=manager,
+            scheduler=scheduler,
+            ansatz=ansatz,
+            objective=objective,
+            shots=shots,
+            maxiter=maxiter,
+            seed=seed,
+            population_size=population_size,
+            elite_frac=elite_frac,
+            timeout_sec=timeout_sec,
+            parallel_workers=parallel_workers,
+            batch_size=batch_size,
+            pce_encoding=pce_encoding,
+        )
+
+    qubo = objective.qubo
+    weight_matrix = _qubo_to_maxcut_weight_matrix(qubo)
+    edges = _maxcut_edges_from_weight_matrix(weight_matrix)
+    num_nodes = int(weight_matrix.shape[0])
+    qubo_num_vars = int(objective.num_qubits)
+
+    compression_k = int(
+        (pce_encoding.compression_k if pce_encoding is not None else 2)
+    )
+    encoded_qubits = estimate_pce_num_qubits(
+        num_variables=int(num_nodes),
+        compression_k=int(compression_k),
+    )
+    if int(ansatz.num_qubits) != int(encoded_qubits):
+        LOGGER.warning(
+            "PCE ansatz qubit mismatch detected (bundle=%s, notebook_impl=%s). "
+            "Using notebook_impl qubit count.",
+            int(ansatz.num_qubits),
+            int(encoded_qubits),
+        )
+
+    reps = int(ansatz.ansatz_reps) if ansatz.ansatz_reps is not None else 2
+    if reps <= 0:
+        reps = 2
+
+    try:
+        from qiskit.circuit.library import efficient_su2
+
+        pce_qiskit_ansatz = efficient_su2(
+            int(encoded_qubits),
+            ["ry", "rz"],
+            reps=int(reps),
+        )
+    except Exception:
+        from qiskit.circuit.library import EfficientSU2
+
+        pce_qiskit_ansatz = EfficientSU2(
+            num_qubits=int(encoded_qubits),
+            su2_gates=["ry", "rz"],
+            entanglement="linear",
+            reps=int(reps),
+        )
+    pce_qiskit_ansatz = _strip_final_measurements(pce_qiskit_ansatz.decompose())
+
+    pauli_strings = generate_pce_pauli_strings(
+        num_qubits=int(encoded_qubits),
+        num_variables=int(num_nodes),
+        compression_k=int(compression_k),
+    )
+    observable_blocks = _group_reversed_pce_pauli_operators(pauli_strings)
+
+    alpha = float(encoded_qubits)
+    beta = 0.5
+    nu = _pce_weighted_nu(int(num_nodes), edges)
+
+    LOGGER.debug(
+        "PCE optimizer start | impl=qiskit_estimator qpu_mode=%s qpus=%s shots=%s maxiter=%s "
+        "pce_k=%s encoded_qubits=%s maxcut_nodes=%s qubo_vars=%s reps=%s",
+        scheduler.mode,
+        scheduler.qpu_ids,
+        shots,
+        maxiter,
+        compression_k,
+        encoded_qubits,
+        num_nodes,
+        qubo_num_vars,
+        reps,
+    )
+
+    def _set_nested_attr(target: Any, dotted_name: str, value: Any) -> bool:
+        current = target
+        parts = dotted_name.split(".")
+        for name in parts[:-1]:
+            if not hasattr(current, name):
+                return False
+            try:
+                current = getattr(current, name)
+            except Exception:
+                return False
+        leaf = parts[-1]
+        if not hasattr(current, leaf):
+            return False
+        try:
+            setattr(current, leaf, value)
+        except Exception:
+            return False
+        return True
+
+    def _configure_estimator_defaults(target: Any) -> None:
+        if target is None:
+            return
+        _set_nested_attr(target, "options.default_shots", int(shots))
+        _set_nested_attr(target, "options.default_precision", 0.05)
+        try:
+            setattr(target, "default_shots", int(shots))
+        except Exception:
+            pass
+
+    def _configure_ibm_runtime_options(target: Any) -> None:
+        pass
+
+    estimator_cache: dict[str, dict[str, Any]] = {}
+
+    def _build_context_for_qpu(qpu_id: str) -> dict[str, Any]:
+        if qpu_id in estimator_cache:
+            return estimator_cache[qpu_id]
+
+        qpu = manager.qpus.get(qpu_id)
+        if qpu is None:
+            raise RuntimeError(f"Unknown QPU id '{qpu_id}'")
+        provider = str(getattr(qpu, "provider", "")).strip()
+
+        backend = None
+        backend_name = qpu_id
+        metadata_extra: dict[str, Any] = {}
+
+        if provider == "local_qiskit":
+            try:
+                from qiskit_aer import AerSimulator
+                from qiskit_aer.primitives import EstimatorV2 as AerEstimatorV2
+            except Exception as exc:
+                raise ModuleNotFoundError(
+                    "Local PCE estimator requires qiskit-aer primitives."
+                ) from exc
+
+            backend = AerSimulator(method="matrix_product_state")
+            backend_name = "aer_simulator_mps"
+            estimator = AerEstimatorV2()
+        elif provider == "ibm":
+            try:
+                from qiskit_ibm_runtime import EstimatorV2 as RuntimeEstimatorV2
+            except Exception as exc:
+                raise ModuleNotFoundError(
+                    "IBM PCE estimator requires qiskit-ibm-runtime."
+                ) from exc
+
+            manager._refresh_ibm_usage_if_needed(force=True)
+            if not bool(getattr(qpu, "is_available", True)):
+                raise RuntimeError(f"IBM unavailable: {getattr(qpu, 'last_error', 'unknown')}")
+            backend_info = manager._select_ibm_backend_info(int(encoded_qubits))
+            if backend_info is None:
+                raise RuntimeError(
+                    f"No IBM backend supports encoded PCE size ({encoded_qubits} qubits)."
+                )
+            backend = backend_info["backend"]
+            backend_name = str(backend_info.get("name", getattr(backend, "name", qpu_id)))
+            metadata_extra["pending_jobs"] = backend_info.get("pending_jobs")
+            metadata_extra["backend_qubits"] = backend_info.get("num_qubits")
+            LOGGER.info(
+                "Selected IBM backend | selection=pce backend=%s qubits=%s pending_jobs=%s",
+                backend_name,
+                backend_info.get("num_qubits"),
+                backend_info.get("pending_jobs"),
+            )
+
+            raw_estimator = RuntimeEstimatorV2(mode=backend)
+            _configure_estimator_defaults(raw_estimator)
+            _configure_ibm_runtime_options(raw_estimator)
+            estimator = _QRAOPrimitiveWrapper(
+                raw_estimator,
+                label="estimator",
+                manager=manager,
+                qpu_id=qpu_id,
+                backend_name=backend_name,
+                qpu=qpu,
+                num_qubits=int(encoded_qubits),
+                primitive_cls=RuntimeEstimatorV2,
+                configure_fns=[_configure_estimator_defaults, _configure_ibm_runtime_options],
+                algo_name="PCE",
+            )
+            metadata_extra["runtime_guard"] = "qrao_primitive_wrapper"
+        else:
+            raise RuntimeError(
+                f"PCE Qiskit-estimator implementation does not support provider '{provider}'."
+            )
+
+        pass_manager = generate_preset_pass_manager(
+            optimization_level=3,
+            backend=backend,
+        )
+        transpiled_ansatz = pass_manager.run(pce_qiskit_ansatz)
+
+        layout = getattr(transpiled_ansatz, "layout", None)
+        hamiltonian_blocks: list[list[Any]] = []
+        for block in observable_blocks:
+            prepared_block: list[Any] = []
+            for op in block:
+                if layout is None:
+                    prepared_block.append(op)
+                    continue
+                try:
+                    prepared_block.append(op.apply_layout(layout))
+                except Exception:
+                    prepared_block.append(op)
+            hamiltonian_blocks.append(prepared_block)
+
+        context = {
+            "provider": provider,
+            "qpu_id": qpu_id,
+            "backend_name": backend_name,
+            "metadata_extra": metadata_extra,
+            "estimator": estimator,
+            "ansatz": transpiled_ansatz,
+            "hamiltonian_blocks": hamiltonian_blocks,
+        }
+        estimator_cache[qpu_id] = context
+        return context
+
+    def _evaluate_theta_qiskit_pce(theta: np.ndarray, qpu_id: str) -> dict[str, Any]:
+        theta_list = [float(value) for value in theta]
+        context = _build_context_for_qpu(qpu_id)
+
+        pubs = []
+        for block in context["hamiltonian_blocks"]:
+            if block:
+                pubs.append((context["ansatz"], block, theta_list))
+        if not pubs:
+            raise RuntimeError("PCE Hamiltonian is empty; cannot evaluate objective.")
+
+        submit_t0 = time.time()
+        job = context["estimator"].run(pubs)
+        job_id = getattr(job, "job_id", None)
+        if callable(job_id):
+            try:
+                job_id = job_id()
+            except Exception:
+                job_id = None
+        result = job.result()
+        elapsed_sec = float(time.time() - submit_t0)
+        current_backend = str(context["backend_name"])
+        estimator_meta = context["estimator"]
+        if hasattr(estimator_meta, "backend_name"):
+            try:
+                current_backend = str(getattr(estimator_meta, "backend_name"))
+            except Exception:
+                current_backend = str(context["backend_name"])
+
+        node_exp = np.zeros(int(num_nodes), dtype=float)
+        exp_idx = 0
+        for pub_result in result:
+            evs = None
+            try:
+                evs = getattr(pub_result.data, "evs", None)
+            except Exception:
+                evs = None
+            if evs is None:
+                continue
+            for ev in np.atleast_1d(evs).reshape(-1):
+                if exp_idx < len(node_exp):
+                    node_exp[exp_idx] = float(np.real(ev))
+                exp_idx += 1
+
+        edge_loss = 0.0
+        for u, v, w in edges:
+            edge_loss += float(w) * float(np.tanh(alpha * node_exp[u])) * float(np.tanh(alpha * node_exp[v]))
+
+        reg_term = np.tanh(alpha * node_exp) ** 2
+        reg_term = float(np.mean(reg_term) ** 2)
+        reg_loss = float(beta * nu * reg_term)
+        total_loss = float(edge_loss + reg_loss)
+
+        maxcut_bits = [1 if float(node_exp[i]) >= 0.0 else 0 for i in range(int(num_nodes))]
+        qubo_bitstring = _maxcut_to_qubo_bitstring(maxcut_bits)
+        if len(qubo_bitstring) < qubo_num_vars:
+            qubo_bitstring = qubo_bitstring.zfill(qubo_num_vars)
+        elif len(qubo_bitstring) > qubo_num_vars:
+            qubo_bitstring = qubo_bitstring[-qubo_num_vars:]
+
+        best_energy = float(objective.energy(qubo_bitstring))
+        pseudo_counts = {qubo_bitstring: int(shots)}
+        node_exp_map = {int(i): float(node_exp[i]) for i in range(int(num_nodes))}
+        eval_metadata: dict[str, Any] | None = None
+        if hasattr(estimator_meta, "pop_oldest_completed_metadata"):
+            try:
+                popped = estimator_meta.pop_oldest_completed_metadata()
+                if isinstance(popped, dict):
+                    eval_metadata = dict(popped)
+            except Exception:
+                eval_metadata = None
+        if eval_metadata is None:
+            eval_metadata = {}
+
+        metadata = dict(eval_metadata)
+        metadata.setdefault("provider", context["provider"])
+        metadata.setdefault("qpu_id", qpu_id)
+        metadata.setdefault("backend_name", current_backend)
+        metadata.setdefault("shots", int(shots))
+        if job_id is not None and not str(metadata.get("job_id", "")).strip():
+            metadata["job_id"] = str(job_id)
+        if "pending_jobs" not in metadata:
+            pending_jobs = context.get("metadata_extra", {}).get("pending_jobs")
+            if pending_jobs is not None:
+                metadata["pending_jobs"] = pending_jobs
+        metadata["elapsed_sec"] = float(elapsed_sec)
+        metadata["num_observables"] = int(num_nodes)
+        if "runtime_guard" not in metadata:
+            runtime_guard = context.get("metadata_extra", {}).get("runtime_guard")
+            if runtime_guard is not None:
+                metadata["runtime_guard"] = runtime_guard
+
+        return {
+            "qpu_id": qpu_id,
+            "theta": theta_list,
+            "counts": pseudo_counts,
+            "raw_counts": pseudo_counts,
+            "metadata": metadata,
+            "objective_value": float(total_loss),
+            "best_bitstring": str(qubo_bitstring),
+            "best_energy": float(best_energy),
+            "edge_loss": float(edge_loss),
+            "regularization_loss": float(reg_loss),
+            "node_exp_map": node_exp_map,
+        }
+
+    rng = np.random.default_rng(seed)
+    theta0 = rng.uniform(0.0, 1.0, size=(int(pce_qiskit_ansatz.num_parameters),))
+
+    trace: list[dict[str, Any]] = []
+    qpu_usage: dict[str, int] = {}
+    best_value = float("inf")
+    best_theta = [float(x) for x in theta0]
+    best_bitstring = "0" * int(qubo_num_vars)
+    best_energy = float("inf")
+    best_counts: dict[str, int] = {}
+    eval_counter = 0
+
+    def _objective_fn(theta: np.ndarray) -> float:
+        nonlocal best_value, best_theta, best_counts, best_bitstring, best_energy, eval_counter
+        eval_counter += 1
+
+        max_retries = max(len(scheduler._all_qpu_ids), 2)
+        last_error: Exception | None = None
+        result: dict[str, Any] | None = None
+        qpu_id = ""
+
+        for attempt in range(max_retries):
+            if not scheduler.has_available_qpus:
+                LOGGER.warning(
+                    "All QPUs offline at eval=%s. Forcing window refresh...",
+                    eval_counter,
+                )
+                scheduler._maybe_refresh_windows()
+                if not scheduler.has_available_qpus:
+                    raise RuntimeError("No QPUs available - all availability windows are closed.")
+
+            qpu_id = scheduler.next_qpu()
+            try:
+                result = _evaluate_theta_qiskit_pce(theta, qpu_id)
+                break
+            except QPUWindowExpiredError as exc:
+                last_error = exc
+                LOGGER.warning(
+                    "PCE: QPU '%s' window expired at eval=%s (attempt %d/%d). Trying next QPU...",
+                    qpu_id,
+                    eval_counter,
+                    attempt + 1,
+                    max_retries,
+                )
+                scheduler.mark_offline(qpu_id)
+                continue
+            except Exception as exc:
+                last_error = exc
+                LOGGER.warning(
+                    "PCE: QPU '%s' failed at eval=%s (attempt %d/%d): %s  Trying next QPU...",
+                    qpu_id,
+                    eval_counter,
+                    attempt + 1,
+                    max_retries,
+                    str(exc)[:200],
+                )
+                continue
+        else:
+            raise RuntimeError(
+                f"All QPUs failed at eval={eval_counter}. Last error: {last_error}"
+            ) from last_error
+
+        if result is None:
+            raise RuntimeError("PCE evaluation returned no result.")
+
+        value = float(result["objective_value"])
+        qpu_usage[qpu_id] = qpu_usage.get(qpu_id, 0) + 1
+
+        LOGGER.debug(
+            "PCE (Qiskit-estimator) evaluation | eval=%s qpu_id=%s objective=%.8f "
+            "edge=%.8f reg=%.8f best_sample_energy=%.8f",
+            eval_counter,
+            qpu_id,
+            value,
+            float(result["edge_loss"]),
+            float(result["regularization_loss"]),
+            float(result["best_energy"]),
+        )
+
+        trace.append(
+            {
+                "evaluation": int(eval_counter),
+                "qpu_id": qpu_id,
+                "objective_value": value,
+                "edge_loss": float(result["edge_loss"]),
+                "regularization_loss": float(result["regularization_loss"]),
+                "best_sample_energy": float(result["best_energy"]),
+                "best_sample_bitstring": result["best_bitstring"],
+                "metadata": result["metadata"],
+                "top_counts": _top_counts(result["counts"]),
+                "node_expectations": result["node_exp_map"],
+            }
+        )
+
+        if value < best_value:
+            best_value = value
+            best_theta = [float(x) for x in result["theta"]]
+            best_counts = dict(result["counts"])
+            best_bitstring = str(result["best_bitstring"])
+            best_energy = float(result["best_energy"])
+            LOGGER.debug(
+                "New PCE incumbent | eval=%s qpu_id=%s objective=%.8f bitstring=%s",
+                eval_counter,
+                qpu_id,
+                best_value,
+                best_bitstring,
+            )
+        return value
+
+    minimize_result = minimize(
+        fun=_objective_fn,
+        x0=theta0,
+        method="COBYLA",
+        options={"maxiter": int(maxiter), "rhobeg": 0.4},
+    )
+
+    LOGGER.debug(
+        "PCE optimizer complete | impl=qiskit_estimator status=%s evaluations=%s best_objective=%.8f",
+        minimize_result.status,
+        eval_counter,
+        best_value,
+    )
+
+    # Mirror QRAO metadata draining so async completions are preserved.
+    for cached_qpu_id, context in estimator_cache.items():
+        primitive = context.get("estimator")
+        if not hasattr(primitive, "drain_completed_metadata"):
+            continue
+        try:
+            remaining_meta = primitive.drain_completed_metadata()
+        except Exception:
+            remaining_meta = []
+        for meta in remaining_meta:
+            if not isinstance(meta, dict):
+                continue
+            trace.append(
+                {
+                    "pce_job_phase": "estimator",
+                    "qpu_id": str(meta.get("qpu_id", cached_qpu_id)),
+                    "backend_name": str(
+                        meta.get("backend_name", context.get("backend_name", cached_qpu_id))
+                    ),
+                    "metadata": meta,
+                }
+            )
+
+    if not best_counts:
+        best_counts = {str(best_bitstring): int(shots)}
+
+    return OptimizationResult(
+        method="pce",
+        objective_mode="pce_qiskit_loss",
+        best_value=float(best_value),
+        best_theta=best_theta,
+        best_bitstring=best_bitstring,
+        best_energy=float(best_energy),
+        best_counts=best_counts,
+        optimizer_status=str(minimize_result.status),
+        optimizer_message=str(minimize_result.message),
+        total_evaluations=int(eval_counter),
+        qpu_usage=qpu_usage,
+        trace=trace,
+    )
+
+
+class _QRAOPrimitiveWrapper:
+    """Transparent wrapper around an IBM Runtime primitive (Estimator/Sampler).
+
+    Intercepts ``.run()`` calls to add per-job logging and periodic IBM
+    budget checks.  When the current credential's budget drops below the
+    threshold, the wrapper triggers credential rotation via the hardware
+    manager, obtains a new backend, **rebuilds** the inner primitive on
+    that backend (with the same configuration), and continues seamlessly
+    — giving runtime-estimator methods the same credential-rotation
+    behaviour that VQE/QAOA/PCE get automatically through ``manager.run_counts()``.
+    """
+
+    _BUDGET_CHECK_INTERVAL = 1  # check budget on EVERY primitive call
+
+    def __init__(
+        self,
+        inner: Any,
+        *,
+        label: str,
+        manager: Any,
+        qpu_id: str,
+        backend_name: str,
+        qpu: Any,
+        num_qubits: int,
+        primitive_cls: type,
+        configure_fns: list,
+        algo_name: str = "QRAO",
+    ) -> None:
+        self._inner = inner
+        self._label = label
+        self._manager = manager
+        self._qpu_id = qpu_id
+        self._backend_name = backend_name
+        self._qpu = qpu
+        self._num_qubits = num_qubits
+        self._primitive_cls = primitive_cls
+        self._configure_fns = configure_fns
+        self._algo_name = str(algo_name)
+        self._job_count = 0
+        self._completed_job_metadata: list[dict[str, Any]] = []
+        self._metadata_lock = threading.Lock()
+
+        # Store the qubit count of the *initial* backend so that dynamic
+        # load-balancing only switches between same-topology machines.
+        # e.g. ibm_fez (156q Heron) and ibm_marrakesh (156q Heron) share a
+        # topology, but ibm_torino (133q Eagle) does NOT — switching to it
+        # mid-optimisation causes ISA / coupling-map mismatches and crashes.
+        self._backend_qubit_count: int | None = None
+        for info in getattr(manager, "ibm_backends", []):
+            if str(info.get("name", "")) == backend_name:
+                self._backend_qubit_count = int(info.get("num_qubits", 0))
+                break
+
+    @property
+    def job_count(self) -> int:
+        return self._job_count
+
+    @property
+    def backend_name(self) -> str:
+        return self._backend_name
+
+    def _record_completed_metadata(self, metadata: dict[str, Any]) -> None:
+        with self._metadata_lock:
+            self._completed_job_metadata.append(dict(metadata))
+
+    def pop_oldest_completed_metadata(self) -> dict[str, Any] | None:
+        with self._metadata_lock:
+            if not self._completed_job_metadata:
+                return None
+            return dict(self._completed_job_metadata.pop(0))
+
+    def drain_completed_metadata(self) -> list[dict[str, Any]]:
+        with self._metadata_lock:
+            records = [dict(item) for item in self._completed_job_metadata]
+            self._completed_job_metadata.clear()
+            return records
+
+    # Forward attribute access to the wrapped primitive so that
+    # qiskit-optimization / qiskit-algorithms can inspect options,
+    # set_options(), etc.
+    def __getattr__(self, name: str) -> Any:
+        return getattr(self._inner, name)
+
+    def _lookup_backend_pending_jobs(self, backend_name: str) -> Any:
+        for info in getattr(self._manager, "ibm_backends", []):
+            try:
+                if str(info.get("name", "")) == str(backend_name):
+                    return info.get("pending_jobs")
+            except Exception:
+                continue
+        return None
+
+    @staticmethod
+    def _extract_circuit_from_run_args(args: tuple[Any, ...]) -> Any | None:
+        if not args:
+            return None
+        first = args[0]
+        first_pub = first[0] if isinstance(first, (list, tuple)) and first else first
+        if hasattr(first_pub, "circuit"):
+            try:
+                return getattr(first_pub, "circuit")
+            except Exception:
+                pass
+        if isinstance(first_pub, (list, tuple)) and first_pub:
+            circuit = first_pub[0]
+            if hasattr(circuit, "data"):
+                return circuit
+        if hasattr(first_pub, "data"):
+            return first_pub
+        return None
+
+    @staticmethod
+    def _collect_circuit_metrics(circuit: Any) -> dict[str, Any]:
+        if circuit is None:
+            return {}
+        metrics: dict[str, Any] = {}
+        try:
+            depth = circuit.depth()
+            if depth is not None:
+                metrics["transpiled_depth"] = int(depth)
+        except Exception:
+            pass
+        one_q = 0
+        two_q = 0
+        meas = 0
+        try:
+            for item in getattr(circuit, "data", []):
+                try:
+                    inst, qargs, _ = item
+                except Exception:
+                    inst = getattr(item, "operation", None)
+                    qargs = getattr(item, "qubits", ())
+                name = str(getattr(inst, "name", ""))
+                qlen = len(qargs) if qargs is not None else 0
+                if name == "measure":
+                    meas += 1
+                elif qlen == 1:
+                    one_q += 1
+                elif qlen == 2:
+                    two_q += 1
+            metrics["transpiled_1q_gates"] = int(one_q)
+            metrics["transpiled_2q_gates"] = int(two_q)
+            metrics["transpiled_measurements"] = int(meas)
+        except Exception:
+            pass
+        return metrics
+
+    def _resolve_shots(self, kwargs: dict[str, Any]) -> int | None:
+        shots = kwargs.get("shots")
+        if shots is None:
+            options = getattr(self._inner, "options", None)
+            for attr in ("shots", "default_shots"):
+                try:
+                    candidate = getattr(options, attr)
+                except Exception:
+                    candidate = None
+                if candidate is not None:
+                    shots = candidate
+                    break
+        if shots is None:
+            try:
+                shots = getattr(self._inner, "default_shots", None)
+            except Exception:
+                shots = None
+        try:
+            return int(shots) if shots is not None else None
+        except Exception:
+            return None
+
+    def _rebuild_primitive_on_new_backend(self) -> bool:
+        """Rotate credentials and rebuild the inner primitive on a new backend.
+
+        After credential rotation, we prefer the **same backend name** as
+        the original (e.g. ``ibm_torino``) because the VQE's pass_manager
+        transpiled the ansatz circuit for that specific backend's coupling
+        map.  Switching to a different backend would cause transpilation
+        mismatches and job failures.
+
+        If all credentials are exhausted, the method will:
+        1. Reload the credential JSON file (to discover newly added accounts)
+        2. Wait and retry — mirroring VQE/QAOA's ``refresh_credentials_if_needed()``
+
+        Returns True on success, False if rotation failed after all retries.
+        """
+        _MAX_RETRIES = 10
+        _RETRY_WAIT_SECONDS = 30
+
+        for attempt in range(1, _MAX_RETRIES + 1):
+            # Step 1: Reload credential pool from disk (picks up new entries
+            # added to the JSON file, just like VQE's refresh_credentials_if_needed).
+            try:
+                self._manager._load_ibm_credential_pool(force=False)
+            except Exception:
+                pass
+
+            # Step 2: Refresh usage — this will rotate credentials if needed.
+            try:
+                self._manager._refresh_ibm_usage_if_needed(force=True)
+            except Exception:
+                pass
+
+            # Step 3: Check if QPU is available after rotation.
+            if self._qpu.is_available:
+                break
+
+            # QPU still unavailable — wait and retry (user may add new credentials).
+            if attempt < _MAX_RETRIES:
+                LOGGER.info(
+                    "%s %s: All credentials exhausted (attempt %d/%d). "
+                    "Waiting %ds for new credentials in %s ...",
+                    self._algo_name,
+                    self._label,
+                    attempt,
+                    _MAX_RETRIES,
+                    _RETRY_WAIT_SECONDS,
+                    self._manager.ibm_credentials_json,
+                )
+                time.sleep(_RETRY_WAIT_SECONDS)
+            else:
+                LOGGER.warning(
+                    "%s %s: All credentials exhausted after %d retries.",
+                    self._algo_name,
+                    self._label,
+                    _MAX_RETRIES,
+                )
+                return False
+
+        # --- Find the SAME backend name from the (now rotated) credential ---
+        # All IBM credentials give access to the same physical backends; only
+        # the runtime budget differs per CRN instance.
+        target_name = self._backend_name
+        new_backend = None
+        new_name = None
+
+        # Search through available backends for a match by name
+        for info in self._manager.ibm_backends:
+            if str(info.get("name", "")) == target_name:
+                if int(info.get("num_qubits", 0)) >= self._num_qubits:
+                    new_backend = info["backend"]
+                    new_name = target_name
+                    LOGGER.info(
+                        "Selected IBM backend | selection=runtime_same_after_rotation "
+                        "backend=%s qubits=%s pending_jobs=%s",
+                        target_name,
+                        info.get("num_qubits"),
+                        info.get("pending_jobs"),
+                    )
+                    break
+
+        # Fallback: if the original backend isn't found, try any compatible one
+        if new_backend is None:
+            backend_info = self._manager._select_ibm_backend_info(self._num_qubits)
+            if backend_info is None:
+                return False
+            new_backend = backend_info["backend"]
+            new_name = str(backend_info.get("name", getattr(new_backend, "name", self._qpu_id)))
+            LOGGER.warning(
+                "%s %s: Original backend '%s' not found after rotation; "
+                "using '%s' instead (may cause transpilation issues)",
+                self._algo_name,
+                self._label,
+                target_name,
+                new_name,
+            )
+
+        # Create a fresh primitive on the (same) backend
+        new_inner = self._primitive_cls(mode=new_backend)
+        for fn in self._configure_fns:
+            fn(new_inner)
+
+        old_name = self._backend_name
+        self._inner = new_inner
+        self._backend_name = new_name
+
+        LOGGER.info(
+            "%s %s: Credential rotated | old_backend=%s new_backend=%s",
+            self._algo_name,
+            self._label,
+            old_name,
+            new_name,
+        )
+        return True
+
+    def run(self, *args: Any, **kwargs: Any) -> Any:
+        self._job_count += 1
+
+        # --- Pre-dispatch budget check with credential rotation ---
+        runtime_budget_str = ""
+        if self._qpu.provider == "ibm":
+            remaining: float | None = None
+            try:
+                from qobench.hardware_manager import _get_ibm_usage_remaining_seconds
+                # Always force a fresh check so we never rely on stale data.
+                self._manager._refresh_ibm_usage_if_needed(force=True)
+                service = self._manager.sessions.get("ibm_quantum")
+                if service is not None:
+                    remaining = _get_ibm_usage_remaining_seconds(service)
+            except Exception:
+                pass
+
+            # Use the manager's configured threshold (set from CLI --ibm-min-runtime-seconds)
+            # NOT the module-level constant IBM_MIN_RUNTIME_SECONDS which may differ.
+            threshold = float(getattr(self._manager, "ibm_min_runtime_seconds", 15.0))
+
+            if remaining is not None:
+                runtime_budget_str = f" | IBM budget: {remaining:.0f}s left"
+                if remaining < threshold:
+                    LOGGER.warning(
+                        "%s %s: IBM budget low (%.0fs < %.0fs) at job=%s. "
+                        "Rotating credential...",
+                        self._algo_name,
+                        self._label,
+                        remaining,
+                        threshold,
+                        self._job_count,
+                    )
+                    if self._rebuild_primitive_on_new_backend():
+                        # Refresh budget display after rotation
+                        try:
+                            service = self._manager.sessions.get("ibm_quantum")
+                            if service is not None:
+                                new_remaining = _get_ibm_usage_remaining_seconds(service)
+                                if new_remaining is not None:
+                                    runtime_budget_str = f" | IBM budget: {new_remaining:.0f}s left"
+                        except Exception:
+                            pass
+                    else:
+                        LOGGER.warning(
+                            "%s %s: All credentials exhausted at job=%s. "
+                            "Stopping optimization.",
+                            self._algo_name,
+                            self._label,
+                            self._job_count,
+                        )
+                        raise RuntimeError(
+                            f"{self._algo_name} stopped: All IBM credentials exhausted "
+                            f"at {self._label} job={self._job_count}."
+                        )
+
+        # Ensure we always select the least busy backend on a per-job basis.
+        # IMPORTANT: only consider backends with the SAME qubit count as the
+        # original to avoid topology / coupling-map mismatches (e.g. switching
+        # from ibm_fez 156q Heron to ibm_torino 133q Eagle causes ISA failures).
+        if self._qpu.provider == "ibm" and getattr(self._manager, "ibm_backends_preferred", None):
+            best_backend = None
+            best_name = self._backend_name
+            best_pending = float('inf')
+            required_backend_qubits = self._backend_qubit_count
+
+            for info in self._manager.ibm_backends_preferred:
+                bq = int(info.get("num_qubits", 0))
+                # Must have enough qubits for the circuit AND must match the
+                # original backend's qubit count to ensure same topology.
+                if bq >= self._num_qubits and (required_backend_qubits is None or bq == required_backend_qubits):
+                    backend = info["backend"]
+                    try:
+                        pending = getattr(backend.status(), "pending_jobs", float('inf'))
+                        if isinstance(info, dict):
+                            info["pending_jobs"] = pending
+                        if pending < best_pending:
+                            best_pending = pending
+                            best_backend = backend
+                            best_name = str(getattr(backend, "name", ""))
+                    except Exception:
+                        pass
+
+            if best_backend is not None and best_name != self._backend_name and best_name != "":
+                LOGGER.info(
+                    "%s %s: Switching from %s to least busy backend %s (%d pending) at job=%d",
+                    self._algo_name,
+                    self._label,
+                    self._backend_name,
+                    best_name,
+                    best_pending,
+                    self._job_count,
+                )
+                new_inner = self._primitive_cls(mode=best_backend)
+                for fn in self._configure_fns:
+                    fn(new_inner)
+                self._inner = new_inner
+                self._backend_name = best_name
+
+        LOGGER.info(
+            "Dispatching %s %s job #%s -> %s | backend=%s%s",
+            self._algo_name,
+            self._label,
+            self._job_count,
+            self._qpu_id,
+            self._backend_name,
+            runtime_budget_str,
+        )
+
+        submit_start = time.time()
+        submit_time_utc = datetime.now(timezone.utc).isoformat()
+        dispatch_backend = self._backend_name
+        job_metadata: dict[str, Any] = {
+            "provider": str(getattr(self._qpu, "provider", "")),
+            "qpu_id": self._qpu_id,
+            "backend_name": dispatch_backend,
+            "submit_time_utc": submit_time_utc,
+        }
+        if self._backend_qubit_count is not None:
+            job_metadata["backend_qubits"] = int(self._backend_qubit_count)
+        pending_jobs = self._lookup_backend_pending_jobs(dispatch_backend)
+        if pending_jobs is not None:
+            job_metadata["pending_jobs_at_submit"] = pending_jobs
+        shots = self._resolve_shots(kwargs)
+        if shots is not None:
+            job_metadata["shots"] = int(shots)
+        job_metadata.update(
+            self._collect_circuit_metrics(
+                self._extract_circuit_from_run_args(args)
+            )
+        )
+        try:
+            import warnings as _warnings
+            from qobench.hardware_manager import _IBM_USAGE_LIMIT_WARNING_SUBSTR
+            usage_limit_hit = False
+            with _warnings.catch_warnings(record=True) as caught_warnings:
+                _warnings.simplefilter("always")
+                job = self._inner.run(*args, **kwargs)
+            for w in caught_warnings:
+                msg = str(w.message)
+                if _IBM_USAGE_LIMIT_WARNING_SUBSTR in msg:
+                    usage_limit_hit = True
+                    LOGGER.warning(
+                        "%s %s: Caught 'usage limit' warning during .run() at job=%s: %s",
+                        self._algo_name,
+                        self._label,
+                        self._job_count,
+                        msg[:200],
+                    )
+                    break
+            if usage_limit_hit:
+                LOGGER.info(
+                    "%s %s: Usage limit hit — rotating credential and retrying job %s...",
+                    self._algo_name,
+                    self._label,
+                    self._job_count,
+                )
+                if self._rebuild_primitive_on_new_backend():
+                    job = self._inner.run(*args, **kwargs)
+                else:
+                    raise RuntimeError(
+                        f"{self._algo_name} stopped: All IBM credentials exhausted "
+                        f"at {self._label} job={self._job_count} (usage limit warning)."
+                    )
+            job_id = getattr(job, "job_id", None)
+            if callable(job_id):
+                job_id = job_id()
+            if job_id is not None:
+                job_metadata["job_id"] = str(job_id)
+        except Exception as exc:
+            job_metadata["fallback_path"] = "submit_exception"
+            LOGGER.warning(
+                "%s %s: QPU job #%s FAILED on %s (backend=%s): %s. "
+                "Falling back to local MPS simulator...",
+                self._algo_name,
+                self._label,
+                self._job_count,
+                self._qpu_id,
+                self._backend_name,
+                exc,
+            )
+            try:
+                job = self._run_mps_fallback(*args, **kwargs)
+                job_metadata["provider"] = "local_qiskit"
+                job_metadata["qpu_id"] = "local_qiskit"
+                job_metadata["backend_name"] = "aer_simulator_mps"
+            except Exception as mps_exc:
+                job_metadata["fallback_path"] = "penalty_result"
+                LOGGER.warning(
+                    "%s %s: QPU job #%s MPS fallback also FAILED at submit: %s. "
+                    "Will return penalty value.",
+                    self._algo_name,
+                    self._label,
+                    self._job_count,
+                    mps_exc,
+                )
+                # Wrap penalty result in a mock job so _JobWrapper can call .result()
+                penalty_res = self._make_penalty_result(*args)
+                class _PenaltyJob:
+                    def result(self, *a, **kw):
+                        return penalty_res
+                    def __getattr__(self, name):
+                        raise AttributeError(name)
+                job = _PenaltyJob()
+
+        # Wrap the returned job so we can measure total time (submit + QPU
+        # execution + result retrieval) — matching VQE's "Job completed on
+        # ibm_quantum in Xs" timing.
+        wrapper_ref = self
+        job_num = self._job_count
+        backend_at_dispatch = str(job_metadata.get("backend_name", self._backend_name))
+        run_args = args
+        run_kwargs = kwargs
+
+        class _JobWrapper:
+            """Transparent job wrapper that logs QPU time on .result()."""
+
+            def __init__(self, inner_job: Any, metadata: dict[str, Any]) -> None:
+                self._inner_job = inner_job
+                self._submit_time = submit_start
+                self._result_logged = False
+                self._metadata = dict(metadata)
+
+            def result(self, *a: Any, **kw: Any) -> Any:
+                try:
+                    import warnings as _w
+                    from qobench.hardware_manager import _IBM_USAGE_LIMIT_WARNING_SUBSTR
+                    with _w.catch_warnings(record=True) as _cw:
+                        _w.simplefilter("always")
+                        res = self._inner_job.result(*a, **kw)
+                    for _wn in _cw:
+                        _msg = str(_wn.message)
+                        if _IBM_USAGE_LIMIT_WARNING_SUBSTR in _msg:
+                            LOGGER.warning(
+                                "%s %s job #%s: 'usage limit' warning on result(). "
+                                "Proactively rotating credential for next job.",
+                                wrapper_ref._algo_name,
+                                wrapper_ref._label,
+                                job_num,
+                            )
+                            try:
+                                wrapper_ref._manager._refresh_ibm_usage_if_needed(force=True)
+                            except Exception:
+                                pass
+                            try:
+                                wrapper_ref._rebuild_primitive_on_new_backend()
+                            except Exception:
+                                pass
+                            break
+                except Exception as exc:
+                    self._metadata["fallback_path"] = "result_exception"
+                    LOGGER.warning(
+                        "%s %s job #%s result() FAILED on %s (backend=%s): %s. "
+                        "Falling back to local MPS simulator...",
+                        wrapper_ref._algo_name,
+                        wrapper_ref._label,
+                        job_num,
+                        wrapper_ref._qpu_id,
+                        backend_at_dispatch,
+                        exc,
+                    )
+                    try:
+                        fallback_job = wrapper_ref._run_mps_fallback(*run_args, **run_kwargs)
+                        res = fallback_job.result()
+                        self._metadata["provider"] = "local_qiskit"
+                        self._metadata["qpu_id"] = "local_qiskit"
+                        self._metadata["backend_name"] = "aer_simulator_mps"
+                        fb_job_id = getattr(fallback_job, "job_id", None)
+                        if callable(fb_job_id):
+                            fb_job_id = fb_job_id()
+                        if fb_job_id is not None:
+                            self._metadata["job_id"] = str(fb_job_id)
+                    except Exception as mps_exc:
+                        self._metadata["fallback_path"] = "penalty_result"
+                        LOGGER.warning(
+                            "%s %s job #%s MPS fallback also FAILED: %s. "
+                            "Returning penalty value so COBYLA can continue.",
+                            wrapper_ref._algo_name,
+                            wrapper_ref._label,
+                            job_num,
+                            mps_exc,
+                        )
+                        res = wrapper_ref._make_penalty_result(*run_args)
+                if not self._result_logged:
+                    self._result_logged = True
+                    total = time.time() - self._submit_time
+                    self._metadata["complete_time_utc"] = datetime.now(timezone.utc).isoformat()
+                    self._metadata["elapsed_sec"] = float(total)
+                    try:
+                        status = self._inner_job.status()
+                        self._metadata["job_status"] = str(status)
+                    except Exception:
+                        pass
+                    wrapper_ref._record_completed_metadata(self._metadata)
+                    LOGGER.info(
+                        "%s %s job #%s completed on %s in %.1fs (backend=%s)",
+                        wrapper_ref._algo_name,
+                        wrapper_ref._label,
+                        job_num,
+                        wrapper_ref._qpu_id,
+                        total,
+                        backend_at_dispatch,
+                    )
+                return res
+
+            def __getattr__(self, name: str) -> Any:
+                return getattr(self._inner_job, name)
+
+        return _JobWrapper(job, job_metadata)
+
+    def _make_penalty_result(self, *args: Any) -> Any:
+        """Construct a fake PrimitiveResult with a very large penalty value.
+
+        This allows COBYLA to treat the failed evaluation as a terrible
+        point and simply move to a different direction, rather than crashing
+        with 'capi_return is NULL'.
+        """
+        try:
+            from qiskit.primitives.containers import PrimitiveResult, PubResult
+            from qiskit.primitives.containers.data_bin import DataBin
+
+            # Count how many PUBs were in the original call
+            num_pubs = 1
+            if args:
+                first_arg = args[0]
+                if isinstance(first_arg, (list, tuple)):
+                    num_pubs = len(first_arg) if len(first_arg) > 0 else 1
+
+            pub_results = []
+            for _ in range(num_pubs):
+                # Return a very large energy so the optimizer rejects this point
+                evs = np.array([1e15])
+                stds = np.array([0.0])
+                data = DataBin(evs=evs, stds=stds)
+                pub_results.append(PubResult(data))
+
+            penalty = PrimitiveResult(pub_results)
+            LOGGER.info(
+                "%s %s: Returning penalty result (1e15) for %d PUB(s) "
+                "so optimizer can continue.",
+                self._algo_name,
+                self._label,
+                num_pubs,
+            )
+            return penalty
+        except Exception as pe:
+            LOGGER.error(
+                "%s %s: Could not construct penalty PrimitiveResult: %s. "
+                "Attempting simple penalty fallback.",
+                self._algo_name,
+                self._label,
+                pe,
+            )
+            # Absolute last resort: return a mock object
+            class _MockResult:
+                def __init__(self):
+                    self.values = np.array([1e15])
+                def __getitem__(self, idx):
+                    class _PubResult:
+                        def __init__(self):
+                            self.data = type("DataBin", (), {"evs": np.array([1e15]), "stds": np.array([0.0])})()
+                    return _PubResult()
+                def __len__(self):
+                    return 1
+            return _MockResult()
+
+    def _run_mps_fallback(self, *args: Any, **kwargs: Any) -> Any:
+        """Re-run the primitive call on a local AerSimulator with MPS method.
+
+        Matrix Product State can efficiently simulate 100+ qubit circuits
+        as long as entanglement stays moderate (which is the case for the
+        EfficientSU2 ansatz with linear entanglement used by QRAO).
+
+        Since the circuits arriving here may be ISA-transpiled for a specific
+        IBM backend (e.g. ibm_fez 156q), we strip layout metadata and
+        re-transpile for the generic AerSimulator to avoid coupling-map
+        mismatches.
+        """
+        try:
+            from qiskit_aer import AerSimulator
+            from qiskit.primitives import BackendEstimatorV2, BackendSamplerV2
+        except ImportError:
+            LOGGER.error(
+                "%s %s: MPS fallback requires qiskit-aer. "
+                "Install with: pip install qiskit-aer",
+                self._algo_name,
+                self._label,
+            )
+            raise
+
+        mps_backend = AerSimulator(method="matrix_product_state")
+        LOGGER.info(
+            "%s %s: Running job #%s on local MPS simulator (%d encoded qubits)",
+            self._algo_name,
+            self._label,
+            self._job_count,
+            self._num_qubits,
+        )
+
+        # Choose the right local primitive to match the wrapped type
+        if self._label == "estimator":
+            local_primitive = BackendEstimatorV2(backend=mps_backend)
+        else:
+            local_primitive = BackendSamplerV2(backend=mps_backend)
+
+        # Apply the same configuration as the wrapped primitive
+        for fn in self._configure_fns:
+            try:
+                fn(local_primitive)
+            except Exception:
+                pass
+
+        # The PUBs may contain ISA-transpiled circuits. Try to strip the
+        # layout and re-transpile for the AerSimulator.
+        try:
+            from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
+            from qiskit.circuit import QuantumCircuit
+            mps_pm = generate_preset_pass_manager(
+                backend=mps_backend,
+                optimization_level=1,
+            )
+            new_args = list(args)
+            if new_args and isinstance(new_args[0], (list, tuple)):
+                new_pubs = []
+                for pub in new_args[0]:
+                    if isinstance(pub, (list, tuple)) and len(pub) >= 1:
+                        circ = pub[0]
+                        if isinstance(circ, QuantumCircuit):
+                            # Strip layout and re-transpile
+                            try:
+                                new_circ = mps_pm.run(circ)
+                                new_pub = (new_circ,) + tuple(pub[1:])
+                                new_pubs.append(new_pub)
+                            except Exception:
+                                new_pubs.append(pub)
+                        else:
+                            new_pubs.append(pub)
+                    else:
+                        new_pubs.append(pub)
+                new_args[0] = new_pubs
+                args = tuple(new_args)
+        except Exception as retranspile_err:
+            LOGGER.debug(
+                "%s %s: Could not re-transpile PUBs for MPS: %s (using originals)",
+                self._algo_name,
+                self._label,
+                retranspile_err,
+            )
+
+        return local_primitive.run(*args, **kwargs)
+
+
+
 def run_qrao_method(
     *,
     manager: Any,
@@ -1462,6 +2835,19 @@ def run_qrao_method(
     if qpu is None:
         raise RuntimeError(f"Unknown QPU id selected for QRAO: {qpu_id}")
 
+    # --- Pre-flight IBM budget check (matches VQE/QAOA/PCE behaviour) ---
+    if qpu.provider == "ibm":
+        manager._refresh_ibm_usage_if_needed()
+        if not qpu.is_available:
+            raise RuntimeError(
+                f"IBM QPU '{qpu_id}' unavailable before QRAO start: {qpu.last_error}"
+            )
+
+    LOGGER.info(
+        "QRAO optimizer start | qpu_id=%s qpu_mode=%s shots=%s maxiter=%s",
+        qpu_id, scheduler.mode, shots, maxiter,
+    )
+
     backend = None
     backend_name = qpu_id
     pending_jobs = None
@@ -1470,6 +2856,12 @@ def run_qrao_method(
     estimator: Any | None = None
     sampler: Any | None = None
     use_numpy_min_eigensolver = False
+    force_mps_env = str(os.getenv("QOBENCH_FORCE_MPS", "")).strip().lower()
+    local_sim_method_env = str(os.getenv("QOBENCH_LOCAL_SIMULATOR_METHOD", "")).strip().lower()
+    force_local_mps = (
+        force_mps_env in {"1", "true", "yes", "on"}
+        or local_sim_method_env in {"mps", "matrix_product_state"}
+    )
     try:
         optimization_level = int(getattr(manager, "qiskit_optimization_level", 1))
     except Exception:
@@ -1522,13 +2914,7 @@ def run_qrao_method(
             pass
 
     def _configure_ibm_runtime_options(target: Any) -> None:
-        if target is None:
-            return
-        _set_nested_attr(target, "options.resilience_level", 1)
-        _set_nested_attr(target, "options.dynamical_decoupling.enable", True)
-        _set_nested_attr(target, "options.dynamical_decoupling.sequence_type", "XY4")
-        _set_nested_attr(target, "options.twirling.enable_gates", True)
-        _set_nested_attr(target, "options.twirling.num_randomizations", "auto")
+        pass
 
     if qpu.provider == "ibm":
         manager._refresh_ibm_usage_if_needed()
@@ -1542,6 +2928,12 @@ def run_qrao_method(
         backend = backend_info["backend"]
         backend_name = str(backend_info.get("name", getattr(backend, "name", qpu_id)))
         pending_jobs = backend_info.get("pending_jobs")
+        LOGGER.info(
+            "Selected IBM backend | selection=qrao backend=%s qubits=%s pending_jobs=%s",
+            backend_name,
+            backend_info.get("num_qubits"),
+            pending_jobs,
+        )
         try:
             from qiskit.transpiler.preset_passmanagers import generate_preset_pass_manager
             from qiskit_ibm_runtime import EstimatorV2 as RuntimeEstimator
@@ -1555,15 +2947,42 @@ def run_qrao_method(
             backend=backend,
             optimization_level=optimization_level,
         )
-        estimator = RuntimeEstimator(mode=backend)
-        sampler = RuntimeSampler(mode=backend)
-        _configure_estimator_defaults(estimator)
-        _configure_sampler_shots(sampler)
-        _configure_ibm_runtime_options(estimator)
-        _configure_ibm_runtime_options(sampler)
+        raw_estimator = RuntimeEstimator(mode=backend)
+        raw_sampler = RuntimeSampler(mode=backend)
+        _configure_estimator_defaults(raw_estimator)
+        _configure_sampler_shots(raw_sampler)
+        _configure_ibm_runtime_options(raw_estimator)
+        _configure_ibm_runtime_options(raw_sampler)
+        # Wrap primitives for per-job logging, budget monitoring, and
+        # seamless credential rotation (rebuild on new backend when
+        # current credential budget runs low).
+        estimator = _QRAOPrimitiveWrapper(
+            raw_estimator,
+            label="estimator",
+            manager=manager,
+            qpu_id=qpu_id,
+            backend_name=backend_name,
+            qpu=qpu,
+            num_qubits=encoded_qubits,
+            primitive_cls=RuntimeEstimator,
+            configure_fns=[_configure_estimator_defaults, _configure_ibm_runtime_options],
+            algo_name="QRAO",
+        )
+        sampler = _QRAOPrimitiveWrapper(
+            raw_sampler,
+            label="sampler",
+            manager=manager,
+            qpu_id=qpu_id,
+            backend_name=backend_name,
+            qpu=qpu,
+            num_qubits=encoded_qubits,
+            primitive_cls=RuntimeSampler,
+            configure_fns=[_configure_sampler_shots, _configure_ibm_runtime_options],
+            algo_name="QRAO",
+        )
         primitive_kind = "runtime_v2"
     elif qpu.provider == "local_qiskit":
-        if encoded_qubits <= 20:
+        if encoded_qubits <= 20 and not force_local_mps:
             try:
                 from qiskit.primitives import StatevectorEstimator, StatevectorSampler
 
@@ -1588,7 +3007,11 @@ def run_qrao_method(
 
                     backend = AerSimulator(method="matrix_product_state")
                     backend_name = "aer_simulator_mps"
-                except Exception:
+                except Exception as exc:
+                    if force_local_mps:
+                        raise ModuleNotFoundError(
+                            "Forced MPS simulation requested, but qiskit-aer is unavailable."
+                        ) from exc
                     from qiskit.providers.basic_provider import BasicSimulator
 
                     backend = BasicSimulator()
@@ -1687,6 +3110,8 @@ def run_qrao_method(
         )
         min_eigen_solver = NumPyMinimumEigensolver()
     else:
+
+
         def _callback(*args: Any) -> None:
             nonlocal eval_counter
             eval_counter += 1
@@ -1696,14 +3121,48 @@ def run_qrao_method(
                     objective_value = float(args[2])
                 except Exception:
                     objective_value = float("nan")
+
+            # Use current backend name from wrapper (may change after rotation)
+            current_backend = (
+                estimator.backend_name
+                if hasattr(estimator, "backend_name")
+                else backend_name
+            )
+            eval_metadata: dict[str, Any] | None = None
+            if hasattr(estimator, "pop_oldest_completed_metadata"):
+                try:
+                    popped = estimator.pop_oldest_completed_metadata()
+                    if isinstance(popped, dict):
+                        eval_metadata = popped
+                except Exception:
+                    eval_metadata = None
+            if eval_metadata is None:
+                eval_metadata = {
+                    "provider": str(getattr(qpu, "provider", "")),
+                    "qpu_id": qpu_id,
+                    "backend_name": current_backend,
+                    "shots": int(shots),
+                }
+            if not str(eval_metadata.get("backend_name", "")).strip():
+                eval_metadata["backend_name"] = current_backend
+            if not str(eval_metadata.get("qpu_id", "")).strip():
+                eval_metadata["qpu_id"] = qpu_id
+
+            LOGGER.info(
+                "QRAO evaluation | eval=%s qpu_id=%s backend=%s objective=%.8f",
+                eval_counter, qpu_id, current_backend, objective_value,
+            )
+
             trace.append(
                 {
                     "evaluation": int(eval_counter),
                     "qpu_id": qpu_id,
-                    "backend_name": backend_name,
+                    "backend_name": current_backend,
                     "objective_value": objective_value,
+                    "metadata": eval_metadata,
                 }
             )
+
 
         min_eigen_solver = VQE(
             ansatz=ansatz,
@@ -1728,7 +3187,47 @@ def run_qrao_method(
         min_eigen_solver=min_eigen_solver,
         rounding_scheme=rounding,
     )
-    result = qrao.solve(qubo)
+
+    LOGGER.info(
+        "Dispatching QRAO optimization -> %s | backend=%s encoded_qubits=%s "
+        "rounding=%s optimizer=%s maxiter=%s shots=%s",
+        qpu_id, backend_name, encoded_qubits,
+        effective_rounding_scheme, optimizer_key, maxiter, shots,
+    )
+
+    # Suppress the verbose qiskit-optimization VQE logger that prints
+    # "Optimization complete in X seconds. Found optimal point [huge array...]"
+    # We provide our own structured logging instead.
+    _qiskit_vqe_logger = logging.getLogger("qiskit_optimization.minimum_eigensolvers.vqe")
+    _orig_level = _qiskit_vqe_logger.level
+    _qiskit_vqe_logger.setLevel(logging.WARNING)
+    try:
+        result = qrao.solve(qubo)
+    finally:
+        _qiskit_vqe_logger.setLevel(_orig_level)
+
+    for phase, primitive in (("estimator", estimator), ("sampler", sampler)):
+        if hasattr(primitive, "drain_completed_metadata"):
+            try:
+                remaining_meta = primitive.drain_completed_metadata()
+            except Exception:
+                remaining_meta = []
+            for meta in remaining_meta:
+                if not isinstance(meta, dict):
+                    continue
+                trace.append(
+                    {
+                        "qrao_job_phase": phase,
+                        "qpu_id": str(meta.get("qpu_id", qpu_id)),
+                        "backend_name": str(meta.get("backend_name", backend_name)),
+                        "metadata": meta,
+                    }
+                )
+
+    LOGGER.info(
+        "QRAO optimization complete | qpu_id=%s backend=%s evaluations=%s",
+        qpu_id, backend_name, eval_counter,
+    )
 
     best_vector = [int(v) for v in list(result.x)]
     best_bitstring = "".join("1" if v == 1 else "0" for v in best_vector)

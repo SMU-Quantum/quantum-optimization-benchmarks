@@ -1,0 +1,4462 @@
+{
+  "schema_version": "2.0",
+  "run_timestamp_utc": "20260304T023527Z",
+  "run_directory": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_qrao_20260304T023527Z\\pet3_dat",
+  "log_file": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\mkp\\mkp_qrao_20260304T023527Z\\run.log",
+  "problem": "mkp",
+  "instance_path": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\Multi_Dimension_Knapsack\\MKP_Instances\\hpp\\pet3.dat",
+  "instance_name": "pet3.dat",
+  "benchmark_protocol": {
+    "budget": {
+      "shots_per_circuit": 1000,
+      "max_optimizer_iterations": 200,
+      "total_circuit_evaluations": 200,
+      "wall_clock_cap_sec": null,
+      "queue_time_policy": "included_in_wall_clock"
+    },
+    "objective_measured": {
+      "optimizer_objective": "qrao",
+      "cvar_alpha": null,
+      "reported_best_sample_energy": 84519581.0,
+      "reported_expected_value": 84519581.0,
+      "post_processed_objective": 2645.0,
+      "note": "optimizer_objective is used to guide parameter updates; best_sample_energy is the lowest QUBO energy from any single bitstring; post_processed_objective is after local-swap repair"
+    },
+    "feasibility_policy": {
+      "repair_allowed": true,
+      "repair_method": "one_round_local_swap",
+      "repair_description": "After optimization, the best raw bitstring is taken. A single round of local bit-flip swap is applied: each variable is flipped and the resulting QUBO energy is checked. If any flip improves the objective, the best flip is kept.",
+      "repair_applied": true,
+      "candidates_checked": 71,
+      "raw_objective_before_repair": 1345.0,
+      "raw_feasible_before_repair": true
+    },
+    "stopping_rule": {
+      "type": "fixed_iterations",
+      "max_iterations": 200,
+      "actual_iterations": 200,
+      "optimizer_status": "0",
+      "optimizer_message": "QRAO finished"
+    }
+  },
+  "execution": {
+    "method": "qrao",
+    "execution_mode": "single",
+    "selected_qpus": [
+      "ibm_quantum"
+    ],
+    "job_ids": [
+      "backfilled-pet3-eval-001",
+      "backfilled-pet3-eval-002",
+      "backfilled-pet3-eval-003",
+      "backfilled-pet3-eval-004",
+      "backfilled-pet3-eval-005",
+      "backfilled-pet3-eval-006",
+      "backfilled-pet3-eval-007",
+      "backfilled-pet3-eval-008",
+      "backfilled-pet3-eval-009",
+      "backfilled-pet3-eval-010",
+      "backfilled-pet3-eval-011",
+      "backfilled-pet3-eval-012",
+      "backfilled-pet3-eval-013",
+      "backfilled-pet3-eval-014",
+      "backfilled-pet3-eval-015",
+      "backfilled-pet3-eval-016",
+      "backfilled-pet3-eval-017",
+      "backfilled-pet3-eval-018",
+      "backfilled-pet3-eval-019",
+      "backfilled-pet3-eval-020",
+      "backfilled-pet3-eval-021",
+      "backfilled-pet3-eval-022",
+      "backfilled-pet3-eval-023",
+      "backfilled-pet3-eval-024",
+      "backfilled-pet3-eval-025",
+      "backfilled-pet3-eval-026",
+      "backfilled-pet3-eval-027",
+      "backfilled-pet3-eval-028",
+      "backfilled-pet3-eval-029",
+      "backfilled-pet3-eval-030",
+      "backfilled-pet3-eval-031",
+      "backfilled-pet3-eval-032",
+      "backfilled-pet3-eval-033",
+      "backfilled-pet3-eval-034",
+      "backfilled-pet3-eval-035",
+      "backfilled-pet3-eval-036",
+      "backfilled-pet3-eval-037",
+      "backfilled-pet3-eval-038",
+      "backfilled-pet3-eval-039",
+      "backfilled-pet3-eval-040",
+      "backfilled-pet3-eval-041",
+      "backfilled-pet3-eval-042",
+      "backfilled-pet3-eval-043",
+      "backfilled-pet3-eval-044",
+      "backfilled-pet3-eval-045",
+      "backfilled-pet3-eval-046",
+      "backfilled-pet3-eval-047",
+      "backfilled-pet3-eval-048",
+      "backfilled-pet3-eval-049",
+      "backfilled-pet3-eval-050",
+      "backfilled-pet3-eval-051",
+      "backfilled-pet3-eval-052",
+      "backfilled-pet3-eval-053",
+      "backfilled-pet3-eval-054",
+      "backfilled-pet3-eval-055",
+      "backfilled-pet3-eval-056",
+      "backfilled-pet3-eval-057",
+      "backfilled-pet3-eval-058",
+      "backfilled-pet3-eval-059",
+      "backfilled-pet3-eval-060",
+      "backfilled-pet3-eval-061",
+      "backfilled-pet3-eval-062",
+      "backfilled-pet3-eval-063",
+      "backfilled-pet3-eval-064",
+      "backfilled-pet3-eval-065",
+      "backfilled-pet3-eval-066",
+      "backfilled-pet3-eval-067",
+      "backfilled-pet3-eval-068",
+      "backfilled-pet3-eval-069",
+      "backfilled-pet3-eval-070",
+      "backfilled-pet3-eval-071",
+      "backfilled-pet3-eval-072",
+      "backfilled-pet3-eval-073",
+      "backfilled-pet3-eval-074",
+      "backfilled-pet3-eval-075",
+      "backfilled-pet3-eval-076",
+      "backfilled-pet3-eval-077",
+      "backfilled-pet3-eval-078",
+      "backfilled-pet3-eval-079",
+      "backfilled-pet3-eval-080",
+      "backfilled-pet3-eval-081",
+      "backfilled-pet3-eval-082",
+      "backfilled-pet3-eval-083",
+      "backfilled-pet3-eval-084",
+      "backfilled-pet3-eval-085",
+      "backfilled-pet3-eval-086",
+      "backfilled-pet3-eval-087",
+      "backfilled-pet3-eval-088",
+      "backfilled-pet3-eval-089",
+      "backfilled-pet3-eval-090",
+      "backfilled-pet3-eval-091",
+      "backfilled-pet3-eval-092",
+      "backfilled-pet3-eval-093",
+      "backfilled-pet3-eval-094",
+      "backfilled-pet3-eval-095",
+      "backfilled-pet3-eval-096",
+      "backfilled-pet3-eval-097",
+      "backfilled-pet3-eval-098",
+      "backfilled-pet3-eval-099",
+      "backfilled-pet3-eval-100",
+      "backfilled-pet3-eval-101",
+      "backfilled-pet3-eval-102",
+      "backfilled-pet3-eval-103",
+      "backfilled-pet3-eval-104",
+      "backfilled-pet3-eval-105",
+      "backfilled-pet3-eval-106",
+      "backfilled-pet3-eval-107",
+      "backfilled-pet3-eval-108",
+      "backfilled-pet3-eval-109",
+      "backfilled-pet3-eval-110",
+      "backfilled-pet3-eval-111",
+      "backfilled-pet3-eval-112",
+      "backfilled-pet3-eval-113",
+      "backfilled-pet3-eval-114",
+      "backfilled-pet3-eval-115",
+      "backfilled-pet3-eval-116",
+      "backfilled-pet3-eval-117",
+      "backfilled-pet3-eval-118",
+      "backfilled-pet3-eval-119",
+      "backfilled-pet3-eval-120",
+      "backfilled-pet3-eval-121",
+      "backfilled-pet3-eval-122",
+      "backfilled-pet3-eval-123",
+      "backfilled-pet3-eval-124",
+      "backfilled-pet3-eval-125",
+      "backfilled-pet3-eval-126",
+      "backfilled-pet3-eval-127",
+      "backfilled-pet3-eval-128",
+      "backfilled-pet3-eval-129",
+      "backfilled-pet3-eval-130",
+      "backfilled-pet3-eval-131",
+      "backfilled-pet3-eval-132",
+      "backfilled-pet3-eval-133",
+      "backfilled-pet3-eval-134",
+      "backfilled-pet3-eval-135",
+      "backfilled-pet3-eval-136",
+      "backfilled-pet3-eval-137",
+      "backfilled-pet3-eval-138",
+      "backfilled-pet3-eval-139",
+      "backfilled-pet3-eval-140",
+      "backfilled-pet3-eval-141",
+      "backfilled-pet3-eval-142",
+      "backfilled-pet3-eval-143",
+      "backfilled-pet3-eval-144",
+      "backfilled-pet3-eval-145",
+      "backfilled-pet3-eval-146",
+      "backfilled-pet3-eval-147",
+      "backfilled-pet3-eval-148",
+      "backfilled-pet3-eval-149",
+      "backfilled-pet3-eval-150",
+      "backfilled-pet3-eval-151",
+      "backfilled-pet3-eval-152",
+      "backfilled-pet3-eval-153",
+      "backfilled-pet3-eval-154",
+      "backfilled-pet3-eval-155",
+      "backfilled-pet3-eval-156",
+      "backfilled-pet3-eval-157",
+      "backfilled-pet3-eval-158",
+      "backfilled-pet3-eval-159",
+      "backfilled-pet3-eval-160",
+      "backfilled-pet3-eval-161",
+      "backfilled-pet3-eval-162",
+      "backfilled-pet3-eval-163",
+      "backfilled-pet3-eval-164",
+      "backfilled-pet3-eval-165",
+      "backfilled-pet3-eval-166",
+      "backfilled-pet3-eval-167",
+      "backfilled-pet3-eval-168",
+      "backfilled-pet3-eval-169",
+      "backfilled-pet3-eval-170",
+      "backfilled-pet3-eval-171",
+      "backfilled-pet3-eval-172",
+      "backfilled-pet3-eval-173",
+      "backfilled-pet3-eval-174",
+      "backfilled-pet3-eval-175",
+      "backfilled-pet3-eval-176",
+      "backfilled-pet3-eval-177",
+      "backfilled-pet3-eval-178",
+      "backfilled-pet3-eval-179",
+      "backfilled-pet3-eval-180",
+      "backfilled-pet3-eval-181",
+      "backfilled-pet3-eval-182",
+      "backfilled-pet3-eval-183",
+      "backfilled-pet3-eval-184",
+      "backfilled-pet3-eval-185",
+      "backfilled-pet3-eval-186",
+      "backfilled-pet3-eval-187",
+      "backfilled-pet3-eval-188",
+      "backfilled-pet3-eval-189",
+      "backfilled-pet3-eval-190",
+      "backfilled-pet3-eval-191",
+      "backfilled-pet3-eval-192",
+      "backfilled-pet3-eval-193",
+      "backfilled-pet3-eval-194",
+      "backfilled-pet3-eval-195",
+      "backfilled-pet3-eval-196",
+      "backfilled-pet3-eval-197",
+      "backfilled-pet3-eval-198",
+      "backfilled-pet3-eval-199",
+      "backfilled-pet3-eval-200"
+    ],
+    "total_jobs_dispatched": 200,
+    "seed": 0,
+    "qrao": {
+      "max_vars_per_qubit": 3,
+      "rounding": "magic",
+      "optimizer": "cobyla"
+    },
+    "pce": null
+  },
+  "circuit_metrics": {
+    "num_qubits": 44,
+    "logical_qubits_before_encoding": 102,
+    "ansatz_family": "EfficientSU2",
+    "ansatz_reps": 3,
+    "ansatz_entanglement": "linear",
+    "trainable_parameters": 352,
+    "depth_pretranspile": 55,
+    "one_qubit_gates_pretranspile": 352,
+    "two_qubit_gates_pretranspile": 129,
+    "measurement_count": 0
+  },
+  "transpiler_settings": {
+    "qiskit_optimization_level": 3,
+    "routing_method": "preset_passmanager_default",
+    "note": "transpiled circuit metrics available per-job in job_metadata",
+    "backfill_note": "Backfilled from trace.jsonl + transpile-only reconstruction + qrao log latencies"
+  },
+  "device_calibration": {
+    "ibm_ibm_fez": {
+      "provider": "ibm",
+      "backend_name": "ibm_fez",
+      "num_qubits": 156,
+      "timestamp_utc": "2026-03-04T11:37:19.234494+00:00",
+      "coupling_map_edges": 352,
+      "t1_us": {
+        "mean": 146.71,
+        "min": 10.46
+      },
+      "t2_us": {
+        "mean": 104.98,
+        "min": 4.82
+      },
+      "readout_error": {
+        "mean": 0.029002,
+        "max": 0.389893
+      }
+    },
+    "ibm_ibm_marrakesh": {
+      "provider": "ibm",
+      "backend_name": "ibm_marrakesh",
+      "num_qubits": 156,
+      "timestamp_utc": "2026-03-04T11:37:19.236098+00:00",
+      "coupling_map_edges": 352,
+      "t1_us": {
+        "mean": 206.8,
+        "min": 6.55
+      },
+      "t2_us": {
+        "mean": 129.3,
+        "min": 6.44
+      },
+      "readout_error": {
+        "mean": 0.029602,
+        "max": 0.49707
+      }
+    },
+    "ibm_ibm_torino": {
+      "provider": "ibm",
+      "backend_name": "ibm_torino",
+      "num_qubits": 133,
+      "timestamp_utc": "2026-03-04T11:37:19.237112+00:00",
+      "coupling_map_edges": 300,
+      "t1_us": {
+        "mean": 172.52,
+        "min": 3.57
+      },
+      "t2_us": {
+        "mean": 134.74,
+        "min": 6.77
+      },
+      "readout_error": {
+        "mean": 0.06245,
+        "max": 0.455566
+      }
+    }
+  },
+  "timing": {
+    "solve_runtime_sec": 9472.366512699984,
+    "total_instance_sec": 9475.184900299995
+  },
+  "qpu_status_snapshot": {
+    "rigetti_ankaa3": {
+      "name": "Rigetti Ankaa-3",
+      "provider": "braket_rigetti",
+      "is_available": false,
+      "max_qubits": 82,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 263.0
+    },
+    "iqm_emerald": {
+      "name": "IQM Emerald",
+      "provider": "braket_iqm_emerald",
+      "is_available": false,
+      "max_qubits": 54,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 293.0
+    },
+    "iqm_garnet": {
+      "name": "IQM Garnet",
+      "provider": "braket_iqm_garnet",
+      "is_available": false,
+      "max_qubits": 20,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 233.0
+    },
+    "amazon_sv1": {
+      "name": "Amazon SV1",
+      "provider": "braket_sim_sv1",
+      "is_available": false,
+      "max_qubits": 34,
+      "backend_name": "",
+      "last_error": "AWS disabled",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "ibm_quantum": {
+      "name": "IBM Quantum",
+      "provider": "ibm",
+      "is_available": true,
+      "max_qubits": 156,
+      "backend_name": "ibm_marrakesh",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "local_qiskit": {
+      "name": "Local Qiskit Statevector Simulator",
+      "provider": "local_qiskit",
+      "is_available": true,
+      "max_qubits": 28,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    }
+  },
+  "optimizer": {
+    "status": "0",
+    "message": "QRAO finished",
+    "total_evaluations": 200,
+    "qpu_usage": {
+      "ibm_quantum": 200
+    }
+  },
+  "job_metadata": [
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-001",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-002",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-003",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-004",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-005",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-006",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-007",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-008",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-009",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-010",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-011",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-012",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-013",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-014",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-015",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-016",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-017",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-018",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-019",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-020",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-021",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-022",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-023",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 24.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-024",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-025",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-026",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-027",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-028",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-029",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-030",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-031",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-032",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-033",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-034",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-035",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-036",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-037",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-038",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-039",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-040",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-041",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-042",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-043",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-044",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-045",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-046",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-047",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-048",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 36.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-049",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 52.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-050",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 40.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-051",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 35.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-052",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 24.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-053",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 42.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-054",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-055",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 35.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-056",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-057",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-058",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 34.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-059",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-060",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 34.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-061",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-062",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-063",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-064",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-065",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-066",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 34.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-067",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 31.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-068",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 31.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-069",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-070",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-071",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-072",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-073",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-074",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-075",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-076",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 40.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-077",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-078",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-079",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-080",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-081",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-082",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-083",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 44.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-084",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-085",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 37.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-086",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 25.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-087",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-088",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-089",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-090",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-091",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-092",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 31.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-093",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-094",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-095",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-096",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-097",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 41.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-098",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 43.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-099",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-100",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 37.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-101",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 55.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-102",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-103",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 86.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-104",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 54.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-105",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 44.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-106",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 82.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-107",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 84.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-108",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 46.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-109",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 57.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-110",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-111",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 61.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-112",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 48.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-113",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 50.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-114",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 69.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-115",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 117.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-116",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 36.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-117",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 76.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-118",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 40.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-119",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-120",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 45.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-121",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 48.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-122",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 36.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-123",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 37.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-124",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 80.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-125",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 40.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-126",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 68.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-127",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 106.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-128",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 43.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-129",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 139.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-130",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 62.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-131",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 44.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-132",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-133",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-134",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 74.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-135",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 67.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-136",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-137",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-138",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 47.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-139",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-140",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 34.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-141",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-142",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 41.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-143",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 38.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-144",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 39.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-145",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 31.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-146",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 35.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-147",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 41.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-148",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 1238.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-149",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 544.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-150",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-151",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-152",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 31.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-153",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-154",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 31.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-155",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-156",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 52.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-157",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 36.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-158",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-159",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-160",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 31.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-161",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-162",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-163",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-164",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-165",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-166",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-167",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 28.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-168",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 37.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-169",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-170",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-171",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 36.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-172",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 106.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-173",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 35.4,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-174",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-175",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 39.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-176",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 30.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-177",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-178",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-179",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-180",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 43.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-181",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-182",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-183",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 37.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-184",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 54.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-185",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 35.3,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-186",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 38.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-187",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 50.5,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-188",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-189",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 93.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-190",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 33.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-191",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.0,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-192",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 32.9,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-193",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-194",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 48.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-195",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 35.7,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-196",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 26.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-197",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.8,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-198",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 27.6,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-199",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 29.1,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    },
+    {
+      "provider": "ibm",
+      "qpu_id": "ibm_quantum",
+      "backend_name": "ibm_marrakesh",
+      "job_id": "backfilled-pet3-eval-200",
+      "shots": 1000,
+      "backfilled_from": [
+        "trace.jsonl",
+        "mkp_qrao_out_v1.log"
+      ],
+      "backend_qubits": 156,
+      "elapsed_sec": 41.2,
+      "transpiled_depth": 67,
+      "transpiled_1q_gates": 880,
+      "transpiled_2q_gates": 129,
+      "transpiled_measurements": 0,
+      "transpilation_source": "GenericBackendV2"
+    }
+  ],
+  "best_result": {
+    "optimization_objective_mode": "qrao",
+    "optimization_objective_value": 84519581.0,
+    "objective_value": 2645.0,
+    "feasible": true,
+    "best_sample_energy": 84519581.0,
+    "raw_best_bitstring": "110100111001000011010101101111010100001000000011001111101010111011100110101101110011100001010111101100",
+    "best_bitstring": "110100111001010011010101101111010100001000000011001111101010111011100110101101110011100001010111101100",
+    "best_theta": [],
+    "raw_decoded_solution": {
+      "active_variable_count": 54,
+      "active_variables": [
+        "capacity_0@int_slack@1",
+        "capacity_0@int_slack@2",
+        "capacity_0@int_slack@4",
+        "capacity_0@int_slack@6",
+        "capacity_0@int_slack@8",
+        "capacity_0@int_slack@9",
+        "capacity_1@int_slack@1",
+        "capacity_1@int_slack@2",
+        "capacity_1@int_slack@3",
+        "capacity_1@int_slack@4",
+        "capacity_1@int_slack@6",
+        "capacity_1@int_slack@8",
+        "capacity_2@int_slack@3",
+        "capacity_3@int_slack@3",
+        "capacity_3@int_slack@4",
+        "capacity_3@int_slack@7",
+        "capacity_4@int_slack@0",
+        "capacity_4@int_slack@1",
+        "capacity_4@int_slack@2",
+        "capacity_4@int_slack@3",
+        "capacity_4@int_slack@5",
+        "capacity_4@int_slack@7",
+        "capacity_5@int_slack@0",
+        "capacity_5@int_slack@1",
+        "capacity_5@int_slack@2",
+        "capacity_5@int_slack@4",
+        "capacity_5@int_slack@5",
+        "capacity_5@int_slack@6",
+        "capacity_6@int_slack@0",
+        "capacity_6@int_slack@1",
+        "capacity_6@int_slack@3",
+        "capacity_6@int_slack@5",
+        "capacity_6@int_slack@6",
+        "capacity_7@int_slack@1",
+        "capacity_7@int_slack@2",
+        "capacity_7@int_slack@3",
+        "capacity_7@int_slack@6",
+        "capacity_7@int_slack@7",
+        "capacity_8@int_slack@0",
+        "capacity_8@int_slack@5",
+        "capacity_8@int_slack@7",
+        "capacity_9@int_slack@0",
+        "capacity_9@int_slack@1",
+        "capacity_9@int_slack@2",
+        "capacity_9@int_slack@3",
+        "capacity_9@int_slack@5",
+        "capacity_9@int_slack@6",
+        "x_0",
+        "x_1",
+        "x_11",
+        "x_3",
+        "x_6",
+        "x_7",
+        "x_8"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        1,
+        3,
+        6,
+        7,
+        8,
+        11
+      ],
+      "selected_indices_one_based": [
+        1,
+        2,
+        4,
+        7,
+        8,
+        9,
+        12
+      ]
+    },
+    "raw_reconstructed_problem_objective": {
+      "objective_label": "mkp_total_profit",
+      "objective_sense": "maximize",
+      "objective_value": 1345.0,
+      "feasible": true,
+      "constraint_violations": {
+        "capacity_overflow_by_dimension": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "postprocess": {
+      "name": "one_round_local_swap",
+      "improved": true,
+      "candidates_checked": 71
+    },
+    "decoded_solution": {
+      "active_variable_count": 55,
+      "active_variables": [
+        "capacity_0@int_slack@1",
+        "capacity_0@int_slack@2",
+        "capacity_0@int_slack@4",
+        "capacity_0@int_slack@6",
+        "capacity_0@int_slack@8",
+        "capacity_0@int_slack@9",
+        "capacity_1@int_slack@1",
+        "capacity_1@int_slack@2",
+        "capacity_1@int_slack@3",
+        "capacity_1@int_slack@4",
+        "capacity_1@int_slack@6",
+        "capacity_1@int_slack@8",
+        "capacity_2@int_slack@3",
+        "capacity_3@int_slack@3",
+        "capacity_3@int_slack@4",
+        "capacity_3@int_slack@7",
+        "capacity_4@int_slack@0",
+        "capacity_4@int_slack@1",
+        "capacity_4@int_slack@2",
+        "capacity_4@int_slack@3",
+        "capacity_4@int_slack@5",
+        "capacity_4@int_slack@7",
+        "capacity_5@int_slack@0",
+        "capacity_5@int_slack@1",
+        "capacity_5@int_slack@2",
+        "capacity_5@int_slack@4",
+        "capacity_5@int_slack@5",
+        "capacity_5@int_slack@6",
+        "capacity_6@int_slack@0",
+        "capacity_6@int_slack@1",
+        "capacity_6@int_slack@3",
+        "capacity_6@int_slack@5",
+        "capacity_6@int_slack@6",
+        "capacity_7@int_slack@1",
+        "capacity_7@int_slack@2",
+        "capacity_7@int_slack@3",
+        "capacity_7@int_slack@6",
+        "capacity_7@int_slack@7",
+        "capacity_8@int_slack@0",
+        "capacity_8@int_slack@5",
+        "capacity_8@int_slack@7",
+        "capacity_9@int_slack@0",
+        "capacity_9@int_slack@1",
+        "capacity_9@int_slack@2",
+        "capacity_9@int_slack@3",
+        "capacity_9@int_slack@5",
+        "capacity_9@int_slack@6",
+        "x_0",
+        "x_1",
+        "x_11",
+        "x_13",
+        "x_3",
+        "x_6",
+        "x_7",
+        "x_8"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        1,
+        3,
+        6,
+        7,
+        8,
+        11,
+        13
+      ],
+      "selected_indices_one_based": [
+        1,
+        2,
+        4,
+        7,
+        8,
+        9,
+        12,
+        14
+      ]
+    },
+    "reconstructed_problem_objective": {
+      "objective_label": "mkp_total_profit",
+      "objective_sense": "maximize",
+      "objective_value": 2645.0,
+      "feasible": true,
+      "constraint_violations": {
+        "capacity_overflow_by_dimension": [
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0,
+          0.0
+        ]
+      }
+    },
+    "active_assignment": {
+      "x_0": 1,
+      "x_1": 1,
+      "x_2": 0,
+      "x_3": 1,
+      "x_4": 0,
+      "x_5": 0,
+      "x_6": 1,
+      "x_7": 1,
+      "x_8": 1,
+      "x_9": 0,
+      "x_10": 0,
+      "x_11": 1,
+      "x_12": 0,
+      "x_13": 1,
+      "x_14": 0,
+      "capacity_0@int_slack@0": 0,
+      "capacity_0@int_slack@1": 1,
+      "capacity_0@int_slack@2": 1,
+      "capacity_0@int_slack@3": 0,
+      "capacity_0@int_slack@4": 1,
+      "capacity_0@int_slack@5": 0,
+      "capacity_0@int_slack@6": 1,
+      "capacity_0@int_slack@7": 0,
+      "capacity_0@int_slack@8": 1,
+      "capacity_0@int_slack@9": 1,
+      "capacity_1@int_slack@0": 0,
+      "capacity_1@int_slack@1": 1,
+      "capacity_1@int_slack@2": 1,
+      "capacity_1@int_slack@3": 1,
+      "capacity_1@int_slack@4": 1,
+      "capacity_1@int_slack@5": 0,
+      "capacity_1@int_slack@6": 1,
+      "capacity_1@int_slack@7": 0,
+      "capacity_1@int_slack@8": 1,
+      "capacity_1@int_slack@9": 0,
+      "capacity_2@int_slack@0": 0,
+      "capacity_2@int_slack@1": 0,
+      "capacity_2@int_slack@2": 0,
+      "capacity_2@int_slack@3": 1,
+      "capacity_2@int_slack@4": 0,
+      "capacity_2@int_slack@5": 0,
+      "capacity_2@int_slack@6": 0,
+      "capacity_2@int_slack@7": 0,
+      "capacity_3@int_slack@0": 0,
+      "capacity_3@int_slack@1": 0,
+      "capacity_3@int_slack@2": 0,
+      "capacity_3@int_slack@3": 1,
+      "capacity_3@int_slack@4": 1,
+      "capacity_3@int_slack@5": 0,
+      "capacity_3@int_slack@6": 0,
+      "capacity_3@int_slack@7": 1,
+      "capacity_4@int_slack@0": 1,
+      "capacity_4@int_slack@1": 1,
+      "capacity_4@int_slack@2": 1,
+      "capacity_4@int_slack@3": 1,
+      "capacity_4@int_slack@4": 0,
+      "capacity_4@int_slack@5": 1,
+      "capacity_4@int_slack@6": 0,
+      "capacity_4@int_slack@7": 1,
+      "capacity_4@int_slack@8": 0,
+      "capacity_5@int_slack@0": 1,
+      "capacity_5@int_slack@1": 1,
+      "capacity_5@int_slack@2": 1,
+      "capacity_5@int_slack@3": 0,
+      "capacity_5@int_slack@4": 1,
+      "capacity_5@int_slack@5": 1,
+      "capacity_5@int_slack@6": 1,
+      "capacity_5@int_slack@7": 0,
+      "capacity_5@int_slack@8": 0,
+      "capacity_6@int_slack@0": 1,
+      "capacity_6@int_slack@1": 1,
+      "capacity_6@int_slack@2": 0,
+      "capacity_6@int_slack@3": 1,
+      "capacity_6@int_slack@4": 0,
+      "capacity_6@int_slack@5": 1,
+      "capacity_6@int_slack@6": 1,
+      "capacity_7@int_slack@0": 0,
+      "capacity_7@int_slack@1": 1,
+      "capacity_7@int_slack@2": 1,
+      "capacity_7@int_slack@3": 1,
+      "capacity_7@int_slack@4": 0,
+      "capacity_7@int_slack@5": 0,
+      "capacity_7@int_slack@6": 1,
+      "capacity_7@int_slack@7": 1,
+      "capacity_8@int_slack@0": 1,
+      "capacity_8@int_slack@1": 0,
+      "capacity_8@int_slack@2": 0,
+      "capacity_8@int_slack@3": 0,
+      "capacity_8@int_slack@4": 0,
+      "capacity_8@int_slack@5": 1,
+      "capacity_8@int_slack@6": 0,
+      "capacity_8@int_slack@7": 1,
+      "capacity_8@int_slack@8": 0,
+      "capacity_9@int_slack@0": 1,
+      "capacity_9@int_slack@1": 1,
+      "capacity_9@int_slack@2": 1,
+      "capacity_9@int_slack@3": 1,
+      "capacity_9@int_slack@4": 0,
+      "capacity_9@int_slack@5": 1,
+      "capacity_9@int_slack@6": 1,
+      "capacity_9@int_slack@7": 0,
+      "capacity_9@int_slack@8": 0
+    }
+  },
+  "raw_bitstring_counts": {
+    "110100111001000011010101101111010100001000000011001111101010111011100110101101110011100001010111101100": 1,
+    "001101000110010000000100011000001000100001111110000001010000110110001000100100000000010011001010011000": 1,
+    "001000010111101001001110000111001010001111001100110000101010011100110000100011000000111011101011011101": 1,
+    "011010110010000101010110100000110101010110100110101010000001011101010000101010011001001011000011101011": 1,
+    "111010001110000010010110001010100010001111111100110000010000111011100101011000111101101110011010001001": 1,
+    "111101011000110001010110110010110001011110100011000100000100100110100011010001001010011110100111100000": 1,
+    "100010010010000100101011000000110101001001111011110011011010101100110001000110001001110001110000011100": 1,
+    "101110000101001000010110011100100011110111100000101001101100001100110100010010111110100100110111011010": 1,
+    "101000000011110111111100010111001010100011110001011110000100010010011110000011000100110000001000001000": 1,
+    "100001000101110001111100111010000101110111000111110011011001010100101000101000110011100100011011000100": 1,
+    "111001000010101010110001101011101010000010100001001111111011111101001111011010000011001100101101100010": 1,
+    "011011010100000010101110101110000100010011110111110111110001010001101000000101010010001011010111111111": 1,
+    "001101010010100010000100101001001010000101101001001110001000100011010010010110011000110111100000001100": 1,
+    "110001110010101100011010110011010100001011001100100011010101000011101100110100000001011100001001100010": 1,
+    "010000001111110101011000011000101000110100101110100010111100001010101101111101011000100001101010111100": 1,
+    "101101010000001111111101010101010100101010000110100111000110110101110010111011001111010100010100111100": 1,
+    "011010111001100011001001011100010101000011000111100001110000000001001111101111001110001101110011110011": 1,
+    "010001101010000011011110000101011010100010011000010011010110101010011100000000101101000110100111101111": 1,
+    "010000100011100001110110101100101010101111001100011010001110001001001111111011011001010011010100101001": 1,
+    "100001000111000011011110011000100101010101101000010100011110110011010010010111001000100111100010101100": 1,
+    "000100000111101010101000110101100101111100011110100100010001011111000101111111010101001011101001110111": 1,
+    "111010111101000100101110110101011001011110010110010101110010000010111110100110101011110010001101000110": 1,
+    "100001010100001100001110010101001010010111000100010010101010011101111001100001110011010111101101011010": 1,
+    "010101110101000000011110111001101001100001000010101000100100000001110111101000010001101111000111011011": 1,
+    "100011110011001100010100100101111001010010100001101100100010100111001011000010011101100001000000110011": 1,
+    "101000001001111000001101011000101011100001101101110011100011000111110011001100000001111001100101001110": 1,
+    "110100001110101001100000000000110000011011010001010101100100001110001100010100100011010100011011100100": 1,
+    "100101110100100011010110111000101011010111011001010111001010001011110110100100110011010000010111100100": 1,
+    "011101010000001011010110101111010100001000101110001000010011011110000101000101100000000110010001110010": 1,
+    "001000111011001000111100110101101101011001110111000011001001110111001010111110011000010000111010110110": 1,
+    "011100001111101010010010001000100100000110110111000101100101000010101010100101111110001001000010110101": 1,
+    "110111101000000001010100010110000011001101010010100001010000101111000010001101011111101000011111111101": 1,
+    "011011001100000010100010000101101000111110010001101000000110100011101001010000001011000011101010001010": 1,
+    "000100001010100110010001000010011011101101110111001110001001011111011110000111100010101110000000110101": 1,
+    "110001110011010110100000000011001001100100100000100000000000000001000011100011010001111100001001000011": 1,
+    "101100100010101011000001100001001010110100100010001101111001101011011011111100100110111010000110011101": 1,
+    "111110010001110010110110000111000010110001110011000111100010011010011010010101111110000010001011101100": 1,
+    "011111001001001100001110111110110000111000111110000111011100000111100010001010100100000101011001100011": 1,
+    "001111111000100110110000111110011000010101101001010100011100110001000000000110001101111111011111100001": 1,
+    "100010010110001100101100001001001101101111100010100110100101110001101011110110100101110111101111110110": 1,
+    "100110111001000000101010000110001100010010011110101010011111101110101000100111110011101111101010011010": 1,
+    "010001000110001110000100001000100011000011000110110011110110010011010100000100101011010100011101110101": 1,
+    "001110011001100000001010110010010101001011110011101100100101000011110100100001001110011001000011010100": 1,
+    "000101110101001110110110000010011001100100010000011010001110110001001000110100000010010110001110110100": 1,
+    "011000010011001101111101000101011101001010111110010011100000100000101000101010000100001100100001101101": 1,
+    "110001110110001010011010001010000010001110111101001100000100011010111111100001110100010011101101110100": 1,
+    "011001001010110110101010000001010101101111110011100110010101010101100110100110100100111000101100001101": 1,
+    "110000011101100011001011000110010100101010111010101101001100011100111000001101100110100010101001011000": 1,
+    "100110000000010111100110101111100111000111111110011100111011011011100111010011111000111010100000100100": 1,
+    "000010001101001111011110100100100111100101100111010010011011011101110001000011110011110110001001010111": 1,
+    "100000111001010101001011111010001010111010001100010100100111111100010001111000000000100100101110100101": 1,
+    "111111011000001000111100100011011010000010111110110001100000110001101100011001011111110011100000100010": 1,
+    "101111001001100100100001011000011010101001110010011001101011101001100100011100011100111101010101010010": 1,
+    "000100001000011000110001010010010111000101011001001000110010110100001000010001101110010000001011011100": 1,
+    "000101111001011100001110001010101001101001000111000010110010011000011010111011000010011110001001110100": 1,
+    "111101100011000110110110100101011001111000001100000010101100001101100101010011101011110111001001101111": 1,
+    "111000000101101100100110100000101101001011000000010101110111101110010101000011010100110101111100000111": 1,
+    "011010111100110101010000011100000000100100000000011111100100111100011110001001010010110011100000111001": 1,
+    "010010001001101100010001000011101101001010110010010000000000100100101001010100110101010000101011101110": 1,
+    "011011110011001010001100111001110001000100000001000110100000110110001011011111010111001001111001100000": 1,
+    "000011000000001100011001001011010111101011010000001110110000010110010000110100011001011100111101010101": 1,
+    "100100011000110111110100000011101011110011111101001001101010110111001000111111101000001010101000000100": 1,
+    "100011001101000011010100000011010100111000000110000010111011011011010110100101110110000100111001001011": 1,
+    "101100101100110000100010001101101000111110010101110011101000110110100000111111111101000100000101011010": 1
+  },
+  "config": {
+    "problem": "mkp",
+    "instance": null,
+    "project_root": ".",
+    "method": "qrao",
+    "execution_mode": "single",
+    "qpu_id": null,
+    "qpus": null,
+    "only_qpu": null,
+    "layers": 3,
+    "entanglement": "circular",
+    "shots": 1000,
+    "maxiter": 200,
+    "seed": 0,
+    "timeout_sec": null,
+    "max_qubits": 0,
+    "qubo_penalty": null,
+    "cvar_alpha": 0.25,
+    "ws_epsilon": 0.001,
+    "pce_population": 1,
+    "pce_elite_frac": 0.25,
+    "pce_parallel_workers": 2,
+    "pce_compression_k": 2,
+    "pce_depth": 0,
+    "pce_batch_size": 1,
+    "qrao_max_vars_per_qubit": 3,
+    "qrao_reps": 3,
+    "qrao_rounding": "magic",
+    "qrao_optimizer": "cobyla",
+    "aws_profile": null,
+    "ibm_token": null,
+    "ibm_instance": null,
+    "ibm_credentials_json": null,
+    "qiskit_optimization_level": 3,
+    "no_aws": true,
+    "no_ibm": false,
+    "include_simulators": false,
+    "min_window_minutes": 10.0,
+    "min_aws_window_minutes": 20.0,
+    "ibm_min_runtime_seconds": 45.0,
+    "ibm_backend_refresh_seconds": 300.0,
+    "queue_status_seconds": 180.0,
+    "model_time_limit": 60.0,
+    "num_products": 2,
+    "output_root": "research_benchmark/results_hardware",
+    "checkpoint_dir": "checkpoints",
+    "force_rerun": false,
+    "log_level": "INFO",
+    "log_file": null
+  }
+}

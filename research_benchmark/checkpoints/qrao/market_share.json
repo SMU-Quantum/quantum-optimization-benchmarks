@@ -1,0 +1,98 @@
+{
+  "ms_seed0_prod2.gen": {
+    "instance": "ms_seed0_prod2.gen",
+    "qubits": 30,
+    "status": "OK",
+    "objective": 29.0,
+    "feasible": true,
+    "time_sec": 5466.123258100008,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260308T090641Z\\ms_seed0_prod2_gen"
+  },
+  "ms_seed0_prod3.gen": {
+    "instance": "ms_seed0_prod3.gen",
+    "qubits": 42,
+    "status": "OK",
+    "objective": 66.0,
+    "feasible": true,
+    "time_sec": 6017.360551299993,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260309T033758Z\\ms_seed0_prod3_gen"
+  },
+  "ms_seed0_prod4.gen": {
+    "instance": "ms_seed0_prod4.gen",
+    "qubits": 73,
+    "status": "OK",
+    "objective": 41.0,
+    "feasible": true,
+    "time_sec": 11194.376038999995,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260310T094729Z\\ms_seed0_prod4_gen"
+  },
+  "ms_seed0_prod5.gen": {
+    "instance": "ms_seed0_prod5.gen",
+    "qubits": 84,
+    "status": "OK",
+    "objective": 333.0,
+    "feasible": true,
+    "time_sec": 12640.305878400104,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260310T094729Z\\ms_seed0_prod5_gen"
+  },
+  "ms_seed1_prod2.gen": {
+    "instance": "ms_seed1_prod2.gen",
+    "qubits": 30,
+    "status": "OK",
+    "objective": 18.0,
+    "feasible": true,
+    "time_sec": 10300.58166799997,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260310T094729Z\\ms_seed1_prod2_gen"
+  },
+  "ms_seed1_prod3.gen": {
+    "instance": "ms_seed1_prod3.gen",
+    "qubits": 42,
+    "status": "OK",
+    "objective": 74.0,
+    "feasible": true,
+    "time_sec": 28291.788383499952,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260311T074611Z\\ms_seed1_prod3_gen"
+  },
+  "ms_seed1_prod4.gen": {
+    "instance": "ms_seed1_prod4.gen",
+    "qubits": 73,
+    "status": "OK",
+    "objective": 351.0,
+    "feasible": true,
+    "time_sec": 14316.999846799998,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260312T022522Z\\ms_seed1_prod4_gen"
+  },
+  "ms_seed1_prod5.gen": {
+    "instance": "ms_seed1_prod5.gen",
+    "qubits": 85,
+    "status": "OK",
+    "objective": 785.0,
+    "feasible": true,
+    "time_sec": 24096.908664499875,
+    "qpus": [
+      "ibm_quantum"
+    ],
+    "result_dir": "C:\\Users\\monitsharma\\Downloads\\quantum-optimization-benchmarks\\research_benchmark\\research_benchmark\\results_hardware\\market_share\\market_share_qrao_20260312T022522Z\\ms_seed1_prod5_gen"
+  }
+}

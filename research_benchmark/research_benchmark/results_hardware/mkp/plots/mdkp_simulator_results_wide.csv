@@ -1,0 +1,13 @@
+Instance,OptimalBKS,Variables,PCE_Qubits,PCE_Feas,PCE_GapPct,VQE_Feas,VQE_GapPct,CVAR_VQE_Feas,CVAR_VQE_GapPct
+hp1,3418,60,7,Yes,20.88,Yes,39.76,Yes,20.59
+hp2,3186,67,8,Yes,38.38,Yes,12.34,Yes,21.78
+pb1,3090,59,7,Yes,14.04,Yes,19.94,Yes,23.43
+pb2,3186,66,8,Yes,14.37,Yes,19.49,Yes,22.78
+pb4,95168,45,6,Yes,32.91,No,inf,Yes,39.38
+pb5,2139,116,10,Yes,11.87,Yes,4.25,Yes,33.34
+pet2,87061,99,9,Yes,28.19,Yes,41.07,Yes,30.37
+pet3,4015,102,9,Yes,15.56,Yes,4.98,Yes,34.74
+pet4,6120,107,9,Yes,50.98,Yes,66.58,Yes,48.44
+pet5,12400,122,10,Yes,22.74,Yes,33.23,Yes,53.15
+pet6,10618,86,9,Yes,33.84,Yes,12.5,Yes,40.41
+pet7,16537,100,9,Yes,15.87,Yes,43.46,Yes,46.47

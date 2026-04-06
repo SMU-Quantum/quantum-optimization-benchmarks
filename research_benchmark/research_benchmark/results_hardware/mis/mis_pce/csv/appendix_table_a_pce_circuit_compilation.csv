@@ -1,0 +1,12 @@
+Instance,Backend,BackendQubits,LogicalQubits,LogicalDepth,LogicalGateCount,Logical2QGates,Parameters,TranspiledDepth,TranspiledTotalGates,Transpiled2QGates
+1tc.8,ibm_fez,156,3,10,22,4,18,27.00,61.00,4.00
+1tc.8,ibm_marrakesh,156,3,10,22,4,18,27.00,61.00,4.00
+1tc.16,ibm_torino,133,4,11,30,6,24,30.00,84.00,6.00
+1tc.32,ibm_fez,156,6,13,46,10,36,36.00,130.00,10.00
+1tc.32,ibm_marrakesh,156,6,13,46,10,36,36.00,130.00,10.00
+1tc.64,ibm_torino,133,8,15,62,14,48,42.00,176.00,14.00
+1et.64,ibm_fez,156,8,15,62,14,48,42.00,176.00,14.00
+1et.64,ibm_marrakesh,156,8,15,62,14,48,42.00,176.00,14.00
+1dc.64,ibm_fez,156,8,15,62,14,48,42.00,176.00,14.00
+1dc.64,ibm_marrakesh,156,8,15,62,14,48,42.00,176.00,14.00
+1dc.128,ibm_torino,133,10,17,78,18,60,48.00,222.00,18.00

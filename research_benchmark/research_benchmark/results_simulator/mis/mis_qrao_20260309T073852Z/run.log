@@ -1,0 +1,139 @@
+Run start | problem=mis method=qrao mode=single seed=0
+Instances discovered | problem=mis count=7
+  - 1dc.128.txt
+  - 1dc.64.txt
+  - 1et.64.txt
+  - 1tc.16.txt
+  - 1tc.32.txt
+  - 1tc.64.txt
+  - 1tc.8.txt
+Initializing backends | use_aws=False use_ibm=False allow_simulators=True
+[local_qiskit] Ready (max 512 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=7
+
+[1/7] Starting instance: 1dc.128.txt
+
+======================================================================
+  Instance: 1dc.128.txt
+======================================================================
+  Problem: mis | Instance: 1dc.128.txt | Logical Qubits: 128 | Execution Qubits: 46
+  QRAO encoding | original_vars=128 encoded_qubits=46 max_vars_per_qubit=3
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 46-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=3 entanglement=linear trainable_parameters=368 depth=57 2q_gates=135
+  Optimization | method=qrao objective=qrao shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+QRAO optimizer start | qpu_id=local_qiskit qpu_mode=single shots=1000 maxiter=200
+Dispatching QRAO optimization -> local_qiskit | backend=aer_simulator_mps encoded_qubits=46 rounding=magic optimizer=cobyla maxiter=200 shots=1000
+QRAO evaluation | eval=1 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37855.69209921
+QRAO evaluation | eval=2 qpu_id=local_qiskit backend=aer_simulator_mps objective=-25811.51625242
+QRAO evaluation | eval=3 qpu_id=local_qiskit backend=aer_simulator_mps objective=-30473.42218194
+QRAO evaluation | eval=4 qpu_id=local_qiskit backend=aer_simulator_mps objective=-32406.34429500
+QRAO evaluation | eval=5 qpu_id=local_qiskit backend=aer_simulator_mps objective=-30047.96822699
+QRAO evaluation | eval=6 qpu_id=local_qiskit backend=aer_simulator_mps objective=-28901.54311273
+QRAO evaluation | eval=7 qpu_id=local_qiskit backend=aer_simulator_mps objective=-30816.00811823
+QRAO evaluation | eval=8 qpu_id=local_qiskit backend=aer_simulator_mps objective=-32793.77171049
+QRAO evaluation | eval=9 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31789.31351504
+QRAO evaluation | eval=10 qpu_id=local_qiskit backend=aer_simulator_mps objective=-29622.79756482
+QRAO evaluation | eval=11 qpu_id=local_qiskit backend=aer_simulator_mps objective=-30427.77309960
+QRAO evaluation | eval=12 qpu_id=local_qiskit backend=aer_simulator_mps objective=-33648.79091905
+QRAO evaluation | eval=13 qpu_id=local_qiskit backend=aer_simulator_mps objective=-32344.28754436
+QRAO evaluation | eval=14 qpu_id=local_qiskit backend=aer_simulator_mps objective=-30213.67291481
+QRAO evaluation | eval=15 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31786.81307342
+QRAO evaluation | eval=16 qpu_id=local_qiskit backend=aer_simulator_mps objective=-34211.69007588
+QRAO evaluation | eval=17 qpu_id=local_qiskit backend=aer_simulator_mps objective=-33323.68943475
+QRAO evaluation | eval=18 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31453.50202092
+QRAO evaluation | eval=19 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31947.18670705
+QRAO evaluation | eval=20 qpu_id=local_qiskit backend=aer_simulator_mps objective=-33884.95737128
+QRAO evaluation | eval=21 qpu_id=local_qiskit backend=aer_simulator_mps objective=-34456.93796078
+QRAO evaluation | eval=22 qpu_id=local_qiskit backend=aer_simulator_mps objective=-33090.71467123
+QRAO evaluation | eval=23 qpu_id=local_qiskit backend=aer_simulator_mps objective=-33233.93972109
+QRAO evaluation | eval=24 qpu_id=local_qiskit backend=aer_simulator_mps objective=-34692.08344916
+QRAO evaluation | eval=25 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35973.19011077
+QRAO evaluation | eval=26 qpu_id=local_qiskit backend=aer_simulator_mps objective=-34847.20969157
+QRAO evaluation | eval=27 qpu_id=local_qiskit backend=aer_simulator_mps objective=-33924.58132042
+QRAO evaluation | eval=28 qpu_id=local_qiskit backend=aer_simulator_mps objective=-34823.33384861
+QRAO evaluation | eval=29 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36050.98872299
+QRAO evaluation | eval=30 qpu_id=local_qiskit backend=aer_simulator_mps objective=-34856.13829165
+QRAO evaluation | eval=31 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35658.82274363
+QRAO evaluation | eval=32 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37442.64645624
+QRAO evaluation | eval=33 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36705.23715074
+QRAO evaluation | eval=34 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35615.65701420
+QRAO evaluation | eval=35 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36014.09517990
+QRAO evaluation | eval=36 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36360.29097969
+QRAO evaluation | eval=37 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36903.07053187
+QRAO evaluation | eval=38 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37878.90374015
+QRAO evaluation | eval=39 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35937.56766571
+QRAO evaluation | eval=40 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36709.58411722
+QRAO evaluation | eval=41 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36123.70470428
+QRAO evaluation | eval=42 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35223.05104920
+QRAO evaluation | eval=43 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35681.34923470
+QRAO evaluation | eval=44 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35017.46860095
+QRAO evaluation | eval=45 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35586.54595470
+QRAO evaluation | eval=46 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36432.34916612
+QRAO evaluation | eval=47 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36748.71120645
+QRAO evaluation | eval=48 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36711.56760538
+QRAO evaluation | eval=49 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36037.70132334
+QRAO evaluation | eval=50 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36729.08939611
+QRAO evaluation | eval=51 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37291.83300897
+QRAO evaluation | eval=52 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37380.39557690
+QRAO evaluation | eval=53 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36382.82253730
+QRAO evaluation | eval=54 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37698.69345471
+QRAO evaluation | eval=55 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36646.01567103
+QRAO evaluation | eval=56 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37204.41404693
+QRAO evaluation | eval=57 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36953.96831933
+QRAO evaluation | eval=58 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36566.28903176
+QRAO evaluation | eval=59 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36173.78937199
+QRAO evaluation | eval=60 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36762.77627340
+QRAO evaluation | eval=61 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36138.61913852
+QRAO evaluation | eval=62 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35844.48313390
+QRAO evaluation | eval=63 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37819.28379841
+QRAO evaluation | eval=64 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36643.92621379
+QRAO evaluation | eval=65 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36457.00715570
+QRAO evaluation | eval=66 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36560.60298546
+QRAO evaluation | eval=67 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35593.96584479
+QRAO evaluation | eval=68 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36447.73023295
+QRAO evaluation | eval=69 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37478.19396584
+QRAO evaluation | eval=70 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35926.95475453
+QRAO evaluation | eval=71 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37478.39768755
+QRAO evaluation | eval=72 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37681.99124710
+QRAO evaluation | eval=73 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35921.07988264
+QRAO evaluation | eval=74 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37547.45382656
+QRAO evaluation | eval=75 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37148.25677683
+QRAO evaluation | eval=76 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36656.76439367
+QRAO evaluation | eval=77 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36529.77385121
+QRAO evaluation | eval=78 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35763.31550350
+QRAO evaluation | eval=79 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36318.41802710
+QRAO evaluation | eval=80 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36446.96542184
+QRAO evaluation | eval=81 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36958.47061794
+QRAO evaluation | eval=82 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35688.05983281
+QRAO evaluation | eval=83 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36551.85132166
+QRAO evaluation | eval=84 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36630.97255820
+QRAO evaluation | eval=85 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37801.64045468
+QRAO evaluation | eval=86 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36291.35989308
+QRAO evaluation | eval=87 qpu_id=local_qiskit backend=aer_simulator_mps objective=-35313.67187112
+QRAO evaluation | eval=88 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36985.16039903
+QRAO evaluation | eval=89 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36724.37136844
+QRAO evaluation | eval=90 qpu_id=local_qiskit backend=aer_simulator_mps objective=-38056.76696090
+QRAO evaluation | eval=91 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36798.37776402
+QRAO evaluation | eval=92 qpu_id=local_qiskit backend=aer_simulator_mps objective=-37203.74699091
+QRAO evaluation | eval=93 qpu_id=local_qiskit backend=aer_simulator_mps objective=-36318.06111144
+QRAO evaluation | eval=94 qpu_id=local_qiskit backend=aer_simulator_mps objective=-28613.03304699
+QRAO evaluation | eval=95 qpu_id=local_qiskit backend=aer_simulator_mps objective=-28190.29988398
+QRAO evaluation | eval=96 qpu_id=local_qiskit backend=aer_simulator_mps objective=-29966.70598564
+QRAO evaluation | eval=97 qpu_id=local_qiskit backend=aer_simulator_mps objective=-29026.43044345
+QRAO evaluation | eval=98 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31313.43090693
+QRAO evaluation | eval=99 qpu_id=local_qiskit backend=aer_simulator_mps objective=-28859.15214962
+QRAO evaluation | eval=100 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31593.18310581
+QRAO evaluation | eval=101 qpu_id=local_qiskit backend=aer_simulator_mps objective=-30262.85322348
+QRAO evaluation | eval=102 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31068.39254373
+QRAO evaluation | eval=103 qpu_id=local_qiskit backend=aer_simulator_mps objective=-28684.76782555
+QRAO evaluation | eval=104 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31996.38037521
+QRAO evaluation | eval=105 qpu_id=local_qiskit backend=aer_simulator_mps objective=-29645.58192100
+QRAO evaluation | eval=106 qpu_id=local_qiskit backend=aer_simulator_mps objective=-31009.10576146

@@ -2,8 +2,10 @@ from __future__ import annotations
 
 import json
 import logging
+import os
 import threading
 import time
+import warnings
 from dataclasses import dataclass
 from datetime import datetime, timedelta, timezone
 from pathlib import Path
@@ -49,6 +51,8 @@ MIN_AWS_WINDOW_REMAINING_MINUTES = 30.0
 IBM_MIN_RUNTIME_SECONDS = 15.0
 
 LOGGER = logging.getLogger("qobench.hardware_manager")
+
+_IBM_USAGE_LIMIT_WARNING_SUBSTR = "met its usage limit"
 
 
 class QPUWindowExpiredError(RuntimeError):
@@ -273,6 +277,18 @@ class QuantumHardwareManager:
         self.use_ibm = use_ibm
         self.allow_simulators = allow_simulators
         self.enabled_qpu_ids = enabled_qpu_ids
+        local_method_env = str(os.getenv("QOBENCH_LOCAL_SIMULATOR_METHOD", "")).strip().lower()
+        force_mps_env = str(os.getenv("QOBENCH_FORCE_MPS", "")).strip().lower()
+        self.force_mps_simulator = force_mps_env in {"1", "true", "yes", "on"}
+        if local_method_env in {"", "auto"}:
+            self.local_simulator_method = (
+                "matrix_product_state" if self.force_mps_simulator else "auto"
+            )
+        elif local_method_env in {"mps", "matrix_product_state"}:
+            self.local_simulator_method = "matrix_product_state"
+        else:
+            self.local_simulator_method = local_method_env
+        local_max_qubits_env = str(os.getenv("QOBENCH_LOCAL_MAX_QUBITS", "")).strip()
         try:
             level = int(qiskit_optimization_level)
         except Exception:
@@ -280,6 +296,17 @@ class QuantumHardwareManager:
         self.qiskit_optimization_level = max(0, min(3, level))
 
         self.qpus = _default_qpus()
+        local_qpu = self.qpus.get("local_qiskit")
+        if local_qpu is not None:
+            default_local_max = int(local_qpu.max_qubits)
+            if self.local_simulator_method == "matrix_product_state":
+                local_qpu.name = "Local Qiskit Aer MPS Simulator"
+                default_local_max = max(default_local_max, 256)
+            try:
+                local_override = int(local_max_qubits_env) if local_max_qubits_env else default_local_max
+            except Exception:
+                local_override = default_local_max
+            local_qpu.max_qubits = int(max(1, local_override))
         self.devices: dict[str, Any] = {}
         self.sessions: dict[str, Any] = {}
         self.ibm_backends: list[dict[str, Any]] = []
@@ -295,7 +322,7 @@ class QuantumHardwareManager:
         self.last_credential_refresh = time.time()
         self.credential_refresh_interval = 2700.0
         self._ibm_usage_last_check = 0.0
-        self._ibm_usage_check_interval = 30.0
+        self._ibm_usage_check_interval = 10.0
         self._ibm_last_reconnect_attempt = 0.0
         self._ibm_reconnect_interval = 120.0
         if self.ibm_credentials_json is not None:
@@ -308,7 +335,7 @@ class QuantumHardwareManager:
         self.ibm_min_runtime_seconds = IBM_MIN_RUNTIME_SECONDS
         self.job_status_log_interval = 30.0
         LOGGER.debug(
-            "QuantumHardwareManager initialized | use_aws=%s use_ibm=%s allow_simulators=%s aws_profile=%s enabled_qpus=%s qiskit_optimization_level=%s ibm_credentials_json=%s",
+            "QuantumHardwareManager initialized | use_aws=%s use_ibm=%s allow_simulators=%s aws_profile=%s enabled_qpus=%s qiskit_optimization_level=%s ibm_credentials_json=%s local_simulator_method=%s force_mps_simulator=%s local_max_qubits=%s",
             self.use_aws,
             self.use_ibm,
             self.allow_simulators,
@@ -316,6 +343,9 @@ class QuantumHardwareManager:
             sorted(self.enabled_qpu_ids) if self.enabled_qpu_ids is not None else "all",
             self.qiskit_optimization_level,
             str(self.ibm_credentials_json) if self.ibm_credentials_json is not None else "(none)",
+            self.local_simulator_method,
+            self.force_mps_simulator,
+            self.qpus["local_qiskit"].max_qubits if "local_qiskit" in self.qpus else None,
         )
 
     @staticmethod
@@ -988,7 +1018,11 @@ class QuantumHardwareManager:
         key = self._credential_key(cred["token"], cred["instance"])
         self._ibm_depleted_credential_keys.add(key)
         try:
+            removal_idx = self._ibm_credential_pool.index(cred)
             self._ibm_credential_pool.remove(cred)
+            # If we remove an item at or before the next index, shift the next index left
+            if removal_idx <= self._ibm_credential_next_index:
+                self._ibm_credential_next_index = max(0, self._ibm_credential_next_index - 1)
         except ValueError:
             pass
         # Fix the next_index after removal.
@@ -1080,6 +1114,22 @@ class QuantumHardwareManager:
                 )
                 self._remove_depleted_credential(cred)
                 continue
+
+        if getattr(self, "_ibm_final_check_attempted", False) is False:
+            LOGGER.info(
+                "[ibm_quantum] Initiating ONE FINAL CHECK of all credentials "
+                "to ensure none were missed..."
+            )
+            self._ibm_final_check_attempted = True
+            # Force a fresh reload from disk to catch any newly added credentials
+            self._ibm_credential_file_mtime_ns = None
+            self._load_ibm_credential_pool(force=True)
+            
+            success = self._init_ibm_device_from_pool()
+            self._ibm_final_check_attempted = False
+            
+            if success:
+                return True
 
         qpu.is_available = False
         qpu.last_error = (
@@ -1339,10 +1389,11 @@ class QuantumHardwareManager:
             self._init_braket_device(qpu_id)
 
     def refresh_credentials_if_needed(self) -> None:
-        if self.ibm_credentials_json is not None:
-            self._load_ibm_credential_pool(force=False)
-        self._refresh_ibm_usage_if_needed()
-        self._refresh_ibm_backends_if_needed(force=False)
+        if self.use_ibm and self._is_enabled("ibm_quantum"):
+            if self.ibm_credentials_json is not None:
+                self._load_ibm_credential_pool(force=False)
+            self._refresh_ibm_usage_if_needed()
+            self._refresh_ibm_backends_if_needed(force=False)
         now = time.time()
         if now - self.last_credential_refresh > self.credential_refresh_interval:
             LOGGER.debug(
@@ -1469,6 +1520,46 @@ class QuantumHardwareManager:
                 "remaining_window_minutes_sgt": self._remaining_window_minutes_sgt(qpu),
             }
         return snapshot
+
+    def dump_ibm_budgets(self) -> None:
+        """Connect to all credentials in the pool and log their remaining budget."""
+        if not self.use_ibm:
+            return
+        if not self._is_enabled("ibm_quantum"):
+            return
+        if not HAS_IBM_RUNTIME:
+            return
+        if not self.ibm_credentials_json:
+            return
+        try:
+            raw = self.ibm_credentials_json.read_text(encoding="utf-8")
+            payload = json.loads(raw)
+            entries = self._extract_credential_entries(payload)
+        except Exception as exc:
+            LOGGER.warning("Could not read credentials for budget dump: %s", exc)
+            return
+
+        LOGGER.info("-" * 40)
+        LOGGER.info(" IBM Credential Budgets (Current Status)")
+        LOGGER.info("-" * 40)
+        
+        for entry in entries:
+            cred = self._parse_credential_entry(entry)
+            if not cred:
+                continue
+            label = cred.get("label", "unknown")
+            try:
+                # Bypass global configuration and single-connect to check
+                svc = QiskitRuntimeService(channel="ibm_cloud", token=cred["token"], instance=cred["instance"])
+                remaining = _get_ibm_usage_remaining_seconds(svc)
+                if remaining is not None:
+                    m, s = divmod(int(remaining), 60)
+                    LOGGER.info("  %-15s : %dm %ds", label, m, s)
+                else:
+                    LOGGER.info("  %-15s : API check failed / budget hidden", label)
+            except Exception as exc:
+                LOGGER.info("  %-15s : Connection failed - %s", label, str(exc)[:60])
+        LOGGER.info("-" * 40)
 
     def get_calibration_snapshot(self) -> dict[str, Any]:
         """Collect device calibration data for reproducibility.
@@ -1776,8 +1867,10 @@ class QuantumHardwareManager:
         shots: int,
         timeout_sec: float | None,
         ansatz_id: str,
+        _retry_count: int = 0,
     ) -> tuple[dict[str, int], dict[str, Any]]:
-        self._refresh_ibm_usage_if_needed()
+        _MAX_IBM_RETRIES = 3
+        self._refresh_ibm_usage_if_needed(force=True)
         qpu = self.qpus["ibm_quantum"]
         if not qpu.is_available:
             raise RuntimeError(f"IBM unavailable: {qpu.last_error}")
@@ -1881,7 +1974,48 @@ class QuantumHardwareManager:
                 bind_map[p] = name_to_value[p.name]
 
         submit_time_utc = datetime.now(timezone.utc).isoformat()
-        sampler = SamplerV2(backend)
+
+        # Intercept the IBM "usage limit" UserWarning during sampler creation.
+        # If it fires, the current credential is definitively depleted.
+        usage_limit_hit = False
+        with warnings.catch_warnings(record=True) as caught_warnings:
+            warnings.simplefilter("always")
+            sampler = SamplerV2(backend)
+        for w in caught_warnings:
+            msg = str(w.message)
+            if _IBM_USAGE_LIMIT_WARNING_SUBSTR in msg:
+                usage_limit_hit = True
+                LOGGER.warning(
+                    "[ibm_quantum] Caught 'usage limit' warning during SamplerV2 creation: %s",
+                    msg[:200],
+                )
+                break
+
+        if usage_limit_hit:
+            if _retry_count < _MAX_IBM_RETRIES:
+                LOGGER.info(
+                    "[ibm_quantum] Usage limit hit — forcing credential rotation and retry (%d/%d)",
+                    _retry_count + 1, _MAX_IBM_RETRIES,
+                )
+                self._refresh_ibm_usage_if_needed(force=True)
+                if not qpu.is_available:
+                    # Trigger full pool drain
+                    self._init_ibm_device()
+                if qpu.is_available:
+                    return self._run_ibm_counts(
+                        qiskit_template=qiskit_template,
+                        qiskit_parameters=qiskit_parameters,
+                        theta=theta,
+                        num_qubits=num_qubits,
+                        shots=shots,
+                        timeout_sec=timeout_sec,
+                        ansatz_id=ansatz_id,
+                        _retry_count=_retry_count + 1,
+                    )
+            raise RuntimeError(
+                "IBM usage limit reached and all credentials exhausted "
+                f"after {_retry_count + 1} retries."
+            )
 
         if len(bind_map) == num_transpiled_params and num_transpiled_params > 0:
             # All parameters matched by name — bind and submit as before.
@@ -1971,7 +2105,21 @@ class QuantumHardwareManager:
                 )
             raise RuntimeError(error_detail) from err
 
-        result = job.result()
+        # Intercept usage-limit warnings during result retrieval too.
+        usage_limit_on_result = False
+        with warnings.catch_warnings(record=True) as result_warnings:
+            warnings.simplefilter("always")
+            result = job.result()
+        for w in result_warnings:
+            msg = str(w.message)
+            if _IBM_USAGE_LIMIT_WARNING_SUBSTR in msg:
+                usage_limit_on_result = True
+                LOGGER.warning(
+                    "[ibm_quantum] Caught 'usage limit' warning during job.result(): %s",
+                    msg[:200],
+                )
+                break
+
         complete_time_utc = datetime.now(timezone.utc).isoformat()
         counts = self._extract_sampler_v2_counts(result=result, num_qubits=num_qubits)
         LOGGER.info(
@@ -1980,6 +2128,18 @@ class QuantumHardwareManager:
             job_id,
             len(counts),
         )
+
+        # If the usage-limit warning fired during result retrieval, proactively
+        # rotate now so the NEXT job doesn't hit the same depleted account.
+        if usage_limit_on_result:
+            LOGGER.info(
+                "[ibm_quantum] Proactively rotating credentials after usage-limit warning on result."
+            )
+            self._refresh_ibm_usage_if_needed(force=True)
+
+        # Proactive post-job budget check: catch depletion immediately.
+        self._refresh_ibm_usage_if_needed(force=True)
+
         return counts, {
             "provider": "ibm",
             "backend_name": backend_name,
@@ -2006,7 +2166,7 @@ class QuantumHardwareManager:
         if not thetas:
             raise ValueError("thetas must not be empty for batched IBM execution")
 
-        self._refresh_ibm_usage_if_needed()
+        self._refresh_ibm_usage_if_needed(force=True)
         qpu = self.qpus["ibm_quantum"]
         if not qpu.is_available:
             raise RuntimeError(f"IBM unavailable: {qpu.last_error}")
@@ -2099,7 +2259,38 @@ class QuantumHardwareManager:
                         bind_map[p] = name_to_value[p.name]
                 pubs.append(compiled_template.assign_parameters(bind_map))
 
-        sampler = SamplerV2(backend)
+        # Intercept usage-limit warnings during sampler creation in batch mode.
+        usage_limit_hit = False
+        with warnings.catch_warnings(record=True) as caught_warnings:
+            warnings.simplefilter("always")
+            sampler = SamplerV2(backend)
+        for w in caught_warnings:
+            msg = str(w.message)
+            if _IBM_USAGE_LIMIT_WARNING_SUBSTR in msg:
+                usage_limit_hit = True
+                LOGGER.warning(
+                    "[ibm_quantum] Caught 'usage limit' warning during batch SamplerV2 creation: %s",
+                    msg[:200],
+                )
+                break
+        if usage_limit_hit:
+            LOGGER.info(
+                "[ibm_quantum] Usage limit hit in batch mode — forcing credential rotation."
+            )
+            self._refresh_ibm_usage_if_needed(force=True)
+            if not qpu.is_available:
+                self._init_ibm_device()
+            if not qpu.is_available:
+                raise RuntimeError(
+                    "IBM usage limit reached and all credentials exhausted in batch mode."
+                )
+            # Re-select backend after rotation
+            backend_info = self._select_ibm_backend_info(num_qubits)
+            if backend_info is None:
+                raise RuntimeError(f"No IBM backend supports {num_qubits} qubits after rotation")
+            backend = backend_info["backend"]
+            backend_name = backend_info.get("name", getattr(backend, "name", "unknown"))
+            sampler = SamplerV2(backend)
         job = sampler.run(pubs, shots=int(shots))
         job_id = getattr(job, "job_id", None)
         if callable(job_id):
@@ -2119,7 +2310,19 @@ class QuantumHardwareManager:
             success_states={"DONE"},
             min_log_interval_sec=120.0,
         )
-        result = job.result()
+        # Intercept usage-limit warnings during result retrieval in batch mode.
+        with warnings.catch_warnings(record=True) as result_warnings:
+            warnings.simplefilter("always")
+            result = job.result()
+        for w in result_warnings:
+            msg = str(w.message)
+            if _IBM_USAGE_LIMIT_WARNING_SUBSTR in msg:
+                LOGGER.warning(
+                    "[ibm_quantum] Caught 'usage limit' warning during batch job.result(): %s",
+                    msg[:200],
+                )
+                self._refresh_ibm_usage_if_needed(force=True)
+                break
 
         try:
             pub_results = list(result)
@@ -2165,10 +2368,11 @@ class QuantumHardwareManager:
         shots: int,
     ) -> tuple[dict[str, int], dict[str, Any]]:
         LOGGER.debug(
-            "Running local qiskit sampler | shots=%s qubits=%s sampler_kind=%s",
+            "Running local qiskit sampler | shots=%s qubits=%s sampler_kind=%s local_method=%s",
             shots,
             num_qubits,
             LOCAL_SAMPLER_KIND,
+            self.local_simulator_method,
         )
         # Use name-based binding to avoid stale Parameter object references.
         name_to_value = {
@@ -2180,6 +2384,65 @@ class QuantumHardwareManager:
             if p.name in name_to_value:
                 bind_map[p] = name_to_value[p.name]
         bound_circuit = qiskit_template.assign_parameters(bind_map)
+
+        def _extract_pub_result_counts(pub_result: Any) -> dict[Any, Any]:
+            raw_counts_local: dict[Any, Any] = {}
+            if hasattr(pub_result, "data"):
+                data = pub_result.data
+                if hasattr(data, "meas"):
+                    raw_counts_local = data.meas.get_counts()
+                elif hasattr(data, "c"):
+                    raw_counts_local = data.c.get_counts()
+                else:
+                    for attr in dir(data):
+                        if attr.startswith("_"):
+                            continue
+                        try:
+                            maybe = getattr(data, attr)
+                        except Exception:
+                            continue
+                        if hasattr(maybe, "get_counts"):
+                            raw_counts_local = maybe.get_counts()
+                            break
+            return raw_counts_local
+
+        if self.local_simulator_method == "matrix_product_state":
+            try:
+                from qiskit.primitives import BackendSamplerV2
+                from qiskit_aer import AerSimulator
+
+                mps_backend = AerSimulator(method="matrix_product_state")
+                sampler_mps = BackendSamplerV2(backend=mps_backend)
+                result_mps = sampler_mps.run([(bound_circuit,)], shots=int(shots)).result()
+                pub_result_mps = result_mps[0]
+                raw_counts_mps = _extract_pub_result_counts(pub_result_mps)
+                counts_mps = normalize_counts(
+                    raw_counts_mps,
+                    num_qubits=num_qubits,
+                    reverse_bits=True,
+                )
+                if not counts_mps:
+                    counts_mps["0" * int(num_qubits)] = int(shots)
+                LOGGER.debug(
+                    "Local qiskit sampling completed (MPS) | unique_bitstrings=%s",
+                    len(counts_mps),
+                )
+                return counts_mps, {
+                    "provider": "local_qiskit",
+                    "qpu_id": "local_qiskit",
+                    "backend_name": "aer_simulator_mps",
+                    "simulator_method": "matrix_product_state",
+                }
+            except Exception as exc:
+                if self.force_mps_simulator:
+                    raise RuntimeError(
+                        "Forced MPS simulation requested, but Aer MPS execution failed."
+                    ) from exc
+                LOGGER.warning(
+                    "Local MPS execution unavailable (%s). Falling back to LocalSampler.",
+                    str(exc)[:200],
+                )
+
         sampler = LocalSampler()
         if LOCAL_SAMPLER_KIND == "v1":
             result = sampler.run([bound_circuit], shots=int(shots)).result()
@@ -2196,30 +2459,17 @@ class QuantumHardwareManager:
             counts = normalize_counts(raw_counts, num_qubits=num_qubits, reverse_bits=True)
         else:
             result = sampler.run([(bound_circuit,)], shots=int(shots)).result()
-            raw_counts = {}
-            pub_result = result[0]
-            if hasattr(pub_result, "data"):
-                data = pub_result.data
-                if hasattr(data, "meas"):
-                    raw_counts = data.meas.get_counts()
-                elif hasattr(data, "c"):
-                    raw_counts = data.c.get_counts()
-                else:
-                    for attr in dir(data):
-                        if attr.startswith("_"):
-                            continue
-                        try:
-                            maybe = getattr(data, attr)
-                        except Exception:
-                            continue
-                        if hasattr(maybe, "get_counts"):
-                            raw_counts = maybe.get_counts()
-                            break
+            raw_counts = _extract_pub_result_counts(result[0])
             counts = normalize_counts(raw_counts, num_qubits=num_qubits, reverse_bits=True)
         if not counts:
             counts["0" * int(num_qubits)] = int(shots)
         LOGGER.debug("Local qiskit sampling completed | unique_bitstrings=%s", len(counts))
-        return counts, {"provider": "local_qiskit", "qpu_id": "local_qiskit"}
+        return counts, {
+            "provider": "local_qiskit",
+            "qpu_id": "local_qiskit",
+            "backend_name": f"local_sampler_{LOCAL_SAMPLER_KIND}",
+            "simulator_method": "auto",
+        }
 
     def run_counts_batch(
         self,

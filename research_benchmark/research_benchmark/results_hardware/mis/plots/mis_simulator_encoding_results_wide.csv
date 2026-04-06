@@ -1,0 +1,8 @@
+Instance,OptimalBKS,Variables,PCE_Qubits,PCE_Feas,PCE_GapRaw,QRAO_Qubits,QRAO_Feas,QRAO_GapRaw
+1tc.8,4,8,3,Yes,0.0,4,Yes,0.0
+1tc.16,8,16,4,Yes,0.0,6,Yes,12.5
+1tc.32,12,32,6,No,inf,13,Yes,41.67
+1tc.64,20,64,8,Yes,5.0,23,Yes,60.0
+1et.64,18,64,8,Yes,11.1,24,Yes,27.78
+1dc.64,8,64,8,Yes,12.5,18,Yes,25.0
+1dc.128,16,128,10,No,inf,46,No,inf

@@ -1,0 +1,7 @@
+Instance,OptimalBKS,Variables,QAOA_Feas,QAOA_RSQRaw,MA_QAOA_Feas,MA_QAOA_RSQRaw
+1tc.8,4,8,Yes,100.0,Yes,100.0
+1tc.16,8,16,Yes,100.0,Yes,50.0
+1tc.32,12,32,Yes,83.3,Yes,91.7
+1tc.64,20,64,Yes,50.0,No,inf
+1et.64,18,64,No,inf,No,inf
+1dc.64,8,64,ME,ME,No,inf

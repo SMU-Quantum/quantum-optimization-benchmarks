@@ -1,0 +1,8 @@
+Instance,Optimal,Qubits,Feas,Gap%,#Evals
+1tc.8,4,8,Yes,0.00,200
+1tc.16,8,16,Yes,12.50,200
+1tc.32,12,32,No,inf,200
+1tc.64,20,64,No,inf,200
+1et.64,18,64,No,inf,200
+1dc.64,10,64,No,inf,200
+1dc.128,16,128,No,inf,200

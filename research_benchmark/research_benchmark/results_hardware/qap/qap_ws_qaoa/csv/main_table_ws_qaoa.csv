@@ -1,0 +1,10 @@
+Instance,Optimal,Qubits,Feas,Gap%,#Evals
+chr12a,9552,144,No,inf,49
+chr12b,9742,144,No,inf,46
+chr12c,11156,144,No,inf,63
+nug12,578,144,No,inf,46
+had12,1652,144,No,inf,50
+rou12,235528,144,No,inf,59
+scr12,31410,144,No,inf,66
+tai10a,135028,100,No,inf,50
+tai10b,1183760,100,No,inf,58

@@ -1,0 +1,9 @@
+Instance,ShotsPerEval,#Evals,#Jobs(ok/failed),MedianJobLatencySec,P95JobLatencySec,TotalWallClockMinutes
+ms_seed0_prod2,1000,200,200/0,8.545,13.995,39.038
+ms_seed0_prod3,1000,200,200/0,8.529,13.990,41.030
+ms_seed0_prod4,1000,200,200/0,8.752,14.005,41.955
+ms_seed0_prod5,1000,200,200/0,8.606,26.120,51.288
+ms_seed1_prod2,1000,200,200/0,8.509,14.447,39.081
+ms_seed1_prod3,1000,200,200/0,8.570,14.011,40.675
+ms_seed1_prod4,1000,200,200/0,8.957,20.124,51.252
+ms_seed1_prod5,1000,200,200/0,8.505,14.008,45.000
