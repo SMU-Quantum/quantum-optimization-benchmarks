@@ -1,0 +1,76 @@
+\begin{table}[t]
+\caption{\label{tab:mdkp_classical}
+Classical Gurobi performance on MDKP instances.
+Size is reported as items $\times$ dimensions.
+BKS denotes the known optimal value from the benchmark file.
+Gap is the final relative MIP gap at termination.}
+\begin{indented}
+\item[]\begin{tabular}{lccccccc}
+\br
+Instance & Size & BKS & Incumbent & Bound & Gap (\%) & Status & Time (s)\\
+\mr
+hpp/hp1 & $28\times 4$ & 3418 & 3418 & 3418 & 0.0 & OPT & 0.01 \\
+hp2 & $35\times 4$ & 3186 & 3186 & 3186 & 0.0 & OPT & 0.00 \\
+pb1 & $27\times 4$ & 3090 & 3090 & 3090 & 0.0 & OPT & 0.00 \\
+pb2 & $34\times 4$ & 3186 & 3186 & 3186 & 0.0 & OPT & 0.00 \\
+pb4 & $29\times 2$ & 95168 & 95168 & 95168 & 0.0 & OPT & 0.00 \\
+pb5 & $20\times 10$ & 2139 & 2139 & 2139 & 0.0 & OPT & 0.02 \\
+pet2 & $10\times 10$ & 87061 & 87061 & 87061 & 0.0 & OPT & 0.00 \\
+pet3 & $15\times 10$ & 4015 & 4015 & 4015 & 0.0 & OPT & 0.00 \\
+pet4 & $20\times 10$ & 6120 & 6120 & 6120 & 0.0 & OPT & 0.00 \\
+pet5 & $28\times 10$ & 12400 & 12400 & 12400 & 0.0 & OPT & 0.01 \\
+pet6 & $39\times 5$ & 10618 & 10618 & 10618 & 0.0 & OPT & 0.00 \\
+pet7 & $50\times 5$ & 16537 & 16537 & 16537 & 0.0 & OPT & 0.09 \\
+test/hp1 & $28\times 4$ & 3418 & 3418 & 3418 & 0.0 & OPT & 0.00 \\
+\br
+\end{tabular}
+\end{indented}
+\end{table}
+
+\begin{table}[t]
+\caption{\label{tab:mis_classical}
+Classical Gurobi performance on MIS instances.
+$|V|$ and $|E|$ denote the number of vertices and edges.
+BKS is the known optimal independent-set size.}
+\begin{indented}
+\item[]\begin{tabular}{lcccccccc}
+\br
+Instance & $|V|$ & $|E|$ & BKS & Incumbent & Bound & Gap (\%) & Status & Time (s)\\
+\mr
+1dc.64 & 64 & 543 & 10 & 10 & 10 & 0.0 & OPT & 0.00 \\
+1dc.128 & 128 & 1471 & 16 & 16 & 16 & 0.0 & OPT & 0.02 \\
+1et.64 & 64 & 264 & 18 & 18 & 18 & 0.0 & OPT & 0.00 \\
+1tc.8 & 8 & 6 & 4 & 4 & 4 & 0.0 & OPT & 0.00 \\
+1tc.16 & 16 & 22 & 8 & 8 & 8 & 0.0 & OPT & 0.00 \\
+1tc.32 & 32 & 68 & 12 & 12 & 12 & 0.0 & OPT & 0.00 \\
+1tc.64 & 64 & 192 & 20 & 20 & 20 & 0.0 & OPT & 0.00 \\
+\br
+\end{tabular}
+\end{indented}
+\end{table}
+
+\begin{table}[t]
+\caption{\label{tab:qap_classical}
+Classical Gurobi performance on QAP instances.
+$n$ is the number of facilities/locations.
+BKS denotes the known optimal objective value.}
+\begin{indented}
+\item[]\begin{tabular}{lccccccc}
+\br
+Instance & $n$ & BKS & Incumbent & Bound & Gap (\%) & Status & Time (s)\\
+\mr
+chr12a & 12 & 9552 & 9552 & 9552 & 0.0 & OPT & 0.36 \\
+chr12b & 12 & 9742 & 9742 & 9742 & 0.0 & OPT & 0.21 \\
+chr12c & 12 & 11156 & 11156 & 11156 & 0.0 & OPT & 2.00 \\
+had12 & 12 & 1652 & 1652 & 1260 & 23.7 & TL & 100.00 \\
+nug12 & 12 & 578 & 578 & 578 & 0.0 & OPT & 98.41 \\
+rou12 & 12 & 235528 & 235528 & 131514 & 44.2 & TL & 100.00 \\
+scr12 & 12 & 31410 & 31410 & 31410 & 0.0 & OPT & 0.89 \\
+tai10a & 10 & 135028 & 135028 & 135028 & 0.0 & OPT & 5.82 \\
+tai10b & 10 & 1183760 & 1183760 & 1183760 & 0.0 & OPT & 0.62 \\
+tai12a & 12 & 224416 & 224416 & 142796 & 36.4 & TL & 100.00 \\
+tai12b & 12 & 39464925 & 39464894.17 & 39464894.17 & 0.0 & OPT & 11.17 \\
+\br
+\end{tabular}
+\end{indented}
+\end{table}

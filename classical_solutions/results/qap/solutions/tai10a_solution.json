@@ -1,0 +1,235 @@
+{
+  "assignment_matrix": [
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0
+    ],
+    [
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      1,
+      0,
+      0,
+      0
+    ],
+    [
+      0,
+      1,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0,
+      0
+    ]
+  ],
+  "assignment_pairs_one_based": [
+    {
+      "facility": 1,
+      "location": 9
+    },
+    {
+      "facility": 2,
+      "location": 1
+    },
+    {
+      "facility": 3,
+      "location": 8
+    },
+    {
+      "facility": 4,
+      "location": 6
+    },
+    {
+      "facility": 5,
+      "location": 10
+    },
+    {
+      "facility": 6,
+      "location": 5
+    },
+    {
+      "facility": 7,
+      "location": 4
+    },
+    {
+      "facility": 8,
+      "location": 3
+    },
+    {
+      "facility": 9,
+      "location": 7
+    },
+    {
+      "facility": 10,
+      "location": 2
+    }
+  ],
+  "assignment_violation_count": 0,
+  "barrier_iterations": 0,
+  "best_bound": 135028.0,
+  "build_wall_time_sec": 0.01643270799831953,
+  "classical_method": "Gurobi global branch-and-bound for binary quadratic assignment",
+  "details_file": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/details/tai10a_details.txt",
+  "distance_sum": 4002,
+  "flow_sum": 4204,
+  "formulation": "Exact binary quadratic assignment formulation",
+  "instance": "tai10a.dat",
+  "instance_id": "tai10a",
+  "instance_path": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Quadratic_Assignment_Problem/qapdata/tai10a.dat",
+  "log_file": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/logs/tai10a_solver.log",
+  "mip_gap_tolerance": 0.0,
+  "nodes_processed": 274306.0,
+  "num_assignment_constraints": 20,
+  "num_assignment_variables": 100,
+  "num_binary_variables": 100,
+  "num_constraints": 20,
+  "num_facilities": 10,
+  "num_locations": 10,
+  "num_nonzero_qap_terms": 7740,
+  "num_nonzeros": 200,
+  "num_quadratic_nonzeros": 3870,
+  "num_variables": 100,
+  "objective_from_solution": 135028,
+  "objective_value": 135028.0,
+  "permutation_one_based": [
+    9,
+    1,
+    8,
+    6,
+    10,
+    5,
+    4,
+    3,
+    7,
+    2
+  ],
+  "permutation_zero_based": [
+    8,
+    0,
+    7,
+    5,
+    9,
+    4,
+    3,
+    2,
+    6,
+    1
+  ],
+  "platform": "macOS-26.4.1-arm64-arm-64bit",
+  "primal_feasible": true,
+  "problem": "QAP",
+  "python_version": "3.10.16",
+  "relative_gap": 0.0,
+  "simplex_iterations": 1891791.0,
+  "solution_count": 10,
+  "solution_file": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/solutions/tai10a_solution.json",
+  "solve_wall_time_sec": 5.81869449999067,
+  "solver": "Gurobi",
+  "solver_runtime_sec": 5.818535089492798,
+  "solver_version": "13.0.1",
+  "solver_work": 11.704042948614731,
+  "started_at_utc": "2026-04-17T05:12:09.237183+00:00",
+  "status": "OPTIMAL",
+  "status_code": 2,
+  "threads": 0,
+  "time_limit_sec": 100.0
+}

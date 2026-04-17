@@ -1,0 +1,48 @@
+Problem: MDKP
+Instance: hp1.dat
+Instance path: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/hpp/hp1.dat
+Formulation: Exact binary integer programming formulation
+Classical method: Gurobi branch-and-cut for 0-1 multi-dimensional knapsack
+Solver: Gurobi 13.0.1
+Started at UTC: 2026-04-17T04:53:59.949419+00:00
+Status: OPTIMAL (code 2)
+Primal feasible: True
+Objective value: 3418.0
+Objective recomputed from solution: 3418
+Known optimal value: 3418
+Known optimal absolute gap: 0
+Known optimal relative gap: 0.0
+Matches known optimum: True
+Best bound: 3418.0
+Relative MIP gap: 0.0
+Build wall time (sec): 0.009767958006705157
+Solve wall time (sec): 0.00854729198908899
+Solver runtime (sec): 0.008244037628173828
+Solver work: 0.00046861922281609195
+Nodes processed: 1.0
+Simplex iterations: 10.0
+Barrier iterations: 0
+Solution count: 6
+Variables: 28
+Binary variables: 28
+Constraints: 4
+Nonzeros: 96
+Quadratic nonzeros: 0
+Items: 28
+Dimensions: 4
+Selected item count: 18
+Max capacity violation: 0
+Time limit (sec): 3600.0
+Threads: 0
+MIP gap tolerance: 0.0
+Raw solver log: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/logs/hpp__hp1_solver.log
+JSON solution: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/solutions/hpp__hp1_solution.json
+
+Selected items (1-based):
+[1, 2, 4, 5, 8, 10, 11, 12, 15, 17, 19, 21, 23, 24, 25, 26, 27, 28]
+
+Capacity usage by dimension:
+  dimension 1: used=216, capacity_slack=3, utilization=0.9863013698630136
+  dimension 2: used=199, capacity_slack=4, utilization=0.9802955665024631
+  dimension 3: used=201, capacity_slack=7, utilization=0.9663461538461539
+  dimension 4: used=180, capacity_slack=0, utilization=1.0

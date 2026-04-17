@@ -1,0 +1,65 @@
+
+Gurobi 13.0.1 (mac64[arm], Python) logging started Fri Apr 17 12:53:59 2026
+
+Set parameter LogToConsole to value 0
+Set parameter Username
+Set parameter LicenseID to value 2799845
+Set parameter LogFile to value "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/logs/hpp__pb1_solver.log"
+Academic license - for non-commercial use only - expires 2027-03-30
+Set parameter TimeLimit to value 3600
+Set parameter Threads to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPFocus to value 0
+Set parameter DisplayInterval to value 5
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (mac64[arm] - Darwin 25.4.0 25E253)
+
+CPU model: Apple M3 Pro
+Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+
+Non-default parameters:
+TimeLimit  3600
+MIPGap  0
+LogToConsole  0
+
+Optimize a model with 4 rows, 27 columns and 92 nonzeros (Max)
+Model fingerprint: 0xc2fa8825
+Model has 27 linear objective coefficients
+Variable types: 0 continuous, 27 integer (27 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 9e+01]
+  Objective range  [2e+01, 1e+03]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+02, 2e+02]
+
+Found heuristic solution: objective 2712.0000000
+Presolve time: 0.00s
+Presolved: 4 rows, 27 columns, 92 nonzeros
+Variable types: 0 continuous, 27 integer (27 binary)
+
+Root relaxation: objective 3.144346e+03, 6 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 3144.34588    0    4 2712.00000 3144.34588  15.9%     -    0s
+H    0     0                    2772.0000000 3144.34588  13.4%     -    0s
+H    0     0                    2951.0000000 3144.34588  6.55%     -    0s
+H    0     0                    3060.0000000 3144.34588  2.76%     -    0s
+H    0     0                    3073.0000000 3118.62936  1.48%     -    0s
+H    0     0                    3074.0000000 3118.62936  1.45%     -    0s
+H    0     0                    3077.0000000 3118.62936  1.35%     -    0s
+     0     0 3118.62936    0    7 3077.00000 3118.62936  1.35%     -    0s
+H    0     0                    3090.0000000 3118.62936  0.93%     -    0s
+     0     0 3090.00000    0    7 3090.00000 3090.00000  0.00%     -    0s
+
+Cutting planes:
+  Cover: 2
+  MIR: 1
+
+Explored 1 nodes (12 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 8: 3090 3077 3074 ... 2712
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 3.090000000000e+03, best bound 3.090000000000e+03, gap 0.0000%

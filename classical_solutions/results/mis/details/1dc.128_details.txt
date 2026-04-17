@@ -1,0 +1,38 @@
+Problem: MIS
+Instance: 1dc.128.txt
+Instance path: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1dc.128.txt
+Formulation: Exact binary integer programming formulation
+Classical method: Gurobi branch-and-cut for maximum independent set
+Solver: Gurobi 13.0.1
+Started at UTC: 2026-04-17T04:54:46.019587+00:00
+Status: OPTIMAL (code 2)
+Primal feasible: True
+Objective value: 16.0
+Best bound: 16.0
+Relative MIP gap: 0.0
+Build wall time (sec): 0.007816625002305955
+Solve wall time (sec): 0.016485999993165024
+Solver runtime (sec): 0.016383886337280273
+Solver work: 0.018635062876523535
+Nodes processed: 1.0
+Simplex iterations: 275.0
+Barrier iterations: 0
+Solution count: 4
+Variables: 128
+Binary variables: 128
+Constraints: 1471
+Nonzeros: 2942
+Quadratic nonzeros: 0
+Graph nodes: 128
+Graph edges: 1471
+Graph density: 0.18097933070866143
+Independent set cardinality: 16
+Edge violation count: 0
+Time limit (sec): 3600.0
+Threads: 0
+MIP gap tolerance: 0.0
+Raw solver log: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mis/logs/1dc.128_solver.log
+JSON solution: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mis/solutions/1dc.128_solution.json
+
+Independent set (1-based):
+[1, 8, 11, 32, 34, 46, 52, 53, 76, 77, 83, 95, 97, 118, 121, 128]

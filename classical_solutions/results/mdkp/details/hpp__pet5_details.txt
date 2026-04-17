@@ -1,0 +1,54 @@
+Problem: MDKP
+Instance: pet5.dat
+Instance path: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/hpp/pet5.dat
+Formulation: Exact binary integer programming formulation
+Classical method: Gurobi branch-and-cut for 0-1 multi-dimensional knapsack
+Solver: Gurobi 13.0.1
+Started at UTC: 2026-04-17T04:54:00.025404+00:00
+Status: OPTIMAL (code 2)
+Primal feasible: True
+Objective value: 12400.0
+Objective recomputed from solution: 12400
+Known optimal value: 12400
+Known optimal absolute gap: 0
+Known optimal relative gap: 0.0
+Matches known optimum: True
+Best bound: 12400.0
+Relative MIP gap: 0.0
+Build wall time (sec): 0.0009136250009760261
+Solve wall time (sec): 0.015055500000016764
+Solver runtime (sec): 0.014986991882324219
+Solver work: 0.0013380483522436176
+Nodes processed: 1.0
+Simplex iterations: 15.0
+Barrier iterations: 0
+Solution count: 8
+Variables: 28
+Binary variables: 28
+Constraints: 10
+Nonzeros: 263
+Quadratic nonzeros: 0
+Items: 28
+Dimensions: 10
+Selected item count: 18
+Max capacity violation: 0
+Time limit (sec): 3600.0
+Threads: 0
+MIP gap tolerance: 0.0
+Raw solver log: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/logs/hpp__pet5_solver.log
+JSON solution: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/solutions/hpp__pet5_solution.json
+
+Selected items (1-based):
+[1, 2, 3, 9, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 25, 26, 27, 28]
+
+Capacity usage by dimension:
+  dimension 1: used=815, capacity_slack=115, utilization=0.8763440860215054
+  dimension 2: used=1204, capacity_slack=6, utilization=0.9950413223140496
+  dimension 3: used=173, capacity_slack=99, utilization=0.6360294117647058
+  dimension 4: used=370, capacity_slack=92, utilization=0.8008658008658008
+  dimension 5: used=443, capacity_slack=89, utilization=0.8327067669172933
+  dimension 6: used=469, capacity_slack=103, utilization=0.8199300699300699
+  dimension 7: used=146, capacity_slack=94, utilization=0.6083333333333333
+  dimension 8: used=323, capacity_slack=77, utilization=0.8075
+  dimension 9: used=453, capacity_slack=17, utilization=0.9638297872340426
+  dimension 10: used=490, capacity_slack=0, utilization=1.0

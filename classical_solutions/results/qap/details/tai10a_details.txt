@@ -1,0 +1,83 @@
+Problem: QAP
+Instance: tai10a.dat
+Instance path: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Quadratic_Assignment_Problem/qapdata/tai10a.dat
+Formulation: Exact binary quadratic assignment formulation
+Classical method: Gurobi global branch-and-bound for binary quadratic assignment
+Solver: Gurobi 13.0.1
+Started at UTC: 2026-04-17T05:12:09.237183+00:00
+Status: OPTIMAL (code 2)
+Primal feasible: True
+Objective value: 135028.0
+Objective recomputed from permutation: 135028
+Best bound: 135028.0
+Relative MIP gap: 0.0
+Build wall time (sec): 0.01643270799831953
+Solve wall time (sec): 5.81869449999067
+Solver runtime (sec): 5.818535089492798
+Solver work: 11.704042948614731
+Nodes processed: 274306.0
+Simplex iterations: 1891791.0
+Barrier iterations: 0
+Solution count: 10
+Variables: 100
+Binary variables: 100
+Constraints: 20
+Nonzeros: 200
+Quadratic nonzeros: 3870
+Facilities/locations: 10
+Assignment variables: 100
+Assignment constraints: 20
+Nonzero QAP objective terms represented: 7740
+Assignment violation count: 0
+Time limit (sec): 100.0
+Threads: 0
+MIP gap tolerance: 0.0
+Raw solver log: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/logs/tai10a_solver.log
+JSON solution: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/solutions/tai10a_solution.json
+
+Permutation, facility -> location (1-based):
+[9, 1, 8, 6, 10, 5, 4, 3, 7, 2]
+
+Assignment pairs (1-based):
+[
+  {
+    "facility": 1,
+    "location": 9
+  },
+  {
+    "facility": 2,
+    "location": 1
+  },
+  {
+    "facility": 3,
+    "location": 8
+  },
+  {
+    "facility": 4,
+    "location": 6
+  },
+  {
+    "facility": 5,
+    "location": 10
+  },
+  {
+    "facility": 6,
+    "location": 5
+  },
+  {
+    "facility": 7,
+    "location": 4
+  },
+  {
+    "facility": 8,
+    "location": 3
+  },
+  {
+    "facility": 9,
+    "location": 7
+  },
+  {
+    "facility": 10,
+    "location": 2
+  }
+]

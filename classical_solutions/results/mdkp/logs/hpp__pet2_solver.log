@@ -1,0 +1,59 @@
+
+Gurobi 13.0.1 (mac64[arm], Python) logging started Fri Apr 17 12:54:00 2026
+
+Set parameter LogToConsole to value 0
+Set parameter Username
+Set parameter LicenseID to value 2799845
+Set parameter LogFile to value "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/logs/hpp__pet2_solver.log"
+Academic license - for non-commercial use only - expires 2027-03-30
+Set parameter TimeLimit to value 3600
+Set parameter Threads to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPFocus to value 0
+Set parameter DisplayInterval to value 5
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (mac64[arm] - Darwin 25.4.0 25E253)
+
+CPU model: Apple M3 Pro
+Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+
+Non-default parameters:
+TimeLimit  3600
+MIPGap  0
+LogToConsole  0
+
+Optimize a model with 10 rows, 10 columns and 97 nonzeros (Max)
+Model fingerprint: 0x279a5891
+Model has 10 linear objective coefficients
+Variable types: 0 continuous, 10 integer (10 binary)
+Coefficient statistics:
+  Matrix range     [2e+00, 3e+02]
+  Objective range  [2e+02, 4e+04]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [2e+02, 5e+02]
+
+Found heuristic solution: objective 83369.000000
+Presolve removed 1 rows and 0 columns
+Presolve time: 0.00s
+Presolved: 9 rows, 10 columns, 87 nonzeros
+Variable types: 0 continuous, 10 integer (10 binary)
+
+Root relaxation: objective 9.266048e+04, 3 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0 92660.4844    0    3 83369.0000 92660.4844  11.1%     -    0s
+H    0     0                    86501.000000 92660.4844  7.12%     -    0s
+H    0     0                    86875.000000 92660.4844  6.66%     -    0s
+H    0     0                    87061.000000 92660.4844  6.43%     -    0s
+
+Cutting planes:
+  Cover: 1
+
+Explored 1 nodes (3 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 4: 87061 86875 86501 83369 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 8.706100000000e+04, best bound 8.706100000000e+04, gap 0.0000%

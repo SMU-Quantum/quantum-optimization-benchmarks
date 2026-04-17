@@ -1,0 +1,38 @@
+Problem: MIS
+Instance: 1tc.16.txt
+Instance path: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.16.txt
+Formulation: Exact binary integer programming formulation
+Classical method: Gurobi branch-and-cut for maximum independent set
+Solver: Gurobi 13.0.1
+Started at UTC: 2026-04-17T04:54:46.063276+00:00
+Status: OPTIMAL (code 2)
+Primal feasible: True
+Objective value: 8.0
+Best bound: 8.0
+Relative MIP gap: 0.0
+Build wall time (sec): 0.0008352090080734342
+Solve wall time (sec): 0.00020225001208018512
+Solver runtime (sec): 0.0001468658447265625
+Solver work: 4.9468002557544754e-05
+Nodes processed: 0.0
+Simplex iterations: 0.0
+Barrier iterations: 0
+Solution count: 1
+Variables: 16
+Binary variables: 16
+Constraints: 22
+Nonzeros: 44
+Quadratic nonzeros: 0
+Graph nodes: 16
+Graph edges: 22
+Graph density: 0.18333333333333332
+Independent set cardinality: 8
+Edge violation count: 0
+Time limit (sec): 3600.0
+Threads: 0
+MIP gap tolerance: 0.0
+Raw solver log: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mis/logs/1tc.16_solver.log
+JSON solution: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mis/solutions/1tc.16_solution.json
+
+Independent set (1-based):
+[1, 2, 4, 8, 9, 13, 15, 16]

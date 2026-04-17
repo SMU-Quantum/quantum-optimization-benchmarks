@@ -1,0 +1,189 @@
+Run start | problem=mis method=pce mode=single seed=0
+Instances discovered | problem=mis count=7
+  - 1dc.128.txt
+  - 1dc.64.txt
+  - 1et.64.txt
+  - 1tc.16.txt
+  - 1tc.32.txt
+  - 1tc.64.txt
+  - 1tc.8.txt
+Initializing backends | use_aws=False use_ibm=False allow_simulators=True
+[local_qiskit] Ready (max 512 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=7
+
+[1/7] Starting instance: 1dc.128.txt
+
+======================================================================
+  Instance: 1dc.128.txt
+======================================================================
+  Problem: mis | Instance: 1dc.128.txt | Logical Qubits: 128 | Execution Qubits: 10
+  PCE encoding | original_vars=128 encoded_qubits=10 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 10-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=60 depth=17 2q_gates=18
+  PCE setup | k=2 logical_vars=128 encoded_qubits=10 pauli_strings=128 su2_reps=2
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+  Optimization finished | evaluations=200 status=2 time=8.0s
+  Result | objective=7.0 feasible=False postprocess_improved=True
+  Checkpoint saved | 1dc.128.txt -> C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\simulator_checkpoints\mis.json
+
+[2/7] Starting instance: 1dc.64.txt
+
+======================================================================
+  Instance: 1dc.64.txt
+======================================================================
+  Problem: mis | Instance: 1dc.64.txt | Logical Qubits: 64 | Execution Qubits: 8
+  PCE encoding | original_vars=64 encoded_qubits=8 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=48 depth=15 2q_gates=14
+  PCE setup | k=2 logical_vars=64 encoded_qubits=8 pauli_strings=64 su2_reps=2
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+  Optimization finished | evaluations=200 status=2 time=4.2s
+  Result | objective=2.0 feasible=True postprocess_improved=True
+  Checkpoint saved | 1dc.64.txt -> C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\simulator_checkpoints\mis.json
+
+[3/7] Starting instance: 1et.64.txt
+
+======================================================================
+  Instance: 1et.64.txt
+======================================================================
+  Problem: mis | Instance: 1et.64.txt | Logical Qubits: 64 | Execution Qubits: 8
+  PCE encoding | original_vars=64 encoded_qubits=8 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=48 depth=15 2q_gates=14
+  PCE setup | k=2 logical_vars=64 encoded_qubits=8 pauli_strings=64 su2_reps=2
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+  Optimization finished | evaluations=200 status=2 time=4.4s
+  Result | objective=4.0 feasible=True postprocess_improved=True
+  Checkpoint saved | 1et.64.txt -> C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\simulator_checkpoints\mis.json
+
+[4/7] Starting instance: 1tc.16.txt
+
+======================================================================
+  Instance: 1tc.16.txt
+======================================================================
+  Problem: mis | Instance: 1tc.16.txt | Logical Qubits: 16 | Execution Qubits: 4
+  PCE encoding | original_vars=16 encoded_qubits=4 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 4-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=24 depth=11 2q_gates=6
+  PCE setup | k=2 logical_vars=16 encoded_qubits=4 pauli_strings=16 su2_reps=2
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+  Optimization finished | evaluations=200 status=2 time=2.6s
+  Result | objective=5.0 feasible=True postprocess_improved=True
+  Checkpoint saved | 1tc.16.txt -> C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\simulator_checkpoints\mis.json
+
+[5/7] Starting instance: 1tc.32.txt
+
+======================================================================
+  Instance: 1tc.32.txt
+======================================================================
+  Problem: mis | Instance: 1tc.32.txt | Logical Qubits: 32 | Execution Qubits: 6
+  PCE encoding | original_vars=32 encoded_qubits=6 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 6-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=36 depth=13 2q_gates=10
+  PCE setup | k=2 logical_vars=32 encoded_qubits=6 pauli_strings=32 su2_reps=2
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+  Optimization finished | evaluations=200 status=2 time=2.7s
+  Result | objective=5.0 feasible=False postprocess_improved=True
+  Checkpoint saved | 1tc.32.txt -> C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\simulator_checkpoints\mis.json
+
+[6/7] Starting instance: 1tc.64.txt
+
+======================================================================
+  Instance: 1tc.64.txt
+======================================================================
+  Problem: mis | Instance: 1tc.64.txt | Logical Qubits: 64 | Execution Qubits: 8
+  PCE encoding | original_vars=64 encoded_qubits=8 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 8-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=48 depth=15 2q_gates=14
+  PCE setup | k=2 logical_vars=64 encoded_qubits=8 pauli_strings=64 su2_reps=2
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+  Optimization finished | evaluations=200 status=2 time=4.0s
+  Result | objective=7.0 feasible=True postprocess_improved=True
+  Checkpoint saved | 1tc.64.txt -> C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\simulator_checkpoints\mis.json
+
+[7/7] Starting instance: 1tc.8.txt
+
+======================================================================
+  Instance: 1tc.8.txt
+======================================================================
+  Problem: mis | Instance: 1tc.8.txt | Logical Qubits: 8 | Execution Qubits: 3
+  PCE encoding | original_vars=8 encoded_qubits=3 compression_k=2
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 3-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=2 entanglement=linear trainable_parameters=18 depth=10 2q_gates=4
+  PCE setup | k=2 logical_vars=8 encoded_qubits=3 pauli_strings=8 su2_reps=2
+  Optimization | method=pce objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+  Optimization finished | evaluations=200 status=2 time=1.5s
+  Result | objective=3.0 feasible=True postprocess_improved=True
+  Checkpoint saved | 1tc.8.txt -> C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\simulator_checkpoints\mis.json
+
+======================================================================
+  BENCHMARK SUMMARY | MIS pce
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  1dc.128.txt            10 OK                7.0    False      8.0
+  1dc.64.txt              8 OK                2.0     True      4.2
+  1et.64.txt              8 OK                4.0     True      4.4
+  1tc.16.txt              4 OK                5.0     True      2.6
+  1tc.32.txt              6 OK                5.0    False      2.7
+  1tc.64.txt              8 OK                7.0     True      4.0
+  1tc.8.txt               3 OK                3.0     True      1.5
+  -----------------------------------------------------------------
+  Total: 7 instances | 7 OK | 28.8s total runtime
+  Results: C:\Users\monitsharma\Downloads\quantum-optimization-benchmarks\research_benchmark\research_benchmark\results_simulator\mis\mis_pce_20260309T073121Z

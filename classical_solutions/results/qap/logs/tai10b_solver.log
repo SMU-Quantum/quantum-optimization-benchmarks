@@ -1,0 +1,70 @@
+
+Gurobi 13.0.1 (mac64[arm], Python) logging started Fri Apr 17 13:12:15 2026
+
+Set parameter LogToConsole to value 0
+Set parameter Username
+Set parameter LicenseID to value 2799845
+Set parameter LogFile to value "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/logs/tai10b_solver.log"
+Academic license - for non-commercial use only - expires 2027-03-30
+Set parameter TimeLimit to value 100
+Set parameter Threads to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPFocus to value 0
+Set parameter DisplayInterval to value 5
+Set parameter NonConvex to value 2
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (mac64[arm] - Darwin 25.4.0 25E253)
+
+CPU model: Apple M3 Pro
+Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+
+Non-default parameters:
+TimeLimit  100
+MIPGap  0
+LogToConsole  0
+NonConvex  2
+
+Optimize a model with 20 rows, 100 columns and 200 nonzeros (Min)
+Model fingerprint: 0x5f16dd2d
+Model has 0 linear objective coefficients
+Model has 3150 quadratic objective terms
+Variable types: 0 continuous, 100 integer (100 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [0e+00, 0e+00]
+  QObjective range [6e+00, 2e+06]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+
+Found heuristic solution: objective 1825966.0000
+Presolve time: 0.02s
+Presolved: 20 rows, 100 columns, 200 nonzeros
+Presolved model has 3250 quadratic objective terms
+Variable types: 0 continuous, 100 integer (100 binary)
+
+Root relaxation: objective -1.525630e+07, 117 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0    0.00000    0   98 1825966.00    0.00000   100%     -    0s
+     0     0    0.00000    0   98 1825966.00    0.00000   100%     -    0s
+H    0     2                    1741207.0000    0.00000   100%     -    0s
+     0     2    0.00000    0   98 1741207.00    0.00000   100%     -    0s
+H   87   147                    1653032.0000    0.00000   100%   3.8    0s
+H   92   147                    1460063.0000    0.00000   100%   3.8    0s
+H  206   207                    1377165.0000    0.00000   100%   3.5    0s
+H  206   197                    1313422.0000    0.00000   100%   3.5    0s
+H  206   187                    1305285.0000    0.00000   100%   3.5    0s
+H  206   178                    1265572.0000    0.00000   100%   3.5    0s
+H  206   169                    1259763.0000 56503.1718  95.5%   3.5    0s
+H  559   353                    1228532.0000 105696.822  91.4%   9.2    0s
+H  929   492                    1203266.0000 105696.822  91.2%  10.8    0s
+* 8898  1588              55    1183760.0000 239716.829  79.7%  10.2    0s
+
+Explored 20854 nodes (164807 simplex iterations) in 0.62 seconds (1.09 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 10: 1.18376e+06 1.20327e+06 1.22853e+06 ... 1.65303e+06
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 1.183760000000e+06, best bound 1.183760000000e+06, gap 0.0000%

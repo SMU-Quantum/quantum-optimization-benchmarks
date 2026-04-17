@@ -1,0 +1,53 @@
+
+Gurobi 13.0.1 (mac64[arm], Python) logging started Fri Apr 17 12:54:46 2026
+
+Set parameter LogToConsole to value 0
+Set parameter Username
+Set parameter LicenseID to value 2799845
+Set parameter LogFile to value "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mis/logs/1et.64_solver.log"
+Academic license - for non-commercial use only - expires 2027-03-30
+Set parameter TimeLimit to value 3600
+Set parameter Threads to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPFocus to value 0
+Set parameter DisplayInterval to value 5
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (mac64[arm] - Darwin 25.4.0 25E253)
+
+CPU model: Apple M3 Pro
+Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+
+Non-default parameters:
+TimeLimit  3600
+MIPGap  0
+LogToConsole  0
+
+Optimize a model with 264 rows, 64 columns and 528 nonzeros (Max)
+Model fingerprint: 0xfa5ea7e1
+Model has 64 linear objective coefficients
+Variable types: 0 continuous, 64 integer (64 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+
+Found heuristic solution: objective 16.0000000
+Presolve removed 248 rows and 46 columns
+Presolve time: 0.00s
+Presolved: 16 rows, 18 columns, 69 nonzeros
+Variable types: 0 continuous, 18 integer (18 binary)
+
+Root relaxation: objective 1.800000e+01, 2 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+*    0     0               0      18.0000000   18.00000  0.00%     -    0s
+
+Explored 1 nodes (2 simplex iterations) in 0.00 seconds (0.00 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 2: 18 16 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 1.800000000000e+01, best bound 1.800000000000e+01, gap 0.0000%

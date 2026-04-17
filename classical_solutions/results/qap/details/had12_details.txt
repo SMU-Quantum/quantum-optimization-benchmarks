@@ -1,0 +1,91 @@
+Problem: QAP
+Instance: had12.dat
+Instance path: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Quadratic_Assignment_Problem/qapdata/had12.dat
+Formulation: Exact binary quadratic assignment formulation
+Classical method: Gurobi global branch-and-bound for binary quadratic assignment
+Solver: Gurobi 13.0.1
+Started at UTC: 2026-04-17T05:07:08.739493+00:00
+Status: TIME_LIMIT (code 9)
+Primal feasible: True
+Objective value: 1652.0
+Objective recomputed from permutation: 1652
+Best bound: 1260.0
+Relative MIP gap: 0.23728813559322035
+Build wall time (sec): 0.04111491599178407
+Solve wall time (sec): 100.00316595799814
+Solver runtime (sec): 100.00230598449707
+Solver work: 254.86256676090557
+Nodes processed: 2606289.0
+Simplex iterations: 36726868.0
+Barrier iterations: 0
+Solution count: 10
+Variables: 144
+Binary variables: 144
+Constraints: 24
+Nonzeros: 288
+Quadratic nonzeros: 8712
+Facilities/locations: 12
+Assignment variables: 144
+Assignment constraints: 24
+Nonzero QAP objective terms represented: 17424
+Assignment violation count: 0
+Time limit (sec): 100.0
+Threads: 0
+MIP gap tolerance: 0.0
+Raw solver log: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/logs/had12_solver.log
+JSON solution: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/qap/solutions/had12_solution.json
+
+Permutation, facility -> location (1-based):
+[3, 10, 11, 2, 12, 5, 6, 7, 8, 1, 4, 9]
+
+Assignment pairs (1-based):
+[
+  {
+    "facility": 1,
+    "location": 3
+  },
+  {
+    "facility": 2,
+    "location": 10
+  },
+  {
+    "facility": 3,
+    "location": 11
+  },
+  {
+    "facility": 4,
+    "location": 2
+  },
+  {
+    "facility": 5,
+    "location": 12
+  },
+  {
+    "facility": 6,
+    "location": 5
+  },
+  {
+    "facility": 7,
+    "location": 6
+  },
+  {
+    "facility": 8,
+    "location": 7
+  },
+  {
+    "facility": 9,
+    "location": 8
+  },
+  {
+    "facility": 10,
+    "location": 1
+  },
+  {
+    "facility": 11,
+    "location": 4
+  },
+  {
+    "facility": 12,
+    "location": 9
+  }
+]

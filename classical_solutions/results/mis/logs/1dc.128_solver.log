@@ -1,0 +1,62 @@
+
+Gurobi 13.0.1 (mac64[arm], Python) logging started Fri Apr 17 12:54:46 2026
+
+Set parameter LogToConsole to value 0
+Set parameter Username
+Set parameter LicenseID to value 2799845
+Set parameter LogFile to value "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mis/logs/1dc.128_solver.log"
+Academic license - for non-commercial use only - expires 2027-03-30
+Set parameter TimeLimit to value 3600
+Set parameter Threads to value 0
+Set parameter MIPGap to value 0
+Set parameter MIPFocus to value 0
+Set parameter DisplayInterval to value 5
+Gurobi Optimizer version 13.0.1 build v13.0.1rc0 (mac64[arm] - Darwin 25.4.0 25E253)
+
+CPU model: Apple M3 Pro
+Thread count: 12 physical cores, 12 logical processors, using up to 12 threads
+
+Non-default parameters:
+TimeLimit  3600
+MIPGap  0
+LogToConsole  0
+
+Optimize a model with 1471 rows, 128 columns and 2942 nonzeros (Max)
+Model fingerprint: 0x0dc97c87
+Model has 128 linear objective coefficients
+Variable types: 0 continuous, 128 integer (128 binary)
+Coefficient statistics:
+  Matrix range     [1e+00, 1e+00]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [1e+00, 1e+00]
+  RHS range        [1e+00, 1e+00]
+
+Found heuristic solution: objective 14.0000000
+Presolve removed 1318 rows and 24 columns
+Presolve time: 0.00s
+Presolved: 153 rows, 104 columns, 943 nonzeros
+Found heuristic solution: objective 12.0000000
+Variable types: 0 continuous, 104 integer (104 binary)
+
+Root relaxation: objective 1.716767e+01, 223 iterations, 0.00 seconds (0.00 work units)
+
+    Nodes    |    Current Node    |     Objective Bounds      |     Work
+ Expl Unexpl |  Obj  Depth IntInf | Incumbent    BestBd   Gap | It/Node Time
+
+     0     0   17.16767    0   72   14.00000   17.16767  22.6%     -    0s
+H    0     0                      15.0000000   17.16767  14.5%     -    0s
+H    0     0                      16.0000000   17.06258  6.64%     -    0s
+     0     0   16.00000    0   69   16.00000   16.00000  0.00%     -    0s
+
+Cutting planes:
+  Gomory: 1
+  Clique: 9
+  Zero half: 3
+
+Explored 1 nodes (275 simplex iterations) in 0.02 seconds (0.02 work units)
+Thread count was 12 (of 12 available processors)
+
+Solution count 4: 16 15 14 12 
+
+Optimal solution found (tolerance 0.00e+00)
+Best objective 1.600000000000e+01, best bound 1.600000000000e+01, gap 0.0000%

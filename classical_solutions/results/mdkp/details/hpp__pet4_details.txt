@@ -1,0 +1,54 @@
+Problem: MDKP
+Instance: pet4.dat
+Instance path: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Multi_Dimension_Knapsack/MKP_Instances/hpp/pet4.dat
+Formulation: Exact binary integer programming formulation
+Classical method: Gurobi branch-and-cut for 0-1 multi-dimensional knapsack
+Solver: Gurobi 13.0.1
+Started at UTC: 2026-04-17T04:54:00.022604+00:00
+Status: OPTIMAL (code 2)
+Primal feasible: True
+Objective value: 6120.0
+Objective recomputed from solution: 6120
+Known optimal value: 6120
+Known optimal absolute gap: 0
+Known optimal relative gap: 0.0
+Matches known optimum: True
+Best bound: 6120.0
+Relative MIP gap: 0.0
+Build wall time (sec): 0.0009349169995402917
+Solve wall time (sec): 0.0011973329965258017
+Solver runtime (sec): 0.0011279582977294922
+Solver work: 0.0006232129689177491
+Nodes processed: 1.0
+Simplex iterations: 5.0
+Barrier iterations: 0
+Solution count: 7
+Variables: 20
+Binary variables: 20
+Constraints: 10
+Nonzeros: 188
+Quadratic nonzeros: 0
+Items: 20
+Dimensions: 10
+Selected item count: 9
+Max capacity violation: 0
+Time limit (sec): 3600.0
+Threads: 0
+MIP gap tolerance: 0.0
+Raw solver log: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/logs/hpp__pet4_solver.log
+JSON solution: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/classical_solutions/results/mdkp/solutions/hpp__pet4_solution.json
+
+Selected items (1-based):
+[1, 10, 14, 15, 16, 17, 18, 19, 20]
+
+Capacity usage by dimension:
+  dimension 1: used=497, capacity_slack=53, utilization=0.9036363636363637
+  dimension 2: used=699, capacity_slack=1, utilization=0.9985714285714286
+  dimension 3: used=70, capacity_slack=60, utilization=0.5384615384615384
+  dimension 4: used=193, capacity_slack=47, utilization=0.8041666666666667
+  dimension 5: used=235, capacity_slack=45, utilization=0.8392857142857143
+  dimension 6: used=256, capacity_slack=54, utilization=0.8258064516129032
+  dimension 7: used=86, capacity_slack=24, utilization=0.7818181818181819
+  dimension 8: used=177, capacity_slack=28, utilization=0.8634146341463415
+  dimension 9: used=245, capacity_slack=15, utilization=0.9423076923076923
+  dimension 10: used=275, capacity_slack=0, utilization=1.0
