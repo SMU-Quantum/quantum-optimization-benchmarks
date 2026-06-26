@@ -1,0 +1,14 @@
+{
+  "hp1.dat": {
+    "instance": "hp1.dat",
+    "qubits": 60,
+    "status": "OK",
+    "objective": 2732.0,
+    "feasible": true,
+    "time_sec": 339.4147368329577,
+    "qpus": [
+      "local_qiskit"
+    ],
+    "result_dir": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R1_mdkp_hp1_vqe/seed_4409/mkp/mkp_vqe_20260623T042134Z/hp1_dat"
+  }
+}

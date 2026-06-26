@@ -1,0 +1,7 @@
+case_id,problem,instance,optimizer_name,maxiter,n_initializations,median_nfev,min_nfev,max_nfev,success_rate,cap_hit_rate,feasible_rate,best_quality,median_quality,worst_quality,median_runtime_seconds
+S1_mis_1tc8_pce,mis,1tc.8.txt,SLSQP,100,3,616.0,529,700,1.0,0.0,1.0,25.0,25.0,25.0,0.5410591660183854
+S1_mis_1tc8_pce,mis,1tc.8.txt,SLSQP,200,3,616.0,529,700,1.0,0.0,1.0,25.0,25.0,25.0,0.5257786249858327
+S2_mis_1tc16_pce,mis,1tc.16.txt,SLSQP,100,3,2590.0,2583,2609,0.0,1.0,1.0,62.5,62.5,62.5,3.019263458030764
+S2_mis_1tc16_pce,mis,1tc.16.txt,SLSQP,200,3,5105.0,5103,5119,0.0,1.0,1.0,62.5,62.5,62.5,5.948722833010834
+S3_qap_nug12_pce,qap,nug12.dat,SLSQP,100,3,7690.0,7690,7690,0.0,1.0,0.0,inf,inf,inf,113.95773366698995
+S3_qap_nug12_pce,qap,nug12.dat,SLSQP,200,3,15317.0,15208,15336,0.0,1.0,0.0,inf,inf,inf,227.04639899998438

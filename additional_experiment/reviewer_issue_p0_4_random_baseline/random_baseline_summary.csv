@@ -1,0 +1,107 @@
+run_id,problem,instance,method,execution_mode,fidelity_estimate,n_decision_variables,eligible_candidate_count,hardware_primary_metric,hardware_feasible,random_feasibility_rate,random_metric_median,random_metric_p025,random_metric_p975,hardware_random_tail_fraction,hardware_vs_random_classification,median_random_local_refinement_improvement,notes
+mkp_ma_qaoa_hp1,MDKP,hp1,ma_qaoa,hardware,2.70351162892e-124,60,200000,21.0649502633,True,1,20.157987127,8.00175541252,35.246489175,0.544850498339,random_comparable,27.1796372148,
+mkp_ma_qaoa_hp2,MDKP,hp2,ma_qaoa,hardware,5.81075511168e-167,67,200000,15.6622724419,True,1,21.5160075329,10.6222536095,32.8209353421,0.162790697674,random_comparable,19.4601381042,
+mkp_ma_qaoa_pb1,MDKP,pb1,ma_qaoa,hardware,4.03247908854e-122,59,200000,27.8640776699,True,1,18.0258899676,7.54045307443,35.0177993527,0.870431893688,random_comparable,26.1812297735,
+mkp_ma_qaoa_pb2,MDKP,pb2,ma_qaoa,hardware,2.39076853986e-160,66,200000,44.5072190835,True,1,22.0809792844,10.5461393597,43.3035153798,0.980066445183,underperforms_matched_uniform_random,19.4601381042,
+mkp_ma_qaoa_pb4,MDKP,pb4,ma_qaoa,hardware,1.55833218567e-66,45,200000,27.6290349697,True,1,32.2650470746,15.1609259415,47.1848205279,0.28903654485,random_comparable,16.3657952253,
+mkp_ma_qaoa_pb5,MDKP,pb5,ma_qaoa,hardware,5.86228280828e-259,116,200000,28.0037400655,True,1,25.1986909771,9.8644226274,47.4287050024,0.604651162791,random_comparable,13.6044880786,
+mkp_ma_qaoa_pet2,MDKP,pet2,ma_qaoa,hardware,3.21175452304e-133,99,200000,30.9656447778,True,1,10.3031208004,0.101480571094,27.5903389578,0.980066445183,underperforms_matched_uniform_random,38.1112093819,
+mkp_ma_qaoa_pet3,MDKP,pet3,ma_qaoa,hardware,3.61219903887e-180,102,200000,27.5217932752,True,1,24.4084682441,6.77148194271,47.5186799502,0.594684385382,random_comparable,22.4159402242,
+mkp_ma_qaoa_pet4,MDKP,pet4,ma_qaoa,hardware,2.27617602658e-235,107,200000,14.3790849673,True,1,22.7124183007,7.39174836601,39.9121732027,0.176079734219,random_comparable,41.6666666666,
+mkp_ma_qaoa_pet5,MDKP,pet5,ma_qaoa,hardware,0,122,200000,26.2096774194,True,1,27.439516129,12.9758064516,51.2983870968,0.451827242525,random_comparable,25,
+mkp_ma_qaoa_pet6,MDKP,pet6,ma_qaoa,hardware,3.22318144917e-257,86,200000,39.8662648333,True,1,18.8500659258,8.79708984743,36.2269259748,0.986710963455,underperforms_matched_uniform_random,36.6264833302,
+mkp_ma_qaoa_pet7,MDKP,pet7,ma_qaoa,hardware,0,100,200000,28.9109270122,True,1,26.483038036,9.3110902824,45.0055935176,0.581395348837,random_comparable,25.7604160367,
+mkp_qaoa_hp1,MDKP,hp1,qaoa,hardware,3.06886200431e-127,60,56000,36.2200117028,True,1,20.5968402575,7.98712697484,35.1755412522,0.983388704319,underperforms_matched_uniform_random,27.1796372148,
+mkp_qaoa_hp2,MDKP,hp2,qaoa,hardware,1.77468942717e-166,67,60000,19.6798493409,True,1,21.971123666,10.7117074702,33.3262711864,0.408637873754,random_comparable,19.4601381042,
+mkp_qaoa_pb1,MDKP,pb1,qaoa,hardware,4.12902364435e-118,59,49000,36.6666666667,True,1,18.0420711974,7.26294498382,34.2718446602,0.993355481728,underperforms_matched_uniform_random,26.1812297735,
+mkp_qaoa_pb2,MDKP,pb2,qaoa,hardware,4.3992967256e-158,66,49000,42.1845574388,True,1,22.1908349027,11.185655995,42.4795982423,0.970099667774,underperforms_matched_uniform_random,19.4601381042,
+mkp_qaoa_pb4,MDKP,pb4,qaoa,hardware,2.01986574153e-65,45,57000,37.5262693342,True,1,31.9939475454,14.5392358776,46.3519250168,0.734219269103,random_comparable,16.4477555481,
+mkp_qaoa_pb5,MDKP,pb5,qaoa,hardware,1.74581209161e-267,116,53000,23.4689107059,True,1,25.4791958859,8.51916783544,49.0182328191,0.408637873754,random_comparable,14.3992519869,
+mkp_qaoa_pet2,MDKP,pet2,qaoa,hardware,2.27102727962e-132,99,63000,14.7000379045,True,1,10.3978819448,0.213643307566,30.7020939342,0.734219269103,random_comparable,38.1112093819,
+mkp_qaoa_pet3,MDKP,pet3,qaoa,hardware,2.44423366887e-179,102,53000,20.0498132005,True,1,25.7160647572,5.91220423412,44.6481942715,0.31561461794,random_comparable,29.3897882939,
+mkp_qaoa_pet4,MDKP,pet4,qaoa,hardware,9.60377722115e-231,107,53000,33.3333333333,True,1,23.6519607843,7.00980392157,40.8578431372,0.867109634551,random_comparable,40.3594771242,
+mkp_qaoa_pet5,MDKP,pet5,qaoa,hardware,0,122,56000,37.2983870968,True,1,28.6693548387,11.8467741936,49.4344758064,0.787375415282,random_comparable,25,
+mkp_qaoa_pet6,MDKP,pet6,qaoa,hardware,2.82977927378e-255,86,51000,23.0928611791,True,1,18.7935581089,9.70874929365,34.2618666415,0.727574750831,random_comparable,34.1778112639,
+mkp_qaoa_pet7,MDKP,pet7,qaoa,hardware,0,100,58000,49.7550946363,True,1,26.3348854084,10.9419785935,44.5602285783,0.996677740864,underperforms_matched_uniform_random,24.9622059624,
+mkp_ws_qaoa_hp1,MDKP,hp1,ws_qaoa,hardware,7.22149567914e-130,60,60000,23.6102984201,True,1,20.20187244,7.84888823874,35.3576653013,0.671096345515,random_comparable,27.1796372147,
+mkp_ws_qaoa_hp2,MDKP,hp2,ws_qaoa,hardware,9.28086961595e-164,67,56000,29.1902071563,True,1,22.0338983051,10.0557124922,33.7539234149,0.890365448505,random_comparable,19.4601381042,
+mkp_ws_qaoa_pb1,MDKP,pb1,ws_qaoa,hardware,1.7661397846e-121,59,68000,28.4466019417,True,1,17.7993527508,7.26294498382,34.1949838188,0.916943521595,random_comparable,26.1812297735,
+mkp_ws_qaoa_pb2,MDKP,pb2,ws_qaoa,hardware,1.18939490316e-158,66,55000,33.9296924043,True,1,22.1908349027,11.4916823603,45.6308851224,0.873754152824,random_comparable,19.4601381042,
+mkp_ws_qaoa_pb4,MDKP,pb4,ws_qaoa,hardware,2.01700984023e-66,45,63000,43.1321452589,True,1,31.9939475454,15.1887451664,46.1328125,0.933554817276,random_comparable,16.4477555481,
+mkp_ws_qaoa_pb5,MDKP,pb5,ws_qaoa,hardware,7.29825104385e-266,116,58000,20.804114072,True,1,25.5493221131,8.92239364189,49.6762505844,0.322259136213,random_comparable,14.3992519869,
+mkp_ws_qaoa_pet2,MDKP,pet2,ws_qaoa,hardware,8.51489828121e-133,99,55000,1.28415708526,True,1,10.3031208004,0.213643307566,30.6025947325,0.116279069767,random_comparable,38.111209382,
+mkp_ws_qaoa_pet3,MDKP,pet3,ws_qaoa,hardware,1.09433464991e-178,102,54000,36.7372353674,True,1,25.9651307597,6.0896637609,44.6481942715,0.840531561462,random_comparable,29.8879202988,
+mkp_ws_qaoa_pet4,MDKP,pet4,ws_qaoa,hardware,1.92657068368e-232,107,49000,25.6535947712,True,1,23.3660130719,7.35294117647,40.8578431372,0.584717607973,random_comparable,41.1764705882,
+mkp_ws_qaoa_pet5,MDKP,pet5,ws_qaoa,hardware,0,122,55000,13.7903225806,True,1,28.7298387097,11.8467741936,50.9032258065,0.0564784053156,random_comparable,25,
+mkp_ws_qaoa_pet6,MDKP,pet6,ws_qaoa,hardware,7.63978070681e-257,86,45000,30.4482953475,True,1,18.755886231,9.29012055001,34.8175268412,0.923588039867,random_comparable,34.1778112639,
+mkp_ws_qaoa_pet7,MDKP,pet7,ws_qaoa,hardware,0,100,57000,27.6229062103,True,1,26.525367358,10.9419785935,44.5602285783,0.56146179402,random_comparable,24.9622059624,
+mis_ma_qaoa_1dc_128,MIS,1dc.128,ma_qaoa,hardware,3.50741555599e-263,128,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_ma_qaoa_1dc_64,MIS,1dc.64,ma_qaoa,hardware,1.25364105417e-77,64,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_ma_qaoa_1et_64,MIS,1et.64,ma_qaoa,hardware,9.5048054812e-27,64,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_ma_qaoa_1tc_32,MIS,1tc.32,ma_qaoa,hardware,2.36436753227e-06,32,200000,inf,False,0.573333333333,33.3333333333,8.33333333333,58.3333333333,nan,hardware_infeasible_random_feasibility_comparison_only,8.3333333333,
+mis_ma_qaoa_1tc_64,MIS,1tc.64,ma_qaoa,hardware,8.01810299717e-20,64,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_qaoa_1dc_128,MIS,1dc.128,qaoa,hardware,9.71226981361e-269,128,56000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_qaoa_1dc_64,MIS,1dc.64,qaoa,hardware,1.45943906602e-77,64,59000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_qaoa_1et_64,MIS,1et.64,qaoa,hardware,3.21169074668e-27,64,65000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_qaoa_1tc_32,MIS,1tc.32,qaoa,hardware,1.918436551e-06,32,56000,25,True,0.626666666667,33.3333333333,8.33333333333,58.3333333333,0.275747508306,random_comparable,8.3333333333,
+mis_qaoa_1tc_64,MIS,1tc.64,qaoa,hardware,3.21169074668e-27,64,59000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_ws_qaoa_1dc_128,MIS,1dc.128,ws_qaoa,hardware,5.32839274234e-265,128,62000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_ws_qaoa_1dc_64,MIS,1dc.64,ws_qaoa,hardware,3.67163568509e-78,64,73000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_ws_qaoa_1et_64,MIS,1et.64,ws_qaoa,hardware,3.67163568509e-78,64,65000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,
+mis_ws_qaoa_1tc_32,MIS,1tc.32,ws_qaoa,hardware,2.3385020106e-06,32,72000,16.6666666667,True,0.633333333333,33.3333333333,8.33333333333,50,0.112956810631,random_comparable,8.3333333333,
+mis_ws_qaoa_1tc_64,MIS,1tc.64,ws_qaoa,hardware,3.67163568509e-78,64,59000,35,True,0,nan,inf,inf,0.00332225913621,outperforms_matched_uniform_random,nan,
+market_share_ma_qaoa_ms_seed0_prod2,MSP,ms_seed0_prod2,ma_qaoa,hardware,4.46849722373e-77,48,200000,9.99999999999,True,1,20,3,169.05,0.259136212625,random_comparable,91,
+market_share_ma_qaoa_ms_seed0_prod3,MSP,ms_seed0_prod3,ma_qaoa,hardware,3.16679634037e-220,84,200000,203,True,1,69.5,12.475,557,0.817275747508,random_comparable,160,
+market_share_ma_qaoa_ms_seed0_prod4,MSP,ms_seed0_prod4,ma_qaoa,hardware,0,118,200000,619,True,1,155,30.475,809.2,0.93023255814,random_comparable,237,
+market_share_ma_qaoa_ms_seed0_prod5,MSP,ms_seed0_prod5,ma_qaoa,hardware,0,150,200000,2440,True,1,292.5,59.95,1009.725,1,underperforms_matched_uniform_random,250.5,
+market_share_ma_qaoa_ms_seed1_prod2,MSP,ms_seed1_prod2,ma_qaoa,hardware,7.07790263279e-82,50,200000,19,True,1,17,3,170.9,0.564784053156,random_comparable,89,
+market_share_ma_qaoa_ms_seed1_prod3,MSP,ms_seed1_prod3,ma_qaoa,hardware,3.66647612421e-226,84,200000,54,True,1,80.0000000001,13.475,556.4,0.355481727575,random_comparable,167,
+market_share_ma_qaoa_ms_seed1_prod4,MSP,ms_seed1_prod4,ma_qaoa,hardware,0,118,200000,85,True,1,178,34.475,997.95,0.1926910299,random_comparable,237,
+market_share_ma_qaoa_ms_seed1_prod5,MSP,ms_seed1_prod5,ma_qaoa,hardware,0,156,200000,495,True,1,277,58.9,1146.7,0.760797342193,random_comparable,270.5,
+market_share_qaoa_ms_seed0_prod2,MSP,ms_seed0_prod2,qaoa,hardware,4.30797117205e-76,48,51000,21,True,1,19,3,139.975,0.634551495017,random_comparable,90,
+market_share_qaoa_ms_seed0_prod3,MSP,ms_seed0_prod3,qaoa,hardware,3.35868750014e-218,84,58000,59,True,1,77.5,12,449.7,0.405315614618,random_comparable,157,
+market_share_qaoa_ms_seed0_prod4,MSP,ms_seed0_prod4,qaoa,hardware,0,118,55000,42,True,1,152.5,29,837.2,0.093023255814,random_comparable,223,
+market_share_qaoa_ms_seed0_prod5,MSP,ms_seed0_prod5,qaoa,hardware,0,150,56000,846,True,1,286.5,64.85,1220.8,0.920265780731,random_comparable,266.5,
+market_share_qaoa_ms_seed1_prod2,MSP,ms_seed1_prod2,qaoa,hardware,9.66950989859e-82,50,59000,15,True,1,18,3,215.55,0.468438538206,random_comparable,93.4999999999,
+market_share_qaoa_ms_seed1_prod3,MSP,ms_seed1_prod3,qaoa,hardware,3.35868750014e-218,84,55000,170,True,1,77.0000000001,14,448.625,0.774086378738,random_comparable,171,
+market_share_qaoa_ms_seed1_prod4,MSP,ms_seed1_prod4,qaoa,hardware,0,118,48000,594,True,1,187,36,985.3,0.870431893688,random_comparable,236,
+market_share_qaoa_ms_seed1_prod5,MSP,ms_seed1_prod5,qaoa,hardware,0,156,49000,1242,True,1,283,69.475,1231.875,0.976744186047,underperforms_matched_uniform_random,265,
+market_share_ws_qaoa_ms_seed0_prod2,MSP,ms_seed0_prod2,ws_qaoa,hardware,1.25792943984e-76,48,47000,41.0000000001,True,1,19,3,158.975,0.770764119601,random_comparable,91,
+market_share_ws_qaoa_ms_seed0_prod3,MSP,ms_seed0_prod3,ws_qaoa,hardware,5.66734332577e-220,84,55000,296,True,1,75.5,12,500.275,0.93023255814,random_comparable,157,
+market_share_ws_qaoa_ms_seed0_prod4,MSP,ms_seed0_prod4,ws_qaoa,hardware,0,118,55000,901,True,1,152.5,29,837.2,0.983388704319,underperforms_matched_uniform_random,223,
+market_share_ws_qaoa_ms_seed0_prod5,MSP,ms_seed0_prod5,ws_qaoa,hardware,0,150,61000,318,True,1,286.5,68,1225,0.554817275748,random_comparable,268,
+market_share_ws_qaoa_ms_seed1_prod2,MSP,ms_seed1_prod2,ws_qaoa,hardware,1.16948410831e-83,50,52000,9,True,1,17.5,3,206.1,0.239202657807,random_comparable,100,
+market_share_ws_qaoa_ms_seed1_prod3,MSP,ms_seed1_prod3,ws_qaoa,hardware,5.66734332577e-220,84,53000,36,True,1,78.5,14,453.1,0.272425249169,random_comparable,173,
+market_share_ws_qaoa_ms_seed1_prod4,MSP,ms_seed1_prod4,ws_qaoa,hardware,0,118,63000,348,True,1,178,36.475,982.675,0.724252491694,random_comparable,236,
+market_share_ws_qaoa_ms_seed1_prod5,MSP,ms_seed1_prod5,ws_qaoa,hardware,0,156,50000,1024,True,1,292.5,69.475,1231.875,0.950166112957,underperforms_matched_uniform_random,269.5,
+qap_ma_qaoa_chr12a,QAP,chr12a,ma_qaoa,hardware,0,144,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_chr12b,QAP,chr12b,ma_qaoa,hardware,0,144,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_chr12c,QAP,chr12c,ma_qaoa,hardware,0,144,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_nug12,QAP,nug12,ma_qaoa,hardware,0,144,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_scr12,QAP,scr12,ma_qaoa,hardware,0,144,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_tai10a,QAP,tai10a,ma_qaoa,hardware,0,100,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_tai10b,QAP,tai10b,ma_qaoa,hardware,0,100,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_tai12b,QAP,tai12b,ma_qaoa,hardware,0,144,200000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_chr12a,QAP,chr12a,qaoa,hardware,0,144,60000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_chr12b,QAP,chr12b,qaoa,hardware,0,144,63000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_chr12c,QAP,chr12c,qaoa,hardware,0,144,64000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_had12,QAP,had12,ma_qaoa,hardware,0,144,67000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_had12,QAP,had12,qaoa,hardware,0,144,62000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_nug12,QAP,nug12,qaoa,hardware,0,144,53000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_rou12,QAP,rou12,ma_qaoa,hardware,0,144,62000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_rou12,QAP,rou12,qaoa,hardware,0,144,48000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_scr12,QAP,scr12,qaoa,hardware,0,144,62000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_tai10a,QAP,tai10a,qaoa,hardware,0,100,54000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_tai10b,QAP,tai10b,qaoa,hardware,0,100,61000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ma_qaoa_tai12a,QAP,tai12a,ma_qaoa,hardware,0,144,67000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_tai12a,QAP,tai12a,qaoa,hardware,0,144,55000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_qaoa_tai12b,QAP,tai12b,qaoa,hardware,0,144,54000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_chr12a,QAP,chr12a,ws_qaoa,hardware,0,144,49000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_chr12b,QAP,chr12b,ws_qaoa,hardware,0,144,46000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_chr12c,QAP,chr12c,ws_qaoa,hardware,0,144,63000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_had12,QAP,had12,ws_qaoa,hardware,0,144,50000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_nug12,QAP,nug12,ws_qaoa,hardware,0,144,46000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_rou12,QAP,rou12,ws_qaoa,hardware,0,144,59000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_scr12,QAP,scr12,ws_qaoa,hardware,0,144,66000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_tai10a,QAP,tai10a,ws_qaoa,hardware,0,100,50000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible
+qap_ws_qaoa_tai10b,QAP,tai10b,ws_qaoa,hardware,0,100,58000,inf,False,0,nan,inf,inf,nan,hardware_infeasible_random_feasibility_comparison_only,nan,QAP rows are feasibility-only analytical controls; all hardware QAP runs are infeasible

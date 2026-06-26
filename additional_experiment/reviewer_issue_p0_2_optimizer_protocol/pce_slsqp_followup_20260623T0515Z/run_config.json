@@ -1,0 +1,37 @@
+{
+  "seeds": [
+    1103,
+    4409,
+    7703
+  ],
+  "maxiter_values": [
+    100,
+    200
+  ],
+  "shots": 1000,
+  "final_shots": 1000,
+  "pce_reps": 2,
+  "compression_k": 2,
+  "ftol": 1e-06,
+  "eps": 1.4901161193847656e-08,
+  "cases": [
+    {
+      "case_id": "S1_mis_1tc8_pce",
+      "problem": "mis",
+      "instance": "Maximum_Independent_Set/mis_benchmark_instances/1tc.8.txt",
+      "note": "Small current PCE case; exact MIS optimum is brute-force recoverable."
+    },
+    {
+      "case_id": "S2_mis_1tc16_pce",
+      "problem": "mis",
+      "instance": "Maximum_Independent_Set/mis_benchmark_instances/1tc.16.txt",
+      "note": "Current PCE case already present in the P0.2 reduced Part B run."
+    },
+    {
+      "case_id": "S3_qap_nug12_pce",
+      "problem": "qap",
+      "instance": "Quadratic_Assignment_Problem/qapdata/nug12.dat",
+      "note": "Smallest QAP PCE case with an appendix-table optimum."
+    }
+  ]
+}

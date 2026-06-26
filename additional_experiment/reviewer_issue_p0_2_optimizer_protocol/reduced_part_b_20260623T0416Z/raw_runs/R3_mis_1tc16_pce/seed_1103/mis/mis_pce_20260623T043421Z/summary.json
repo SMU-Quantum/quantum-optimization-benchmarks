@@ -1,0 +1,21 @@
+{
+  "problem": "mis",
+  "method": "pce",
+  "total_instances": 1,
+  "ok_count": 1,
+  "total_runtime_sec": 1.3756752079934813,
+  "results": [
+    {
+      "instance": "1tc.16.txt",
+      "qubits": 4,
+      "status": "OK",
+      "objective": 3.0,
+      "feasible": true,
+      "time_sec": 1.2298718329984695,
+      "qpus": [
+        "local_qiskit"
+      ],
+      "result_dir": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R3_mis_1tc16_pce/seed_1103/mis/mis_pce_20260623T043421Z/1tc_16_txt"
+    }
+  ]
+}

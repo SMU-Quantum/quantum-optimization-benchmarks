@@ -1,0 +1,2335 @@
+{
+  "schema_version": "2.0",
+  "run_timestamp_utc": "20260623T043424Z",
+  "run_directory": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R3_mis_1tc16_pce/seed_4409/mis/mis_pce_20260623T043424Z/1tc_16_txt",
+  "log_file": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R3_mis_1tc16_pce/seed_4409/mis/mis_pce_20260623T043424Z/run.log",
+  "problem": "mis",
+  "instance_path": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/Maximum_Independent_Set/mis_benchmark_instances/1tc.16.txt",
+  "instance_name": "1tc.16.txt",
+  "benchmark_protocol": {
+    "budget": {
+      "shots_per_circuit": 1000,
+      "max_optimizer_iterations": 200,
+      "total_circuit_evaluations": 200,
+      "wall_clock_cap_sec": null,
+      "queue_time_policy": "included_in_wall_clock"
+    },
+    "objective_measured": {
+      "optimizer_objective": "pce_qiskit_loss",
+      "cvar_alpha": null,
+      "reported_best_sample_energy": -2.0,
+      "reported_expected_value": -263.73453011381395,
+      "post_processed_objective": 3.0,
+      "note": "optimizer_objective is used to guide parameter updates; best_sample_energy is the lowest QUBO energy from any single bitstring; post_processed_objective is after local-swap repair"
+    },
+    "feasibility_policy": {
+      "repair_allowed": true,
+      "repair_method": "one_round_local_swap",
+      "repair_description": "After optimization, the best raw bitstring is taken. A single round of local bit-flip swap is applied: each variable is flipped and the resulting QUBO energy is checked. If any flip improves the objective, the best flip is kept.",
+      "repair_applied": true,
+      "candidates_checked": 44,
+      "raw_objective_before_repair": 2.0,
+      "raw_feasible_before_repair": true
+    },
+    "stopping_rule": {
+      "type": "fixed_iterations",
+      "max_iterations": 200,
+      "actual_iterations": 200,
+      "optimizer_status": "2",
+      "optimizer_message": "Maximum number of function evaluations has been exceeded."
+    }
+  },
+  "execution": {
+    "method": "pce",
+    "requested_method": "pce",
+    "execution_mode": "single",
+    "selected_qpus": [
+      "local_qiskit"
+    ],
+    "job_ids": [
+      "528ae185-9267-4979-9ab9-904c8611a51b",
+      "b6bf870d-62e5-4844-9199-432afbc99ff6",
+      "07fa84c8-d4c3-4e7d-86e6-f666707651ec",
+      "241de450-78e4-4c71-81a9-391c8651104c",
+      "a9aa8732-ccea-4078-a885-0b2141cc9f0f",
+      "8d5999ea-0b5a-4ad5-acf9-0b1c696a5b58",
+      "e37a75ce-c42a-4b4b-8665-01cf3c75db74",
+      "267536fa-1c05-4d5b-b921-cca5b13ac0dc",
+      "35d382fc-ce53-4995-a879-486373a2861f",
+      "396e2ae8-7a2f-4731-9e3f-cd93ac41947a",
+      "8779ef38-5d68-4284-b836-e6c60f7286c3",
+      "159495ea-d319-4bc7-8df3-346839b636a2",
+      "2c4afa6b-a609-4cff-8b10-5d79c5f8f69e",
+      "2a072f2f-104a-4b00-b5ac-85bfda0f0166",
+      "c1830532-8ff7-4a68-a78b-d651f1716856",
+      "4ea1de1e-aca4-4e61-af6c-493a0d1f4e77",
+      "365d8e19-2a8d-4d62-bf9b-82497933ea12",
+      "c3d46758-edd8-491c-92bd-94233c746005",
+      "6a5e0640-5043-4f88-a9eb-9218c11b4245",
+      "6fef13d7-46e5-470f-a9e5-5124f71ec544",
+      "013c3370-15a0-41b6-852a-8f27e738be23",
+      "4ee8d294-80ae-4826-be2a-18e7a4b145d7",
+      "3d1dd8f9-8d66-4abb-b954-c5a430f94918",
+      "24a20917-d01f-4776-aba0-7c34ab154a84",
+      "3fd3f943-a678-47d1-a04d-fa41fe1d280e",
+      "95184db3-59c4-45bf-baa8-bde873a25b95",
+      "b87d97c5-4427-4627-927b-f634eaa30f3e",
+      "a7bfda16-1162-4cfb-a450-cfecfbee4e06",
+      "3ebf97eb-9984-46d1-a38c-f8fd23208d3f",
+      "317ee31f-b317-4fac-827d-eceafcd2a994",
+      "c7f374e1-e26f-4bc7-8900-a821677aeac1",
+      "add4e96b-5108-4c23-a1de-3cfb03c17f5f",
+      "b8aecf6a-d386-46b2-bb2b-b18e3001cf5e",
+      "c50ae210-9478-41f7-a085-85e3fd8f93d5",
+      "ce2b63ca-6248-4f48-8554-a729b7b4f925",
+      "95216190-8053-4973-ad86-7bd71e75cd8a",
+      "d95360fd-96c4-461f-af30-39cee766a231",
+      "94dea000-5ef9-4d59-9557-ac4d438c5c22",
+      "b47747dd-d716-4e07-9cc3-1728f7af2a29",
+      "568984ea-46ce-4dda-b52f-dc272209ec80",
+      "dd4db2ac-afa6-4939-bece-467a2f4e6cb1",
+      "851f7981-9cec-4024-beb5-2bdac9c13745",
+      "883098a3-0a21-4e26-91e3-713ce242ef3b",
+      "73a6212c-74f6-4ed5-ac3d-78702a6b6d49",
+      "a2e3b2e8-1e17-4da6-8339-d5cf3d104b47",
+      "ffd32013-6a7f-4818-bd6f-7a0955f50409",
+      "cff16675-d9a3-432c-a6b6-5809874f3f36",
+      "e6b14089-6ead-4198-842b-7e7b3c6f9411",
+      "de75782e-9ca8-4853-9b33-60ea12e4555c",
+      "d656b3b4-b706-4f83-9832-d5a8de11df43",
+      "f1a36eee-a548-4c85-85a9-02f854e05a28",
+      "25414974-3432-417f-9895-14104e39dba0",
+      "2a67ba8b-989e-4a2f-9f59-4fe077c34352",
+      "c14d5c31-48f6-4193-af0a-62d850f54b6e",
+      "6713acd7-6ef9-4517-b660-b03e8b84737b",
+      "6c00982a-cc50-4bb3-94f0-8c2cc2d46761",
+      "02ba60c9-0d7b-422e-954c-8ba3752bab17",
+      "de0f4b35-9bbe-4ce9-8133-3d7aae822b01",
+      "3bf07bbf-1e98-4f87-a1ca-dfa3378a3f96",
+      "1b9a6732-c840-4c61-95fc-553a4f408ad9",
+      "e04ab91d-ceb8-4987-a567-32c6ae9c3fba",
+      "19a9517d-5453-4c06-8baa-8bb6cad452bc",
+      "7b0a8ebd-27e2-44f5-b6a5-376d8263c23e",
+      "c38124d5-1c63-4084-8842-65341c65c50e",
+      "6a25c170-839c-4d5e-a412-5ddb1bf14d83",
+      "9d4514ae-86ec-4554-89b9-2367a9c0c7ec",
+      "8e71efbd-c573-40d2-b377-f0e4f24ec45a",
+      "7f4092e2-89f9-4152-87bc-c52591997b61",
+      "35332979-2977-4e1f-a97b-ed18c9eac35e",
+      "630c55c6-44d9-4e5c-a865-2110904ced06",
+      "42f707b9-9caa-4648-ac79-1d01bcba8550",
+      "9ef5eb17-ece0-4587-ade7-cdf2f0487926",
+      "1d65c919-ca15-4254-a16b-1f112a5730ea",
+      "533f0b7d-8f8b-478b-983e-46f0a42a8507",
+      "13ecf7e3-3277-4abb-bcde-0b166f02dc95",
+      "c83ac86b-ce0a-4115-87c5-801cbb9c5c1a",
+      "7f1a10c1-11db-40a4-8b8b-6270e9578104",
+      "dbabd381-d765-4775-b4ff-725b57d377ae",
+      "c8dc117d-a408-419b-a48a-a08a32d57ede",
+      "39da1e3b-0c63-4bcf-aabb-901b87cf8b15",
+      "d5ce146c-3f49-4efd-88aa-8cf011fdc049",
+      "8ce812cd-d6f4-4e99-85c6-af6d0bc8f63f",
+      "78ea5f73-c2ac-4370-b77a-f45d576db259",
+      "f71bd09c-40eb-4471-8803-e50449ae9d75",
+      "6305abab-ddc8-4f27-84ed-5f771fbd69d4",
+      "5d1d9fa9-2a94-4d78-8646-ec1446e115f9",
+      "6325f67c-382e-440c-a9b1-d5c9383eb10e",
+      "7b5371e6-cb76-4748-85be-c95798937ef4",
+      "566ec379-168c-48af-88f2-213a7cefec66",
+      "2164c988-553c-4cb4-88cd-6024fb71df25",
+      "d28369ba-7c1e-4148-a2e4-b790098892bd",
+      "643fd85e-1724-495e-a0dd-cf79f979e49c",
+      "783fd75c-6a21-440c-b017-00792216cde0",
+      "a366c566-cbee-4372-8e92-0aeb98046de2",
+      "ac356177-3a2d-4c27-9f48-653ab56c8ce7",
+      "0e5f2607-2e5c-4c3c-be9a-1ad10fc0e4f7",
+      "59979e03-b369-4c0a-a2cd-b79e53c97c67",
+      "9803fff6-af1c-4fd5-a624-baf375a57b36",
+      "c2cb7ae1-f0f7-468d-b9e4-d34bafa537e5",
+      "7021f49d-0e84-4f6f-afc7-7e970a368c7b",
+      "3a4707a3-10a9-4562-b84d-8e3e998e5749",
+      "a800fb6f-3611-4603-b5e0-0c7ee420c627",
+      "0ecb6210-5992-499c-826d-cfe9b0e13ca5",
+      "66ec45d3-72cd-4d8c-9f0c-e322a47f85ad",
+      "363e027a-f387-4bb5-839c-0b37f5525d18",
+      "4c791e19-6411-4118-8abd-9ca0c83fa12e",
+      "bada488a-17e0-4b39-b3d8-1ed3ed109aa5",
+      "9b061ccd-e3e4-40a3-a55c-7b62efdc35c0",
+      "37c7dbc7-c775-431d-9e4d-6fef531feb11",
+      "a7aaad14-baf6-4f08-bbf4-46b92300a8b3",
+      "3b8d4c6e-cfc2-4f23-a42a-0fe84c16c1a4",
+      "cccab781-17a3-4ac1-ab5e-dc2e1336e464",
+      "60c7da8d-c18f-4289-80c0-af0d9f7e6412",
+      "a8d91ef1-3146-416e-9d42-debb5dfbb79c",
+      "236f579f-a6ff-4348-a056-39434707e22a",
+      "5e5d2032-ecfd-4853-8bb1-705cd2831ccf",
+      "31088ccb-252c-4f34-81ac-269947e78e46",
+      "f47dc40a-a362-4857-bbb7-01479cacdc95",
+      "e66c34c6-5db4-484a-b09e-d67f7447fa70",
+      "c222900a-2931-4a45-8f42-832802904cdc",
+      "b08d1438-9238-49fd-ab2a-5ed7ac94a97c",
+      "21dfaf43-110e-4a66-8163-2663c60bbfaf",
+      "c8e1b226-e324-4230-a7bb-432ba63422a3",
+      "0fed7425-711b-4625-ae1f-75a7f2ba0ce4",
+      "f040fc2c-9795-41f5-9556-77affdb3acc5",
+      "d736abca-1014-49b9-af00-4ab42ef34e1d",
+      "46427b0d-e305-4148-8217-3a805a0f2c90",
+      "c8bf7908-247c-488a-a54e-56a075808d32",
+      "59866577-7291-40eb-adea-8b95ca756109",
+      "9938aaa8-19b0-48be-80a9-028abb0f4512",
+      "a6da6493-98b0-4e91-9734-9a8dab678f8a",
+      "4971fd56-dd2e-43ea-a0d8-dc58fc607c7d",
+      "9c0ba928-71ef-4acc-b993-b7b6b7af4a1f",
+      "1574a3c9-0105-437f-b1b6-d7630388b926",
+      "1c9ac87e-121d-4317-a753-d83bcda41112",
+      "cf867233-2d97-4838-8c4e-2c9fc4faeaaa",
+      "a4342beb-ef23-4efd-ae2f-aa4cdefd4afa",
+      "b4325b94-4cd2-4ab7-a533-1a470642e5e5",
+      "5bddc324-c172-4579-a2e4-a1f03773f0eb",
+      "d9be2f48-85ae-4741-8dc1-f6a125e86da1",
+      "2f8eb97d-3e27-429a-ad10-895e9f025edc",
+      "3521485e-d722-4cc6-aa6b-b439ea7f8c5b",
+      "8eddbe26-cc8f-4071-99b1-a1da060535a6",
+      "94c561d9-cf79-46bd-b21a-24e8d7863f60",
+      "74874ed3-ed3d-4454-825d-53501ec929ff",
+      "70b180ab-0c9a-431c-bf90-d88ad4931a0c",
+      "a9f93f38-f5a4-47c7-a6af-786b7310aad9",
+      "c5c32206-4d64-47bb-abd1-6f17ee05daf3",
+      "6d33232b-595c-4bf2-aa6c-bf27aa80e8b1",
+      "0cd23d29-6d94-4f7a-b1a8-a792553e8df1",
+      "6d6f62e6-de9a-4bf3-b6e8-bb143fb25985",
+      "a1cb91c4-1758-4737-a67f-6caaa48cde5e",
+      "3cf17c6c-8bc5-45d2-bfc6-5691a24b703b",
+      "4183e8ba-a714-4274-9435-b82d65381e6d",
+      "66ce8c8e-b2da-456c-b91b-d628f34f4c96",
+      "bcd0ea28-7e1d-49c6-9919-11b8089dc43b",
+      "760fbe00-06f0-4736-a12e-403d09c36acf",
+      "0b901d9a-2338-434b-abcd-9040ca07d4fb",
+      "28d5a080-9f9f-4a0b-bc22-b7cf85eb2d01",
+      "8fa9e6a5-125b-4a64-a63e-2f7d3b5ca9d2",
+      "8c486c4c-922e-4362-9f66-29f145bb1720",
+      "605a25c2-394f-4564-86d7-189c0065752c",
+      "a093b9dd-492a-4827-a4b4-e973ee5a8e78",
+      "6617a757-422a-45b0-b37b-ac9e5d784b4f",
+      "043756f8-9e28-4ed9-8ad9-2bdfa8f6868b",
+      "1fd06e09-552b-4901-9381-738fda783d99",
+      "b8f78e42-d8f1-4cf7-8289-6c8b48307421",
+      "64f8a86e-ec91-459c-94b1-dd83d32936d7",
+      "221d0695-51d1-4bfd-8a90-bccecfecab43",
+      "924c7fbb-6ede-4969-af93-3e6b89e24c2a",
+      "c176b590-a462-4593-bdc1-2072b0d75daa",
+      "133b6f59-8e2d-4d5a-9662-b050b4a724c7",
+      "11ae71f6-e9dd-4927-9a1d-bc594a70c418",
+      "c4e663c9-1096-4cbd-8668-1bdf3357a019",
+      "0d2c3476-2cb0-4c4f-a751-a86223260a37",
+      "2e206d7f-dce1-49a8-b897-0d8cb2fa170a",
+      "85ab0082-dcea-4d2d-9b19-9a76b1ab0f0b",
+      "ba357ed6-b719-4c49-9420-fbdf0a3c0301",
+      "b952417e-bf44-408b-a606-911025ca38bb",
+      "9aba3189-bf74-49c3-b1e7-3a09fa46e405",
+      "8ed9ef25-0cb7-480f-9922-471cd392e5c0",
+      "2a906c86-7b0b-459b-b4c4-6e1ad32e3669",
+      "61bda469-b3ec-4517-9173-ca709205f418",
+      "bd741110-c09b-47a3-9ff2-65e01d330c19",
+      "fdddb127-6bff-4b68-82aa-0261f508ed97",
+      "668657ea-d710-4417-8cc4-76c51a9896e1",
+      "35faf4d8-871c-4dd2-a061-d2314fb730f2",
+      "482440ce-654a-4b6c-985e-c65fbaba37b4",
+      "942ea987-04d2-4b37-9202-1f8c29c988f4",
+      "7b19b27e-ee42-415b-93ce-51868843170f",
+      "33eb3081-a38e-4a07-a47f-eb8c01606090",
+      "2fc78581-d68e-4287-9687-bfe60df4890e",
+      "73a6053a-4a9e-4825-86c2-eeaa47c49ac3",
+      "3a610ca7-2609-466e-8b83-29b195abc28d",
+      "0dee80f1-70a0-49ba-9d03-86f5585fb7c8",
+      "a63e1612-1046-4338-abef-383de9d122cc",
+      "4306e850-e815-4c70-95fc-76adc537cde0",
+      "27f8a32b-8eb5-4ffa-b607-ec1fcb65dbb6",
+      "195a7edb-2f10-49e9-9df4-ad0cf3a8aeb6",
+      "bbeaa0b6-e387-4018-9a7b-ab95290597b6"
+    ],
+    "total_jobs_dispatched": 200,
+    "seed": 4409,
+    "recovery_actions": [],
+    "qrao": null,
+    "pce": {
+      "compression_k": 2,
+      "su2_reps": 2,
+      "brickwork_depth": 2
+    }
+  },
+  "circuit_metrics": {
+    "num_qubits": 4,
+    "logical_qubits_before_encoding": 16,
+    "ansatz_family": "EfficientSU2",
+    "ansatz_reps": 2,
+    "ansatz_entanglement": "linear",
+    "trainable_parameters": 24,
+    "depth_pretranspile": 11,
+    "one_qubit_gates_pretranspile": 24,
+    "two_qubit_gates_pretranspile": 6,
+    "measurement_count": 0
+  },
+  "transpiler_settings": {
+    "qiskit_optimization_level": 3,
+    "routing_method": "preset_passmanager_default",
+    "note": "transpiled circuit metrics available per-job in job_metadata"
+  },
+  "device_calibration": {},
+  "timing": {
+    "solve_runtime_sec": 1.2286497500026599,
+    "total_instance_sec": 1.3628700000117533
+  },
+  "qpu_status_snapshot": {
+    "rigetti_ankaa3": {
+      "name": "Rigetti Ankaa-3",
+      "provider": "braket_rigetti",
+      "is_available": false,
+      "max_qubits": 82,
+      "backend_name": "",
+      "last_error": "Disabled by --only-qpu filter",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 146.0
+    },
+    "iqm_emerald": {
+      "name": "IQM Emerald",
+      "provider": "braket_iqm_emerald",
+      "is_available": false,
+      "max_qubits": 54,
+      "backend_name": "",
+      "last_error": "Disabled by --only-qpu filter",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 0.0
+    },
+    "iqm_garnet": {
+      "name": "IQM Garnet",
+      "provider": "braket_iqm_garnet",
+      "is_available": false,
+      "max_qubits": 20,
+      "backend_name": "",
+      "last_error": "Disabled by --only-qpu filter",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": 656.0
+    },
+    "amazon_sv1": {
+      "name": "Amazon SV1",
+      "provider": "braket_sim_sv1",
+      "is_available": false,
+      "max_qubits": 34,
+      "backend_name": "",
+      "last_error": "Disabled by --only-qpu filter",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "ibm_quantum": {
+      "name": "IBM Quantum",
+      "provider": "ibm",
+      "is_available": false,
+      "max_qubits": 156,
+      "backend_name": "",
+      "last_error": "Disabled by --only-qpu filter",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    },
+    "local_qiskit": {
+      "name": "Local Qiskit Aer MPS Simulator",
+      "provider": "local_qiskit",
+      "is_available": true,
+      "max_qubits": 512,
+      "backend_name": "",
+      "last_error": "",
+      "total_jobs": 0,
+      "successful_jobs": 0,
+      "failed_jobs": 0,
+      "total_time_sec": 0.0,
+      "remaining_window_minutes_sgt": null
+    }
+  },
+  "optimizer": {
+    "status": "2",
+    "message": "Maximum number of function evaluations has been exceeded.",
+    "total_evaluations": 200,
+    "qpu_usage": {
+      "local_qiskit": 200
+    }
+  },
+  "job_metadata": [
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "528ae185-9267-4979-9ab9-904c8611a51b",
+      "elapsed_sec": 0.0074841976165771484,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b6bf870d-62e5-4844-9199-432afbc99ff6",
+      "elapsed_sec": 0.005202293395996094,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "07fa84c8-d4c3-4e7d-86e6-f666707651ec",
+      "elapsed_sec": 0.0051958560943603516,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "241de450-78e4-4c71-81a9-391c8651104c",
+      "elapsed_sec": 0.005570650100708008,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a9aa8732-ccea-4078-a885-0b2141cc9f0f",
+      "elapsed_sec": 0.005065202713012695,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8d5999ea-0b5a-4ad5-acf9-0b1c696a5b58",
+      "elapsed_sec": 0.005621910095214844,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "e37a75ce-c42a-4b4b-8665-01cf3c75db74",
+      "elapsed_sec": 0.005064964294433594,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "267536fa-1c05-4d5b-b921-cca5b13ac0dc",
+      "elapsed_sec": 0.0048542022705078125,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "35d382fc-ce53-4995-a879-486373a2861f",
+      "elapsed_sec": 0.005080223083496094,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "396e2ae8-7a2f-4731-9e3f-cd93ac41947a",
+      "elapsed_sec": 0.0051288604736328125,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8779ef38-5d68-4284-b836-e6c60f7286c3",
+      "elapsed_sec": 0.004630088806152344,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "159495ea-d319-4bc7-8df3-346839b636a2",
+      "elapsed_sec": 0.005251169204711914,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2c4afa6b-a609-4cff-8b10-5d79c5f8f69e",
+      "elapsed_sec": 0.004965066909790039,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2a072f2f-104a-4b00-b5ac-85bfda0f0166",
+      "elapsed_sec": 0.004769086837768555,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c1830532-8ff7-4a68-a78b-d651f1716856",
+      "elapsed_sec": 0.004786968231201172,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "4ea1de1e-aca4-4e61-af6c-493a0d1f4e77",
+      "elapsed_sec": 0.0052089691162109375,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "365d8e19-2a8d-4d62-bf9b-82497933ea12",
+      "elapsed_sec": 0.004683017730712891,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c3d46758-edd8-491c-92bd-94233c746005",
+      "elapsed_sec": 0.00483393669128418,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6a5e0640-5043-4f88-a9eb-9218c11b4245",
+      "elapsed_sec": 0.004756927490234375,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6fef13d7-46e5-470f-a9e5-5124f71ec544",
+      "elapsed_sec": 0.005134105682373047,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "013c3370-15a0-41b6-852a-8f27e738be23",
+      "elapsed_sec": 0.004693269729614258,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "4ee8d294-80ae-4826-be2a-18e7a4b145d7",
+      "elapsed_sec": 0.004831790924072266,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3d1dd8f9-8d66-4abb-b954-c5a430f94918",
+      "elapsed_sec": 0.004897117614746094,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "24a20917-d01f-4776-aba0-7c34ab154a84",
+      "elapsed_sec": 0.004845619201660156,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3fd3f943-a678-47d1-a04d-fa41fe1d280e",
+      "elapsed_sec": 0.0048980712890625,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "95184db3-59c4-45bf-baa8-bde873a25b95",
+      "elapsed_sec": 0.005223989486694336,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b87d97c5-4427-4627-927b-f634eaa30f3e",
+      "elapsed_sec": 0.004687786102294922,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a7bfda16-1162-4cfb-a450-cfecfbee4e06",
+      "elapsed_sec": 0.005143880844116211,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3ebf97eb-9984-46d1-a38c-f8fd23208d3f",
+      "elapsed_sec": 0.005214214324951172,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "317ee31f-b317-4fac-827d-eceafcd2a994",
+      "elapsed_sec": 0.004981040954589844,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c7f374e1-e26f-4bc7-8900-a821677aeac1",
+      "elapsed_sec": 0.004868984222412109,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "add4e96b-5108-4c23-a1de-3cfb03c17f5f",
+      "elapsed_sec": 0.005063772201538086,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b8aecf6a-d386-46b2-bb2b-b18e3001cf5e",
+      "elapsed_sec": 0.00459599494934082,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c50ae210-9478-41f7-a085-85e3fd8f93d5",
+      "elapsed_sec": 0.005068778991699219,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "ce2b63ca-6248-4f48-8554-a729b7b4f925",
+      "elapsed_sec": 0.004760026931762695,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "95216190-8053-4973-ad86-7bd71e75cd8a",
+      "elapsed_sec": 0.005029916763305664,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "d95360fd-96c4-461f-af30-39cee766a231",
+      "elapsed_sec": 0.004906892776489258,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "94dea000-5ef9-4d59-9557-ac4d438c5c22",
+      "elapsed_sec": 0.005330085754394531,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b47747dd-d716-4e07-9cc3-1728f7af2a29",
+      "elapsed_sec": 0.005119800567626953,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "568984ea-46ce-4dda-b52f-dc272209ec80",
+      "elapsed_sec": 0.005140781402587891,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "dd4db2ac-afa6-4939-bece-467a2f4e6cb1",
+      "elapsed_sec": 0.0048542022705078125,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "851f7981-9cec-4024-beb5-2bdac9c13745",
+      "elapsed_sec": 0.005040884017944336,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "883098a3-0a21-4e26-91e3-713ce242ef3b",
+      "elapsed_sec": 0.004836082458496094,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "73a6212c-74f6-4ed5-ac3d-78702a6b6d49",
+      "elapsed_sec": 0.0050258636474609375,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a2e3b2e8-1e17-4da6-8339-d5cf3d104b47",
+      "elapsed_sec": 0.00514984130859375,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "ffd32013-6a7f-4818-bd6f-7a0955f50409",
+      "elapsed_sec": 0.004864931106567383,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "cff16675-d9a3-432c-a6b6-5809874f3f36",
+      "elapsed_sec": 0.004770040512084961,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "e6b14089-6ead-4198-842b-7e7b3c6f9411",
+      "elapsed_sec": 0.005142688751220703,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "de75782e-9ca8-4853-9b33-60ea12e4555c",
+      "elapsed_sec": 0.00460505485534668,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "d656b3b4-b706-4f83-9832-d5a8de11df43",
+      "elapsed_sec": 0.004992961883544922,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "f1a36eee-a548-4c85-85a9-02f854e05a28",
+      "elapsed_sec": 0.004997730255126953,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "25414974-3432-417f-9895-14104e39dba0",
+      "elapsed_sec": 0.004868984222412109,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2a67ba8b-989e-4a2f-9f59-4fe077c34352",
+      "elapsed_sec": 0.004956245422363281,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c14d5c31-48f6-4193-af0a-62d850f54b6e",
+      "elapsed_sec": 0.005328178405761719,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6713acd7-6ef9-4517-b660-b03e8b84737b",
+      "elapsed_sec": 0.004851102828979492,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6c00982a-cc50-4bb3-94f0-8c2cc2d46761",
+      "elapsed_sec": 0.0050811767578125,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "02ba60c9-0d7b-422e-954c-8ba3752bab17",
+      "elapsed_sec": 0.004658937454223633,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "de0f4b35-9bbe-4ce9-8133-3d7aae822b01",
+      "elapsed_sec": 0.0048177242279052734,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3bf07bbf-1e98-4f87-a1ca-dfa3378a3f96",
+      "elapsed_sec": 0.0046939849853515625,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "1b9a6732-c840-4c61-95fc-553a4f408ad9",
+      "elapsed_sec": 0.004868984222412109,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "e04ab91d-ceb8-4987-a567-32c6ae9c3fba",
+      "elapsed_sec": 0.00467991828918457,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "19a9517d-5453-4c06-8baa-8bb6cad452bc",
+      "elapsed_sec": 0.00477910041809082,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "7b0a8ebd-27e2-44f5-b6a5-376d8263c23e",
+      "elapsed_sec": 0.00497889518737793,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c38124d5-1c63-4084-8842-65341c65c50e",
+      "elapsed_sec": 0.005160808563232422,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6a25c170-839c-4d5e-a412-5ddb1bf14d83",
+      "elapsed_sec": 0.0046961307525634766,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "9d4514ae-86ec-4554-89b9-2367a9c0c7ec",
+      "elapsed_sec": 0.004973173141479492,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8e71efbd-c573-40d2-b377-f0e4f24ec45a",
+      "elapsed_sec": 0.0048351287841796875,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "7f4092e2-89f9-4152-87bc-c52591997b61",
+      "elapsed_sec": 0.004879951477050781,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "35332979-2977-4e1f-a97b-ed18c9eac35e",
+      "elapsed_sec": 0.004809141159057617,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "630c55c6-44d9-4e5c-a865-2110904ced06",
+      "elapsed_sec": 0.004879951477050781,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "42f707b9-9caa-4648-ac79-1d01bcba8550",
+      "elapsed_sec": 0.00483393669128418,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "9ef5eb17-ece0-4587-ade7-cdf2f0487926",
+      "elapsed_sec": 0.00498509407043457,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "1d65c919-ca15-4254-a16b-1f112a5730ea",
+      "elapsed_sec": 0.004664897918701172,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "533f0b7d-8f8b-478b-983e-46f0a42a8507",
+      "elapsed_sec": 0.004890918731689453,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "13ecf7e3-3277-4abb-bcde-0b166f02dc95",
+      "elapsed_sec": 0.0046231746673583984,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c83ac86b-ce0a-4115-87c5-801cbb9c5c1a",
+      "elapsed_sec": 0.0049359798431396484,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "7f1a10c1-11db-40a4-8b8b-6270e9578104",
+      "elapsed_sec": 0.004850864410400391,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "dbabd381-d765-4775-b4ff-725b57d377ae",
+      "elapsed_sec": 0.005060911178588867,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c8dc117d-a408-419b-a48a-a08a32d57ede",
+      "elapsed_sec": 0.004709720611572266,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "39da1e3b-0c63-4bcf-aabb-901b87cf8b15",
+      "elapsed_sec": 0.004934787750244141,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "d5ce146c-3f49-4efd-88aa-8cf011fdc049",
+      "elapsed_sec": 0.0048198699951171875,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8ce812cd-d6f4-4e99-85c6-af6d0bc8f63f",
+      "elapsed_sec": 0.005115985870361328,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "78ea5f73-c2ac-4370-b77a-f45d576db259",
+      "elapsed_sec": 0.004836082458496094,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "f71bd09c-40eb-4471-8803-e50449ae9d75",
+      "elapsed_sec": 0.005323886871337891,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6305abab-ddc8-4f27-84ed-5f771fbd69d4",
+      "elapsed_sec": 0.005277872085571289,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "5d1d9fa9-2a94-4d78-8646-ec1446e115f9",
+      "elapsed_sec": 0.010245084762573242,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6325f67c-382e-440c-a9b1-d5c9383eb10e",
+      "elapsed_sec": 0.012296915054321289,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "7b5371e6-cb76-4748-85be-c95798937ef4",
+      "elapsed_sec": 0.006880044937133789,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "566ec379-168c-48af-88f2-213a7cefec66",
+      "elapsed_sec": 0.008787155151367188,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2164c988-553c-4cb4-88cd-6024fb71df25",
+      "elapsed_sec": 0.006269931793212891,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "d28369ba-7c1e-4148-a2e4-b790098892bd",
+      "elapsed_sec": 0.00797271728515625,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "643fd85e-1724-495e-a0dd-cf79f979e49c",
+      "elapsed_sec": 0.012984752655029297,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "783fd75c-6a21-440c-b017-00792216cde0",
+      "elapsed_sec": 0.00558161735534668,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a366c566-cbee-4372-8e92-0aeb98046de2",
+      "elapsed_sec": 0.008110284805297852,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "ac356177-3a2d-4c27-9f48-653ab56c8ce7",
+      "elapsed_sec": 0.0069158077239990234,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "0e5f2607-2e5c-4c3c-be9a-1ad10fc0e4f7",
+      "elapsed_sec": 0.005705118179321289,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "59979e03-b369-4c0a-a2cd-b79e53c97c67",
+      "elapsed_sec": 0.005716085433959961,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "9803fff6-af1c-4fd5-a624-baf375a57b36",
+      "elapsed_sec": 0.005441904067993164,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c2cb7ae1-f0f7-468d-b9e4-d34bafa537e5",
+      "elapsed_sec": 0.0048830509185791016,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "7021f49d-0e84-4f6f-afc7-7e970a368c7b",
+      "elapsed_sec": 0.005026817321777344,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3a4707a3-10a9-4562-b84d-8e3e998e5749",
+      "elapsed_sec": 0.004914045333862305,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a800fb6f-3611-4603-b5e0-0c7ee420c627",
+      "elapsed_sec": 0.0053060054779052734,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "0ecb6210-5992-499c-826d-cfe9b0e13ca5",
+      "elapsed_sec": 0.0047299861907958984,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "66ec45d3-72cd-4d8c-9f0c-e322a47f85ad",
+      "elapsed_sec": 0.005023956298828125,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "363e027a-f387-4bb5-839c-0b37f5525d18",
+      "elapsed_sec": 0.005452871322631836,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "4c791e19-6411-4118-8abd-9ca0c83fa12e",
+      "elapsed_sec": 0.004918098449707031,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "bada488a-17e0-4b39-b3d8-1ed3ed109aa5",
+      "elapsed_sec": 0.004931211471557617,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "9b061ccd-e3e4-40a3-a55c-7b62efdc35c0",
+      "elapsed_sec": 0.004876136779785156,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "37c7dbc7-c775-431d-9e4d-6fef531feb11",
+      "elapsed_sec": 0.004822969436645508,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a7aaad14-baf6-4f08-bbf4-46b92300a8b3",
+      "elapsed_sec": 0.004869937896728516,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3b8d4c6e-cfc2-4f23-a42a-0fe84c16c1a4",
+      "elapsed_sec": 0.004709005355834961,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "cccab781-17a3-4ac1-ab5e-dc2e1336e464",
+      "elapsed_sec": 0.005038022994995117,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "60c7da8d-c18f-4289-80c0-af0d9f7e6412",
+      "elapsed_sec": 0.0046977996826171875,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a8d91ef1-3146-416e-9d42-debb5dfbb79c",
+      "elapsed_sec": 0.004819154739379883,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "236f579f-a6ff-4348-a056-39434707e22a",
+      "elapsed_sec": 0.004803657531738281,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "5e5d2032-ecfd-4853-8bb1-705cd2831ccf",
+      "elapsed_sec": 0.004736900329589844,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "31088ccb-252c-4f34-81ac-269947e78e46",
+      "elapsed_sec": 0.004822969436645508,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "f47dc40a-a362-4857-bbb7-01479cacdc95",
+      "elapsed_sec": 0.004935026168823242,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "e66c34c6-5db4-484a-b09e-d67f7447fa70",
+      "elapsed_sec": 0.004697084426879883,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c222900a-2931-4a45-8f42-832802904cdc",
+      "elapsed_sec": 0.004967927932739258,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b08d1438-9238-49fd-ab2a-5ed7ac94a97c",
+      "elapsed_sec": 0.004662036895751953,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "21dfaf43-110e-4a66-8163-2663c60bbfaf",
+      "elapsed_sec": 0.00493311882019043,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c8e1b226-e324-4230-a7bb-432ba63422a3",
+      "elapsed_sec": 0.004796028137207031,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "0fed7425-711b-4625-ae1f-75a7f2ba0ce4",
+      "elapsed_sec": 0.005024909973144531,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "f040fc2c-9795-41f5-9556-77affdb3acc5",
+      "elapsed_sec": 0.004846811294555664,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "d736abca-1014-49b9-af00-4ab42ef34e1d",
+      "elapsed_sec": 0.005316019058227539,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "46427b0d-e305-4148-8217-3a805a0f2c90",
+      "elapsed_sec": 0.004845142364501953,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c8bf7908-247c-488a-a54e-56a075808d32",
+      "elapsed_sec": 0.005257129669189453,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "59866577-7291-40eb-adea-8b95ca756109",
+      "elapsed_sec": 0.0047130584716796875,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "9938aaa8-19b0-48be-80a9-028abb0f4512",
+      "elapsed_sec": 0.005037784576416016,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a6da6493-98b0-4e91-9734-9a8dab678f8a",
+      "elapsed_sec": 0.004930973052978516,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "4971fd56-dd2e-43ea-a0d8-dc58fc607c7d",
+      "elapsed_sec": 0.004889965057373047,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "9c0ba928-71ef-4acc-b993-b7b6b7af4a1f",
+      "elapsed_sec": 0.004869699478149414,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "1574a3c9-0105-437f-b1b6-d7630388b926",
+      "elapsed_sec": 0.0051729679107666016,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "1c9ac87e-121d-4317-a753-d83bcda41112",
+      "elapsed_sec": 0.004773139953613281,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "cf867233-2d97-4838-8c4e-2c9fc4faeaaa",
+      "elapsed_sec": 0.00501704216003418,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a4342beb-ef23-4efd-ae2f-aa4cdefd4afa",
+      "elapsed_sec": 0.004671812057495117,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b4325b94-4cd2-4ab7-a533-1a470642e5e5",
+      "elapsed_sec": 0.004975080490112305,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "5bddc324-c172-4579-a2e4-a1f03773f0eb",
+      "elapsed_sec": 0.004891872406005859,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "d9be2f48-85ae-4741-8dc1-f6a125e86da1",
+      "elapsed_sec": 0.004925966262817383,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2f8eb97d-3e27-429a-ad10-895e9f025edc",
+      "elapsed_sec": 0.004954099655151367,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3521485e-d722-4cc6-aa6b-b439ea7f8c5b",
+      "elapsed_sec": 0.004746913909912109,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8eddbe26-cc8f-4071-99b1-a1da060535a6",
+      "elapsed_sec": 0.004764080047607422,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "94c561d9-cf79-46bd-b21a-24e8d7863f60",
+      "elapsed_sec": 0.005197048187255859,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "74874ed3-ed3d-4454-825d-53501ec929ff",
+      "elapsed_sec": 0.004575014114379883,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "70b180ab-0c9a-431c-bf90-d88ad4931a0c",
+      "elapsed_sec": 0.005029916763305664,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a9f93f38-f5a4-47c7-a6af-786b7310aad9",
+      "elapsed_sec": 0.004793882369995117,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c5c32206-4d64-47bb-abd1-6f17ee05daf3",
+      "elapsed_sec": 0.0050389766693115234,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6d33232b-595c-4bf2-aa6c-bf27aa80e8b1",
+      "elapsed_sec": 0.004625082015991211,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "0cd23d29-6d94-4f7a-b1a8-a792553e8df1",
+      "elapsed_sec": 0.005182027816772461,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6d6f62e6-de9a-4bf3-b6e8-bb143fb25985",
+      "elapsed_sec": 0.004711151123046875,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a1cb91c4-1758-4737-a67f-6caaa48cde5e",
+      "elapsed_sec": 0.004745960235595703,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3cf17c6c-8bc5-45d2-bfc6-5691a24b703b",
+      "elapsed_sec": 0.004748821258544922,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "4183e8ba-a714-4274-9435-b82d65381e6d",
+      "elapsed_sec": 0.005093812942504883,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "66ce8c8e-b2da-456c-b91b-d628f34f4c96",
+      "elapsed_sec": 0.004685640335083008,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "bcd0ea28-7e1d-49c6-9919-11b8089dc43b",
+      "elapsed_sec": 0.004930973052978516,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "760fbe00-06f0-4736-a12e-403d09c36acf",
+      "elapsed_sec": 0.004645824432373047,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "0b901d9a-2338-434b-abcd-9040ca07d4fb",
+      "elapsed_sec": 0.0050008296966552734,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "28d5a080-9f9f-4a0b-bc22-b7cf85eb2d01",
+      "elapsed_sec": 0.004739046096801758,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8fa9e6a5-125b-4a64-a63e-2f7d3b5ca9d2",
+      "elapsed_sec": 0.004900932312011719,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8c486c4c-922e-4362-9f66-29f145bb1720",
+      "elapsed_sec": 0.004854917526245117,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "605a25c2-394f-4564-86d7-189c0065752c",
+      "elapsed_sec": 0.00479888916015625,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a093b9dd-492a-4827-a4b4-e973ee5a8e78",
+      "elapsed_sec": 0.004701852798461914,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "6617a757-422a-45b0-b37b-ac9e5d784b4f",
+      "elapsed_sec": 0.005025148391723633,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "043756f8-9e28-4ed9-8ad9-2bdfa8f6868b",
+      "elapsed_sec": 0.004584312438964844,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "1fd06e09-552b-4901-9381-738fda783d99",
+      "elapsed_sec": 0.004990100860595703,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b8f78e42-d8f1-4cf7-8289-6c8b48307421",
+      "elapsed_sec": 0.004787921905517578,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "64f8a86e-ec91-459c-94b1-dd83d32936d7",
+      "elapsed_sec": 0.0051729679107666016,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "221d0695-51d1-4bfd-8a90-bccecfecab43",
+      "elapsed_sec": 0.004964113235473633,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "924c7fbb-6ede-4969-af93-3e6b89e24c2a",
+      "elapsed_sec": 0.004996776580810547,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c176b590-a462-4593-bdc1-2072b0d75daa",
+      "elapsed_sec": 0.005064964294433594,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "133b6f59-8e2d-4d5a-9662-b050b4a724c7",
+      "elapsed_sec": 0.005268096923828125,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "11ae71f6-e9dd-4927-9a1d-bc594a70c418",
+      "elapsed_sec": 0.004908084869384766,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "c4e663c9-1096-4cbd-8668-1bdf3357a019",
+      "elapsed_sec": 0.005406856536865234,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "0d2c3476-2cb0-4c4f-a751-a86223260a37",
+      "elapsed_sec": 0.004595041275024414,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2e206d7f-dce1-49a8-b897-0d8cb2fa170a",
+      "elapsed_sec": 0.004997968673706055,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "85ab0082-dcea-4d2d-9b19-9a76b1ab0f0b",
+      "elapsed_sec": 0.004826784133911133,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "ba357ed6-b719-4c49-9420-fbdf0a3c0301",
+      "elapsed_sec": 0.004835844039916992,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "b952417e-bf44-408b-a606-911025ca38bb",
+      "elapsed_sec": 0.0048639774322509766,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "9aba3189-bf74-49c3-b1e7-3a09fa46e405",
+      "elapsed_sec": 0.004984855651855469,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "8ed9ef25-0cb7-480f-9922-471cd392e5c0",
+      "elapsed_sec": 0.004759073257446289,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2a906c86-7b0b-459b-b4c4-6e1ad32e3669",
+      "elapsed_sec": 0.005075931549072266,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "61bda469-b3ec-4517-9173-ca709205f418",
+      "elapsed_sec": 0.004683971405029297,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "bd741110-c09b-47a3-9ff2-65e01d330c19",
+      "elapsed_sec": 0.0050661563873291016,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "fdddb127-6bff-4b68-82aa-0261f508ed97",
+      "elapsed_sec": 0.004986286163330078,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "668657ea-d710-4417-8cc4-76c51a9896e1",
+      "elapsed_sec": 0.004927158355712891,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "35faf4d8-871c-4dd2-a061-d2314fb730f2",
+      "elapsed_sec": 0.00490880012512207,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "482440ce-654a-4b6c-985e-c65fbaba37b4",
+      "elapsed_sec": 0.005013942718505859,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "942ea987-04d2-4b37-9202-1f8c29c988f4",
+      "elapsed_sec": 0.005012989044189453,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "7b19b27e-ee42-415b-93ce-51868843170f",
+      "elapsed_sec": 0.005051136016845703,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "33eb3081-a38e-4a07-a47f-eb8c01606090",
+      "elapsed_sec": 0.0046558380126953125,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "2fc78581-d68e-4287-9687-bfe60df4890e",
+      "elapsed_sec": 0.004931926727294922,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "73a6053a-4a9e-4825-86c2-eeaa47c49ac3",
+      "elapsed_sec": 0.004765987396240234,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "3a610ca7-2609-466e-8b83-29b195abc28d",
+      "elapsed_sec": 0.005063772201538086,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "0dee80f1-70a0-49ba-9d03-86f5585fb7c8",
+      "elapsed_sec": 0.004722118377685547,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "a63e1612-1046-4338-abef-383de9d122cc",
+      "elapsed_sec": 0.004979133605957031,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "4306e850-e815-4c70-95fc-76adc537cde0",
+      "elapsed_sec": 0.004864931106567383,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "27f8a32b-8eb5-4ffa-b607-ec1fcb65dbb6",
+      "elapsed_sec": 0.005048990249633789,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "195a7edb-2f10-49e9-9df4-ad0cf3a8aeb6",
+      "elapsed_sec": 0.0046482086181640625,
+      "num_observables": 17
+    },
+    {
+      "provider": "local_qiskit",
+      "qpu_id": "local_qiskit",
+      "backend_name": "aer_simulator_mps",
+      "shots": 1000,
+      "job_id": "bbeaa0b6-e387-4018-9a7b-ab95290597b6",
+      "elapsed_sec": 0.08350896835327148,
+      "num_observables": 17
+    }
+  ],
+  "best_result": {
+    "optimization_objective_mode": "pce_qiskit_loss",
+    "optimization_objective_value": -263.73453011381395,
+    "objective_value": 3.0,
+    "feasible": true,
+    "best_sample_energy": -2.0,
+    "raw_best_bitstring": "1000000000000001",
+    "best_bitstring": "1100000000000001",
+    "best_theta": [
+      0.2148691964101699,
+      1.2029154147796053,
+      1.1719523102447567,
+      0.42252179830246284,
+      1.2681863738427384,
+      0.3941957091558052,
+      0.12629847924422619,
+      1.0548032105761838,
+      0.7430503558943775,
+      0.6043972102357509,
+      0.5208946157778656,
+      1.2799271361088254,
+      1.4828096079973794,
+      0.05970591333179609,
+      0.5913983721642944,
+      0.9259108031551951,
+      1.1417470498360809,
+      -0.1861016337816006,
+      0.6022799271008169,
+      0.7049283354537603,
+      0.8562744463158879,
+      0.18480313829823627,
+      -0.06364130022546996,
+      0.866232458851975
+    ],
+    "raw_decoded_solution": {
+      "active_variable_count": 2,
+      "active_variables": [
+        "x_0",
+        "x_15"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        15
+      ],
+      "selected_indices_one_based": [
+        1,
+        16
+      ]
+    },
+    "raw_reconstructed_problem_objective": {
+      "objective_label": "maximum_independent_set_cardinality",
+      "objective_sense": "maximize",
+      "objective_value": 2.0,
+      "feasible": true,
+      "constraint_violations": {
+        "edge_conflicts": 0
+      }
+    },
+    "postprocess": {
+      "name": "one_round_local_swap",
+      "improved": true,
+      "candidates_checked": 44
+    },
+    "decoded_solution": {
+      "active_variable_count": 3,
+      "active_variables": [
+        "x_0",
+        "x_1",
+        "x_15"
+      ],
+      "selected_indices_zero_based": [
+        0,
+        1,
+        15
+      ],
+      "selected_indices_one_based": [
+        1,
+        2,
+        16
+      ]
+    },
+    "reconstructed_problem_objective": {
+      "objective_label": "maximum_independent_set_cardinality",
+      "objective_sense": "maximize",
+      "objective_value": 3.0,
+      "feasible": true,
+      "constraint_violations": {
+        "edge_conflicts": 0
+      }
+    },
+    "active_assignment": {
+      "x_0": 1,
+      "x_1": 1,
+      "x_2": 0,
+      "x_3": 0,
+      "x_4": 0,
+      "x_5": 0,
+      "x_6": 0,
+      "x_7": 0,
+      "x_8": 0,
+      "x_9": 0,
+      "x_10": 0,
+      "x_11": 0,
+      "x_12": 0,
+      "x_13": 0,
+      "x_14": 0,
+      "x_15": 1
+    }
+  },
+  "raw_bitstring_counts": {
+    "1000000000000001": 1000
+  },
+  "config": {
+    "problem": "mis",
+    "instance": "Maximum_Independent_Set/mis_benchmark_instances/1tc.16.txt",
+    "project_root": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks",
+    "method": "pce",
+    "execution_mode": "single",
+    "qpu_id": "local_qiskit",
+    "qpus": null,
+    "only_qpu": "local_qiskit",
+    "layers": 3,
+    "entanglement": "circular",
+    "shots": 1000,
+    "maxiter": 200,
+    "seed": 4409,
+    "timeout_sec": null,
+    "max_qubits": 0,
+    "qubo_penalty": null,
+    "cvar_alpha": 0.25,
+    "ws_epsilon": 0.001,
+    "pce_population": 1,
+    "pce_elite_frac": 0.25,
+    "pce_parallel_workers": 2,
+    "pce_compression_k": 2,
+    "pce_depth": 0,
+    "pce_batch_size": 1,
+    "qrao_max_vars_per_qubit": 3,
+    "qrao_reps": 3,
+    "qrao_rounding": "magic",
+    "qrao_optimizer": "cobyla",
+    "aws_profile": null,
+    "ibm_token": null,
+    "ibm_instance": null,
+    "ibm_credentials_json": null,
+    "qiskit_optimization_level": 3,
+    "no_aws": true,
+    "no_ibm": true,
+    "include_simulators": true,
+    "min_window_minutes": 10.0,
+    "min_aws_window_minutes": 20.0,
+    "ibm_min_runtime_seconds": 45.0,
+    "ibm_backend_refresh_seconds": 300.0,
+    "queue_status_seconds": 180.0,
+    "model_time_limit": 60.0,
+    "num_products": 2,
+    "output_root": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R3_mis_1tc16_pce/seed_4409",
+    "checkpoint_dir": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/checkpoints/R3_mis_1tc16_pce/seed_4409",
+    "force_rerun": true,
+    "log_level": "INFO",
+    "log_file": null
+  }
+}

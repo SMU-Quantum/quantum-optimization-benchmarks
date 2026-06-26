@@ -1,0 +1,4 @@
+case_id,problem,instance,method,n_initializations,n_final_sampling_repetitions_per_initialization,median_best_energy,iqr_best_energy,mean_primary_quality,sd_primary_quality,median_primary_quality,best_primary_quality,worst_primary_quality,feasible_initialization_fraction,median_realized_objective_evaluations,min_realized_objective_evaluations,max_realized_objective_evaluations,dominant_termination_reason
+R1_mdkp_hp1_vqe,mkp,hp1.dat,vqe,3,1,2688076.0,1842426.0,23.034913204603082,2.5701683495266834,24.400234055002926,20.070216500877706,24.634289057928612,1.0,200.0,200.0,200.0,budget_reached
+R2_mis_1tc32_ws_qaoa,mis,1tc.32.txt,ws_qaoa,3,1,-9.0,2.5,25.0,22.04792759220492,16.666666666666664,8.333333333333332,50.0,1.0,70.0,63.0,75.0,optimizer_success
+R3_mis_1tc16_pce,mis,1tc.16.txt,pce,3,1,-2.0,0.0,62.5,0.0,62.5,62.5,62.5,1.0,200.0,200.0,200.0,budget_reached

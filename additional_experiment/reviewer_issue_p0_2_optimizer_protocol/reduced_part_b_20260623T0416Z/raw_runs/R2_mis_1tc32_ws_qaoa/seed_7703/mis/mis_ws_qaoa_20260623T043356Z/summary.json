@@ -1,0 +1,21 @@
+{
+  "problem": "mis",
+  "method": "ws_qaoa",
+  "total_instances": 1,
+  "ok_count": 1,
+  "total_runtime_sec": 22.846128332952503,
+  "results": [
+    {
+      "instance": "1tc.32.txt",
+      "qubits": 32,
+      "status": "OK",
+      "objective": 6.0,
+      "feasible": true,
+      "time_sec": 22.236947417026386,
+      "qpus": [
+        "local_qiskit"
+      ],
+      "result_dir": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R2_mis_1tc32_ws_qaoa/seed_7703/mis/mis_ws_qaoa_20260623T043356Z/1tc_32_txt"
+    }
+  ]
+}

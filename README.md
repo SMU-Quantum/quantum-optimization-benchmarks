@@ -2,7 +2,7 @@
 
 This repository accompanies the paper draft:
 
-**Beyond Simulation: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware**
+**From Circuits to Hardware: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware**
 Monit Sharma and Hoong Chuin Lau
 
 The project is built around a hardware-aware benchmark of gate-based quantum optimization on four NP-hard 0-1 combinatorial problem classes:
@@ -147,8 +147,8 @@ Start with these files:
 If you use this repository, please cite the accompanying paper/manuscript:
 
 ```bibtex
-@misc{sharma2025beyondsimulation,
-  title={Beyond Simulation: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware},
+@misc{sharma2025fromcircuitstohardware,
+  title={From Circuits to Hardware: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware},
   author={Monit Sharma and Hoong Chuin Lau},
   year={2025}
 }

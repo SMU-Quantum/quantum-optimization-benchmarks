@@ -1,0 +1,6 @@
+[
+  {
+    "case_id": "vqe_hp1",
+    "reason": "Cannot reconstruct exact vqe_hp1: stored theta has 240 parameters but current ansatz builder produces 480."
+  }
+]

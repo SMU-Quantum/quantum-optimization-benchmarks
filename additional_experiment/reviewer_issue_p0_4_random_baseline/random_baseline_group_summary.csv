@@ -1,0 +1,13 @@
+problem,method,n_low_fidelity_hardware_runs,n_hardware_feasible,median_fidelity_estimate,median_eligible_candidate_count,median_hardware_primary_metric,median_random_primary_metric,median_hardware_random_tail_fraction,fraction_outperforms_matched_uniform_random,fraction_random_comparable,fraction_underperforms_matched_uniform_random,median_random_feasibility_rate
+MDKP,ma_qaoa,12,12,2.90537755584e-167,200000,27.7465563198,22.3966987926,0.588039867109,0,0.75,0.25,1
+MDKP,qaoa,12,12,8.87344713585e-167,54500,34.776672518,22.9213978435,0.760797342192,0,0.666666666667,0.333333333333,1
+MDKP,ws_qaoa,12,12,4.64043480798e-164,55500,28.034754076,22.7784239873,0.755813953489,0,1,0,1
+MIS,ma_qaoa,5,0,9.5048054812e-27,200000,nan,33.3333333333,nan,0,0,0,0
+MIS,qaoa,5,1,3.21169074668e-27,59000,25,33.3333333333,0.275747508306,0,0.2,0,0
+MIS,ws_qaoa,5,2,3.67163568509e-78,65000,25.8333333333,33.3333333333,0.0581395348836,0.2,0.2,0,0
+MSP,ma_qaoa,8,8,1.83323806211e-226,200000,144,117.5,0.662790697674,0,0.875,0.125,1
+MSP,qaoa,8,8,1.67934375007e-218,55000,114.5,115,0.704318936878,0,0.875,0.125,1
+MSP,ws_qaoa,8,8,2.83367166288e-220,54000,307,115.5,0.747508305648,0,0.75,0.25,1
+QAP,ma_qaoa,11,0,0,200000,nan,nan,nan,0,0,0,0
+QAP,qaoa,11,0,0,60000,nan,nan,nan,0,0,0,0
+QAP,ws_qaoa,9,0,0,50000,nan,nan,nan,0,0,0,0

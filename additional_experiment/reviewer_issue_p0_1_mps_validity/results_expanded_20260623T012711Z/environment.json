@@ -1,0 +1,26 @@
+{
+  "python": "3.10.16 (main, Feb 12 2025, 15:03:04) [Clang 19.1.6 ]",
+  "python_executable": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/.venv/bin/python",
+  "platform": "macOS-26.5.1-arm64-arm-64bit",
+  "machine": "arm64",
+  "processor": "arm",
+  "cpu_model_sysctl": "Apple M3 Pro",
+  "physical_memory_bytes_sysctl": "38654705664",
+  "cpu_count": 12,
+  "environment": {},
+  "gpu_used": false,
+  "qiskit_version": "2.3.0",
+  "qiskit_aer_version": "0.17.2",
+  "aer_mps_default_options": {
+    "method": "matrix_product_state",
+    "device": "CPU",
+    "precision": "double",
+    "enable_truncation": true,
+    "matrix_product_state_max_bond_dimension": null,
+    "matrix_product_state_truncation_threshold": 1e-16,
+    "mps_log_data": false,
+    "mps_omp_threads": 1,
+    "max_parallel_threads": null,
+    "max_memory_mb": null
+  }
+}

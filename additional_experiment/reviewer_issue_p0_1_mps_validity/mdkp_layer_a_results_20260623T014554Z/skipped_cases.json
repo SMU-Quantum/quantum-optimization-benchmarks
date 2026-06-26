@@ -1,0 +1,6 @@
+[
+  {
+    "case_id": "pce_hp1",
+    "reason": "Cannot reconstruct exact pce_hp1: stored theta has 182 parameters but current ansatz builder produces 42."
+  }
+]

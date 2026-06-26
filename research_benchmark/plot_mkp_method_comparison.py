@@ -596,7 +596,7 @@ def plot_encoding_tradeoff(main_df: pd.DataFrame, out_dir: Path, dpi: int) -> No
         )
 
     ax.set_title("Encoding Tradeoff: Qubits vs Gap (PCE vs QRAO)", fontsize=14, weight="bold")
-    ax.set_xlabel("Qubits used")
+    ax.set_xlabel("Qubit Count")
     ax.set_ylabel("Gap to BKS (%)")
     ax.grid(alpha=0.28)
     handles, labels = ax.get_legend_handles_labels()

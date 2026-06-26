@@ -1,0 +1,14 @@
+{
+  "1tc.32.txt": {
+    "instance": "1tc.32.txt",
+    "qubits": 32,
+    "status": "OK",
+    "objective": 11.0,
+    "feasible": true,
+    "time_sec": 24.458028458990157,
+    "qpus": [
+      "local_qiskit"
+    ],
+    "result_dir": "/Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R2_mis_1tc32_ws_qaoa/seed_1103/mis/mis_ws_qaoa_20260623T043300Z/1tc_32_txt"
+  }
+}

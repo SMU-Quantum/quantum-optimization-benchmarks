@@ -1,0 +1,437 @@
+Run start | problem=mkp method=vqe mode=single seed=7703
+Instances discovered | problem=mkp count=1
+  - hp1.dat
+Initializing backends | use_aws=False use_ibm=False allow_simulators=True
+[local_qiskit] Ready (max 512 qubits)
+Execution plan | mode=single qpus=['local_qiskit'] instances=1
+
+[1/1] Starting instance: hp1.dat
+
+======================================================================
+  Instance: hp1.dat
+======================================================================
+  Problem: mkp | Instance: hp1.dat | Qubits: 60
+No hardware QPU available - falling back to simulators: ['local_qiskit']
+QPUs skipped for 60-qubit problem:
+  rigetti_ankaa3: unavailable - Disabled by --only-qpu filter
+  iqm_emerald: unavailable - Disabled by --only-qpu filter
+  iqm_garnet: unavailable - Disabled by --only-qpu filter
+  amazon_sv1: unavailable - Disabled by --only-qpu filter
+  ibm_quantum: unavailable - Disabled by --only-qpu filter
+QPUs selected: ['local_qiskit']
+  Ansatz | family=EfficientSU2 reps=3 entanglement=circular trainable_parameters=480 depth=189 2q_gates=180
+  Optimization | method=vqe objective=expectation shots=1000 maxiter=200 qpus=['local_qiskit']
+  Protocol | shots=1000 maxiter=200 timeout=none repair=one_round_local_swap stopping=fixed_iterations
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 1 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.2s (total: 2 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 3 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 4 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 5 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 6 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 7 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 8 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 9 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 10 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 11 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 12 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 13 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 14 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 15 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 16 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 17 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 18 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 19 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 20 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 21 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 22 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 23 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 24 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 25 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 26 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 27 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 28 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 29 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 30 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 31 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 32 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 33 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 34 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 35 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 36 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 37 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 38 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 39 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 40 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 41 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 42 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 43 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 44 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 45 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 46 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 47 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 48 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 49 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 50 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 51 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 52 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 53 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 54 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 55 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 56 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 57 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 58 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 59 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 60 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 61 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 62 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 63 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 64 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 65 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 66 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 67 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 68 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 69 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 70 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 71 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 72 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 73 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 74 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 75 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 76 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 77 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 78 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 79 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 80 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 81 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 82 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 83 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 84 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 85 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 86 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 87 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 88 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 89 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 90 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 91 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 92 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 93 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 94 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 95 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 96 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 97 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 98 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 99 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 100 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 101 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 102 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 103 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 104 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 105 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 106 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 107 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 108 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 109 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 110 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 111 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 112 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 113 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 114 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 115 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 116 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 117 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 118 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 119 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 120 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 121 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 122 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 123 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 124 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 125 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 126 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 127 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 128 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 129 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 130 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 131 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 132 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 133 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 134 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 135 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 136 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 137 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 138 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 139 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 140 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 141 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 142 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 143 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 144 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 145 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 146 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 147 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 148 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 149 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 150 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 151 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 152 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 153 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 154 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 155 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 156 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 157 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 158 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 159 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 160 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 161 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 162 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 163 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 164 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 165 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 166 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 167 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 168 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 169 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 170 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 171 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 172 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 173 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 174 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 175 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 176 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 177 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 178 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 179 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 180 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 181 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 182 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 183 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 184 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 185 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 186 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 187 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 188 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 189 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 190 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 191 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 192 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 193 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 194 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 195 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 196 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 197 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.1s (total: 198 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 199 ok, 0 failed)
+Dispatching job -> local_qiskit | shots=1000 qubits=60
+Job completed on local_qiskit in 1.0s (total: 200 ok, 0 failed)
+  Optimization finished | method=vqe evaluations=200 status=2 time=341.7s
+  Result | objective=2576.0 feasible=True postprocess_improved=True
+  Checkpoint saved | hp1.dat -> /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/checkpoints/R1_mdkp_hp1_vqe/seed_7703/mkp.json
+
+======================================================================
+  BENCHMARK SUMMARY | MKP vqe
+======================================================================
+  Instance           Qubits Status      Objective Feasible  Time(s)
+  -----------------------------------------------------------------
+  hp1.dat                60 OK             2576.0     True    341.7
+  -----------------------------------------------------------------
+  Total: 1 instances | 1 OK | 342.0s total runtime
+  Results: /Users/monitsharma/SMU-Quantum-Repos/quantum-optimization-benchmarks/reviewer_issue_p0_2_optimizer_protocol/reduced_part_b_20260623T0416Z/raw_runs/R1_mdkp_hp1_vqe/seed_7703/mkp/mkp_vqe_20260623T042716Z
