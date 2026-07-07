@@ -1,6 +1,6 @@
 amazon-braket-default-simulator==1.33.0
 amazon-braket-schemas==1.28.0
-amazon-braket-sdk==1.110.1
+amazon-braket-sdk==1.117.0
 annotated-types==0.7.0
 antlr4-python3-runtime==4.13.2
 appnope==0.1.4
