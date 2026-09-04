@@ -150,13 +150,19 @@ Start with these files:
 If you use this repository, please cite the accepted paper:
 
 ```bibtex
-@article{sharma2026fromcircuitstohardware,
-  title={From Circuits to Hardware: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware},
-  author={Monit Sharma and Hoong Chuin Lau},
+@article{Sharma_2026,
+  title={From circuits to hardware: benchmarking standard and qubit-efficient quantum optimization on real hardware},
+  volume={11},
+  ISSN={2058-9565},
+  url={http://dx.doi.org/10.1088/2058-9565/ae94a4},
+  DOI={10.1088/2058-9565/ae94a4},
+  number={4},
   journal={Quantum Science and Technology},
+  publisher={IOP Publishing},
+  author={Sharma, Monit and Lau, Hoong Chuin},
   year={2026},
-  doi={10.1088/2058-9565/ae94a4},
-  url={https://doi.org/10.1088/2058-9565/ae94a4}
+  month={Sept},
+  pages={045029}
 }
 ```
 
