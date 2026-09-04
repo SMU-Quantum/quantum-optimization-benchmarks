@@ -1,5 +1,7 @@
 # Quantum Optimization Benchmarks
 
+> **ArXiv version:** This branch preserves the code and benchmark snapshot associated with the pre-publication paper, [A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems](https://arxiv.org/abs/2503.12121). The repository’s current accepted-paper implementation is maintained on [`main`](https://github.com/SMU-Quantum/quantum-optimization-benchmarks/tree/main).
+
 This repository, **Quantum Optimization Benchmarks**, provides a collection of benchmark datasets and Jupyter notebooks for solving combinatorial optimization problems. The repository includes benchmark instances for problems like **Market Share**, **Maximum Independent Set**, **Multi-Dimensional Knapsack**, and **Quadratic Assignment Problem**. It also provides Python code for formulating these problems and analyzing results.
 
 See [Quantum Optimization Algorithms](https://github.com/SMU-Quantum/quantum-optimization-algorithms) for implementation details
