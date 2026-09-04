@@ -1,9 +1,12 @@
 # Quantum Optimization Benchmarks
 
-This repository accompanies the paper draft:
+This repository accompanies the accepted paper published in *Quantum Science and Technology*:
 
-**From Circuits to Hardware: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware**
-Monit Sharma and Hoong Chuin Lau
+**[From Circuits to Hardware: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware](https://doi.org/10.1088/2058-9565/ae94a4)**
+
+Monit Sharma and Hoong Chuin Lau (2026)
+
+The earlier pre-publication study is preserved on the [`arxiv`](https://github.com/SMU-Quantum/quantum-optimization-benchmarks/tree/arxiv) branch: [A Comparative Study of Quantum Optimization Techniques for Solving Combinatorial Optimization Benchmark Problems](https://arxiv.org/abs/2503.12121).
 
 The project is built around a hardware-aware benchmark of gate-based quantum optimization on four NP-hard 0-1 combinatorial problem classes:
 
@@ -144,13 +147,16 @@ Start with these files:
 
 ## Citation
 
-If you use this repository, please cite the accompanying paper/manuscript:
+If you use this repository, please cite the accepted paper:
 
 ```bibtex
-@misc{sharma2025fromcircuitstohardware,
+@article{sharma2026fromcircuitstohardware,
   title={From Circuits to Hardware: Benchmarking Standard and Qubit-Efficient Quantum Optimization on Real Hardware},
   author={Monit Sharma and Hoong Chuin Lau},
-  year={2025}
+  journal={Quantum Science and Technology},
+  year={2026},
+  doi={10.1088/2058-9565/ae94a4},
+  url={https://doi.org/10.1088/2058-9565/ae94a4}
 }
 ```
 
