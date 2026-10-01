@@ -81,10 +81,13 @@ Those directories are intentionally versioned so readers can inspect the paper-f
 
 ## Quickstart
 
+Use Python 3.12 for the pinned environment (including CPLEX). Dependency audits
+and update policy are documented in [Dependency security](docs/DEPENDENCY_SECURITY.md).
+
 From the repository root:
 
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python -m pip install -e research_benchmark

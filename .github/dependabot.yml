@@ -1,0 +1,27 @@
+version: 2
+updates:
+  - package-ecosystem: pip
+    directories:
+      - /
+      - /research_benchmark
+      - /quantum-optimization-algorithms
+    schedule:
+      interval: weekly
+      day: monday
+      timezone: Asia/Singapore
+    open-pull-requests-limit: 3
+    groups:
+      python-security:
+        applies-to: security-updates
+        patterns: ["*"]
+      python-maintenance:
+        applies-to: version-updates
+        patterns: ["*"]
+        update-types: [minor, patch]
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: monthly
+    groups:
+      actions:
+        patterns: ["*"]

@@ -1,4 +1,5 @@
 PYTHON ?= .venv/bin/python
+VENV_PYTHON ?= python3.12
 PROBLEM ?= mis
 METHOD ?= qaoa
 INSTANCE ?=
@@ -25,7 +26,7 @@ help:
 	@printf "  make simulate PROBLEM=mkp METHOD=qaoa INSTANCE=Multi_Dimension_Knapsack/MKP_Instances/sac94/hp/hp1.dat\n"
 
 venv:
-	python3 -m venv .venv
+	$(VENV_PYTHON) -m venv .venv
 
 install:
 	$(PYTHON) -m pip install --upgrade pip
