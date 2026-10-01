@@ -1,0 +1,56 @@
+name: Dependency security
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 1 * * 1"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  audit:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        requirements:
+          - requirements.txt
+          - quantum-optimization-algorithms/requirements.txt
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+      - run: python -m pip install pip-audit==2.10.1
+      # Check every explicit pin without installing the scientific/CPLEX stack.
+      - run: python -m pip_audit --no-deps --disable-pip -r "${{ matrix.requirements }}"
+
+  compatibility:
+    runs-on: ubuntu-24.04
+    strategy:
+      fail-fast: false
+      matrix:
+        requirements:
+          - requirements.txt
+          - quantum-optimization-algorithms/requirements.txt
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      - uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: python -m pip install -r "${{ matrix.requirements }}"
+      - if: matrix.requirements == 'requirements.txt'
+        run: python -m pip install -e research_benchmark
+      - run: python -m pip check
+      - if: matrix.requirements == 'requirements.txt'
+        run: python -m unittest discover -s research_benchmark/tests -p 'test_*.py'
+      - if: matrix.requirements == 'quantum-optimization-algorithms/requirements.txt'
+        run: python -c "from qiskit.primitives import BackendEstimatorV2, BackendSamplerV2; from qiskit_aer import AerSimulator; from qiskit_optimization import QuadraticProgram"
+      # Audit the installed environment too, including unpinned transitive packages.
+      - run: python -m pip install pip-audit==2.10.1
+      - run: python -m pip_audit
