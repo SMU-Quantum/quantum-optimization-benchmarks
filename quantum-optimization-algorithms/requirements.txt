@@ -39,7 +39,7 @@ python-dateutil==2.9.0.post0
 pytz==2024.2
 pywin32==308; sys_platform == "win32"
 pyzmq==26.2.0
-qiskit==1.4.5
+qiskit==2.5.2
 qiskit-aer==0.15.1
 qiskit-algorithms==0.3.1
 qiskit-optimization==0.6.1
