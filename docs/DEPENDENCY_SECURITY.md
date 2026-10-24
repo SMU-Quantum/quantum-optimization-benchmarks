@@ -1,46 +1,96 @@
 # Dependency security maintenance
 
-Use Python 3.12 for the pinned benchmark environment. The CPLEX 22.1.2.0
-pin does not provide a Python 3.13 wheel.
+This is a companion to a published paper. Scientific dependencies stay pinned;
+changes are made for security or demonstrated compatibility problems, rather
+than to track every new release. Historical results and logs remain unchanged.
 
+Use Python 3.12 for the pinned environments, including CPLEX 22.2.0.1.
 There are two separately maintained environments:
 
-- `requirements.txt` is the paper companion and research pipeline environment.
+- `requirements.txt` is the paper companion and research pipeline environment
+  (Qiskit 2.3.0).
 - `quantum-optimization-algorithms/requirements.txt` preserves the original
-  Qiskit 1.x algorithms. It is UTF-8 so dependency tooling can read it, and
-  its `pywin32` dependency is restricted to Windows.
+  Qiskit 1.4.5 APIs. Its `pywin32` dependency is restricted to Windows.
 
 Install the environment you need in its own virtual environment. Do not install
 both requirements files together: their Qiskit versions differ intentionally.
+For the research pipeline, follow the root README quickstart. For legacy code:
 
-## Checks and updates
+```bash
+python3.12 -m venv .venv-legacy
+.venv-legacy/bin/python -m pip install -r quantum-optimization-algorithms/requirements.txt
+.venv-legacy/bin/python -m pip check
+```
+
+## Update policy
+
+Dependabot is configured for **Python security updates only**, grouped across
+the three manifest directories. `open-pull-requests-limit: 0` disables routine
+version-update PRs while retaining security-update PRs, as documented by
+[GitHub](https://docs.github.com/en/code-security/how-tos/secure-your-supply-chain/manage-your-dependency-security/customizing-dependabot-security-prs).
+GitHub Actions receive grouped monthly version updates so the CI runtime can
+remain supported. Security alerts remain enabled; there are no ignored advisory
+IDs or automatic merges. Existing routine-upgrade PRs should not be merged just
+because a newer version is available.
+
+Security fixes can arrive at any time; the weekly Dependabot schedule does not
+delay them. Future advisories may still require attention. A frozen environment
+cannot guarantee that newly discovered vulnerabilities will never affect it.
+
+## Compatibility rules
+
+The previous bulk version update produced individually valid but mutually
+incompatible pins. Keep these dependency relationships intact:
+
+- Pydantic 2.13.5 requires `pydantic-core==2.46.5` exactly.
+- SymPy 1.14.0 requires `mpmath<1.4`; both environments use 1.3.0.
+- Qiskit 1.4.5 requires `symengine>=0.11,<0.14`; legacy code uses 0.13.0.
+- Legacy notebooks use V1 primitives such as `BackendEstimator` and
+  `BackendSampler`; a Qiskit major upgrade needs a separate code migration.
+
+Resolve and test each environment as a whole. An audit of explicit pins alone
+cannot establish that the environment is installable or that its APIs work.
+
+## Automated checks
 
 The Dependency security workflow runs on pull requests, pushes to `main`,
-weekly, and on demand. It audits both sets of explicit pins, installs the
-two environments separately, runs the existing research parser tests and a
-legacy Qiskit import check, checks dependency compatibility, and audits all
-installed transitive packages.
+weekly, and on demand. It:
 
-Dependabot checks all three manifest directories weekly. Security updates are
-grouped separately from routine minor/patch updates to reduce separate PRs.
-Major version updates remain separate so scientific API migrations can be
-reviewed. GitHub Actions are checked monthly. Security alerts remain enabled;
-there are no ignored advisory IDs or automatic merges.
+1. Audits both sets of explicit pins.
+2. Installs the two environments separately and runs `pip check`.
+3. Runs the research parser tests, imports the cloud SDKs, and executes all
+   eight supported methods on a four-node MIS instance using the local
+   simulator. It does not require cloud credentials or submit hardware jobs.
+4. Imports the V1 primitives used by the legacy code and executes an Aer circuit.
+5. Audits installed dependencies, including transitive packages. Audit tooling
+   lives in a separate environment so it cannot change the packages under test.
 
-To audit locally, install `pip-audit==2.10.1` in a separate tooling environment
-and run:
+These are compatibility checks, not a rerun of the paper's experiments or a
+guarantee of identical numerical results on different dependency versions.
+
+## Local checks
+
+Install `pip-audit==2.10.1` in a separate tooling environment. Audit each
+manifest independently (they intentionally contain different versions):
 
 ```bash
 python -m pip_audit --no-deps --disable-pip -r requirements.txt
 python -m pip_audit --no-deps --disable-pip -r quantum-optimization-algorithms/requirements.txt
 ```
 
-For a full environment check, run `python -m pip check` and
-`python -m pip_audit` inside that installed environment. Update vulnerable pins
-to released fixes, run the checks and relevant simulator tests, then merge the
-update. GitHub closes dependency alerts after the patched manifests reach the
-default branch and its dependency scan finishes.
+Inside the installed research environment, run:
 
-New vulnerabilities can be disclosed in previously safe releases. These checks
-and grouped updates make maintenance repeatable; no fixed set of versions can
-guarantee that future alerts will never appear.
+```bash
+python -m pip check
+python -m unittest discover -s research_benchmark/tests -p 'test_*.py'
+qobench-smoke --problem mis --instance research_benchmark/tests/fixtures/tiny_mis.col --qpu-id local_qiskit --shots 32 --maxiter 2 --output-root /tmp/qobench-smoke
+```
+
+To audit the installed environment without adding audit tools to it, obtain its
+package path with `python -c "import sysconfig; print(sysconfig.get_path('purelib'))"`,
+then run the tooling environment's `python -m pip_audit --strict --skip-editable
+--path /absolute/path/to/site-packages`.
+
+Update vulnerable pins to released fixes, run the checks, and merge the reviewed
+change. GitHub closes corresponding dependency alerts after patched manifests
+reach the default branch and its dependency scan finishes.

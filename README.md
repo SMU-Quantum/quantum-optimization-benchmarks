@@ -83,6 +83,8 @@ Those directories are intentionally versioned so readers can inspect the paper-f
 
 Use Python 3.12 for the pinned environment (including CPLEX). Dependency audits
 and update policy are documented in [Dependency security](docs/DEPENDENCY_SECURITY.md).
+Python dependencies receive grouped security updates; routine version upgrades
+are disabled to keep this published paper companion stable.
 
 From the repository root:
 

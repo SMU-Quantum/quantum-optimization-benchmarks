@@ -9,15 +9,13 @@ updates:
       interval: weekly
       day: monday
       timezone: Asia/Singapore
-    open-pull-requests-limit: 3
+    # Published paper companion: preserve tested scientific versions. GitHub
+    # still opens security PRs when this version-update limit is zero.
+    open-pull-requests-limit: 0
     groups:
       python-security:
         applies-to: security-updates
         patterns: ["*"]
-      python-maintenance:
-        applies-to: version-updates
-        patterns: ["*"]
-        update-types: [minor, patch]
   - package-ecosystem: github-actions
     directory: /
     schedule:

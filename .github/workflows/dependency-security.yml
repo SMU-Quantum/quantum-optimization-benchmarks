@@ -49,8 +49,43 @@ jobs:
       - run: python -m pip check
       - if: matrix.requirements == 'requirements.txt'
         run: python -m unittest discover -s research_benchmark/tests -p 'test_*.py'
+      - if: matrix.requirements == 'requirements.txt'
+        name: Check cloud SDK imports
+        run: |
+          python - <<'PY'
+          from qobench.hardware_manager import HAS_BRAKET, HAS_IBM_RUNTIME, HAS_QISKIT
+          assert HAS_BRAKET, "Braket SDK import failed"
+          assert HAS_IBM_RUNTIME, "IBM Runtime SDK import failed"
+          assert HAS_QISKIT, "Qiskit import failed"
+          PY
+      - if: matrix.requirements == 'requirements.txt'
+        name: Exercise all methods on a tiny local instance
+        run: >-
+          qobench-smoke --problem mis
+          --instance research_benchmark/tests/fixtures/tiny_mis.col
+          --qpu-id local_qiskit --shots 32 --maxiter 2
+          --output-root "${{ runner.temp }}/qobench-smoke"
       - if: matrix.requirements == 'quantum-optimization-algorithms/requirements.txt'
-        run: python -c "from qiskit.primitives import BackendEstimatorV2, BackendSamplerV2; from qiskit_aer import AerSimulator; from qiskit_optimization import QuadraticProgram"
+        name: Check legacy primitives and simulator
+        run: |
+          python - <<'PY'
+          from qiskit import QuantumCircuit
+          from qiskit.primitives import BackendEstimator, BackendSampler
+          from qiskit_aer import AerSimulator
+          from qiskit_algorithms import VQE, QAOA
+          from qiskit_optimization import QuadraticProgram
+          circuit = QuantumCircuit(1)
+          circuit.x(0)
+          circuit.measure_all()
+          counts = AerSimulator().run(circuit, shots=16).result().get_counts()
+          assert counts == {"1": 16}, counts
+          PY
       # Audit the installed environment too, including unpinned transitive packages.
-      - run: python -m pip install pip-audit==2.10.1
-      - run: python -m pip_audit
+      # Keep audit tooling out of the benchmark environment: installing it there
+      # can change dependencies before they are audited.
+      - name: Audit installed benchmark dependencies
+        run: |
+          python -m venv "${{ runner.temp }}/audit-tools"
+          "${{ runner.temp }}/audit-tools/bin/python" -m pip install pip-audit==2.10.1
+          site_packages=$(python -c "import sysconfig; print(sysconfig.get_path('purelib'))")
+          "${{ runner.temp }}/audit-tools/bin/python" -m pip_audit --strict --skip-editable --path "$site_packages"

@@ -5,11 +5,16 @@
 From the repository root:
 
 ```bash
-python3 -m venv .venv
+python3.12 -m venv .venv
 .venv/bin/python -m pip install --upgrade pip
 .venv/bin/python -m pip install -r requirements.txt
 .venv/bin/python -m pip install -e research_benchmark
 ```
+
+Scientific dependencies remain pinned under the
+[security maintenance policy](DEPENDENCY_SECURITY.md). The legacy Qiskit 1.x
+code uses a separate environment; do not combine its requirements with the
+research pipeline environment.
 
 Sanity checks:
 

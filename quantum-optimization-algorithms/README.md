@@ -43,7 +43,7 @@ To set up the repository, follow these steps:
 
 2. **Set up a virtual environment (recommended):**
     ```bash
-    python3 -m venv venv
+    python3.12 -m venv venv
     source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
     ```
 
@@ -53,7 +53,9 @@ To set up the repository, follow these steps:
     pip install -r requirements.txt
     ```
 
-    Ensure that your system has Python 3.9 or higher installed.
+    Use Python 3.12 for these pins. Keep this legacy Qiskit 1.x environment
+    separate from the parent repository's research environment. See the
+    [dependency maintenance policy](../docs/DEPENDENCY_SECURITY.md).
 
 
 ## Usage
