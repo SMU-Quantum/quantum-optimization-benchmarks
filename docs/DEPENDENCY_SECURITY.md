@@ -86,10 +86,18 @@ python -m unittest discover -s research_benchmark/tests -p 'test_*.py'
 qobench-smoke --problem mis --instance research_benchmark/tests/fixtures/tiny_mis.col --qpu-id local_qiskit --shots 32 --maxiter 2 --output-root /tmp/qobench-smoke
 ```
 
-To audit the installed environment without adding audit tools to it, obtain its
-package path with `python -c "import sysconfig; print(sysconfig.get_path('purelib'))"`,
-then run the tooling environment's `python -m pip_audit --strict --skip-editable
---path /absolute/path/to/site-packages`.
+To audit the installed environment without adding audit tools to it, collect its
+third-party package inventory:
+
+```bash
+python -m pip list --format=freeze --exclude-editable > /tmp/qobench-installed-requirements.txt
+```
+
+Then run the tooling environment's `python -m pip_audit --strict --no-deps
+--disable-pip -r /tmp/qobench-installed-requirements.txt`. This includes installed
+transitive dependencies and excludes only editable local code. Do not combine
+`--strict --skip-editable --path` with pip-audit 2.10.1: it treats the skipped
+editable package as a dependency collection error and fails the audit.
 
 Update vulnerable pins to released fixes, run the checks, and merge the reviewed
 change. GitHub closes corresponding dependency alerts after patched manifests
